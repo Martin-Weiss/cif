@@ -1,0 +1,122 @@
+###################################################################################################################################
+###################################################################################################################################
+##
+## The purpose of this file is to define the server-specific configuration information for an automated installation via AutoYaST
+##
+##
+## Individual fields are seperated by ";". Fields can contain single values or multiple values seperated by ":" (list fields).
+## If fields are optional they can be left empty resulting in two consecutive field separators ";;".
+##
+## As of November 5, 2012 this file has 14 fields per server which means there should be 13 semicolons per line.
+
+## To jump to the ";" after a certain field, e. g. field 8 execute the following sequence of commands in vi:
+##
+## 1. leave insert mode by typing <ESC>
+## 2. use cursor to go to a particular line
+## 3. type 0 (number 0) to go to beginning of the line
+## 4. type "8", type "f", type ";" - your cursor will jump to the semicolon after the 8th field
+##
+## the following command determines the number of occurences of ";" in the current line: "s/;/&/ng"
+
+
+## Detailed field description 
+## Field 01 - HOST_NAME 	- mandatory - short name of the server being installed; e.g. machine01
+## Field 02 - IP_ADDRESS/CIDR	- mandatory - IP address and net mask of the server being installed; used as system identifier
+##				  Net mask in CIDR notation:
+##				  255.255.240.0 = 20
+##				  255.255.248.0 = 21
+##				  255.255.252.0 = 22
+##				  255.255.254.0 = 23
+##				  255.255.255.0 = 24
+## Field 03 - GATEWAY		- optional - IP address of the default gateway
+## Field 04 - SERVER_TYPE	- mandatory - pure SLES or OES systems including version, feature pack (FP, OES11 only) and support
+##				  pack level; "ovl" at the end of the identifier denotes that the system will be installed from the
+##				  combined SLES/OES installation medium.
+##				  Examples for valid server types are: sles11sp3, oes11sp2, oes11sp2ovl, oes2015sp1, oes2015sp1ovl
+##				  Server types for different environments can be created by appending them with identifiers such as
+##				  "-DEV", "-TST", etc.
+##				  !!! IMPORTANT !!!
+##				  There always needs to be a corresponding addon_products-$SERVER_TYPE.xml file in the ../files/addon
+##				  directory, even when installing a pure SLES system.
+## Field 05 - DEVICE_NAME0	- mandatory name of the 1st system disk device; e.g. /dev/sda|/dev/hda|/dev/vmx|/dev/cciss/c0d0|...
+## Field 06 - DEVICE_NAME1	- optional  name of the 2nd system disk device; e.g. /dev/sdb|/dev/hdb|/dev/vmx|/dev/cciss/c0d1|...
+##			  	  Use "ssh $SERVER -C 'sfdisk -l'" to determine device names if unsure.
+## Field 07 - PART_FILE		- mandatory partitioning class file; must be located in .../files/partitioning
+##			  	  The file name should identify the type and size of the device for which the partitioning
+## 				  has been defined: e.g. part-Xen-20GB.xml, part-cciss-lvm-146GB.xml, etc.  
+## Field 08 - SOFT_FILE		- mandatory software class file; must be located in .../files/software  
+##			  	  The file name should identify the SERVER_TYPE and the purpose of the server for which the software
+##				  selection is valid;
+##			          e.g. soft-oes11sp2ovl-login.xml; soft-oes11sp2ovl-NCS.xml, etc.
+## Field 09 - ZCM_KEY_LIST	- optional keys for the registration of the new device with a ZCM server.
+## 				  Multiple keys are possible separated by ':'; the first key will be used for registration with the
+## 				  ZCM server, all other keys will be used for subscribing to device groups in ZCM used to manage
+##				  configuration and software updates.
+##				  Examples for valid ZCM keys for a production environment are:
+## 				  PROD_<location>_EDIR (location), PROD_EDIR_GRP (config) and PROD_OES11SP2_GRP (update) etc.
+## Field 10 - TREE_NAME		- mandatory for OES servers - eDirectory tree name 
+##				  There must be a configuration file <TREE_NAME>.txt in .../configs; the file name is case sensitive!
+## Field 11 - TREE_TYPE		- mandatory for OES servers - existing|new
+## Field 12 - SERVER_CONTEXT	- mandatory for OES servers - server context in LDAP syntax, e.g. ou=servers,ou=services,o=Novell
+## Field 13 - SERVER_LOCATION	- optional configuration file determining all aspects of the physical server location such as the following:
+##				  default gateway, LDAP server list, NTP server list, etc.
+##				  There must be a configuration file <SERVER_LOCATION.txt> in .../configs; the file name is case sensitive!
+## 				  In smaller environments all this information can be provided in the configuration file corresponding
+##				  to the tree name or in CUSTOMER.txt
+## Field 14 - SERVICE_TYPE	- mandatory XML profile as defined in CUSTOMER.txt; the file names are case sensitive!
+## 				  The XML files identified by the profile must exist in .../files/services/oes11|sles11
+
+
+## Field overview
+## 01: HOST_NAME; 02: IP_ADDRESS/NETMASK; 03 GATEWAY; 04: SERVER_TYPE; 05: DEVICE_NAME0; 06: DEVICE_NAME1; 07: PART_FILE;
+## 08: SOFT_FILE; 09: ZCM_KEY_LIST; 10: TREE_NAME; 11: TREE_TYPE; 12: SERVER_CONTEXT; 13: SERVER_LOCATION; 14: SERVICE_TYPE
+
+
+#################################################################
+###     DEVELOPMENT environment                               ###
+#################################################################
+
+# SLES 11 SP4 Example
+sles11sp4-1;10.1.1.100/24;;sles11sp4;/dev/vda;;part-ext3-50G.xml;soft-sles11.xml;;;;;;SLES11_DEFAULT
+
+# SLES 12 SP3 Example
+sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
+
+# SLES 12 SP4 Example
+sles12sp4-1;10.1.1.102/24;;sles12sp4;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
+
+# SLES 15 GA Example
+sles15ga-1;10.1.1.103/24;;sles15ga;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES12_DEFAULT
+
+# CAASP 3 Example
+caasp3-admin;10.1.1.110/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_ADMIN
+caasp3-master01;10.1.1.111/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
+caasp3-master02;10.1.1.112/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
+caasp3-master03;10.1.1.113/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
+caasp3-worker01;10.1.1.114/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
+caasp3-worker02;10.1.1.115/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
+caasp3-worker03;10.1.1.116/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
+
+# SES 5 Example
+ses5-admin;10.1.1.120/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5.xml;;;;;;SLES12_DEFAULT
+ses5-osd01;10.1.1.121/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5.xml;;;;;;SLES12_DEFAULT
+ses5-osd02;10.1.1.122/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5.xml;;;;;;SLES12_DEFAULT
+ses5-osd03;10.1.1.123/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5.xml;;;;;;SLES12_DEFAULT
+ses5-osd04;10.1.1.124/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5.xml;;;;;;SLES12_DEFAULT
+
+# OES 2015 SP1 Example
+oes2015sp1-1;10.1.1.201/24;;oes2015sp1;/dev/vda;;part-vmware-btrfs-lvm-edir-20G.xml;soft-oes2015sp1_branch.xml;;oes2015sp1-tree;new;ou=services,o=oes2015sp1;;OES2015_BRANCH
+oes2015sp1-2;10.1.1.202/24;;oes2015sp1;/dev/vda;;part-vmware-btrfs-lvm-edir-20G.xml;soft-oes2015sp1_branch.xml;;oes2015sp1-tree;existing;ou=services,o=oes2015sp1;;OES2015_BRANCH
+
+# OES 2018 Example
+oes2018ga-1;10.1.1.203/24;;oes2018ga;/dev/vda;;part-vmware-btrfs-lvm-edir-20G.xml;soft-oes2018_branch.xml;;oes2018ga-tree;new;ou=services,o=oes2018ga;;OES2018_BRANCH
+oes2018ga-2;10.1.1.204/24;;oes2018ga;/dev/vda;;part-vmware-btrfs-lvm-edir-20G.xml;soft-oes2018_branch.xml;;oes2018ga-tree;existing;ou=services,o=oes2018ga;;OES2018_BRANCH
+
+#################################################################
+###        TEST environment                                   ###
+#################################################################
+
+
+#################################################################
+###     PRODUCTION environment                                ###
+#################################################################

@@ -1,0 +1,3 @@
+autoyast=http://10.1.1.1/autoyast/xml/
+install=http://10.1.1.1/sles11sp4/
+

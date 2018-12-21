@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <runlevel>
+    <default>3</default>
+    <services config:type="list">
+      <service>
+        <service_name>nfs</service_name>
+        <service_start>disable</service_start>
+      </service>
+      <service>
+        <service_name>splash</service_name>
+        <service_start>disable</service_start>
+      </service>
+      <service>
+        <service_name>splash_early</service_name>
+        <service_start>disable</service_start>
+      </service>
+      <service>
+        <service_name>atd</service_name>
+        <service_start>enable</service_start>
+      </service>
+    </services>
+  </runlevel>
+  <security>
+    <console_shutdown>ignore</console_shutdown>
+  </security>
+  <services-manager>
+    <default_target>multi-user</default_target>
+    <services>
+      <enable config:type="list">
+        <service>system-sysctl</service>
+        <service>atd</service>
+        <service>nscd</service>
+        <service>sshd</service>
+        <service>named</service>
+        <service>sysstat</service>
+      </enable>
+    </services>
+  </services-manager>
+  <sysconfig config:type="list">
+    <sysconfig_entry>
+      <sysconfig_key>DAILY_TIME</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/cron</sysconfig_path>
+      <sysconfig_value>00:00</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DEFAULT_WM</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/windowmanager</sysconfig_path>
+      <sysconfig_value>gnome</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DISPLAYMANAGER</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>gdm</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>ENABLE_SYSRQ</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/sysctl</sysconfig_path>
+      <sysconfig_value>yes</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>IPV6_DISABLE</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/sysctl</sysconfig_path>
+      <sysconfig_value>yes</sysconfig_value>
+    </sysconfig_entry>
+  </sysconfig>
+  <users config:type="list">
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>root</fullname>
+      <gid>0</gid>
+      <home>/root</home>
+      <password_settings/>
+      <shell>/bin/bash</shell>
+      <uid>0</uid>
+      <user_password>%%ROOT_PWD%%</user_password>
+      <username>root</username>
+    </user>
+  </users>
+</profile>

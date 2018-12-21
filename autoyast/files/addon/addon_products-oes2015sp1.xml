@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <add-on>
+    <add_on_products config:type="list">
+      <listentry>
+        <media_url>%%ISO_SERVER%%/oes2015sp1</media_url>
+        <product>OES2015-SP1-DVD</product>
+        <product_dir>/</product_dir>
+        <name>OES2015-SP1-DVD</name>
+        <alias>OES2015-SP1-DVD</alias>
+      </listentry>
+      <listentry>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2015-SP1-Pool/sle-11-x86_64</media_url>
+        <product>OES2015-SP1-POOL</product>
+        <product_dir>/</product_dir>
+        <name>OES2015-SP1-POOL</name>
+        <alias>OES2015-SP1-POOL</alias>
+      </listentry>
+      <listentry>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2015-SP1-Updates/sle-11-x86_64</media_url>
+        <product>OES2015-SP1-UPDATES</product>
+        <product_dir>/</product_dir>
+        <name>OES2015-SP1-UPDATES</name>
+        <alias>OES2015-SP1-UPDATES</alias>
+      </listentry>
+      <listentry>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/SLES11-SP4-Pool/sle-11-x86_64</media_url>
+        <product>SLES11-SP4-POOL</product>
+        <product_dir>/</product_dir>
+        <name>SLES11-SP4-POOL</name>
+        <alias>SLES11-SP4-POOL</alias>
+      </listentry>
+      <listentry>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/SLES11-SP4-Updates/sle-11-x86_64</media_url>
+        <product>SLES11-SP4-UPDATES</product>
+        <product_dir>/</product_dir>
+        <name>SLES11-SP4-UPDATES</name>
+        <alias>SLES11-SP4-UPDATES</alias>
+      </listentry>
+    </add_on_products>
+  </add-on>
+</profile>

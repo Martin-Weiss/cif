@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <bootloader>
+    <global>
+      <generic_mbr>true</generic_mbr>
+      <gfxmode>auto</gfxmode>
+      <hiddenmenu>false</hiddenmenu>
+      <os_prober>false</os_prober>
+      <terminal>gfxterm</terminal>
+      <timeout config:type="integer">8</timeout>
+      <suse_btrfs config:type="boolean">true</suse_btrfs>
+    </global>
+  </bootloader>
+  <general>
+    <ask-list config:type="list"/>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+      <second_stage config:type="boolean">false</second_stage>
+      <self_update config:type="boolean">false</self_update>
+    </mode>
+    <proposals config:type="list"/>
+    <storage>
+      <partition_alignment config:type="symbol">align_optimal</partition_alignment>
+      <start_multipath config:type="boolean">false</start_multipath>
+    </storage>
+      <signature-handling>
+          <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
+          <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
+          <accept_unknown_gpg_key config:type="boolean">true</accept_unknown_gpg_key>
+          <accept_unsigned_file config:type="boolean">true</accept_unsigned_file>
+          <accept_verification_failed config:type="boolean">false</accept_verification_failed>
+          <import_gpg_key config:type="boolean">true</import_gpg_key>
+       </signature-handling>
+  </general>
+  <ssh_import>
+    <copy_config config:type="boolean">false</copy_config>
+    <import config:type="boolean">false</import>
+  </ssh_import>
+  <keyboard>
+    <keymap>%%KEYMAP%%</keymap>
+  </keyboard>
+  <language>
+    <language>%%LANGUAGE%%</language>
+    <languages/>
+  </language>
+  <timezone>
+    <hwclock>%%HWCLOCK%%</hwclock>
+    <timezone>%%TIME_ZONE%%</timezone>
+  </timezone>
+  <services-manager>
+    <default_target>multi-user</default_target>
+    <services>
+      <disable config:type="list">
+        <service>purge-kernels</service>
+      </disable>
+      <enable config:type="list">
+        <service>sshd</service>
+        <service>cloud-init-local</service>
+        <service>cloud-init</service>
+        <service>cloud-config</service>
+        <service>cloud-final</service>
+        <service>issue-generator</service>
+        <service>issue-add-ssh-keys</service>
+        <service>container-feeder</service>
+        <service>docker</service>
+        <service>salt-minion</service>
+        <service>ntpd</service>
+        <service>etcd</service>
+        <service>kubelet</service>
+        <service>admin-node-setup</service>
+        <service>haveged</service>
+      </enable>
+    </services>
+  </services-manager>
+  <users config:type="list">
+    <user>
+      <username>root</username>
+      <user_password>%%ROOT_PWD%%</user_password>
+      <encrypted config:type="boolean">true</encrypted>
+    </user>
+  </users>
+</profile>
+

@@ -1,0 +1,15 @@
+# autoinst level 0
+color white/blue black/light-gray
+default 0
+timeout 60
+root (cd)
+gfxmenu /grub/message
+
+### localboot
+title localboot
+    rootnoverify (hd0)
+    chainloader +1
+
+### network
+title network installation
+    configfile /grub/instserver.lst

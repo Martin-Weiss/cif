@@ -1,0 +1,30 @@
+color white/blue black/light-gray
+default 0
+timeout 60
+root (cd)
+gfxmenu /grub/message
+
+title back
+	configfile /boot/grub/menu.lst
+
+title SLES11SP4
+	configfile /grub/sles11sp4.lst
+
+title SLES12SP3
+	configfile /grub/sles12sp3.lst
+
+title SLES12SP4
+	configfile /grub/sles12sp4.lst
+
+title SLES15GA
+	configfile /grub/sles15ga.lst
+
+title CAASP3
+	configfile /grub/caasp3.lst
+
+title OES2015SP1
+	configfile /grub/oes2015sp1.lst
+
+title OES2018GA
+	configfile /grub/oes2018ga.lst
+

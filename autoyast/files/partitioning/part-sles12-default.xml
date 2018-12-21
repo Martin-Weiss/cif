@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <partitioning config:type="list">
+    <drive>
+      <initialize config:type="boolean">true</initialize>
+      <device>%%DEVICE_NAME0%%</device>
+      <initialize config:type="boolean">true</initialize>
+    </drive>
+</partitioning>
+</profile>

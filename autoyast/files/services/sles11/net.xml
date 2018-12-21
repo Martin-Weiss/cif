@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <host>
+    <hosts config:type="list">
+      <hosts_entry>
+        <host_address>127.0.0.1</host_address>
+        <names config:type="list">
+          <name>localhost</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry>
+        <host_address>%%IP_ADDRESS%%</host_address>
+        <names config:type="list">
+          <name>%%HOST_NAME%%.%%DOMAIN_NAME%% %%HOST_NAME%%</name>
+        </names>
+      </hosts_entry>
+    </hosts>
+  </host>
+  <networking>
+    <dhcp_options>
+      <dhclient_additional_options></dhclient_additional_options>
+      <dhclient_client_id></dhclient_client_id>
+      <dhclient_hostname_option>AUTO</dhclient_hostname_option>
+    </dhcp_options>
+    <dns>
+      <dhcp_hostname config:type="boolean">false</dhcp_hostname>
+      <dhcp_resolv config:type="boolean">true</dhcp_resolv>
+      <domain>%%DOMAIN_NAME%%</domain>
+      <hostname>%%HOST_NAME%%</hostname>
+      <nameservers config:type="list">
+        <nameserver>%%NAME_SERVER_LIST%%</nameserver>
+      </nameservers>
+      <searchlist config:type="list">
+        <search>%%SUFFIX_SEARCH_LIST%%</search>
+      </searchlist>
+      <write_hostname config:type="boolean">false</write_hostname>
+    </dns>
+    <ipv6 config:type="boolean">false</ipv6>
+    <managed config:type="boolean">false</managed>
+    <interfaces config:type="list">
+      <interface>
+        <bootproto>static</bootproto>
+        <device>eth0</device>
+	<firewall>no</firewall>
+        <ipaddr>%%IP_ADDRESS%%</ipaddr>
+        <prefixlen>%%PREFLEN_1%%</prefixlen>
+        <startmode>auto</startmode>
+        <usercontrol>no</usercontrol>
+      </interface>
+    </interfaces>
+    <routing>
+      <ip_forward config:type="boolean">false</ip_forward>
+      <routes config:type="list">
+        <route>
+          <destination>default</destination>
+          <device>-</device>
+          <gateway>%%GATEWAY%%</gateway>
+          <netmask>-</netmask>
+        </route>
+      </routes>
+    </routing>
+  </networking>
+</profile>

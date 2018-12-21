@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <users config:type="list">
+    <user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>root</fullname>
+      <gid>0</gid>
+      <home>/root</home>
+      <password_settings>
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/bash</shell>
+      <uid>0</uid>
+      <user_password>%%ROOT_PWD%%</user_password>
+      <username>root</username>
+    </user>
+<user>
+      <encrypted config:type="boolean">true</encrypted>
+      <fullname>GRuner Adminstration User</fullname>
+      <gid>100</gid>
+      <home>/home/grau</home>
+      <password_settings>
+        <expire></expire>
+        <flag></flag>
+        <inact>-1</inact>
+        <max>99999</max>
+        <min>0</min>
+        <warn>7</warn>
+      </password_settings>
+      <shell>/bin/bash</shell>
+      <uid>1999</uid>
+      <user_password>$2a$05$BGKq5yi7J.3Fjr.EsmOz.e62Xt0XlHCesHKoi6m8A4aqjkbKrCg0S</user_password>
+      <username>grau</username>
+    </user>
+  </users>
+  <security>
+    <console_shutdown>ignore</console_shutdown>
+  </security>
+  <sysconfig config:type="list">
+    <sysconfig_entry>
+      <sysconfig_key>DAILY_TIME</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/cron</sysconfig_path>
+      <sysconfig_value>00:00</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>ENABLE_SYSRQ</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/sysctl</sysconfig_path>
+      <sysconfig_value>yes</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DEFAULT_WM</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/windowmanager</sysconfig_path>
+      <sysconfig_value>gnome</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_key>DISPLAYMANAGER</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/displaymanager</sysconfig_path>
+      <sysconfig_value>gdm</sysconfig_value>
+    </sysconfig_entry>
+    <sysconfig_entry>
+      <sysconfig_path>/etc/sysconfig/sysctl</sysconfig_path>
+      <sysconfig_key>IPV6_DISABLE</sysconfig_key>
+      <sysconfig_value>yes</sysconfig_value>
+    </sysconfig_entry>
+  </sysconfig>
+<services-manager>
+    <default_target>multi-user</default_target>
+    <services>
+      <disable config:type="list"/>
+      <enable config:type="list">
+        <service>apparmor</service>
+        <service>auditd</service>
+        <service>btrfsmaintenance-refresh</service>
+        <service>ca-certificates</service>
+        <service>cron</service>
+        <service>display-manager</service>
+        <service>haveged</service>
+        <service>irqbalance</service>
+        <service>iscsi</service>
+        <service>issue-generator</service>
+        <service>kbdsettings</service>
+        <service>klog</service>
+        <service>lvm2-monitor</service>
+        <service>nscd</service>
+        <service>postfix</service>
+        <service>purge-kernels</service>
+        <service>rollback</service>
+        <service>rsyslog</service>
+        <service>smartd</service>
+        <service>sshd</service>
+        <service>systemd-fsck-root</service>
+        <service>wicked</service>
+        <service>wickedd-auto4</service>
+        <service>wickedd-dhcp4</service>
+        <service>wickedd-dhcp6</service>
+        <service>wickedd-nanny</service>
+        <service>YaST2-Firstboot</service>
+        <service>YaST2-Second-Stage</service>
+        <service>getty@tty1</service>
+        <service>serial-getty@hvc0</service>
+      </enable>
+    </services>
+  </services-manager>
+</profile>

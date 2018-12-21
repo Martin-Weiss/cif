@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <kdump>
+
+    <!-- kdump -->
+    <!-- memory reservation -->
+
+    <add_crash_kernel config:type="boolean">true</add_crash_kernel>
+<!--
+    <crash_kernel>124M,high</crash_kernel>
+-->
+    <crash_kernel>256M-1G:64M,1G-2G:128M,2G-:256M</crash_kernel>
+
+    <general>
+      <!-- dump target settings -->
+      <KDUMP_SAVEDIR>file:///var/crash</KDUMP_SAVEDIR>
+      <KDUMP_COPY_KERNEL>yes</KDUMP_COPY_KERNEL>
+      <KDUMP_KEEP_OLD_DUMPS>5</KDUMP_KEEP_OLD_DUMPS>
+
+      <!-- filtering and compression -->
+      <KDUMP_DUMPFORMAT>lzo</KDUMP_DUMPFORMAT>
+ 
+      <!-- dump level=31: strip "zero pages" to make dump smaller -->
+      <KDUMP_DUMPLEVEL>31</KDUMP_DUMPLEVEL>
+
+      <!-- notification -->
+      <KDUMP_NOTIFICATION_TO></KDUMP_NOTIFICATION_TO>
+      <KDUMP_SMTP_SERVER></KDUMP_SMTP_SERVER>
+
+      <!-- kdump kernel -->
+      <KDUMP_KERNELVER></KDUMP_KERNELVER>
+      <KDUMP_COMMANDLINE></KDUMP_COMMANDLINE>
+      <KDUMP_COMMANDLINE_APPEND>maxcpus=1 </KDUMP_COMMANDLINE_APPEND>
+
+      <!-- expert settings -->
+      <KDUMP_IMMEDIATE_REBOOT>no</KDUMP_IMMEDIATE_REBOOT>
+      <KDUMP_VERBOSE>15</KDUMP_VERBOSE>
+      <KEXEC_OPTIONS>--args-linux </KEXEC_OPTIONS>
+    </general>
+  </kdump>
+</profile> 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+   <software>
+      <image />
+      <install_recommended config:type="boolean">false</install_recommended>
+      <instsource />
+      <patterns config:type="list">
+         <pattern>SUSE-MicroOS</pattern>
+      </patterns>
+      <patterns config:type="list">
+         <pattern>SUSE-CaaSP-Stack</pattern>
+      </patterns>
+  </software>
+</profile>
+

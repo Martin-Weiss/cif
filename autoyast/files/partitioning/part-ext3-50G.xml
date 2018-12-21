@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+
+  <!-- with this partitioning scheme you need at least 110 GB of free space -->
+
+  <partitioning config:type="list">
+    <drive>
+      <initialize config:type="boolean">true</initialize>
+      <device>%%DEVICE_NAME0%%</device>
+      <partitions config:type="list">
+
+        <partition>
+          <!-- boot -->
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">ext3</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>acl,user_xattr</fstopt>
+	  <mount>/boot</mount>
+          <mountby config:type="symbol">id</mountby>
+          <partition_id config:type="integer">131</partition_id>
+          <partition_nr config:type="integer">1</partition_nr>
+          <partition_type>primary</partition_type>
+          <size>1GB</size>
+        </partition>
+
+        <partition>
+          <!-- system VG -->
+          <create config:type="boolean">true</create>
+          <lvm_group>system</lvm_group>
+          <partition_id config:type="integer">142</partition_id>
+          <partition_nr config:type="integer">2</partition_nr>
+          <partition_type>primary</partition_type>
+          <size>max</size>
+        </partition>
+
+      </partitions>
+      <use>all</use>
+    </drive>
+    <drive>
+      <initialize config:type="boolean">true</initialize>
+      <device>/dev/system</device>
+      <lvm2 config:type="boolean">true</lvm2>
+      <partitions config:type="list">
+
+        <partition>
+          <!-- swap LV -->
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">swap</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>defaults</fstopt>
+          <lv_name>swap</lv_name>
+          <mount>swap</mount>
+          <mountby config:type="symbol">device</mountby>
+          <size>4GB</size>
+        </partition>
+
+        <partition>
+          <!-- tmp LV -->
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">ext3</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>acl,user_xattr</fstopt>
+          <lv_name>tmp</lv_name>
+          <mount>/tmp</mount>
+          <mountby config:type="symbol">device</mountby>
+          <size>5GB</size>
+        </partition>
+
+        <partition>
+          <!-- var LV -->
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">ext3</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>acl,user_xattr</fstopt>
+          <lv_name>var</lv_name>
+          <mount>/var</mount>
+          <mountby config:type="symbol">device</mountby>
+          <size>10GB</size>
+        </partition>
+
+        <partition>
+          <!-- root LV -->
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">ext3</filesystem>
+          <format config:type="boolean">true</format>
+          <lv_name>root</lv_name>
+          <mount>/</mount>
+          <mountby config:type="symbol">device</mountby>
+          <size>10G</size>
+        </partition>
+
+      </partitions>
+      <pesize>4M</pesize>
+      <type config:type="symbol">CT_LVM</type>
+      <use>all</use>
+    </drive>
+</partitioning>
+</profile>

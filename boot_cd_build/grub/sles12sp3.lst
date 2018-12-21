@@ -1,0 +1,13 @@
+color white/blue black/light-gray
+default 0
+timeout 30
+root (cd)
+gfxmenu /grub/message
+
+title back
+        configfile /grub/instserver.lst
+
+title SLES12SP3
+	kernel /kernel/sles12sp3/linux info=http://10.1.1.1/autoyast/info-sles12sp3.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/sles12sp3/initrd
+

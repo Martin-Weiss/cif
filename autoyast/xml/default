@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+ <scripts>
+    <pre-scripts config:type="list">
+<!--
+    This section is mandatory and must not be removed.
+    Amongst other things it is used to determine the
+    IP address of the AutoYaST server in the post-inst
+    phase
+-->
+	<script>
+	<interpreter>shell</interpreter>
+	<filename>pre-fetch.sh</filename>
+        <location>http://10.1.1.1/autoyast/scripts/pre-fetch.sh</location>
+	<notification>Please wait while pre-fetch.sh is running...</notification>
+	<feedback config:type="boolean">false</feedback>
+	<debug config:type="boolean">false</debug>
+	</script>
+    </pre-scripts>
+  </scripts>
+  <software>
+<!--
+   Required for SLES 15
+-->
+    <products config:type="list">
+      <product>SLES</product>
+    </products>
+  </software>
+</profile>

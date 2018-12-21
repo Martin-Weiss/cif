@@ -1,0 +1,312 @@
+#!/bin/bash
+#
+# Author: Jochen Schaefer <jochen.schaefer@microfocus.com>
+#	  Frieder Schmidt <frieder.schmidt@microfocus.com>
+#	  Martin Weiss	  <martin.weiss@suse.com>
+# 
+# copyright (c) Novell Deutschland GmbH, 2001-2016. All rights reserved.
+# GNU Public License
+#
+# CUSTOMER.txt			  			25 Jan 2013
+# last update						20 Dec 2018
+
+
+########################################################################
+########################################################################
+##
+## The purpose of this file is to define the configuration information
+## that is consistent across *all* servers in *all* environments of the
+## customer.
+##
+## !! IMPORTANT !!
+## Do NOT use any special characters, such as (but not limited to) "&",
+## "<", or ">" in any variable value since these characters could have
+## special meanings in the programming languages used and/or in the
+## resulting xml files.
+## This could result in unforseable behavior including abortian of the
+## installation routine.
+##
+########################################################################
+
+
+## OES information
+
+## Type String
+## Description: fully distinguished name of the OES Installation user
+##		in LDAP syntax
+OES_INSTALL_USER="cn=admin,o=oes2018ga"
+
+## Type String
+## Description: fully distinguished name of the LUM admingroup
+##		in LDAP syntax
+LUM_ADMIN_GROUP="cn=admingroup,ou=lum,ou=global,o=oes2018ga"
+
+## Type String
+## Description: eDirectory context where the Unix Configuration object
+##		is located in LDAP Syntax
+UCO_CONTEXT="ou=lum,ou=global,o=oes2018ga"
+
+## Type IP|DNS
+## Description: Colon separated list of IP addresses or DNS NAMES of LDAP
+##		servers for OES.
+##		These LDAP servers are configured for eDirectory in random
+## 		order with the local LDAP server as first server.
+##		For certain OES services (afp, cifs, iprint, lum, netstorage)
+##		the local LDAP server is used if it is in the list. Otherwise
+##		a random server is picked from this list and configured for
+## 		theses services.
+##		The remaining servers are configured as alternate LDAP servers
+##		for LUM
+LDAP_SERVER_LIST="oes2018ga-1.suse:oes2018ga-2.suse"
+
+## Type IP
+## Description: IP Address of an existing eDirectory server holding a writable
+##		replica of the context where the new server will be installed
+REPLICA_SERVER="10.1.1.203"
+
+
+## DHCP information
+
+## Type String
+## Description: eDirectory context where the DHCP Group object is located in 
+##		LDAP Syntax
+DHCP_GROUP_CONTEXT="ou=dhcp,ou=global,o=oes2018ga"
+
+## Type String
+## Description: space separated list of interfaces the DHCP server should listen
+## 		to i. e. "eth0 eth1"
+DHCP_INTERFACES="eth0"
+
+## Type String
+## Description: eDirectory context where the DHCP Locator object is located in
+##		LDAP Syntax
+DHCP_LOCATOR_CONTEXT="ou=dhcp,ou=global,o=oes2018ga"
+
+## Type String
+## Description: name of the OU where the Novell DHCP Server object will be located
+##		subordinate to the NCP Server context
+##			e.g. "ou=DHCP" will place the object in
+##		 	ou=DHCP,ou=servers,ou=services,ou=location,ou...
+##
+##		if the DHCP Server object shall be placed higher in the tree
+##		structure than the NCP Server object the number of levels can be
+##		specified using  a ";" as separator
+##			e.g. ou="DHCP;1" will place the DHCP Server object in
+##			an OU named DHCP in parallel to the server context, i. e.
+##			ou=DHCP,ou=services,ou=location,...
+#DHCP_SERVER_CTX="ou=dhcp;1"
+
+
+## DNS information
+
+## Type String
+## Description: eDirectory context where the Novell DNS Services Group object is
+##              located in LDAP Syntax
+DNS_GROUP_CONTEXT="ou=dns,ou=global,o=oes2018ga"
+
+## Type String
+## Description: eDirectory context where the Novell DNS Services Locator object is
+##              located in LDAP Syntax
+DNS_LOCATOR_CONTEXT="ou=dns,ou=global,o=oes2018ga"
+
+## Type String
+## Description: eDirectory context where the Novell DNS Services Root Server Info
+##              is located in LDAP Syntax
+DNS_ROOTSERVERINFO_CONTEXT="ou=dns,ou=global,o=oes2018ga"
+
+## Type String
+## Description: name of the OU where the Novell DNS Server object will be located
+##		subordinate to the NCP Server context
+##			e.g. "ou=DNS" will place the object in
+##		 	ou=DNS,ou=servers,ou=services,ou=location,ou...
+##
+##		if the DNS Server object shall be placed higher in the tree
+##		structure than the NCP Server object the number of levels can be
+##		specified using  a ";" as separator
+##			e.g. ou="DNS;1" will place the DHCP Server object in
+##			an OU named DNS in parallel to the server context, i. e.
+##			ou=DNS,ou=services,ou=location,...
+##
+##		!!! future enhancement not usable at the moment !!!
+##
+##		     !!! Requires changes in YaST/OES code !!!
+#DNS_SERVER_CTX=""
+
+
+## LDAP information
+
+## Type String
+## Description: fully distinguished name of the eDir search base for
+##              afp, cifs, iprint, and netstorage in LDAP syntax
+##
+##		This LDAP base will be used for all OES services
+##		unless specified differently in the variables below
+SEARCH_BASE="o=oes2018ga"
+
+## Type String
+## Description: fully distinguished name of the eDir search base for
+##              afp in LDAP syntax
+AFP_SEARCH_BASE="$SEARCH_BASE"
+
+## Type String
+## Description: fully distinguished name of the eDir search base for
+##              cifs in LDAP syntax
+CIFS_SEARCH_BASE="$SEARCH_BASE"
+
+## Type String
+## Description: fully distinguished name of the eDir search base for
+IPRINT_SEARCH_BASE="$SEARCH_BASE"
+
+## Type String
+## Description: fully distinguished name of the eDir search base for
+##              netstorage in LDAP syntax
+NETSTORAGE_SEARCH_BASE="$SEARCH_BASE"
+
+
+## NSS information
+
+## Type Integer
+## Description: Start value for Novell Idendity Translator (NIT)
+##		Only required with OES2015 and newer
+##		default: 100000
+AD_NIT_UID_START="100000"
+
+## Type Integer
+## Description: End value for Novell Idendity Translator (NIT)
+##		Only required with OES2015 and newer
+##		default: 200000
+AD_NIT_UID_END="200000"
+
+
+## NSS-AD information
+
+## Type String
+## Description: name of the AD container where the computer objects
+##              for the OES2015 servers joined to the domain will
+##		be placed
+##		default: CN=Computers
+AD_COMPUTER_CONTAINER="CN=Computers"
+
+## Type String
+## Description: determines wether or not NIT IDs will be generated on
+##              the fly
+##		default: yes = generate mode
+AD_CREATE_NIT_UIDS="yes"
+
+## Type String
+## Description: name of the domain the OES2015 server will join
+AD_DOMAIN_NAME="ad.suse"
+
+## Type String
+## Description: name of the AD group that will receive SUPERVISOR
+##		rights to the root of all NSS volumes
+##		default: Domain Admins
+AD_DOMAIN_ADMIN_GROUP="Domain Admins"
+
+## Type List	(no|yes)
+## Description: determines whether or not pre-created computer objects
+##              will be used to represent the server in AD
+##		default: no
+AD_USE_PRECREATED_COMPUTEROBJ="no"
+
+## Type String
+## Description: name of an AD user with sufficient rights to join the
+##              domain
+##		default: Administrator
+AD_USER_NAME="Administrator"
+
+
+## SLP information
+
+## type list	(novell,open)
+## Description: determines the type of SLP infrastructure in use
+SLP_TYPE="open"
+
+## Type Custom
+## Description: Colon separated list of IP addresses of SLP Directory Agent
+##              host servers
+SLPDA_SERVER_LIST="10.1.1.203:10.1.1.204"
+
+## Type Custom
+## Description: Colon separated list of SLP Scope names
+SLP_SCOPE_LIST="oes2018ga-scope"
+
+
+## SLES information
+
+## Type String
+## Description: name of the YaST CA; mandatory
+##		default: YaST_Default_CA
+CA_NAME="YaST_Default_CA"
+
+## Type String
+## Description: CN of the YaST CA; mandatory
+## 		default: YaST_Default_CA ($my_hostname)
+CA_CN="YaST_Default_CA (%%HOST_NAME%%)"
+
+## Type String
+## Description: country of the YaST CA; mandatory
+##		default: DE
+CA_COUNTRY="DE"
+
+## Type String
+## Description: state where the YaST CA is located; optional
+CA_STATE=""
+
+## Type String
+## Description: locality of the YaST CA; optional
+CA_LOCALITY=""
+
+## Type String
+## Description: organization of the YaST CA; optional
+CA_O=""
+
+## Type String
+## Description: organizational unit of the YaST CA; optional
+CA_OU=""
+
+## Type String
+## Description: password of the YaST CA; mandatory
+##		default: "novell" (without quotes)
+##
+##		IMPORTANT NOTE
+##		when using eDirectory based AutoYast this password is
+##		visible to anybody that can access the web service on
+##		the AutoYaST server
+##
+##		Therefor it is strongly recommend that you change the
+##		CA password after installation
+CA_PWD="microfocus"
+
+## Type String
+## Description: e-mail address of the YaST CA; mandatory
+##		default: postmaster@primary_domain
+##		The first value of SUFFIX_SEARCH_LIST is used as primary
+##		domain. 
+CA_EMAIL="postmaster@%%DOMAIN_NAME%%"
+
+
+## Type List	(UTC|localtime)
+## Description:	Hardware clock setting
+HWCLOCK="UTC"
+
+## Type String
+## Description:	YaST-internal identifier of the attached keyboard
+KEYMAP="german"
+
+## Type String
+## Description:	Language
+LANGUAGE="en_US"
+
+## Type String
+## Description:	encrypted root password
+##		must be enclosed in '' due to bash expansion of $
+#ROOT_PWD=''
+
+# novell
+ROOT_PWD='$6$eTocV/T/0xF6$xIRCW5zo7tQJ8zxMqBPEmt59X5m97bS0YwpGj6BBh12G6JJIsF59H3jJLBsgHPSJUbU5bYIUnyqNkrCOhIO78.'
+
+## Type String
+## Description:	Time Zone
+TIME_ZONE="Europe/Berlin"
+

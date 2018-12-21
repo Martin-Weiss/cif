@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+ <general>
+  <ask-list config:type="list">
+      <ask>
+          <!-- DON'T remove this comment which is used by function create_error_popup -->
+	  <dialog config:type="integer">12</dialog>
+          <question>Please enter the password for user %%AD_DOMAIN_NAME%%\%%AD_USER_NAME%%</question>
+          <path>novell-nssad,admin_password</path>
+          <type>string</type>
+          <help>This is the password for the AD user used to join the domain.
+                &lt;p&gt;The password needs to be entered twice.&lt;/p&gt;</help>
+          <password config:type="boolean">true</password>
+          <stage>initial</stage>
+          <title>AD User Password</title>
+      </ask>
+   </ask-list>
+ </general>
+</profile>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <software>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+      <pattern>x11</pattern>
+   </patterns>
+    <packages  config:type="list">
+      <package>kernel-source</package>
+      <package>iftop</package>
+      <package>gcc</package>
+      <package>glibc</package> 
+      <package>mc</package>	
+      <package>ncurses</package>
+      <package>net-tools</package>
+      <package>findutils</package>
+      <package>kexec-tools</package>
+      <package>kdump</package>
+      <package>sysstat</package>
+      <package>dos2unix</package>
+      <package>nagios-plugins</package>
+      <package>nagios-plugins-extras</package>
+     </packages>
+     <remove-packages config:type="list">
+      <package>gnome2-SuSE</package>
+      <package>samba</package>
+      <package>tightvnc</package>
+      <package>mDNSResponder</package>
+      <package>evolution</package>
+      <package>gnome2-SLES</package>
+      <package>salinfo</package>
+      <package>s390-32</package>
+      <package>s390-tools</package>
+      <package>powerpc32</package>
+      <package>pfmon</package>
+      <package>pdisk</package>
+      <package>libpfm</package>
+      <package>linux32</package>
+      <package>numactl</package>
+      <package>mcelog</package>
+      <package>sles-preparation-zseries_en</package>
+      <package>sles-preparation-power_en</package>
+    </remove-packages>
+  </software>
+</profile>

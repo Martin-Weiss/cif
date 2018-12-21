@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <software>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+      <pattern>novell-base</pattern>
+      <pattern>novell-afp</pattern>
+      <pattern>novell-cifs</pattern>
+      <pattern>novell-dhcp</pattern>
+      <pattern>novell-dns</pattern>
+      <pattern>novell-edirectory</pattern>
+      <pattern>novell-ftp</pattern>
+      <pattern>novell-imanager</pattern>
+      <pattern>novell-iprint</pattern>
+      <pattern>novell-lum</pattern>
+      <pattern>novell-ncp</pattern>
+      <pattern>novell-netstorage</pattern>
+      <pattern>novell-nrm</pattern>
+      <pattern>novell-nss</pattern>
+      <pattern>novell-sms</pattern>
+      <pattern>novell-web-services</pattern>
+      <pattern>novell-welcome</pattern>
+      <pattern>novell-xtier</pattern>
+      <pattern>novell-yast2</pattern>
+      <pattern>x11</pattern>
+   </patterns>
+    <packages  config:type="list">
+      <package>Open_Enterprise_Server-release</package>
+      <package>dos2unix</package>
+      <package>findutils</package>
+      <package>gcc</package>
+      <package>glibc</package> 
+      <package>iftop</package>
+      <package>kdump</package>
+      <package>kexec-tools</package>
+      <package>lftp</package>	
+      <package>mc</package>	
+      <package>net-tools</package>
+      <!-- the following package is required for novell-sms -->
+      <package>openslp-32bit</package>
+      <package>sysstat</package>
+     </packages>
+     <remove-packages config:type="list">
+      <package>evolution</package>
+      <package>gnome2-SLES</package>
+      <package>gnome2-SuSE</package>
+      <package>libpfm</package>
+      <package>linux32</package>
+      <package>mDNSResponder</package>
+      <package>mcelog</package>
+      <package>numactl</package>
+      <package>pdisk</package>
+      <package>pfmon</package>
+      <package>powerpc32</package>
+      <package>samba</package>
+      <package>tightvnc</package>
+      <package>salinfo</package>
+      <package>s390-32</package>
+      <package>s390-tools</package>
+      <package>sles-preparation-zseries_en</package>
+      <package>sles-preparation-power_en</package>
+    </remove-packages>
+  </software>
+</profile>

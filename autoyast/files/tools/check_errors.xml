@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+<general>
+<ask-list config:type="list">
+  <ask>
+    <default>ok</default>
+    <dialog config:type="integer">1</dialog>
+    <stage>initial</stage>
+    <title>Errors During Script Execution !!!</title>
+    <timeout config:type="integer">1</timeout>
+    <selection config:type="list">
+      <entry>
+ 	<value>
+          ok
+	</value>
+	<label>
+          ok
+	</label>
+      </entry>
+    </selection>
+    <script>
+      <environment config:type="boolean">false</environment>
+      <filename>printout.sh</filename>
+      <source><![CDATA[
+if [ -e /tmp/profile/errors.txt ];then
+	cat /tmp/profile/errors.txt 
+fi
+]]>
+      </source>
+      <debug config:type="boolean">false</debug>
+      <feedback config:type="boolean">true</feedback>
+    </script>
+  </ask>
+
+  <ask>
+    <default>reboot</default>
+    <dialog config:type="integer">2</dialog>
+    <stage>initial</stage>
+    <title>Handling Script Errors</title>
+    <question>Choose an Option</question>
+    <selection config:type="list">
+      <entry>
+	<value>reboot</value>
+	<label>Reboot System</label>
+      </entry>
+      <entry>
+	<value>continue</value>
+	<label>Continue</label>
+     </entry>
+    </selection>
+    <script>
+      <environment config:type="boolean">true</environment>
+      <filename>check_errors.sh</filename>
+      <source><![CDATA[
+if [ $(grep -qi reboot <<<"$VAL";echo $?) -eq 0 ]; then
+    reboot -f
+else
+	exit 0
+fi
+]]>
+      </source>
+    </script>
+  </ask>
+</ask-list>
+</general>
+</profile>

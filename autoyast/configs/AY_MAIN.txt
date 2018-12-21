@@ -1,0 +1,175 @@
+#!/bin/bash
+#
+# Author: Jochen Schaefer <jochen.schaefer@microfocus.com>
+#         Frieder Schmidt <frieder.schmidt@microfocus.com>
+#         Martin Weiss    <martin.weiss@suse.com>
+#
+# copyright (c) Novell Deutschland GmbH, 2001-2016. All rights reserved.
+# GNU Public License
+#
+# AY_MAIN.txt  						 9 Jan 2013
+# last update (merge OES 2018,SLES 15, CaaSP)          	20 Dec 2018
+
+
+############################################################################
+############################################################################
+##
+## The purpose of this file is to define global configuration information
+## for the AutoYaST system developed by Novell Consulting Germany
+##
+## It is recommended that you do not make any changes to this files unless
+## you are absolutelly sure that you understand the consequences
+##
+############################################################################
+
+## Type list    (dev|tst|prd)
+## Description: determines in which of three possible environments
+##		the installation shall be performed.
+##		For edirectory based installations a corresponding
+##		configuration for the web service needs to be available.
+AY_CONFIG_ENV="prd"
+
+## Type list	(cvs|eDirectory)
+## Description: determines if we are using Variables from eDirectory
+##		or csv file
+AY_CONFIG_BASE="csv"
+
+## Type list	(IP|MAC)
+## Description: determines if we are using IP or MAC addresses as identifier
+## 		for server specific information
+AY_MACHINE_IDENTIFIER="IP"
+
+## Type Directory
+## Description: Base directory of the AutoYaST system
+##		Must be configured as an alias on the AutoYaST server
+AY_BASE_DIR="$PREFIX"
+
+## Type Directory
+## Description: Directory for the xml files defining deviations from the
+##		configurations defined in the .../xml directory structure
+##		such as add-on product selection, partitioning schemes
+##		or software selections.
+##
+##              This is the place for all customer specific xml files!
+AY_FILE_DIR="files"
+
+## Type Directory
+## Description: Directory for the libraries used by the AutoYaST system
+##		Libraries provided by MicroFocus/SUSE Consulting are stored in
+##		.../main
+##
+##		Customer specific libraires can be placed in .../customer
+AY_LIB_DIR="lib"
+
+## Type Directory
+## Description: Directory for shell scripts used by the AutoYaST system
+AY_SCRIPTS_DIR="scripts"
+
+## Type Directory
+## Description: Directory underneath $AY_FILE_DIR for xml configuration
+##		files with services configuration information
+## 		
+AY_SERVICES_DIR="services"
+
+## Type Directory
+## Description: Directory underneath $AY_FILE_DIR for tools
+AY_TOOLS_DIR="tools"
+
+## Type Directory
+## Description: Base Directory for static xml configuration files.
+AY_XML_DIR="xml"
+
+## Type Directory
+## Description: Class Directory underneath $AY_XML_DIR for static xml
+##		configuration files 
+##
+##		These files must not be changed!
+AY_XML_CLASS_DIR="classes"
+
+
+## Type File
+## Description: Name of the configuration file with customer specific
+##		configuration information that is consistent across
+##		*all* servers in *all* environments of the customer
+AY_CUSTOMER_FILE="CUSTOMER.txt"
+
+## Type File
+## Description: File used to generate the message in the error popup
+AY_ERROR_HANDLER_FILE="check_errors.xml"
+
+## Type File
+## Description: Coma separated file for the server-specific configuration
+##		information
+AY_SERVERTXT_FILE="server.txt"
+
+## Type File
+## Description: Coma separated file for the customer server-specific configuration
+##		information used in AY_CUSTOMER_LIB_FILE
+AY_MY_SERVERTXT_FILE="my_server.txt"
+
+## Type File
+## Description: Main library file containing generic functions from
+##		Novell Consulting
+AY_MAIN_LIB_FILE="ay_lib.sh"
+
+## Type File
+## Description: Customer library file containing customer specific functions
+AY_CUSTOMER_LIB_FILE="customer_lib.sh"
+
+
+## Type URL
+## Description: URL to the base directory of the AutoYaST system
+AY_BASE_DIR_URL="$AY_SERVER/$AY_BASE_DIR"
+
+## Type URL
+## Description: URL to the directory for xml files defining deviations from the
+##		configuration defined in the $AY_XML_DIR directory structure.
+AY_FILE_STORE_URL="$AY_BASE_DIR_URL/$AY_FILE_DIR"
+
+## Type URL
+## Description: URL to the directory with the libraries of the AutoYaST
+##		system
+AY_LIB_DIR_URL="$AY_BASE_DIR_URL/$AY_LIB_DIR"
+
+## Type URL
+## Description: URL to the directory for xml configuration files configuring
+##		service aspects
+AY_SERVICES_DIR_URL="$AY_FILE_STORE_URL/$AY_SERVICES_DIR"
+
+## Type URL
+## Description: URL to the directory containing tools
+AY_TOOLS_DIR_URL="$AY_FILE_STORE_URL/$AY_TOOLS_DIR"
+
+## Type URL
+## Description: URL to the base directory for static xml configuration files of
+##		the AutoYaST system
+AY_XML_STORE_URL="$AY_BASE_DIR_URL/$AY_XML_DIR"
+
+## Type URL
+## Description: URL to the class directory for static xml configuration files of
+##		the AutoYaST system
+AY_XML_CLASS_DIR_URL="$AY_XML_STORE_URL/$AY_XML_CLASS_DIR"
+
+## Type URL
+## Description: URL to the customer configuration file of the AutoYaST system
+AY_CUSTOMER_FILE_URL="$AY_CONFIG_DIR_URL/$AY_CUSTOMER_FILE"
+
+## Type URL
+## Description: URL to the file used to generate the message in the error popup
+AY_ERROR_HANDLER_FILE_URL="$AY_TOOLS_DIR_URL/$AY_ERROR_HANDLER_FILE"
+
+## Type URL
+## Description: URL to the server configuration file of the AutoYaST system
+AY_SERVERTXT_FILE_URL="$AY_CONFIG_DIR_URL/$AY_SERVERTXT_FILE"
+
+## Type URL
+## Description: URL to the customer server configuration file of the AutoYaST system
+AY_MY_SERVERTXT_FILE_URL="$AY_CONFIG_DIR_URL/$AY_MY_SERVERTXT_FILE"
+
+## Type URL
+## Description: URL to the main library file of the AutoYaST system
+AY_MAIN_LIB_FILE_URL="$AY_LIB_DIR_URL/main/$AY_MAIN_LIB_FILE"
+
+## Type URL
+## Description: URL to the customer library file of the AutoYaST system
+AY_CUSTOMER_LIB_FILE_URL="$AY_LIB_DIR_URL/customer/$AY_CUSTOMER_LIB_FILE"

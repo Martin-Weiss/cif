@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+
+  <!-- with this partitioning scheme you need at least 104.01 GB of free space -->
+
+  <partitioning config:type="list">
+    <drive>
+      <device>%%DEVICE_NAME0%%</device>
+      <disklabel>gpt</disklabel>
+      <initialize config:type="boolean">true</initialize>
+      <enable_snapshots config:type="boolean">true</enable_snapshots>
+      <partitions config:type="list">
+
+        <partition>
+          <!-- BIOS Grub -->
+          <create config:type="boolean">true</create>
+          <partition_id config:type="integer">263</partition_id>
+          <resize config:type="boolean">false</resize>
+          <size>8MB</size>
+        </partition>
+
+        <partition>
+          <!-- swap -->
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">swap</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>defaults</fstopt>
+	      <label>Swap</label>
+          <mount>swap</mount>
+          <mountby config:type="symbol">label</mountby>
+          <partition_type>primary</partition_type>
+          <size>4GB</size>
+        </partition>
+
+        <partition>
+          <!-- root -->
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">btrfs</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>defaults</fstopt>
+	      <label>Root</label>
+          <mount>/</mount>
+          <mountby config:type="symbol">label</mountby>
+          <partition_id config:type="integer">131</partition_id>
+          <partition_type>primary</partition_type>
+          <size>90GB</size>
+          <subvolumes config:type="list">
+            <listentry>boot/grub2/i386-pc</listentry>
+            <listentry>boot/grub2/x86_64-efi</listentry>
+            <listentry>opt</listentry>
+            <listentry>srv</listentry>
+            <listentry>tmp</listentry>
+            <listentry>usr/local</listentry>
+            <listentry>var/cache</listentry>
+            <listentry>var/crash</listentry>
+            <listentry>var/lib/libvirt/images</listentry>
+            <listentry>var/lib/machines</listentry>
+            <listentry>var/lib/mailman</listentry>
+            <listentry>var/lib/mariadb</listentry>
+            <listentry>var/lib/mysql</listentry>
+            <listentry>var/lib/named</listentry>
+            <listentry>var/lib/pgsql</listentry>
+            <listentry>var/log</listentry>
+            <listentry>var/opt</listentry>
+            <listentry>var/spool</listentry>
+            <listentry>var/tmp</listentry>
+          </subvolumes>
+        </partition>
+
+        <partition>
+          <!-- eDir VG -->
+          <create config:type="boolean">true</create>
+          <lvm_group>eDir</lvm_group>
+          <partition_id config:type="integer">142</partition_id>
+          <partition_type>primary</partition_type>
+          <size>10GB</size>
+        </partition>
+
+      </partitions>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+
+    <drive>
+      <initialize config:type="boolean">true</initialize>
+      <device>/dev/eDir</device>
+      <lvm2 config:type="boolean">true</lvm2>
+      <partitions config:type="list">
+
+        <partition>
+          <!-- eDir LV -->
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">xfs</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>defaults</fstopt>
+          <lv_name>eDir</lv_name>
+	      <label>eDir</label>
+          <mount>/var/opt/novell/eDirectory</mount>
+          <mountby config:type="symbol">label</mountby>
+          <partition_type>primary</partition_type>
+          <size>max</size>
+        </partition>
+
+      </partitions>
+      <pesize/>
+      <type config:type="symbol">CT_LVM</type>
+      <use>all</use>
+    </drive>
+
+  </partitioning>
+</profile>

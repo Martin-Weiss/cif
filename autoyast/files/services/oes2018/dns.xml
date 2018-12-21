@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <novell-dns>
+    <ocs_store>yes</ocs_store>
+    <create_server_object>yes</create_server_object>
+    <domain_name>%%DOMAIN_NAME%%</domain_name>
+    <host_name>%%HOST_NAME%%</host_name>
+    <group_context>%%DNS_GROUP_CONTEXT%%</group_context>
+    <ldap_basedn>%%DNS_ROOTSERVERINFO_CONTEXT%%</ldap_basedn>
+    <locator_context>%%DNS_LOCATOR_CONTEXT%%</locator_context>
+    <ldap_server>%%IP_ADDRESS%%</ldap_server>
+    <runtime_admin>cn=OESCommonProxy_%%HOST_NAME%%,%%SERVER_CONTEXT%%</runtime_admin>
+<!--    <runtime_admin_password>Replace this text with the real password</runtime_admin_password> -->
+    <server_context>%%DNS_SERVER_CTX%%</server_context>
+    <use_secure_port>yes</use_secure_port>
+  </novell-dns>
+</profile>
+

@@ -1,0 +1,4 @@
+autoyast=http://10.1.1.1/autoyast/xml/
+install=http://10.1.1.1/sles12sp3/
+self_update=http://10.1.1.1/repo/SUSE/Updates/SLE-SERVER-INSTALLER/12-SP3/x86_64/update/
+

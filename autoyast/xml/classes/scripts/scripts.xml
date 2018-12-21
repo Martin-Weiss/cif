@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <scripts>
+
+    <chroot-scripts config:type="list">
+      <listentry>
+      <filename>create-variables.sh</filename>
+        <interpreter>shell</interpreter>
+        <source>
+<![CDATA[
+
+# save variables in /root/install/variables.txt
+if [ -f /tmp/profile/variables.txt ]; then
+   mkdir -p /mnt/root/install
+   cat /tmp/profile/variables.txt  >>/mnt/root/install/variables.txt
+fi
+
+]]>
+        </source>
+		<notification>Please wait while variables list is stored in /root/install/variables.txt . . .</notification>
+      </listentry>
+    </chroot-scripts>
+
+    <!-- init-scripts (during the first boot of the installed system, all services up and running) -->
+    <init-scripts config:type="list">
+      <listentry>
+        <!-- Miscellaneous changes -->
+        <filename>post-inst.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/post-inst.sh</location>
+      </listentry>
+      <listentry>
+        <!-- Install ZCM agent -->
+        <filename>zcm-install.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/zcm-install.sh</location>
+      </listentry>
+    </init-scripts>
+  </scripts>
+</profile>

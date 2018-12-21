@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <ca_mgm>
+    <CAName>%%CA_NAME%%</CAName>
+    <ca_commonName>%%CA_CN%%</ca_commonName>
+    <country>%%CA_COUNTRY%%</country>
+    <state>%%CA_STATE%%</state>
+    <locality>%%CA_LOCALITY%%</locality>
+    <organisation>%%CA_O%%</organisation>
+    <organisationUnit>%%CA_OU%%</organisationUnit>
+    <password>%%CA_PWD%%</password>
+    <server_email>%%CA_EMAIL%%</server_email>
+    <importCertificate config:type="boolean">false</importCertificate>
+    <takeLocalServerName config:type="boolean">true</takeLocalServerName>
+  </ca_mgm>
+</profile>

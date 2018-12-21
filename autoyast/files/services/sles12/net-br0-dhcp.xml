@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+ <profile
+ xmlns="http://www.suse.com/1.0/yast2ns"
+ xmlns:config="http://www.suse.com/1.0/configns">
+<networking>
+      <dhcp_options>
+        <dhclient_hostname_option>AUTO</dhclient_hostname_option>
+        </dhcp_options>
+      <dns>
+        <dhcp_hostname config:type="boolean">true</dhcp_hostname>
+        <dhcp_resolv config:type="boolean">true</dhcp_resolv>
+	<hostname>%%HOST_NAME%%</hostname>
+       <domain>%%DOMAIN_NAME%%</domain>
+	<searchlist config:type="list">
+        <search>%%SUFFIX_SEARCH_LIST%%</search>
+        </searchlist>
+	<write_hostname config:type="boolean">false</write_hostname>
+      </dns>
+     <routing>
+      <ip_forward config:type="boolean">false</ip_forward>
+     </routing>
+      <interfaces config:type="list">
+	<interface>
+		  <bootproto>dhcp4</bootproto>
+		<device>br0</device>
+		<bridge_ports>eth0</bridge_ports>
+		<bridge>yes</bridge>
+		<bridge_forwarddelay>0</bridge_forwarddelay>
+		<bridge_stp>off</bridge_stp>
+		<startmode>auto</startmode>
+		<usercontrol>no</usercontrol>
+      </interface>
+	<interface>
+	      <bootproto>none</bootproto>
+	      <device>eth0</device>
+	      <startmode>off</startmode>
+	      <usercontrol>no</usercontrol>
+      </interface>
+      </interfaces>
+<net-udev config:type="list">
+      <rule>
+        <name>eth0</name>
+        <rule>ATTR{address}</rule>
+        <value>%%MAC_ADDRESS%%</value>
+      </rule>
+    </net-udev>
+      <keep_install_network config:type="boolean">true</keep_install_network>
+      <ipv6 config:type="boolean">false</ipv6>
+    </networking>
+<host>
+    <hosts config:type="list">
+      <hosts_entry>
+        <host_address>127.0.0.1</host_address>
+        <names config:type="list">
+          <name>localhost</name>
+        </names>
+      </hosts_entry>
+ <hosts_entry>
+        <host_address>%%IP_ADDRESS%%</host_address>
+        <names config:type="list">
+          <name>%%HOST_NAME%%.%%DOMAIN_NAME%% %%HOST_NAME%%</name>
+        </names>
+      </hosts_entry>
+    </hosts>
+</host>
+</profile>
