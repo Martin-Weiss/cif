@@ -6,7 +6,7 @@
      <listentry>%%CIFS_SEARCH_BASE%%</listentry>
     </cifs_edir_contexts>
     <create_new_user>no</create_new_user>
-    <ldap_server>%%LDAP_1%%</ldap_server>
+    <ldap_server>%%IP_ADDRESS%%</ldap_server>
     <cifs_ldap_port config:type="integer">636</cifs_ldap_port>
     <proxy_user>cn=OESCommonProxy_%%HOST_NAME%%,%%SERVER_CONTEXT%%</proxy_user>
 <!--

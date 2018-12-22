@@ -1,12 +1,3 @@
-Open ToDo:
-----------------------------------------------
-- add rescue mode and manual install to iso
-- add EFI for bootcd
-- add suse manager script
-- add release rpms for addons
-- ntp pre-sles12sp3 --> error with ntp.conf comments starting with sles12sp3
-- add pci-bus-id also for kvm sles11sp4? (net.xml und skript)
-
 Quick howto:
 ----------------------------------------------
 
@@ -36,11 +27,7 @@ Create and adjust network variables files in
 Create and adjust tree variables files
 Adjust server.txt, hint: vda for kvm, sda for vmware, xda for xen
 
-For PXE
-Adjust /etc/dhcpd.conf
-Adjust /srv/tftpboot/... grub.cfg, message, pxelinux.sys/default
-Start tftserver, start dhcp server
-
+Adjust IP in autoyast/xml/default
 Adjust autoyast/info-<os>.txt file to your autoyast and iso server
 
 Adjust BOOT_CD 
@@ -55,3 +42,19 @@ KVM example:
 virt-install --connect qemu:///system --virt-type kvm  --name ay-test-sles11sp4 --memory 2048 --network network=10-1-1 --disk pool=images-nvme,size=50,sparse=true --graphics vnc --os-variant sles11sp4 --vcpus 2 --cdrom /srv/www/htdocs/isos/autoyast-suse.iso
 
 -> enter IP and Gateway that matches server.txt
+
+Open ToDo:
+----------------------------------------------
+- add EFI for bootcd
+- add release rpms for addons
+- add PXE/DHCP
+	Adjust /etc/dhcpd.conf
+	Adjust /srv/tftpboot/... grub.cfg, message, pxelinux.sys/default
+	Start tftserver, start dhcp server
+- add upgrade (down server and online)
+
+Known Issue:
+----------------------------------------------
+- ntp pre-sles12sp3 --> error with ntp.conf comments starting with sles12sp3
+- add pci-bus-id also for kvm sles11sp4? (net.xml and script)
+

@@ -11,3 +11,13 @@ title CAASP3
 	kernel /kernel/caasp3/linux info=http://10.1.1.1/autoyast/info-caasp3.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
 	initrd=/kernel/caasp3/initrd
 
+title CAASP3 manual installation
+	kernel /kernel/caasp3/linux info=http://10.1.1.1/autoyast/info-caasp3-manual.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/caasp3/initrd
+
+title CAASP3 rescue mode
+	kernel /kernel/caasp3/linux info=http://10.1.1.1/autoyast/info-caasp3-rescue.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/caasp3/initrd
+
+
+

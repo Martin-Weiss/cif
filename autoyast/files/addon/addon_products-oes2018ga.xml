@@ -4,42 +4,42 @@
   <add-on>
     <add_on_products config:type="list">
       <listentry>
-        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-SLES12-SP2-Pool</media_url>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-SLES12-SP2-Pool/sle-12-x86_64</media_url>
         <product>OES2018-SLES12-SP2-POOL</product>
         <product_dir>/</product_dir>
         <name>OES2018-SLES12-SP2-POOL</name>
         <alias>OES2018-SLES12-SP2-POOL</alias>
       </listentry>
       <listentry>
-        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-SLES12-SP2-Updates</media_url>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-SLES12-SP2-Updates/sle-12-x86_64</media_url>
         <product>OES2018-SLES12-SP2-UPDATES</product>
         <product_dir>/</product_dir>
         <name>OES2018-SLES12-SP2-UPDATES</name>
         <alias>OES2018-SLES12-SP2-UPDATES</alias>
       </listentry>
       <listentry>
-        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-SLE-Module-Containers-12-SP2-Pool</media_url>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-SLE-Module-Containers-12-SP2-Pool/sle-12-x86_64</media_url>
         <product>OES2018-SLE-MODULE-CONTAINERS-12-SP2-POOL</product>
         <product_dir>/</product_dir>
         <name>OES2018-SLE-MODULE-CONTAINERS-12-SP2-POOL</name>
         <alias>OES2018-SLE-MODULE-CONTAINERS-12-SP2-POOL</alias>
       </listentry>
       <listentry>
-        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-SLE-Module-Containers-12-SP2-Updates</media_url>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-SLE-Module-Containers-12-SP2-Updates/sle-12-x86_64</media_url>
         <product>OES2018-SLE-MODULE-CONTAINERS-12-SP2-UPDATES</product>
         <product_dir>/</product_dir>
         <name>OES2018-SLE-MODULE-CONTAINERS-12-SP2-UPDATES</name>
         <alias>OES2018-SLE-MODULE-CONTAINERS-12-SP2-UPDATES</alias>
       </listentry>
       <listentry>
-        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-Pool</media_url>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-Pool/sle-12-x86_64</media_url>
         <product>OES2018-POOL</product>
         <product_dir>/</product_dir>
         <name>OES2018-POOL</name>
         <alias>OES2018-POOL</alias>
       </listentry>
       <listentry>
-        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-Updates</media_url>
+        <media_url>%%SMT_SERVER%%/repo/$RCE/OES2018-Updates/sle-12-x86_64</media_url>
         <product>OES2018-UPDATES</product>
         <product_dir>/</product_dir>
         <name>OES2018-UPDATES</name>

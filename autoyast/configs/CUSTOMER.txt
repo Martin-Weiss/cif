@@ -49,10 +49,12 @@ CAASP3_NODE="caasp3/general-node.xml:caasp3/scripts-node.xml:caasp3/net.xml"
 OES2015_EDIR="$SLES11_DEFAULT:oes2015/oes_base.xml:oes2015/imanager.xml"
 OES2015_NCS="$SLES11_DEFAULT:oes2015/oes_base.xml:oes2015/nss.xml:oes2015/afp.xml:oes2015/cifs.xml:oes2015/dhcp.xml:oes2015/dns.xml:oes2015/iprint.xml"
 OES2015_BRANCH="$SLES11_DEFAULT:oes2015/oes_base.xml:oes2015/imanager.xml:oes2015/nss.xml:oes2015/afp.xml:oes2015/cifs.xml:oes2015/dhcp.xml:oes2015/dns.xml:oes2015/iprint.xml:oes2015/netstorage.xml"
+OES2015_ALL="$SLES11_DEFAULT:oes2015/oes_base.xml:oes2015/imanager.xml:oes2015/nss.xml:oes2015/afp.xml:oes2015/cifs.xml:oes2015/dhcp.xml:oes2015/dns.xml:oes2015/iprint.xml:oes2015/netstorage.xml"
 
 OES2018_EDIR="$SLES12_DEFAULT:oes2018/oes_base.xml:oes2018/imanager.xml"
 OES2018_NCS="$SLES12_DEFAULT:oes2018/oes_base.xml:oes2018/nss.xml:oes2018/afp.xml:oes2018/cifs.xml:oes2018/dhcp.xml:oes2018/dns.xml:oes2018/iprint.xml"
 OES2018_BRANCH="$SLES12_DEFAULT:oes2018/oes_base.xml:oes2018/imanager.xml:oes2018/nss.xml:oes2018/afp.xml:oes2018/cifs.xml:oes2018/dhcp.xml:oes2018/dns.xml:oes2018/iprint.xml:oes2018/netstorage.xml"
+OES2018_ALL="$SLES12_DEFAULT:oes2018/oes_base.xml:oes2018/imanager.xml:oes2018/nss.xml:oes2018/afp.xml:oes2018/cifs.xml:oes2018/dhcp.xml:oes2018/dns.xml:oes2018/iprint.xml:oes2018/netstorage.xml"
 
 ## infrastructure information
 
@@ -373,7 +375,7 @@ TIME_ZONE="Europe/Berlin"
 ##
 ########################################################################
 
-## Type List	(smt,zcm)
+## Type List	(smt, suma, zcm)
 ## Description: Type of system used for software updates
 UPDATE_SYSTEM="smt"
 
@@ -424,3 +426,14 @@ YUM_SERVER="$SMT_SERVER"
 ##
 #SALT_MASTER=""
 
+## Type String
+## Description: Suse Manager Server (Hostname or IP address)
+#SUMA_SERVER="http://10.1.1.1"
+
+## Type URL/Path
+## Description:	URL-Path to Suse Manager Bootstrap script
+#SUMA_BOOTSTRAP_FILE="/pub/bootstrap/bootstrap.sh"
+
+## Type URL
+## Description: Full URL to the Suse Manager Bootstrap script
+#SUMA_BOOTSTRAP_URL="${SUMA_SERVER}${SUMA_BOOTSTRAP_FILE}"

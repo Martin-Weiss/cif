@@ -5,7 +5,7 @@
     <afp_edir_contexts config:type="list">
      <listentry>%%AFP_SEARCH_BASE%%</listentry>
     </afp_edir_contexts>
-    <afp_ldap_server>%%LDAP_1%%</afp_ldap_server>
+    <afp_ldap_server>%%IP_ADDRESS%%</afp_ldap_server>
     <afp_proxy_user>cn=OESCommonProxy_%%HOST_NAME%%,%%SERVER_CONTEXT%%</afp_proxy_user>
 <!--
     <afp_proxy_user_password>Replace this text with the real password</afp_proxy_user_password>

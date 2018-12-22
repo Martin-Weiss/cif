@@ -27,13 +27,14 @@
    </patterns>
     <packages  config:type="list">
       <package>dos2unix</package>
-      <package>findutils</package>
+      <package>findutils-locate</package>
       <package>gcc</package>
       <package>glibc</package> 
       <package>iftop</package>
       <package>kdump</package>
       <package>kexec-tools</package>
       <package>mc</package>	
+      <package>ncurses</package>
       <package>net-tools</package>
       <package>sysstat</package>
      </packages>

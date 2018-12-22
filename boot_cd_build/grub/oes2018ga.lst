@@ -11,3 +11,11 @@ title OES2018GA
 	kernel /kernel/oes2018ga/linux info=http://10.1.1.1/autoyast/info-oes2018ga.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
 	initrd=/kernel/oes2018ga/initrd
 
+title OES2018GA manual installation
+	kernel /kernel/oes2018ga/linux info=http://10.1.1.1/autoyast/info-oes2018ga-manual.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes2018ga/initrd
+
+title OES2018GA rescue mode
+	kernel /kernel/oes2018ga/linux info=http://10.1.1.1/autoyast/info-oes2018ga-rescue.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes2018ga/initrd
+

@@ -31,6 +31,12 @@ fi
         <location>%%AY_SERVER%%/%%PREFIX%%/scripts/post-inst.sh</location>
       </listentry>
       <listentry>
+        <!-- SALT Minion -->
+        <filename>salt.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/salt.sh</location>
+      </listentry>
+      <listentry>
         <!-- Install ZCM agent -->
         <filename>zcm-install.sh</filename>
         <interpreter>shell</interpreter>
