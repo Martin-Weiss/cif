@@ -70,6 +70,7 @@ Open Tasks:
 	Start tftserver, start dhcp server
 
 - Add upgrade (down server and online)
+- SUMA, ZCM or SMT registration based on variables
 
 Known Issues:
 ----------------------------------------------
