@@ -22,14 +22,49 @@
 #!/bin/bash
 sed -i 's/^NTPD_FORCE_SYNC_ON_STARTUP.*/NTPD_FORCE_SYNC_ON_STARTUP="yes"' /etc/ntpd.conf
 sed -i 's/^NTPD_FORCE_SYNC_HWCLOCK_ON_STARTUP.*/NTPD_FORCE_SYNC_HWCLOCK_ON_STARTUP="yes"' /etc/ntpd.conf
-echo "server 10.1.1.1 burst iburst" >> /etc/ntp.conf
-echo "server 192.168.0.31 burst iburst" >> /etc/ntp.conf
-echo "server 192.168.0.1 burst iburst" >> /etc/ntp.conf
+for SERVER in %%NTP_SERVER_LIST_CAASP%%; do
+echo "server $SERVER burst iburst" >> /etc/ntp.conf
+done
 echo "tinker panic 0" >> /etc/ntp.conf
 systemctl restart ntpd
 systemctl enable ntpd
 ]]>
             </source>
+         </script>
+         <script>
+            <chrooted config:type="boolean">true</chrooted>
+            <filename>hostname.sh</filename>
+            <interpreter>shell</interpreter>
+            <source>
+<![CDATA[#!/bin/bash
+echo "%%HOST_NAME%%.%%DOMAIN_NAME%%" > /etc/HOSTNAME
+]]>
+            </source>
+         </script>
+        <script>
+            <chrooted config:type="boolean">true</chrooted>
+            <filename>resolv.sh</filename>
+            <interpreter>shell</interpreter>
+            <source>
+<![CDATA[#!/bin/bash
+for NAME_SERVER in %%NAME_SERVER_LIST_CAASP%%; do
+echo "nameserver $NAME_SERVER" >> /etc/resolv.conf
+done
+echo "search %%SUFFIX_SEARCH_LIST_CAASP%%" >> /etc/resolv.conf
+]]>
+            </source>
+         </script>
+         <script>
+             <chrooted config:type="boolean">true</chrooted>
+             <filename>set_authorized_keys.sh</filename>
+             <interpreter>shell</interpreter>
+             <source><![CDATA[
+        #!/bin/sh
+        mkdir -p /root/.ssh
+        chmod 600 /root/.ssh
+        echo "%%SSH_KEYS%%" > /root/.ssh/authorized_keys
+        ]]>
+             </source>
          </script>
       </chroot-scripts>
    </scripts>

@@ -6,7 +6,7 @@
 # GNU Public License
 #
 # generic-script-executor.sh                             9 Jan 2013
-# last modified:                                         1 May 2016
+# last modified:                                        22 Dez 2018
 
 function get_main_config_files()
 {
@@ -35,12 +35,12 @@ function get_main_config_files()
 	mkdir -p /tmp/profile
 	cd /tmp/profile
 
- 	/usr/bin/wget $AY_CONFIG_DIR_URL/$MAIN_CONFIG_FILE
+ 	/usr/bin/wget -N $AY_CONFIG_DIR_URL/$MAIN_CONFIG_FILE
 	source $MAIN_CONFIG_FILE
 
 	# fetch the main library and the customer configuration file
-	/usr/bin/wget $AY_MAIN_LIB_FILE_URL
-	/usr/bin/wget $AY_CUSTOMER_FILE_URL
+	/usr/bin/wget -N $AY_MAIN_LIB_FILE_URL
+	/usr/bin/wget -N $AY_CUSTOMER_FILE_URL
 
 	# source the main library and the customer configuration file
 	source $AY_MAIN_LIB_FILE
@@ -52,7 +52,7 @@ function execute_post_scripts()
 	local SCRIPT_LIST=""
 	local script
 	for script in $SCRIPT_LIST;do
-		test -n $script && /usr/bin/wget $AY_BASE_DIR_URL/scripts/$script
+		test -n $script && /usr/bin/wget -N $AY_BASE_DIR_URL/scripts/$script
 		test -n $script && sh -x $script
 	done
 }

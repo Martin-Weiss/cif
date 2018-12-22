@@ -43,8 +43,8 @@ SLES11_DEFAULT="sles11/bootloader.xml:sles11/ca_mgm.xml:sles11/general.xml:sles1
 SLES12_DEFAULT="sles12/bootloader.xml:sles12/ca_mgm.xml:sles12/general.xml:sles12/scripts.xml:sles12/system.xml:sles12/kdump.xml:sles12/net.xml"
 SLES15_DEFAULT="sles15/bootloader.xml:sles15/general.xml:sles15/scripts.xml:sles15/system.xml:sles15/kdump.xml:sles15/net.xml"
 
-CAASP3_ADMIN="caasp3/general-admin.xml:caasp3/scripts-admin.xml:caasp3/net.xml:caasp3/scripts-ssh-keys.xml"
-CAASP3_NODE="caasp3/general-node.xml:caasp3/scripts-node.xml:caasp3/net.xml:caasp3/scripts-ssh-keys.xml"
+CAASP3_ADMIN="caasp3/general-admin.xml:caasp3/scripts-admin.xml:caasp3/net.xml"
+CAASP3_NODE="caasp3/general-node.xml:caasp3/scripts-node.xml:caasp3/net.xml"
 
 OES2015_EDIR="$SLES11_DEFAULT:oes2015/oes_base.xml:oes2015/imanager.xml"
 OES2015_NCS="$SLES11_DEFAULT:oes2015/oes_base.xml:oes2015/nss.xml:oes2015/afp.xml:oes2015/cifs.xml:oes2015/dhcp.xml:oes2015/dns.xml:oes2015/iprint.xml"

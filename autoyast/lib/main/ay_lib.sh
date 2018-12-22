@@ -8,7 +8,7 @@
 # GNU Public License
 #
 # ay_lib.sh	  		  			23 Jan 2013
-# last modified:                                        26 Nov 2018
+# last modified:                                        22 Dec 2018
 
 
 #######################################################################
@@ -90,7 +90,7 @@ function set_vars()
 	VAR_FILE=$PROFILE_DIR/variables.txt
 
 	# defining OS commands
-	WGETCMD=/usr/bin/wget
+	WGETCMD="/usr/bin/wget -N"
         IP_CMD=/sbin/ip
         DHCPCMD="/sbin/dhcpcd -T"
 	# Change by JS, Tue Sep 20 16:35:52 CEST 2016, mark for github
@@ -201,6 +201,9 @@ function split_ip_cidr()
 
 function get_sles_version()
 {
+        if grep CaaS /etc/issue >/dev/null 2>&1; then
+                SLES_VERSION="CAASP"
+        fi
         if grep 2018 /etc/issue >/dev/null 2>&1; then
                 SLES_VERSION=2018
         fi
@@ -1393,6 +1396,7 @@ HERE
         merge_xml $NTP_TMP_FILE ntp-client
 }
 
+
 #####################################################################
 # Name:		remove_from_list
 #
@@ -1921,6 +1925,17 @@ function make_server
 
         # create ntp server xml
         create_ntp_sles15 "$(split_list $NTP_SERVER_LIST)"
+
+        elif [ "$my_product" == "caasp" ]; then
+
+        # replace settings for SALT_MASTER in CAASP
+        replace_placeholders NTP_SERVER_LIST_CAASP "$(split_list $NTP_SERVER_LIST)"
+
+        # replace settings for NAME_SERVER in CAASP
+        replace_placeholders NAME_SERVER_LIST_CAASP "$(split_list $NAME_SERVER_LIST)"
+
+        # replace settings for NAME_SERVER in CAASP
+        replace_placeholders SUFFIX_SEARCH_LIST_CAASP "$(split_list $SUFFIX_SEARCH_LIST)"
 
         else
 

@@ -42,11 +42,11 @@ function get_main_config_files()
 	cd $PROFILE_DIR
 
 	# fetch and source the main configuration file (default: AY_MAIN.txt)	
-	/usr/bin/wget $AY_CONFIG_DIR_URL/$MAIN_CONFIG_FILE
+	/usr/bin/wget -N $AY_CONFIG_DIR_URL/$MAIN_CONFIG_FILE
 	source ./$MAIN_CONFIG_FILE
 
 	# fetch and source the main library (default: ay_lib.sh)
-	/usr/bin/wget $AY_MAIN_LIB_FILE_URL
+	/usr/bin/wget -N $AY_MAIN_LIB_FILE_URL
 	source ./$AY_MAIN_LIB_FILE
 }
 

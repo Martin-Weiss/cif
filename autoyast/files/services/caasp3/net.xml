@@ -8,17 +8,9 @@
       <dhclient_hostname_option>AUTO</dhclient_hostname_option>
     </dhcp_options>
     <dns>
-      <dhcp_hostname config:type="boolean">false</dhcp_hostname>
-      <dhcp_resolv config:type="boolean">true</dhcp_resolv>
-      <nameservers config:type="list">
-        <nameserver>%%NAME_SERVER_LIST%%</nameserver>
-      </nameservers>
-      <domain>%%DOMAIN_NAME%%</domain>
-      <hostname>%%HOST_NAME%%</hostname>
-      <searchlist config:type="list">
-        <search>%%SUFFIX_SEARCH_LIST%%</search>
-      </searchlist>
+      <resolv_conf_policy>auto</resolv_conf_policy>
       <write_hostname config:type="boolean">false</write_hostname>
+      <dhcp_hostname config:type="boolean">false</dhcp_hostname>
     </dns>
     <managed config:type="boolean">false</managed>
     <routing>
@@ -61,3 +53,4 @@
     </hosts>
 </host>
 </profile>
+
