@@ -3,6 +3,6 @@
 <profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
   <imanager>
     <configure_now config:type="boolean">true</configure_now>
-    <install_plugins>no</install_plugins>
+    <install_plugins>yes</install_plugins>
   </imanager>
 </profile>
