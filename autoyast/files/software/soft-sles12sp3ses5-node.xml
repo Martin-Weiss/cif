@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <software>
+    <packages config:type="list">
+      <package>syslinux</package>
+      <package>snapper</package>
+      <package>perl-Bootloader-YAML</package>
+      <package>openssh</package>
+      <package>numactl</package>
+      <package>mdadm</package>
+      <package>kexec-tools</package>
+      <package>kdump</package>
+      <package>irqbalance</package>
+      <package>grub2</package>
+      <package>glibc</package>
+      <package>e2fsprogs</package>
+      <package>btrfsprogs</package>
+      <package>sles-release</package>
+      <package>iftop</package>
+      <package>lftp</package>
+      <package>fio</package>
+      <package>sdparm</package>
+      <package>sysstat</package>
+      <package>iotop</package>
+      <package>iperf</package>
+      <package>ses-release</package>
+      <package>salt-minion</package>
+    </packages>
+    <patterns config:type="list">
+      <pattern>32bit</pattern>
+      <pattern>Minimal</pattern>
+      <pattern>base</pattern>
+    </patterns>
+  </software>
+</profile>

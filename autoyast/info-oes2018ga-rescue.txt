@@ -1,0 +1,2 @@
+install=http://10.1.1.1/oes2018ga/
+rescue=1

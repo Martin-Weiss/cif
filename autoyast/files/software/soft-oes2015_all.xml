@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <software>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+      <pattern>novell-base</pattern>
+      <pattern>novell-edirectory</pattern>
+      <pattern>novell-imanager</pattern>
+      <pattern>novell-lum</pattern>
+      <pattern>novell-ncp</pattern>
+      <pattern>novell-nrm</pattern>
+      <pattern>novell-sms</pattern>
+      <pattern>novell-web-services</pattern>
+      <pattern>novell-welcome</pattern>
+      <pattern>novell-xtier</pattern>
+      <pattern>novell-yast2</pattern>
+      <pattern>novell-nss</pattern>
+      <pattern>novell-afp</pattern>
+      <pattern>novell-cifs</pattern>
+      <pattern>novell-ftp</pattern>
+      <pattern>novell-dns</pattern>
+      <pattern>novell-dhcp</pattern>
+      <pattern>novell-iprint</pattern>
+      <pattern>novell-ncs</pattern>
+      <pattern>x11</pattern>
+   </patterns>
+    <packages  config:type="list">
+      <package>dos2unix</package>
+      <package>findutils-locate</package>
+      <package>gcc</package>
+      <package>glibc</package> 
+      <package>iftop</package>
+      <package>kdump</package>
+      <package>kexec-tools</package>
+      <package>mc</package>	
+      <package>ncurses</package>
+      <package>net-tools</package>
+      <package>sysstat</package>
+     </packages>
+  </software>
+</profile>
