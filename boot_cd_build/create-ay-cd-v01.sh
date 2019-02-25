@@ -6,7 +6,8 @@
 # GNU Public License
 #
 # create-ay-cd-v01.sh 					27 Apr 2013
-# last modified (Customer Name)				26 Nov 2018
+# change copy to move for backup			25 Feb 2019
+# last modified (Customer Name)				25 Feb 2019
 
 
 ARGV=$@
@@ -84,7 +85,7 @@ function set_vars()
 
 function make_iso()
 {
-	test -f "$ISO_DIR/$ISO_NAME" && cp -p "$ISO_DIR/$ISO_NAME" $DEF_ISO_DIR/$ISO_NAME_COPIED
+	test -f "$ISO_DIR/$ISO_NAME" && mv "$ISO_DIR/$ISO_NAME" $DEF_ISO_DIR/$ISO_NAME_COPIED
 	
 	mkisofs -f -rV "$ISO_LABEL" -b boot/grub/iso9660_stage1_5 -no-emul-boot -boot-load-size \
         4 -boot-info-table -D -o $ISO_DIR/$ISO_NAME $WORK_DIR
