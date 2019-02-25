@@ -32,25 +32,5 @@
       <package>openslp-32bit</package>
       <package>sysstat</package>
      </packages>
-     <remove-packages config:type="list">
-      <package>evolution</package>
-      <package>gnome2-SLES</package>
-      <package>gnome2-SuSE</package>
-      <package>libpfm</package>
-      <package>linux32</package>
-      <package>mDNSResponder</package>
-      <package>mcelog</package>
-      <package>numactl</package>
-      <package>pdisk</package>
-      <package>pfmon</package>
-      <package>powerpc32</package>
-      <package>samba</package>
-      <package>tightvnc</package>
-      <package>salinfo</package>
-      <package>s390-32</package>
-      <package>s390-tools</package>
-      <package>sles-preparation-zseries_en</package>
-      <package>sles-preparation-power_en</package>
-    </remove-packages>
   </software>
 </profile>
