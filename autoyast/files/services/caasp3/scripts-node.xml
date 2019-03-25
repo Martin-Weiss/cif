@@ -32,6 +32,8 @@
             <source>
 <![CDATA[#!/bin/bash
 echo "%%HOST_NAME%%.%%DOMAIN_NAME%%" > /etc/HOSTNAME
+sed -i "/^%%IP_ADDRESS%%.*/d" /etc/hosts
+echo "%%IP_ADDRESS%% %%HOST_NAME%%.%%DOMAIN_NAME%% %%HOST_NAME%%" >> /etc/hosts
 ]]>
             </source>
          </script>
