@@ -4,6 +4,20 @@
   <add-on>
     <add_on_products config:type="list">
      <listentry>
+        <media_url>%%SMT12_SERVER%%/repo/SUSE/Products/SLE-Product-SLES/15/x86_64/product/</media_url>
+        <product>SLE-Product-SLES15-Pool</product>
+        <product_dir>/</product_dir>
+        <name>SLE-Product-SLES15-Pool</name>
+        <alias>SLE-Product-SLES15-Pool</alias>
+      </listentry>
+     <listentry>
+        <media_url>%%SMT12_SERVER%%/repo/SUSE/Updates/SLE-Product-SLES/15/x86_64/update/</media_url>
+        <product>SLE-Product-SLES15-Updates</product>
+        <product_dir>/</product_dir>
+        <name>SLE-Product-SLES15-Updates</name>
+        <alias>SLE-Product-SLES15-Updates</alias>
+      </listentry>
+     <listentry>
         <media_url>%%SMT12_SERVER%%/repo/SUSE/Products/SLE-Module-Basesystem/15/x86_64/product/</media_url>
         <product>SLE-Module-Basesystem15-Pool</product>
         <product_dir>/</product_dir>

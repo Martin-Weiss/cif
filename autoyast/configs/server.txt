@@ -86,7 +86,10 @@ sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sl
 sles12sp4-1;10.1.1.102/24;;sles12sp4;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
 
 # SLES 15 GA Example
-sles15ga-1;10.1.1.103/24;;sles15ga;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES12_DEFAULT
+sles15ga-1;10.1.1.103/24;;sles15ga;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES15_DEFAULT
+
+# SLES 15 SP1 Example
+sles15sp1-1;10.1.1.104/24;;sles15sp1;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES15_DEFAULT
 
 # CAASP 3 Example
 caasp3-admin;10.1.1.110/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_ADMIN
@@ -109,6 +112,13 @@ ses-5-rgw1;172.17.2.201/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;so
 ses-5-rgw2;172.17.2.202/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw2.txt;SLES12_DEFAULT
 ses-5-rgw3;172.17.2.203/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw3.txt;SLES12_DEFAULT
 
+# SES 6 Example
+ses6-admin;10.1.1.130/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp13ses6-admin.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
+ses6-osd01;10.1.1.131/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp13ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
+ses6-osd02;10.1.1.132/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp13ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
+ses6-osd03;10.1.1.133/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp13ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
+ses6-osd04;10.1.1.134/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp13ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
+
 # OES 2015 SP1 Example
 oes2015sp1-1;10.1.1.201/24;;oes2015sp1;/dev/vda;;part-ext3-50G.xml;soft-oes2015_all.xml;;oes2015sp1-tree;new;ou=services,o=oes2015sp1;;OES2015_ALL
 oes2015sp1-2;10.1.1.202/24;;oes2015sp1;/dev/vda;;part-ext3-50G.xml;soft-oes2015_all.xml;;oes2015sp1-tree;existing;ou=services,o=oes2015sp1;;OES2015_ALL
@@ -116,6 +126,10 @@ oes2015sp1-2;10.1.1.202/24;;oes2015sp1;/dev/vda;;part-ext3-50G.xml;soft-oes2015_
 # OES 2018 Example
 oes2018ga-1;10.1.1.203/24;;oes2018ga;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes2018_all.xml;;oes2018ga-tree;new;ou=services,o=oes2018ga;;OES2018_ALL
 oes2018ga-2;10.1.1.204/24;;oes2018ga;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes2018_all.xml;;oes2018ga-tree;existing;ou=services,o=oes2018ga;;OES2018_ALL
+
+# OES 2018 SP1 Example
+oes2018sp1-1;10.1.1.205/24;;oes2018sp1;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes2018_all.xml;;oes2018sp1-tree;new;ou=services,o=oes2018sp1;;OES2018_ALL
+oes2018sp1-2;10.1.1.206/24;;oes2018sp1;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes2018_all.xml;;oes2018sp1-tree;existing;ou=services,o=oes2018sp1;;OES2018_ALL
 
 #################################################################
 ###        TEST environment                                   ###

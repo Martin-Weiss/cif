@@ -44,6 +44,7 @@
         <product_dir>/</product_dir>
         <name>SLE-Module-Containers15-Updates</name>
         <alias>SLE-Module-Containers15-Updates</alias>
+      </listentry>
     </add_on_products>
   </add-on>
 </profile>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <software>
+    <image/>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <instsource/>
+    <packages config:type="list">
+      <package>sles-release</package>
+      <package>ses-release</package>
+      <package>sle-module-server-applications-release</package>
+      <package>sle-module-basesystem-release</package>
+      <package>iftop</package>
+      <package>lftp</package>
+      <package>fio</package>
+      <package>sdparm</package>
+      <package>sysstat</package>
+      <package>iotop</package>
+      <package>iperf</package>
+      <package>salt-minion</package>
+    </packages>
+    <patterns config:type="list">
+      <pattern>apparmor</pattern>
+      <pattern>base</pattern>
+      <pattern>enhanced_base</pattern>
+      <pattern>minimal_base</pattern>
+      <pattern>sw_management</pattern>
+      <pattern>x11</pattern>
+      <pattern>x11_yast</pattern>
+      <pattern>yast2_basis</pattern>
+    </patterns>
+    <products config:type="list">
+      <product>SLES</product>
+    </products>
+  </software>
+</profile>
