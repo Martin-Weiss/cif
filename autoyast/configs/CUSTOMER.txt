@@ -361,7 +361,7 @@ ROOT_PWD='$6$MFqFb2ql$wjr0b5MwfjMWNrAi/Ala.vQnwKseKYYjQyLRAlWyADKT3fWRRGfCMFz87O
 
 # Type: String
 ## Description: SSH Keys to /root/.ssh/authrized_keys
-#SSH_KEYS=''
+SSH_KEYS='ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEA3P7KpLSXnkDfNfvmTkTIdlyPBRzwsHzAL60+Qw3L0U6VEuKFRLS7TTJE8s4XOdt1VxUmvWbBkEcJC8rG/g55leqJyuokZJkoNeRHdVDHT0430WpnmL21xkHl/6fGVxbxPWpwlp1XEWi8/sjvVvrc8LBeri44QMBfG8/3bkFx7zc= mweiss@nbmweiss2'
 
 ## Type String
 ## Description:	Time Zone
