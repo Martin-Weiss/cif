@@ -104,6 +104,11 @@ ses5-osd02;10.1.1.122/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft
 ses5-osd03;10.1.1.123/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_DEFAULT
 ses5-osd04;10.1.1.124/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_DEFAULT
 
+# SES 5 RGW test
+ses-5-rgw1;172.17.2.201/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw1.txt;SLES12_DEFAULT
+ses-5-rgw2;172.17.2.202/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw2.txt;SLES12_DEFAULT
+ses-5-rgw3;172.17.2.203/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw3.txt;SLES12_DEFAULT
+
 # OES 2015 SP1 Example
 oes2015sp1-1;10.1.1.201/24;;oes2015sp1;/dev/vda;;part-ext3-50G.xml;soft-oes2015_all.xml;;oes2015sp1-tree;new;ou=services,o=oes2015sp1;;OES2015_ALL
 oes2015sp1-2;10.1.1.202/24;;oes2015sp1;/dev/vda;;part-ext3-50G.xml;soft-oes2015_all.xml;;oes2015sp1-tree;existing;ou=services,o=oes2015sp1;;OES2015_ALL

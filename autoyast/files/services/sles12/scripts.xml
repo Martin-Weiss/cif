@@ -37,6 +37,12 @@ fi
         <location>%%AY_SERVER%%/%%PREFIX%%/scripts/salt.sh</location>
       </listentry>
       <listentry>
+        <!-- SSH Keys -->
+        <filename>ssh-keys.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/ssh-keys.sh</location>
+      </listentry>
+      <listentry>
         <!-- Install ZCM agent -->
         <filename>zcm-install.sh</filename>
         <interpreter>shell</interpreter>
