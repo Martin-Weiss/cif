@@ -77,3 +77,6 @@ Known Issues:
 - NTP pre-sles12sp3 --> error with ntp.conf comments starting with sles12sp3
 - Add pci-bus-id also for kvm sles11sp4? (net.xml and script)
 
+Changelog:
+----------------------------------------------
+20190507-01 added ssh.keys.sh to sles scripts, added ses-5-rgw example to server.txt
