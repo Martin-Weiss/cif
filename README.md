@@ -81,3 +81,4 @@ Changelog:
 ----------------------------------------------
 20190507-01 added ssh.keys.sh to sles scripts, added ses-5-rgw example to server.txt
 20190507-02 added sles15sp1, ses6, oes2018sp1 (not yet tested)
+20190508-01 changed ntp config for sles15 (no offline for chrony)

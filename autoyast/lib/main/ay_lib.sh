@@ -1381,7 +1381,7 @@ HERE
       <ntp_server>
           <address>$ntp_server</address>
           <iburst config:type="boolean">true</iburst>
-          <offline config:type="boolean">true</offline>
+          <offline config:type="boolean">false</offline>
       </ntp_server>
 HERE
         done
