@@ -41,7 +41,7 @@ Adjust IP in autoyast/xml/default
 
 Adjust autoyast/info-<os>.txt file to your autoyast and iso server
 
-Adjust BOOT_CD: /data/boot_cd_build/grub/*.lst
+Adjust BOOT_CD: /data/boot_cd_build/grub/*.lst and /data/boot_cd_build/grub2.cfg
 
 Copy initrd linux to boot cd kernel sub-directories
 
@@ -59,7 +59,7 @@ virt-install --connect qemu:///system --virt-type kvm  --name ay-test-sles11sp4 
 
 Open Tasks:
 ----------------------------------------------
-- Add EFI for bootcd
+- Test EFI
 - Add release rpms for addons
 - Add PXE/DHCP
 
@@ -79,7 +79,7 @@ Known Issues:
 
 Changelog:
 ----------------------------------------------
-20190507-01 added ssh.keys.sh to sles scripts, added ses-5-rgw example to server.txt
-20190507-02 added sles15sp1, ses6, oes2018sp1 (not yet tested)
-20190508-01 changed ntp config for sles15 (no offline for chrony)
-20190513-01 added efi boot for boot cd (not yet tested)
+- 20190507-01 added ssh.keys.sh to sles scripts, added ses-5-rgw example to server.txt
+- 20190507-02 added sles15sp1, ses6, oes2018sp1 (not yet tested)
+- 20190508-01 changed ntp config for sles15 (no offline for chrony)
+- 20190513-01 added efi boot for boot cd (not yet tested)
