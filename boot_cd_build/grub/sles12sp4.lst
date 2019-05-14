@@ -8,14 +8,14 @@ title back
         configfile /grub/instserver.lst
 
 title SLES12SP4
-	kernel /kernel/sles12sp4/linux info=http://10.1.1.1/autoyast/info-sles12sp4.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	kernel /kernel/sles12sp4/linux info=http://10.1.1.1/autoyast/info-sles12sp4.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
 	initrd=/kernel/sles12sp4/initrd
 
 title SLES12SP4 manual installation
-	kernel /kernel/sles12sp4/linux info=http://10.1.1.1/autoyast/info-sles12sp4-manual.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	kernel /kernel/sles12sp4/linux info=http://10.1.1.1/autoyast/info-sles12sp4-manual.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
 	initrd=/kernel/sles12sp4/initrd
 
 title SLES12SP4 rescue mode
-	kernel /kernel/sles12sp4/linux info=http://10.1.1.1/autoyast/info-sles12sp4-rescue.txt netsetup=hostip,gateway netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	kernel /kernel/sles12sp4/linux info=http://10.1.1.1/autoyast/info-sles12sp4-rescue.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
 	initrd=/kernel/sles12sp4/initrd
 

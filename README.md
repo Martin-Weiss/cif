@@ -83,3 +83,4 @@ Changelog:
 - 20190507-02 added sles15sp1, ses6, oes2018sp1 (not yet tested)
 - 20190508-01 changed ntp config for sles15 (no offline for chrony)
 - 20190513-01 added efi boot for boot cd (not yet tested)
+- 20190514-01 fix localboot option in efi boot, add netsetup nameserver
