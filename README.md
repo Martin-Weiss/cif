@@ -57,6 +57,10 @@ virt-install --connect qemu:///system --virt-type kvm  --name ay-test-sles11sp4 
 
 -> Enter IP and gateway that matches server.txt when prompted
 
+For for alpha to upgrade to sles 15 sp1 this check out on a sles 12 sp3 server:
+
+- curl -Sks http://10.1.1.1/autoyast/upgrade/sles15sp1.sh | /bin/bash
+
 Open Tasks:
 ----------------------------------------------
 - Test EFI
@@ -84,3 +88,7 @@ Changelog:
 - 20190508-01 changed ntp config for sles15 (no offline for chrony)
 - 20190513-01 added efi boot for boot cd (not yet tested)
 - 20190514-01 fix localboot option in efi boot, add netsetup nameserver
+- 20190514-02 caasp: disable cloud-init(not needed with autoyast), add timezone config, fix ntp settings, ipv6 off
+- 20190514-03 caasp: add example for gpt and efi partitioning
+- 20190514-04 fixing / adding partitioning examples with gpt plus mdraid and efi plus mdraid
+- 20190528-01 added first alpha for upgrade to sles15sp1

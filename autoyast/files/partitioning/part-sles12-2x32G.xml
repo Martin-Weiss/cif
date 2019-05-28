@@ -47,6 +47,7 @@
           </raid_options>
           <resize config:type="boolean">false</resize>
           <subvolumes config:type="list">
+            <listentry>@</listentry>
             <listentry>boot/grub2/i386-pc</listentry>
             <listentry>boot/grub2/x86_64-efi</listentry>
             <listentry>home</listentry>
@@ -54,10 +55,18 @@
             <listentry>srv</listentry>
             <listentry>tmp</listentry>
             <listentry>usr/local</listentry>
+            <listentry>var/cache</listentry>
             <listentry>var/crash</listentry>
+            <listentry>var/lib/libvirt/images</listentry>
+            <listentry>var/lib/machines</listentry>
             <listentry>var/lib/mailman</listentry>
+            <listentry>var/lib/mariadb</listentry>
+            <listentry>var/lib/mysql</listentry>
             <listentry>var/lib/named</listentry>
             <listentry>var/lib/pgsql</listentry>
+            <listentry>var/lib/docker</listentry>
+            <listentry>var/lib/ceph</listentry>
+            <listentry>var/lib/docker-registry</listentry>
             <listentry>var/log</listentry>
             <listentry>var/opt</listentry>
             <listentry>var/spool</listentry>

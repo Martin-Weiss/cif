@@ -7,7 +7,7 @@ gfxmenu /grub/message
 title back
         configfile /grub/instserver.lst
 
-title CAASP3
+title CAASP3 AutoYaST
 	kernel /kernel/caasp3/linux info=http://10.1.1.1/autoyast/info-caasp3.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
 	initrd=/kernel/caasp3/initrd
 

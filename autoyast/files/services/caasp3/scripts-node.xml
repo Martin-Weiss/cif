@@ -22,6 +22,8 @@
         #!/bin/sh
 	sed -i -e 's|#NTP=.*|NTP=%%NTP_SERVER_LIST_CAASP%%|g' /etc/systemd/timesyncd.conf
         timedatectl set-ntp true
+        timedatectl set-timezone "%%TIME_ZONE%%"
+	ln -sf /usr/share/zoneinfo/%%TIME_ZONE%% /etc/localtime
         ]]>
         </source>
       </script>
@@ -61,6 +63,18 @@ echo "search %%SUFFIX_SEARCH_LIST_CAASP%%" >> /etc/resolv.conf
         echo "%%SSH_KEYS%%" > /root/.ssh/authorized_keys
         ]]>
              </source>
+         </script>
+         <script>
+            <chrooted config:type="boolean">true</chrooted>
+            <filename>ipv6-off.sh</filename>
+            <interpreter>shell</interpreter>
+            <source>
+<![CDATA[#!/bin/bash
+sed -i '/^net.ipv6.conf.all.disable_ipv6/d' /etc/sysctl.conf
+echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+]]>
+            </source>
          </script>
       </chroot-scripts>
    </scripts>

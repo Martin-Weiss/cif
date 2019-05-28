@@ -56,10 +56,12 @@
       </disable>
       <enable config:type="list">
         <service>sshd</service>
+       <!-- Disable Cloud-Init as we do not need this when using autoyast
         <service>cloud-init-local</service>
         <service>cloud-init</service>
         <service>cloud-config</service>
         <service>cloud-final</service>
+	-->
         <service>issue-generator</service>
         <service>issue-add-ssh-keys</service>
         <service>container-feeder</service>
@@ -69,6 +71,13 @@
       </enable>
     </services>
   </services-manager>
+  <sysconfig>
+    <sysconfig_entry>
+      <sysconfig_key>IPV6_DISABLE</sysconfig_key>
+      <sysconfig_path>/etc/sysconfig/sysctl</sysconfig_path>
+      <sysconfig_value>yes</sysconfig_value>
+    </sysconfig_entry>
+  </sysconfig>
   <users config:type="list">
     <user>
       <username>root</username>

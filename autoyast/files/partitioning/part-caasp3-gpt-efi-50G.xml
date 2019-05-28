@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+   <partitioning config:type="list">
+
+    <drive>
+      <initialize config:type="boolean">true</initialize>
+      <device>%%DEVICE_NAME0%%</device>
+      <disklabel>gpt</disklabel>
+      <enable_snapshots config:type="boolean">true</enable_snapshots>
+      <initialize config:type="boolean">true</initialize>
+      <partitions config:type="list">
+
+       <partition>
+          <create config:type="boolean">true</create>
+          <filesystem config:type="symbol">vfat</filesystem>
+          <format config:type="boolean">true</format>
+          <fstopt>umask=0002,utf8=true</fstopt>
+          <mount>/boot/efi</mount>
+          <mountby config:type="symbol">uuid</mountby>
+          <partition_id config:type="integer">259</partition_id>
+          <partition_nr config:type="integer">1</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>156M</size>
+        </partition>
+
+        <partition>
+          <mount>/</mount>
+          <size>30gb</size>
+        </partition>
+
+        <partition>
+          <filesystem config:type="symbol">btrfs</filesystem>
+          <mount>/var/lib/docker</mount>
+          <size>max</size>
+        </partition>
+
+      </partitions>
+    </drive>
+   </partitioning>
+</profile>
+

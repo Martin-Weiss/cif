@@ -7,7 +7,7 @@ gfxmenu /grub/message
 title back
         configfile /grub/instserver.lst
 
-title SLES15GA
+title SLES15GA AutoYaST
 	kernel /kernel/sles15ga/linux info=http://10.1.1.1/autoyast/info-sles15ga.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
 	initrd=/kernel/sles15ga/initrd
 

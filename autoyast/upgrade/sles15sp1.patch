@@ -1,0 +1,63 @@
+202c202
+<     xi?86 | xx86_64) klist="/boot/vmlinuz-* /vmlinuz-* /boot/kernel-*" ;;
+---
+>     xi?86 | xx86_64) klist="/boot/upgrade/linux /upgrade/linux" ;;
+262a263
+> 	   "initrd" \
+330a332,359
+>   # AutoYaST Server
+>   AUTOYASTSERVER="%%AUTOYASTSERVER%%"
+>   # get hostip including netmask
+>   HOSTIP=$(ip addr show|grep $(hostname -i)|awk '{print $2}')
+>   # get gateway
+>   GATEWAY=$(ip route show|grep default|awk '{print $3}')
+>   # get nameserver
+>   NAMESERVER=$(grep nameserver /etc/resolv.conf |head -n1|awk '{print $2}')
+>   # get domain
+>   DOMAIN=$(hostname -d)
+>   # get interface
+>   INTERFACE=$(ip addr show|grep $(hostname -i)|awk '{print $7}')
+>   # get MAC address of the interface
+>   MAC=$(ip -br -h -f link a show $INTERFACE|awk '{print $3}')
+>   # get bonding module opts
+>   BONDING_MODULE_OPTS=$(grep BONDING_MODULE_OPTS /etc/sysconfig/network/ifcfg-$INTERFACE |sed 's/BONDING_MODULE_OPTS=//g')
+>   # get VLANID
+>   # todo
+> 
+>   # set autoupgradeparameters
+>   AUTOUPGRADEPARAMETERS="info=\"http://$AUTOYASTSERVER/autoyast/%%INFO%%\" \
+> netwait=10 \
+> udev.rule="mac=$MAC,name=eth0" \
+> ifcfg=eth0=BOOTPROTO='none',STARTMODE='hotplug' \
+> ifcfg=eth*=BOOTPROTO='none',STARTMODE='hotplug' \
+> ifcfg=bond0=$HOSTIP,$GATEWAY,$NAMESERVER,$DOMAIN,BONDING_MASTER='yes',BONDING_MODULE_OPTS=$BONDING_MODULE_OPTS,BONDING_SLAVE0='eth0',BOOTPROTO='static',STARTMODE='auto' \
+> " 
+> 
+332,333c361,362
+<     linux_entry "${OS}" "${version}" simple \
+<     "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
+---
+>     linux_entry "SLES 15 SP1 UPGRADE" "" simple \
+>     "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT} $AUTOUPGRADEPARAMETERS"
+341,343c370,372
+<     echo "submenu '$(gettext_printf "Advanced options for %s" "${OS}" | grub_quote)' $(print_hotkey) \$menuentry_id_option 'gnulinux-advanced-$boot_device_id' {"
+<     hotkey=$(incr_hotkey)
+<     is_top_level=false
+---
+>    # echo "submenu '$(gettext_printf "Advanced options for %s" "${OS}" | grub_quote)' $(print_hotkey) \$menuentry_id_option 'gnulinux-advanced-$boot_device_id' {"
+>    # hotkey=$(incr_hotkey)
+>    # is_top_level=false
+346,351c375,380
+<   linux_entry "${OS}" "${version}" advanced \
+<               "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
+<   if [ "x${GRUB_DISABLE_RECOVERY}" != "xtrue" ]; then
+<     linux_entry "${OS}" "${version}" recovery \
+<                 "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_RECOVERY}"
+<   fi
+---
+>   #linux_entry "${OS}" "${version}" advanced \
+>   #            "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}"
+>   #if [ "x${GRUB_DISABLE_RECOVERY}" != "xtrue" ]; then
+>   #  linux_entry "${OS}" "${version}" recovery \
+>   #              "${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_RECOVERY}"
+>   #fi

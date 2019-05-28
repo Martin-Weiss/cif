@@ -7,7 +7,7 @@ gfxmenu /grub/message
 title back
         configfile /grub/instserver.lst
 
-title OES2015SP1
+title OES2015SP1 AutoYaST
 	kernel /kernel/sles11sp4/linux info=http://10.1.1.1/autoyast/info-oes2015sp1.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
 	initrd=/kernel/sles11sp4/initrd
 
