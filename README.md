@@ -93,3 +93,4 @@ Changelog:
 - 20190514-04 fixing / adding partitioning examples with gpt plus mdraid and efi plus mdraid
 - 20190528-01 added first alpha for upgrade to sles15sp1
 - 20190528-02 fix sles15sp1ses6 installerupdate in info.txt
+- 20190528-03 add python2 sles15sp1 module for upgrade to ses6
