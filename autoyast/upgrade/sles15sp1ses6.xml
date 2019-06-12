@@ -142,6 +142,20 @@ rm /etc/grub.d/99_upgrade
         <alias>SLE-Module-Python2-15-SP1-Updates</alias>
       </listentry>
      <listentry>
+        <media_url>http://10.1.1.1/repo/SUSE/Products/SLE-Module-Legacy/15-SP1/x86_64/product/</media_url>
+        <product>SLE-Module-Legacy15-SP1-Pool</product>
+        <product_dir>/</product_dir>
+        <name>SLE-Module-Legacy15-SP1-Pool</name>
+        <alias>SLE-Module-Legacy15-SP1-Pool</alias>
+      </listentry>
+     <listentry>
+        <media_url>http://10.1.1.1/repo/SUSE/Updates/SLE-Module-Legacy/15-SP1/x86_64/update/</media_url>
+        <product>SLE-Module-Legacy15-SP1-Updates</product>
+        <product_dir>/</product_dir>
+        <name>SLE-Module-Legacy15-SP1-Updates</name>
+        <alias>SLE-Module-Legacy15-SP1-Updates</alias>
+      </listentry>
+     <listentry>
         <media_url>http://10.1.1.1/ses6</media_url>
         <product>SES6-DVD</product>
         <product_dir>/</product_dir>

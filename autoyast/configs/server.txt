@@ -80,11 +80,11 @@
 sles11sp4-1;10.1.1.100/24;;sles11sp4;/dev/vda;;part-ext3-50G.xml;soft-sles11.xml;;;;;;SLES11_DEFAULT
 
 # SLES 12 SP3 Example
-#sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
+sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
 bond-test-sles12sp3;10.1.1.99/24;;sles12sp3;/dev/vda;/dev/vdb;part-sles12-gpt-raid1-max.xml;soft-sles12-minimal.xml;;;;;;SLES12_DEFAULT
 
 # SLES 12 SP3 Example with EFI
-sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
+#sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
 sles12sp3-2;192.168.0.111/24;192.168.0.1;sles12sp3;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles12.xml;;;;;192-168-0.txt;SLES12_DEFAULT
 
 # SLES 12 SP4 Example
@@ -104,6 +104,15 @@ caasp3-master03;10.1.1.113/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft
 caasp3-worker01;10.1.1.114/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
 caasp3-worker02;10.1.1.115/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
 caasp3-worker03;10.1.1.116/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
+
+# CAASP4 Example
+caasp4-01;10.1.1.151/24;;sles15sp1caasp4;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15caasp4-infra.xml;;;;;;SLES15_DEFAULT
+caasp4-02;10.1.1.152/24;;sles15sp1caasp4;/dev/vda;;part-sles12-btrfs-noswap-50G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
+caasp4-03;10.1.1.153/24;;sles15sp1caasp4;/dev/vda;;part-sles12-btrfs-noswap-50G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
+caasp4-04;10.1.1.154/24;;sles15sp1caasp4;/dev/vda;;part-sles12-btrfs-noswap-50G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
+caasp4-05;10.1.1.155/24;;sles15sp1caasp4;/dev/vda;;part-sles12-btrfs-noswap-50G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
+caasp4-06;10.1.1.156/24;;sles15sp1caasp4;/dev/vda;;part-sles12-btrfs-noswap-50G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
+caasp4-07;10.1.1.157/24;;sles15sp1caasp4;/dev/vda;;part-sles12-btrfs-noswap-50G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
 
 # SES 5 Example
 ses5-admin;10.1.1.120/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses5-cluster1.txt;SLES12_DEFAULT
