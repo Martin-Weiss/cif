@@ -17,7 +17,7 @@ Adjust /etc/fstab to loop mount the isos to /srv/www/htdocs/<os>
 - ln -s /data/isos
 - ln -s /data/autoyast
 
-Adjust /etc/apache/conf.d/inst_server.conf to export /srv/www/htdocs including follow symlinks
+Adjust /etc/apache2/conf.d/inst_server.conf to export /srv/www/htdocs including follow symlinks
 
 Example:
 # httpd configuration for Installation Server included by httpd.conf
@@ -63,6 +63,10 @@ Install server using the boot-cd and specifying the IP for the server from serve
 KVM example:
 
 virt-install --connect qemu:///system --virt-type kvm  --name ay-test-sles11sp4 --memory 2048 --network network=10-1-1 --disk pool=images-nvme,size=50,sparse=true --graphics vnc --os-variant sles11sp4 --vcpus 2 --cdrom /srv/www/htdocs/isos/autoyast-suse.iso
+
+or a bit more complex:
+
+virt-install --connect qemu:///system --virt-type kvm  --name ses-5-1 --memory 1024 --network network=172-17-2 --network network=172-17-3 --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --location http://192.168.0.31/sles12sp3 --graphics vnc --os-variant sles12sp3 --vcpus 2 -x "netsetup=0 hostip=172.17.2.51 nameserver=172.17.2.1 gateway=172.17.2.1 netmask=255.255.255.0 domain=suse hostname=ses-5-1.suse netwait=3 autoyast=http://192.168.0.31/autoyast/xml/"
 
 -> Enter IP and gateway that matches server.txt when prompted
 
