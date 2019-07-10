@@ -66,7 +66,7 @@ virt-install --connect qemu:///system --virt-type kvm  --name ay-test-sles11sp4 
 
 or a bit more complex:
 
-virt-install --connect qemu:///system --virt-type kvm  --name ses-5-1 --memory 1024 --network network=172-17-2 --network network=172-17-3 --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --location http://192.168.0.31/sles12sp3 --graphics vnc --os-variant sles12sp3 --vcpus 2 -x "netsetup=0 hostip=172.17.2.51 nameserver=172.17.2.1 gateway=172.17.2.1 netmask=255.255.255.0 domain=suse hostname=ses-5-1.suse netwait=3 autoyast=http://192.168.0.31/autoyast/xml/"
+virt-install --connect qemu:///system --virt-type kvm  --name ses-5-1 --memory 1024 --network network=172-17-2 --network network=172-17-3 --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --disk pool=images-nvme,size=20,sparse=true --location http://10.1.1.1/sles12sp3 --graphics vnc --os-variant sles12sp3 --vcpus 2 -x "netsetup=0 hostip=172.17.2.51 nameserver=172.17.2.1 gateway=172.17.2.1 netmask=255.255.255.0 domain=suse hostname=ses-5-1.suse netwait=3 autoyast=http://10.1.1.1/autoyast/xml/"
 
 -> Enter IP and gateway that matches server.txt when prompted
 
