@@ -535,8 +535,10 @@ get_dhcp_info()
 	#below matching seems to be better than above, check for default route (almost at 
 	#any time) bound to the installation network device
 	# Change by JS, Tue Sep 20 16:35:52 CEST 2016, mark for github
+	# Change by JH, 2019/08/10. Remove quotes from result.
         local my_interface=$($IP_CMD r s| awk '/default/ {print $5}')
-        local my_value=$($DHCPCMD $my_interface|awk -v y=$my_property -F'='  '$1~y {print $2}')
+        local my_value=$($DHCPCMD $my_interface|awk -v y=$my_property -F'='  '$1~y {print $2}'| cut -d "'" -f 2 ) 
+        #local my_value=$($DHCPCMD $my_interface|awk -v y=$my_property -F'='  '$1~y {print $2}' )
         echo $my_value
 }
 
@@ -617,6 +619,30 @@ function create_error_popup()
 	fi
 }       
 
+#####################################################################
+# Name:         getIpAddressAndPrefix
+#
+# Description:  Returns the IP address and Prefix in format
+#		xxx.xxx.xxx.xxx/yy.
+#		It's used when MAC address method is used to 
+#		identify servers on server.txt
+#               It's an improvement over previous method based on
+#		function get_dhcp_info as it requires a dhcp to 
+#		be available to calculate the prefix and netmask
+#
+# Used in:      pre-fetch.sh
+#####################################################################
+
+function getIpAddressAndPrefix () {
+
+
+	local my_interface=$($IP_CMD r s| awk '/default/ {print $5}')
+
+	local my_ip_pref=$(ip address show dev $my_interface |awk '/inet / {print $2}')
+
+	echo $my_ip_pref
+
+}
 
 #####################################################################
 # Name:		parse_line
@@ -645,9 +671,18 @@ function parse_line()
 
         # field 02 cidr
         my_preflen_1=$(split_ip_cidr "$(print_col 2)" cidr)
+ 
+
         if [ -z "$my_preflen_1" ];then
-                my_preflen_1=$(get_dhcp_info NETMASK)
-                my_ipaddress=$(get_ip_list)
+
+		#JH 2019/08/10
+		#Avoid using get_dhcp_info as it requires a dhcp server to be available
+                #my_preflen_1=$(get_dhcp_info PREFIXLEN)
+                #my_ipaddress=$(get_ip_list)
+		my_ip_and_prefix=$(getIpAddressAndPrefix)
+		my_preflen_1=$(split_ip_cidr "$my_ip_and_prefix" cidr)                
+		my_ipaddress=$(split_ip_cidr "$my_ip_and_prefix" ip)		
+
         fi
 
         # field 03 gateway
@@ -655,7 +690,8 @@ function parse_line()
 	if [ -n "$my_gateway" ];then
 		GATEWAY=$my_gateway
 	else
-		my_gateway=$GATEWAY
+		mo_gateway=$GATEWAY
+t
 	fi
 
         # field 04 servertype sles11sp1,oes11sp1...
