@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <partitioning config:type="list">
+    <drive>
+      <device>/dev/md</device>
+      <disklabel>msdos</disklabel>
+      <enable_snapshots config:type="boolean">true</enable_snapshots>
+      <initialize config:type="boolean">true</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <filesystem config:type="symbol">swap</filesystem>
+          <format config:type="boolean">true</format>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mount>swap</mount>
+          <mountby config:type="symbol">uuid</mountby>
+          <partition_id config:type="integer">130</partition_id>
+          <partition_nr config:type="integer">0</partition_nr>
+          <raid_options>
+            <device_order config:type="list">
+              <device>%%DEVICE_NAME0%%2</device>
+              <device>%%DEVICE_NAME1%%2</device>
+            </device_order>
+            <persistent_superblock config:type="boolean">false</persistent_superblock>
+            <raid_type>raid1</raid_type>
+          </raid_options>
+          <resize config:type="boolean">false</resize>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <filesystem config:type="symbol">btrfs</filesystem>
+          <format config:type="boolean">true</format>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mount>/</mount>
+          <mountby config:type="symbol">uuid</mountby>
+          <partition_nr config:type="integer">1</partition_nr>
+          <raid_options>
+            <device_order config:type="list">
+              <device>%%DEVICE_NAME0%%3</device>
+              <device>%%DEVICE_NAME1%%3</device>
+            </device_order>
+            <persistent_superblock config:type="boolean">false</persistent_superblock>
+            <raid_type>raid1</raid_type>
+          </raid_options>
+          <resize config:type="boolean">false</resize>
+          <subvolumes config:type="list">
+            <listentry>boot/grub2/i386-pc</listentry>
+            <listentry>boot/grub2/x86_64-efi</listentry>
+            <listentry>home</listentry>
+            <listentry>opt</listentry>
+            <listentry>srv</listentry>
+            <listentry>tmp</listentry>
+            <listentry>usr/local</listentry>
+            <listentry>var</listentry>
+          </subvolumes>
+        </partition>
+      </partitions>
+      <pesize/>
+      <type config:type="symbol">CT_MD</type>
+      <use>all</use>
+    </drive>
+    <drive>
+      <device>%%DEVICE_NAME0%%</device>
+      <disklabel>gpt</disklabel>
+      <enable_snapshots config:type="boolean">true</enable_snapshots>
+      <initialize config:type="boolean">true</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <partition_id config:type="integer">263</partition_id>
+          <partition_nr config:type="integer">1</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>8M</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <format config:type="boolean">true</format>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mountby config:type="symbol">device</mountby>
+          <partition_id config:type="integer">253</partition_id>
+          <partition_nr config:type="integer">2</partition_nr>
+          <raid_name>/dev/md0</raid_name>
+          <resize config:type="boolean">false</resize>
+          <size>4G</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <format config:type="boolean">false</format>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mountby config:type="symbol">device</mountby>
+          <partition_id config:type="integer">253</partition_id>
+          <partition_nr config:type="integer">3</partition_nr>
+          <raid_name>/dev/md1</raid_name>
+          <resize config:type="boolean">false</resize>
+          <size>max</size>
+        </partition>
+      </partitions>
+      <pesize/>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+    <drive>
+      <device>%%DEVICE_NAME1%%</device>
+      <disklabel>gpt</disklabel>
+      <enable_snapshots config:type="boolean">true</enable_snapshots>
+      <initialize config:type="boolean">true</initialize>
+      <partitions config:type="list">
+        <partition>
+          <create config:type="boolean">true</create>
+          <partition_id config:type="integer">263</partition_id>
+          <partition_nr config:type="integer">1</partition_nr>
+          <resize config:type="boolean">false</resize>
+          <size>8M</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <format config:type="boolean">false</format>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mountby config:type="symbol">device</mountby>
+          <partition_id config:type="integer">253</partition_id>
+          <partition_nr config:type="integer">2</partition_nr>
+          <raid_name>/dev/md0</raid_name>
+          <resize config:type="boolean">false</resize>
+          <size>4G</size>
+        </partition>
+        <partition>
+          <create config:type="boolean">true</create>
+          <crypt_fs config:type="boolean">false</crypt_fs>
+          <format config:type="boolean">false</format>
+          <loop_fs config:type="boolean">false</loop_fs>
+          <mountby config:type="symbol">device</mountby>
+          <partition_id config:type="integer">253</partition_id>
+          <partition_nr config:type="integer">3</partition_nr>
+          <raid_name>/dev/md1</raid_name>
+          <resize config:type="boolean">false</resize>
+          <size>max</size>
+        </partition>
+      </partitions>
+      <pesize/>
+      <type config:type="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+  </partitioning>
+</profile>
