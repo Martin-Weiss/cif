@@ -690,8 +690,7 @@ function parse_line()
 	if [ -n "$my_gateway" ];then
 		GATEWAY=$my_gateway
 	else
-		mo_gateway=$GATEWAY
-t
+		my_gateway=$GATEWAY
 	fi
 
         # field 04 servertype sles11sp1,oes11sp1...
