@@ -90,7 +90,7 @@
       <partitions config:type="list">
         <partition>
           <create config:type="boolean">true</create>
-          <filesystem config:type="symbol">xfs</filesystem>
+          <filesystem config:type="symbol">btrfs</filesystem>
           <format config:type="boolean">false</format>
           <lv_name>containers</lv_name>
           <mount>/var/lib/containers</mount>

@@ -107,3 +107,7 @@ Changelog:
 - 20190528-01 added first alpha for upgrade to sles15sp1
 - 20190528-02 fix sles15sp1ses6 installerupdate in info.txt
 - 20190528-03 add python2 sles15sp1 module for upgrade to ses6
+- 20190813-01 added fix for mac address based server.txt
+- 20190917-01 fixed typo in previous fix causing gateway not to be set
+- 20190917-02 added caasp4 multidisk setup
+- 20190917-03 changed caasp4 multidisk setup to btrfs for /var/lib/containers
