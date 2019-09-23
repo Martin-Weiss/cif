@@ -42,6 +42,7 @@ CUSTOMER_NAME="SUSE"
 SLES11_DEFAULT="sles11/bootloader.xml:sles11/ca_mgm.xml:sles11/general.xml:sles11/scripts.xml:sles11/system.xml:sles11/kdump.xml:sles11/net.xml"
 SLES12_DEFAULT="sles12/bootloader.xml:sles12/ca_mgm.xml:sles12/general.xml:sles12/scripts.xml:sles12/system.xml:sles12/kdump.xml:sles12/net.xml"
 SLES15_DEFAULT="sles15/bootloader.xml:sles15/general.xml:sles15/scripts.xml:sles15/system.xml:sles15/kdump.xml:sles15/net.xml"
+SLES15_CAASPV4="sles15/bootloader.xml:sles15/general.xml:sles15/scripts.xml:sles15/system.xml:sles15/kdump.xml:sles15/netforward.xml"
 
 CAASP3_ADMIN="caasp3/general-admin.xml:caasp3/scripts-admin.xml:caasp3/net.xml"
 CAASP3_NODE="caasp3/general-node.xml:caasp3/scripts-node.xml:caasp3/net.xml"

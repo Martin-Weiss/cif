@@ -111,3 +111,4 @@ Changelog:
 - 20190917-01 fixed typo in previous fix causing gateway not to be set
 - 20190917-02 added caasp4 multidisk setup
 - 20190917-03 changed caasp4 multidisk setup to btrfs for /var/lib/containers
+- 20190923-01 ip forwarding for CaaSP v4

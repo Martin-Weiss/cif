@@ -108,13 +108,14 @@ caasp3-worker03;10.1.1.116/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft
 
 # CAASP4 Example
 caasp4-01;10.1.1.151/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-50G-100G.xml;soft-sles15caasp4-infra.xml;;;;;;SLES15_DEFAULT
-caasp4-02;10.1.1.152/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
-caasp4-03;10.1.1.153/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
-caasp4-04;10.1.1.154/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
-caasp4-05;10.1.1.155/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
-caasp4-06;10.1.1.156/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
-caasp4-07;10.1.1.157/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
-caasp4-08;10.1.1.158/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_DEFAULT
+caasp4-02;10.1.1.152/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
+caasp4-03;10.1.1.153/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
+caasp4-04;10.1.1.154/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
+caasp4-05;10.1.1.155/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
+caasp4-06;10.1.1.156/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
+caasp4-07;10.1.1.157/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
+caasp4-08;10.1.1.158/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
+caasp4-09;10.1.1.159/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles12-btrfs-noswap-50G-100G.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
 
 # SES 5 Example
 ses5-admin;10.1.1.120/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses5-cluster1.txt;SLES12_DEFAULT
