@@ -4,28 +4,28 @@
   <add-on>
     <add_on_products config:type="list">
      <listentry>
-        <media_url>%%SMT12_SERVER%%/SUSE/Products/SUSE-CAASP/3.0/x86_64/product/</media_url>
+        <media_url>%%SMT12_SERVER%%/repo/SUSE/Products/SUSE-CAASP/3.0/x86_64/product/</media_url>
         <product>SUSE-CAASP-3.0-Pool</product>
         <product_dir>/</product_dir>
         <name>SUSE-CAASP-3.0-Pool</name>
         <alias>SUSE-CAASP-3.0-Pool</alias>
       </listentry>
      <listentry>
-        <media_url>%%SMT12_SERVER%%/SUSE/Updates/SUSE-CAASP/3.0/x86_64/update/</media_url>
+        <media_url>%%SMT12_SERVER%%/repo/SUSE/Updates/SUSE-CAASP/3.0/x86_64/update/</media_url>
         <product>SUSE-CAASP-3.0-Updates</product>
         <product_dir>/</product_dir>
         <name>SUSE-CAASP-3.0-Updates</name>
         <alias>SUSE-CAASP-3.0-Updates</alias>
       </listentry>
      <listentry>
-        <media_url>%%SMT12_SERVER%%/SUSE/Products/SUSE-CaaSP-Toolchain/3/x86_64/product/</media_url>
+        <media_url>%%SMT12_SERVER%%/repo/SUSE/Products/SUSE-CaaSP-Toolchain/3/x86_64/product/</media_url>
         <product>SUSE-CAASP-Toolchain-3-Pool</product>
         <product_dir>/</product_dir>
         <name>SUSE-CAASP-Toolchain-3-Pool</name>
         <alias>SUSE-CAASP-Toolchain-3-Pool</alias>
       </listentry>
      <listentry>
-        <media_url>%%SMT12_SERVER%%/SUSE/Updates/SUSE-CaaSP-Toolchain/3/x86_64/update/</media_url>
+        <media_url>%%SMT12_SERVER%%/repo/SUSE/Updates/SUSE-CaaSP-Toolchain/3/x86_64/update/</media_url>
         <product>SUSE-CAASP-Toolchain-3-Updates</product>
         <product_dir>/</product_dir>
         <name>SUSE-CAASP-Toolchain-3-Updates</name>

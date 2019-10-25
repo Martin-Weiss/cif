@@ -19,12 +19,12 @@ Adjust /etc/fstab to loop mount the isos to /srv/www/htdocs/<os>
 
 Adjust /etc/apache2/conf.d/inst_server.conf to export /srv/www/htdocs including follow symlinks
 
-Example:
-# httpd configuration for Installation Server included by httpd.conf
-<Directory /srv/www/htdocs/>
-        Options +Indexes +FollowSymLinks
-        IndexOptions +NameWidth=*
-</Directory>
+\# httpd configuration for Installation Server included by httpd.conf
+
+	<Directory /srv/www/htdocs/>
+	        Options +Indexes +FollowSymLinks
+        	IndexOptions +NameWidth=*
+	</Directory>
 
 Hint: We use http and apache to give access to the AutoYaST files as this allows easy tracking and logging by the apache acess and error logs. You can basically use any web server to provide the autoyast files.
 
@@ -112,3 +112,5 @@ Changelog:
 - 20190917-02 added caasp4 multidisk setup
 - 20190917-03 changed caasp4 multidisk setup to btrfs for /var/lib/containers
 - 20190923-01 ip forwarding for CaaSP v4
+- 20191004-01 add /repo to the CaaSP v3 URLs to standardize
+- 20191025-01 cosmetic change in README.md
