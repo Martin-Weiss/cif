@@ -114,3 +114,4 @@ Changelog:
 - 20190923-01 ip forwarding for CaaSP v4
 - 20191004-01 add /repo to the CaaSP v3 URLs to standardize
 - 20191025-01 cosmetic change in README.md
+- 20191113-01 add SUMA variables to ay_lib.sh

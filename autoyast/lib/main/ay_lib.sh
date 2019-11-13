@@ -429,6 +429,10 @@ function create_var_file()
         SMT12_CLIENT_URL
         SMT_CLIENT_URL
         SMT_SERVER
+	SUMA_SERVER
+	SUMA_BOOTSTRAP_FILE
+	SUMA_BOOTSTRAP_URL
+	SUMA_SERVER
 	SP
         SUFFIX_SEARCH_LIST
         TIME_ZONE
@@ -900,6 +904,9 @@ function do_replace()
 	replace_placeholders SMT12_CLIENT_URL "$SMT12_CLIENT_URL"
 	replace_placeholders YUM_SERVER "$YUM_SERVER"
 	replace_placeholders ZCM_SERVER "$ZCM_SERVER"
+	replace_placeholders SUMA_SERVER "$SUMA_SERVER"
+	replace_placeholders SUMA_BOOTSTRAP_FILE "$SUMA_BOOTSTRAP_FILE"
+	replace_placeholders SUMA_BOOTSTRAP_URL "$SUMA_BOOTSTRAP_URL"
 
 	# replace root password 
 	# must be encrypted as created by the yast autoinstallationt module

@@ -79,7 +79,7 @@ function exec_vendor_scripts()
 
 	local script
 	cd $AY_DIR
-	wget -r -np -nH --reject "index.html*" $AY_SERVER/autoyast/scripts/$VENDOR_DIR/
+	wget -r -np -nH --reject "index.html*" $AY_SERVER/$PREFIX/scripts/$VENDOR_DIR/
 	if [ $? -eq 0 ];then
 		VENDOR_DIR=$(find -type d -name $VENDOR_DIR)	
 		if [ -d $VENDOR_DIR ];then
