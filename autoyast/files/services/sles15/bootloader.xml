@@ -22,7 +22,9 @@
       <hiddenmenu>false</hiddenmenu>
       <os_prober>false</os_prober>
     </global>
+    <!-- # efi needs grub2-efi - so changing to "autodetect" by removing this entry
     <loader_type>grub2</loader_type>
+    -->
   </bootloader>
   <deploy_image>
     <image_installation config:type="boolean">false</image_installation>

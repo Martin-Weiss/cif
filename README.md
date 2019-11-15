@@ -115,3 +115,4 @@ Changelog:
 - 20191004-01 add /repo to the CaaSP v3 URLs to standardize
 - 20191025-01 cosmetic change in README.md
 - 20191113-01 add SUMA variables to ay_lib.sh
+- 20191115-01 fix EFI setup for SLES 15 SP1
