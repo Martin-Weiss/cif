@@ -9,7 +9,8 @@
       <package>sles-release</package>
       <package>sle-module-server-applications-release</package>
       <package>sle-module-basesystem-release</package>
-      <package>caasp-release</package>
+      <package>sle-module-containers-release</package>
+      <package>docker</package>
     </packages>
     <patterns config:type="list">
       <pattern>apparmor</pattern>
@@ -17,12 +18,12 @@
       <pattern>enhanced_base</pattern>
       <pattern>minimal_base</pattern>
       <pattern>sw_management</pattern>
+      <pattern>x11</pattern>
+      <pattern>x11_yast</pattern>
       <pattern>yast2_basis</pattern>
-      <pattern>SUSE-CaaSP-Management</pattern>
     </patterns>
     <products config:type="list">
       <product>SLES</product>
-      <product>caasp</product>
     </products>
   </software>
 </profile>

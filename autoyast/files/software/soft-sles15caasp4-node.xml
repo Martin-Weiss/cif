@@ -9,6 +9,7 @@
       <package>sles-release</package>
       <package>sle-module-server-applications-release</package>
       <package>sle-module-basesystem-release</package>
+      <package>caasp-release</package>
     </packages>
     <patterns config:type="list">
       <pattern>apparmor</pattern>

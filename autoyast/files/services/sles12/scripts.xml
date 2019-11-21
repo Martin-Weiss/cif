@@ -48,6 +48,12 @@ fi
         <interpreter>shell</interpreter>
         <location>%%AY_SERVER%%/%%PREFIX%%/scripts/zcm-install.sh</location>
       </listentry>
+      <listentry>
+        <!-- SUSE Manager -->
+        <filename>suma-bootstrap.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/suma-bootstrap.sh</location>
+      </listentry>
     </init-scripts>
   </scripts>
 </profile>

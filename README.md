@@ -74,6 +74,34 @@ For for alpha to upgrade to sles 15 sp1 this check out on a sles 12 sp3 server:
 
 - curl -Sks http://10.1.1.1/autoyast/upgrade/sles15sp1.sh | /bin/bash
 
+SUSE Manager Integration:
+----------------------------------------------
+autoyast needs to be served via /srv/www/htdocs/pub/autoyast
+
+(place for non-SUSE Manager http data)
+
+
+
+The prefix "autoyast" needs to be adjusted to "pub/autoyast" in
+
+autoyast/*.txt
+
+autoyast/xml/default
+
+autoyast/scripts/*.sh
+
+change PREFIX="autoyast" to PREFIX="pub/autoyast"
+
+
+SUSE Manager parameters need to be adjusted in CUSTOMER.txt
+
+SUSE Manager registration key needs to be defined in server.txt
+
+addon XML for SUSE Manager needs to be used (see -test/-referenz/-prod examples)
+
+
+SUSE Manager bootstrap script "/pub/bootstrap/bootstrap.sh" needs to exist.
+
 Open Tasks:
 ----------------------------------------------
 - Test EFI
@@ -116,3 +144,4 @@ Changelog:
 - 20191025-01 cosmetic change in README.md
 - 20191113-01 add SUMA variables to ay_lib.sh
 - 20191115-01 fix EFI setup for SLES 15 SP1
+- 20191121-01 Added SUSE Manager information, adjusted CaaSP v4 to EFI and new partitioning layout
