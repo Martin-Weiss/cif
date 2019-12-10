@@ -20,24 +20,6 @@
       <user_password>%%ROOT_PWD%%</user_password>
       <username>root</username>
     </user>
-<user>
-      <encrypted config:type="boolean">true</encrypted>
-      <fullname>GRuner Adminstration User</fullname>
-      <gid>100</gid>
-      <home>/home/grau</home>
-      <password_settings>
-        <expire></expire>
-        <flag></flag>
-        <inact>-1</inact>
-        <max>99999</max>
-        <min>0</min>
-        <warn>7</warn>
-      </password_settings>
-      <shell>/bin/bash</shell>
-      <uid>1999</uid>
-      <user_password>$2a$05$BGKq5yi7J.3Fjr.EsmOz.e62Xt0XlHCesHKoi6m8A4aqjkbKrCg0S</user_password>
-      <username>grau</username>
-    </user>
   </users>
   <security>
     <console_shutdown>ignore</console_shutdown>

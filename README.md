@@ -145,3 +145,4 @@ Changelog:
 - 20191113-01 add SUMA variables to ay_lib.sh
 - 20191115-01 fix EFI setup for SLES 15 SP1
 - 20191121-01 Added SUSE Manager information, adjusted CaaSP v4 to EFI and new partitioning layout
+- 20191210-01 fix services/sles15/system.xml, added sle-ha example

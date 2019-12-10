@@ -165,6 +165,12 @@ oes2018ga-2;10.1.1.204/24;;oes2018ga;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50
 oes2018sp1-1;10.1.1.205/24;;oes2018sp1;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes2018_all.xml;;oes2018sp1-tree;new;ou=services,o=oes2018sp1;;OES2018_ALL
 oes2018sp1-2;10.1.1.206/24;;oes2018sp1;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes2018_all.xml;;oes2018sp1-tree;existing;ou=services,o=oes2018sp1;;OES2018_ALL
 
+# SLE-HA Example
+cl2-n01;192.168.0.61/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_DEFAULT
+cl2-n02;192.168.0.62/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_DEFAULT
+cl2-n03;192.168.0.63/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_DEFAULT
+cl2-n04;192.168.0.64/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_DEFAULT
+
 #################################################################
 ###        TEST environment                                   ###
 #################################################################
