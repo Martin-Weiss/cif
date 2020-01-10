@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+ <general>
+  <ask-list config:type="list">
+      <ask>
+          <!-- DON'T remove this comment which is used by function create_error_popup -->
+          <dialog config:type="integer">11</dialog>
+          <question>Please enter the password for user %%OES_INSTALL_USER%%</question>
+	  <pathlist config:type="list">
+            <path>edirectory,xad_ldap_admin_password</path>
+            <path>oes-ldap,xad_tree_admin_password</path>
+	  </pathlist>
+          <type>string</type>
+          <help>This is the password for the OES Installation user.
+                &lt;p&gt;This may or may not be your eDirectory Admin user.&lt;/p&gt;
+                The password needs to be entered twice.</help>
+          <password config:type="boolean">true</password>
+          <stage>initial</stage>
+          <title>Install User Password</title>
+      </ask>
+      <ask>
+          <!-- DON'T remove this comment which is used by function create_error_popup -->
+	  <dialog config:type="integer">12</dialog>
+          <question>Please enter the password for user %%DSFW_ROOT_DOMAIN_ADMIN%%</question>
+	  <pathlist config:type="list">
+            <path>edirectory,xad_admin_password</path>
+            <path>oes-ldap,admin_password</path>
+	  </pathlist>
+          <type>string</type>
+          <help>This is the password for the user Administrator of the forest root domain.
+                &lt;p&gt;The password needs to be entered twice.&lt;/p&gt;</help>
+          <password config:type="boolean">true</password>
+          <stage>initial</stage>
+          <title>FRD Administrator Password</title>
+      </ask>
+   </ask-list>
+ </general>
+</profile>

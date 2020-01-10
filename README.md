@@ -146,3 +146,5 @@ Changelog:
 - 20191115-01 fix EFI setup for SLES 15 SP1
 - 20191121-01 Added SUSE Manager information, adjusted CaaSP v4 to EFI and new partitioning layout
 - 20191210-01 fix services/sles15/system.xml, added sle-ha example
+- 20200110-01 update post-inst.sh to create ntp.conf properly
+- 20200110-02 merge Frieders changes to lib and some XMLs

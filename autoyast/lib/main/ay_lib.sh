@@ -1,14 +1,17 @@
 #!/bin/bash
 #
-# Author: Jochen Schaefer <jochen.schaefer@microfocus.com>
+# Author: Jochen Schaefer <jochen.schaefer@suse.com>
 #         Frieder Schmidt <frieder.schmidt@microfocus.com>
 #	  Martin Weiss	  <martin.weiss@suse.com>
 #
-# copyright (c) Novell Deutschland GmbH, 2001-2016. All rights reserved.
+# copyright (c) Novell Deutschland GmbH, 2001-2020. All rights reserved.
 # GNU Public License
 #
 # ay_lib.sh	  		  			23 Jan 2013
-# last modified:                                        22 Dec 2018
+# last modified (DSfW support)                          19 Sep 2019
+# last modified (NTP  config)                           10 Dec 2019
+# last modified (SLE15 support)                         10 Jan 2020
+# last modified (merged with Frieder)                   10 Jan 2020
 
 
 #######################################################################
@@ -64,6 +67,7 @@ function print_func()
 	fi
 }
 
+
 #####################################################################
 
 # Name:		set_vars
@@ -85,21 +89,24 @@ function set_vars()
         XSLT_TEMPL=/usr/share/autoinstall/xslt/merge.xslt
 	XSLT_TMP_FILE=$PROFILE_DIR/XSLT_TMP.xml
 	ERROR_FILE=$PROFILE_DIR/errors.txt
+	FRD_ADC_XML_FILE=oes_base_frd_adc.xml
+	FRD_ASK_XML_FILE=ask-dsfw-frd.xml
+	FRD_FDC_XML_FILE=oes_base_frd_fdc.xml
 	NSS_AD_XML_FILE=nss-ad.xml
 	NSS_AD_ASK_XML_FILE=ask-ad.xml
 	VAR_FILE=$PROFILE_DIR/variables.txt
 
 	# defining OS commands
-	WGETCMD="/usr/bin/wget -N"
-        IP_CMD=/sbin/ip
         DHCPCMD="/sbin/dhcpcd -T"
-	# Change by JS, Tue Sep 20 16:35:52 CEST 2016, mark for github
 	DHCPCMD12="/usr/sbin/wicked test dhcp4"
+        IP_CMD=/sbin/ip
+	WGETCMD="/usr/bin/wget -N"
 	XSLT_CMD=/usr/bin/xsltproc
 
 	# defining ZENworks Configuration Management agent command
 	ZAC_CMD=/opt/novell/zenworks/bin/zac		
 }
+
 
 #####################################################################
 # Name:		get_file
@@ -120,6 +127,7 @@ function get_file()
 	fi
 }
 
+
 #####################################################################
 # Name:		get_ip_list
 #
@@ -136,6 +144,7 @@ function get_ip_list()
         echo "$ip_list"
 }
 
+
 #####################################################################
 # Name:		get_mac_list
 #
@@ -151,6 +160,7 @@ function get_mac_list()
         echo "$mac_list"
 }
 
+
 #####################################################################
 # Name:		prepare_xml
 #
@@ -165,6 +175,7 @@ function prepare_xml()
 
         cp $AUTOYAST_FILE $AUTOYAST_CHANGE_FILE
 }
+
 
 #####################################################################
 
@@ -191,12 +202,13 @@ function split_ip_cidr()
         fi
 }
 
+
 #####################################################################
-# Name:         get_sles_version
+# Name:		get_sles_version
 #
 # Description:  derives the sles version from /etc/issue
 #
-# Used in:      do_replace
+# Used in:	do_replace
 #####################################################################
 
 function get_sles_version()
@@ -216,13 +228,18 @@ function get_sles_version()
         if grep 11 /etc/issue  >/dev/null 2>&1; then
                 SLES_VERSION=11
         fi
-        # In case of validation we don't have SLES_VERSION on cmdline cause the script will be executed
-        # from the validation server (most times autoyast server itself)
-        if [ -z "$SLES_VERSION" ];then
-                SLES_VERSION=12
-        fi
+
+	# If executed to validate parameter file entries we don't have
+	# SLES_VERSION on the command line because the script will be
+	# executed from the validation server
+	# (typically the AutoYaST server itself)
+	if [ -z "$SLES_VERSION" ];then
+	 	  SLES_VERSION=12
+	fi
+
         echo $SLES_VERSION
 }
+
 
 #####################################################################
 # Name:		get_sles_sp
@@ -240,6 +257,7 @@ function get_sles_sp()
         echo $SLES_SERVICE_PACK
 }
 
+
 #####################################################################
 # Name:		guess_arch
 #
@@ -256,6 +274,7 @@ function guess_arch()
         fi
         echo $my_arch
 }
+
 
 #####################################################################
 #
@@ -403,6 +422,15 @@ function create_var_file()
         DNS_ROOTSERVERINFO_CONTEXT
         DNS_SERVER_CTX
 	DOMAIN_NAME
+	DSFW_CONTEXT
+	DSFW_CONFIG_DC_DNS
+	DSFW_CONFIG_DC_WINS
+	DSFW_DC_TYPE
+	DSFW_DOMAIN_NETBIOS
+	DSFW_EXISTING_DNS_IP
+	DSFW_ROOT_DOMAIN
+	DSFW_ROOT_DOMAIN_ADMIN
+	DSFW_ROOT_PDC_IP
         GATEWAY
 	HOST_NAME
         HWCLOCK
@@ -519,35 +547,6 @@ function get_random_list_value()
 
 
 #####################################################################
-# Name:		get_dhcp_info
-#
-# Description:	retrieves property given as first argument from 
-# 		dhcpcd
-#
-# Used in:	parse_line
-#####################################################################
-
-get_dhcp_info()
-{
-	# Change by JS, Tue Sep 20 16:35:52 CEST 2016, mark for github
-	# dhcpcd script does not exist on SLES12
-	if [ $(get_sles_version) -eq "12" ];then
-		DHCPCMD="$DHCPCMD12"
-	fi
-        local my_property=$1
-        #local my_interface=$($IP_CMD a | grep "\<inet\>" | grep -v 127.0 | awk '{print $NF}')
-	#below matching seems to be better than above, check for default route (almost at 
-	#any time) bound to the installation network device
-	# Change by JS, Tue Sep 20 16:35:52 CEST 2016, mark for github
-	# Change by JH, 2019/08/10. Remove quotes from result.
-        local my_interface=$($IP_CMD r s| awk '/default/ {print $5}')
-        local my_value=$($DHCPCMD $my_interface|awk -v y=$my_property -F'='  '$1~y {print $2}'| cut -d "'" -f 2 ) 
-        #local my_value=$($DHCPCMD $my_interface|awk -v y=$my_property -F'='  '$1~y {print $2}' )
-        echo $my_value
-}
-
-
-#####################################################################
 # Name:		check4errors
 #
 # Description:	checking for errors like "%%" within driverfile and 
@@ -623,6 +622,7 @@ function create_error_popup()
 	fi
 }       
 
+
 #####################################################################
 # Name:         getIpAddressAndPrefix
 #
@@ -637,16 +637,14 @@ function create_error_popup()
 # Used in:      pre-fetch.sh
 #####################################################################
 
-function getIpAddressAndPrefix () {
-
-
+function getIpAddressAndPrefix()
+{
 	local my_interface=$($IP_CMD r s| awk '/default/ {print $5}')
 
-	local my_ip_pref=$(ip address show dev $my_interface |awk '/inet / {print $2}')
-
+	local my_ip_pref=$($IP_CMD a s dev $my_interface |awk '/inet / {print $2}')
 	echo $my_ip_pref
-
 }
+
 
 #####################################################################
 # Name:		parse_line
@@ -676,9 +674,7 @@ function parse_line()
         # field 02 cidr
         my_preflen_1=$(split_ip_cidr "$(print_col 2)" cidr)
  
-
         if [ -z "$my_preflen_1" ];then
-
 		#JH 2019/08/10
 		#Avoid using get_dhcp_info as it requires a dhcp server to be available
                 #my_preflen_1=$(get_dhcp_info PREFIXLEN)
@@ -686,7 +682,6 @@ function parse_line()
 		my_ip_and_prefix=$(getIpAddressAndPrefix)
 		my_preflen_1=$(split_ip_cidr "$my_ip_and_prefix" cidr)                
 		my_ipaddress=$(split_ip_cidr "$my_ip_and_prefix" ip)		
-
         fi
 
         # field 03 gateway
@@ -703,7 +698,7 @@ function parse_line()
         # field 05 first disk
         my_diskdevice_1="$(print_col 5)"
 
-        # field 06 first disk
+        # field 06 second disk
         my_diskdevice_2="$(print_col 6)"
 
         # field 07 partition xml file
@@ -712,7 +707,7 @@ function parse_line()
         # field 08 software xml file
         my_software_file="$(print_col 8)"
 
-        # field 09 zlm/zcm key
+        # field 09 zcm registration key list
         my_zcmkey="$(print_col 9)"
 
 	# field 10 treename
@@ -785,6 +780,7 @@ function replace_placeholders()
 	fi
 }
 
+
 #####################################################################
 # Name:		get_media_label
 #
@@ -802,6 +798,7 @@ function get_media_label()
 	echo $LABEL
 
 }
+
 
 #####################################################################
 # Name:		do_replace
@@ -877,14 +874,26 @@ function do_replace()
 	replace_placeholders OES_INSTALL_USER "$OES_INSTALL_USER"
 	replace_placeholders UCO_CONTEXT "$UCO_CONTEXT"
 
-	# DHCP and DNS information come from CUSTOMER.txt, $AY_TREE_FILE
-	# or $my_location_file
+	# DHCP information comes from CUSTOMER.txt, $AY_TREE_FILE or $my_location_file
 	replace_placeholders DHCP_GROUP_CONTEXT "$DHCP_GROUP_CONTEXT"
 	replace_placeholders DHCP_INTERFACES "$DHCP_INTERFACES"
 	replace_placeholders DHCP_LOCATOR_CONTEXT "$DHCP_LOCATOR_CONTEXT"
+
+	# DNS information comes from CUSTOMER.txt, $AY_TREE_FILE or $my_location_file
 	replace_placeholders DNS_GROUP_CONTEXT "$DNS_GROUP_CONTEXT"
 	replace_placeholders DNS_LOCATOR_CONTEXT "$DNS_LOCATOR_CONTEXT"
 	replace_placeholders DNS_ROOTSERVERINFO_CONTEXT "$DNS_ROOTSERVERINFO_CONTEXT"
+
+	# DSfW information comes from CUSTOMER.txt, $AY_TREE_FILE or $my_location_file
+        replace_placeholders DSFW_CONTEXT "$DSFW_CONTEXT"
+        replace_placeholders DSFW_CONFIG_DC_DNS "$DSFW_CONFIG_DC_DNS" 
+        replace_placeholders DSFW_CONFIG_DC_WINS "$DSFW_CONFIG_DC_WINS"
+	replace_placeholders DSFW_DC_TYPE "$DSFW_DC_TYPE"
+        replace_placeholders DSFW_DOMAIN_NETBIOS "$DSFW_DOMAIN_NETBIOS"
+        replace_placeholders DSFW_EXISTING_DNS_IP "$DSFW_EXISTING_DNS_IP"
+        replace_placeholders DSFW_ROOT_DOMAIN "$DSFW_ROOT_DOMAIN"
+	replace_placeholders DSFW_ROOT_DOMAIN_ADMIN "$DSFW_ROOT_DOMAIN_ADMIN"
+	replace_placeholders DSFW_ROOT_PDC_IP "$DSFW_ROOT_PDC_IP"
 
 	# Search base information comes from CUSTOMER.txt, $AY_TREE_FILE
 	# or $my_location_file
@@ -928,8 +937,8 @@ function do_replace()
 	return_service_ctx DHCP_SERVER_CTX $my_server_context "$DHCP_SERVER_CTX"
 	return_service_ctx DNS_SERVER_CTX $my_server_context "$DNS_SERVER_CTX"
 
-	# replace LABELS when installation sources are on images or hard media and 
-	# installation URL' are specified like cd:///oes?devices=/dev/disk/by-label/<LABEL>
+	# replace LABELs if installation sources are on images or fixed media and 
+	# installation URLs are specified as cd:///oes?devices=/dev/disk/by-label/<LABEL>
 	replace_placeholders FPL_LABEL $(get_media_label FPL)
 	replace_placeholders OES_LABEL $(get_media_label OES)
 
@@ -951,6 +960,7 @@ function do_replace()
 
 }
 
+
 #####################################################################
 #
 #	FUNCTIONS TO HANDLE XML TAGS AND FILES
@@ -971,6 +981,7 @@ function remove_32()
 	print_func $FUNCNAME	
         sed -i -e '/-32bit\|32bit/d' $AUTOYAST_CHANGE_FILE
 }
+
 
 #####################################################################
 # Name:		un_tag
@@ -996,6 +1007,7 @@ function un_tag()
         sed -i -e 's#^\s*</'$tag'>\s*$#& -->#' $file
 }
 
+
 #####################################################################
 # Name:		insert_before_placeholder
 #
@@ -1014,6 +1026,7 @@ function insert_before_placeholder
         sed -i '/'$place_holder'/i'"${replace_string}"'' $AUTOYAST_CHANGE_FILE
 }
 
+
 #####################################################################
 # Name:		delete_placeholders
 #
@@ -1031,6 +1044,7 @@ function delete_placeholders()
         place_holder=$1
         sed -i '/%%'$place_holder'%%/d' $AUTOYAST_CHANGE_FILE
 }
+
 
 #####################################################################
 # Name:		uncomment_multiple_tags
@@ -1081,6 +1095,7 @@ function uncomment_multiple_tags()
         mv $AUTOYAST_CHANGE_FILE_JS  $AUTOYAST_CHANGE_FILE
 }
 
+
 #####################################################################
 # Name:		merge_xml
 #
@@ -1110,6 +1125,7 @@ function merge_xml()
         mv $out_file $AUTOYAST_CHANGE_FILE
         rm $with_file
 }
+
 
 #####################################################################
 # Name:		dont_merge_xml
@@ -1142,10 +1158,10 @@ function dont_merge_xml()
 }
 
 
-############################################
+#####################################################################
 # Name:		process_xml
 #
-# Description:	wrapper arround merge-xml which is using 4 arguments
+# Description:	wrapper arround merge_xml which is using 4 arguments
 #		argument 1: xml file which needs to be merged
 #		argument 2: outer tag from file in argument 1
 #		argument 3: class directory below classes which contains
@@ -1189,6 +1205,7 @@ function process_xml()
         fi
 }
 
+
 #####################################################################
 # Name:		create_ntp_sles
 #
@@ -1197,11 +1214,12 @@ function process_xml()
 #		as preferred server to spread the load across different
 #		ntp servers.
 #
-#		merge_xml is used to merge the snipped with the main
+#		merge_xml is used to merge the snippet with the main
 #		autoyast driver file
 #
-#		the ntp_server_list from $my_location_file will be
-#		used as argument 
+#		the ntp_server_list resulting from processing
+#		CUSTOMER.txt, $AY_TREE_FILE, and my_location_file
+#		will be used as argument 
 #
 # Used in:	make_server
 #####################################################################
@@ -1212,15 +1230,6 @@ function create_ntp_sles()
         local ntp_server_list="$1"
         local preferred_server=$(get_random_list_value "$ntp_server_list")
 
-	# <address> </address> and <type>#</type>  MUST NOT be removed,
-	# otherwise the comment will never make it into ntp.conf!!!
-	
-	# hint: this only works on SLES 11 and SLES 12 up to SLES 12 SP2
-	#       with SLES 12 SP3 this is broken
-
-	# FIXME - need to add a check for "pre SLES 12 SP3" until then we will not have this comment in the file
-	if [ "$my_release" == "pre-sles12sp4" ]; then
-
         cat <<HERE >>$NTP_TMP_FILE
 <?xml version="1.0"?>
 <!DOCTYPE profile>
@@ -1228,214 +1237,73 @@ function create_ntp_sles()
 xmlns="http://www.suse.com/1.0/yast2ns"
 xmlns:config="http://www.suse.com/1.0/configns">
   <ntp-client>
-    <ntp_policy>auto</ntp_policy>
-    <peers config:type="list">
-      <peer>
-        <address> </address>
-	<type>#</type>
-        <comment>################################################################################
-## /etc/ntp.conf
-##
-## Sample NTP configuration file.
-## See package 'ntp-doc' for documentation, Mini-HOWTO and FAQ.
-## Copyright (c) 1998 S.u.S.E. GmbH Fuerth, Germany.
-##
-## Author: Michael Andres,  &lt;ma@suse.de&gt;
-##         Michael Skibbe,  &lt;mskibbe@suse.de&gt;
-##
-################################################################################
-
-##
-## Radio and modem clocks by convention have addresses in the form 127.127.t.u,
-## where t is the clock type and u is a unit number in the range 0-3.
-##
-## Most of these clocks require support in the form of a serial port or special
-## bus peripheral. The particular device is normally specified by adding a soft
-## link /dev/device-u to the particular hardware device involved, where u does
-## correspond to the unit number above.
-##
-## Generic DCF77 clock on serial port (Conrad DCF77)
-## Address:     127.127.8.u
-## Serial Port: /dev/refclock-u
-##
-## (create soft link /dev/refclock-0 to the particular ttyS?)
-##
-# server 127.127.8.0 mode 5 prefer
-
-##
-## Undisciplined Local Clock. This is a fake driver intended for backup and when
-## no outside source of synchronized time is available.
-##
-# server 127.127.1.0		 # local clock (LCL)
-# fudge  127.127.1.0 stratum 10	 # LCL is unsynchronized
-
-##
-## Add external Servers using
-## # rcntpd addserver &lt;yourserver&gt;
-## The servers will only be added to the currently running instance, not to
-## /etc/ntp.conf.
-##
-
-# Access control configuration; see /usr/share/doc/packages/ntp/html/accopt.html
-# for details.
-# The web page &lt;http://support.ntp.org/bin/view/Support/AccessRestrictions&gt; might
-# also be helpful.
-#
-# Note that "restrict" applies to both servers and clients, so a configuration
-# that might be intended to block requests from certain clients could also end
-# up blocking replies from your own upstream servers.
-
-# By default, exchange time with everybody, but don't allow configuration.
-restrict -4 default notrap nomodify nopeer noquery
-restrict -6 default notrap nomodify nopeer noquery
-
-# Local users may interrogate the ntp server more closely.
-restrict 127.0.0.1
-restrict ::1
-
-# Clients from this (example!) subnet have unlimited access, but only if
-# cryptographically authenticated.
-# restrict 192.168.123.0 mask 255.255.255.0 notrust
-
-##
-## Miscellaneous stuff
-##
-
-driftfile /var/lib/ntp/drift/ntp.drift 	# path for drift file
-
-logfile   /var/log/ntp			# alternate log file
-
-# logconfig =syncstatus + sysevents
-# logconfig =all
-
-# statsdir /tmp/			# directory for statistics files
-# filegen peerstats  file peerstats  type day enable
-# filegen loopstats  file loopstats  type day enable
-# filegen clockstats file clockstats type day enable
-
-#
-# Authentication stuff
-#
-
-keys 	   /etc/ntp.keys 		# path for key file
-trustedkey 1				# define trusted keys
-requestkey 1				# key (7) for accessing server variables
-controlkey 1				# key (6) for accessing server variables
-
-
-## configure %%CUSTOMER_NAME%% time sources
-</comment>
-      </peer>
 HERE
 
-	else
-
-	cat <<HERE >>$NTP_TMP_FILE
-<?xml version="1.0"?>
-<!DOCTYPE profile>
- <profile
- xmlns="http://www.suse.com/1.0/yast2ns"
- xmlns:config="http://www.suse.com/1.0/configns">
-<ntp-client>
-   <peers config:type="list">
-    <peer>
-    <address>/var/lib/ntp/drift/ntp.drift</address>
-    <initial_sync config:type="boolean">false</initial_sync>
-    <type>driftfile</type>
-    </peer>
+	# SLES/OES releases pre SLE15
+	if [ -n "$(egrep "11|12|20"<<<$my_release)" ]; then
+        cat <<HERE >>$NTP_TMP_FILE
+  <peers config:type="list">
 HERE
-
-	fi
 
 	for ntp_server in $ntp_server_list;do
 		if [ "$ntp_server" == "$preferred_server" ];then
 
 			cat <<HERE >>$NTP_TMP_FILE
-      <peer>
-        <initial config:type="boolean">true</initial>
-          <options>burst iburst prefer</options>
-          <type>server</type>
-          <address>$ntp_server</address>
-      </peer>
+    <peer>
+    <initial config:type="boolean">true</initial>
+        <options>burst iburst prefer</options>
+        <type>server</type>
+        <address>$ntp_server</address>
+    </peer>
 HERE
 		else
 
 		cat <<HERE >>$NTP_TMP_FILE
-      <peer>
-        <initial config:type="boolean">true</initial>
+    <peer>
+    <initial config:type="boolean">true</initial>
         <options>burst iburst</options>
         <type>server</type>
         <address>$ntp_server</address>
-      </peer>
+    </peer>
 HERE
         	fi
         done
 
         cat <<HERE >>$NTP_TMP_FILE
-    </peers>
-    <start_at_boot config:type="boolean">true</start_at_boot>
-    <start_in_chroot config:type="boolean">true</start_in_chroot>
-  </ntp-client>
-</profile>
+  </peers>
+  <start_at_boot config:type="boolean">true</start_at_boot>
+  <start_in_chroot config:type="boolean">true</start_in_chroot>
 HERE
 
-        merge_xml $NTP_TMP_FILE ntp-client
-}
-
-#####################################################################
-# Name:         create_ntp_sles15
-#
-# Description:  creates the ntp-xml part for ntp.conf
-#               one server from the ntp list will be randomly selected
-#               as preferred server to spread the load across different
-#               ntp servers.
-#
-#               merge_xml is used to merge the snipped with the main
-#               autoyast driver file
-#
-#               the ntp_server_list from $my_location_file will be
-#               used as argument
-#
-# Used in:      make_server
-#####################################################################
-
-function create_ntp_sles15()
-{
-        local NTP_TMP_FILE=ntp.xml
-        local ntp_server_list="$1"
-        local preferred_server=$(get_random_list_value "$ntp_server_list")
-
-        # <address> </address> and <type>#</type>  MUST NOT be removed,
-        # otherwise the comment will never make it into ntp.conf!!!
-        cat <<HERE >>$NTP_TMP_FILE
-<?xml version="1.0"?>
-<!DOCTYPE profile>
-<profile
-xmlns="http://www.suse.com/1.0/yast2ns"
-xmlns:config="http://www.suse.com/1.0/configns">
-  <ntp-client>
+	# SLE15 and newer
+	else
+            cat <<HERE >>$NTP_TMP_FILE
     <ntp_policy>auto</ntp_policy>
     <ntp_servers config:type="list">
 HERE
 
-        for ntp_server in $ntp_server_list;do
-                        cat <<HERE >>$NTP_TMP_FILE
-      <ntp_server>
-          <address>$ntp_server</address>
-          <iburst config:type="boolean">true</iburst>
-          <offline config:type="boolean">false</offline>
-      </ntp_server>
+            for ntp_server in $ntp_server_list;do
+		cat <<HERE >>$NTP_TMP_FILE
+    <ntp_server>
+      <address>$ntp_server</address>
+      <iburst config:type="boolean">true</iburst>
+      <offline config:type="boolean">false</offline>
+    </ntp_server>
 HERE
-        done
+	    done
 
-        cat <<HERE >>$NTP_TMP_FILE
+	    cat <<HERE >>$NTP_TMP_FILE
     </ntp_servers>
     <ntp_sync>systemd</ntp_sync>
+HERE
+	fi
+
+	    cat <<HERE >>$NTP_TMP_FILE
   </ntp-client>
 </profile>
 HERE
 
-        merge_xml $NTP_TMP_FILE ntp-client
+	merge_xml $NTP_TMP_FILE ntp-client
 }
 
 
@@ -1456,6 +1324,7 @@ function remove_from_list()
 	
 	echo "$list"
 }
+
 
 #####################################################################
 # Name:		create_ldap_entries
@@ -1542,7 +1411,7 @@ HERE
 HERE
 	   fi
 	else
-	  # LDAP_SERVER_LIST is undefined; we use the local IP for OEs services
+	  # LDAP_SERVER_LIST is undefined; we use the local IP for OES services
 	  LDAP_1=$my_ipaddress
 	fi
 
@@ -1586,6 +1455,7 @@ HERE
 
         merge_xml $LDAP_TMP_FILE ldap_servers
 }
+
 
 #####################################################################
 # Name:		get_pci_values					
@@ -1660,6 +1530,7 @@ get_pci_values()
 
 }
 
+
 #####################################################################
 # Name:		set_pciID
 #
@@ -1672,11 +1543,8 @@ get_pci_values()
 
 function set_pciID()
 {
-	# if $1 matches ethx%%vmbus_0_x then skip this function
-	# required for sles 12 sp3
+	# bypass this function in case the installation is into a kvm guest
 	if [[ ! $1 =~ .*%%vmbus_0_.* ]] && [[ ! $1 =~ .*%%virtio.* ]]
-	# required for sles 11 sp4 in kvm
-	# if [[ ! $1 =~ .*%%vmbus_0_.* ]] 
 	then
 	print_func $FUNCNAME	
 
@@ -1684,48 +1552,47 @@ function set_pciID()
         local arglist="$1"
 
 	# udev pci based vs. mac-address based
-	# Change by JS, Tue Sep 20 16:35:52 CEST 2016, mark for github
+	# my_macaddress is only defined in customer_lib.sh for some customers
 	if [ -z "$my_macaddress" ]; then
         cat <<HERE >$tmpfile
 <?xml version="1.0"?>
 <!DOCTYPE profile>
 <profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
-<networking>
-<net-udev config:type="list">
+  <networking>
+    <net-udev config:type="list">
 HERE
 
         for arg in $arglist;do
                 local DEVNAME=$(awk -F"%%" '{print $1}'<<<$arg)
                 local PCI_ID=$(awk -F"%%" '{print $2}'<<<$arg)
                 cat<<HERE >>$tmpfile
-  <rule>
-      <name>$DEVNAME</name>
+      <rule>
+        <name>$DEVNAME</name>
         <rule>KERNELS</rule>
-      <value>$PCI_ID</value>
-  </rule>
+        <value>$PCI_ID</value>
+      </rule>
 HERE
         done
 
-	# Change by JS, Tue Sep 20 16:35:52 CEST 2016, mark for github
 	# introduced complete else branch for mac-based udev rules
 	else
 cat <<HERE >$tmpfile
 <?xml version="1.0"?>
 <!DOCTYPE profile>
 <profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
-<networking>
-<net-udev config:type="list">
+  <networking>
+    <net-udev config:type="list">
 HERE
 
         for arg in $arglist;do
                 local DEVNAME=$(awk -F"%%" '{print $1}'<<<$arg)
                 local PCI_ID=$(awk -F"%%" '{print $2}'<<<$arg)
                 cat<<HERE >>$tmpfile
-  <rule>
+      <rule>
         <name>$DEVNAME</name>
         <rule>ATTR{address}</rule>
         <value>%%MAC_ADDRESS%%</value>
-  </rule>
+      </rule>
 HERE
 
 	# remove possible %%MAC_ADDRESS%% entries when installing via IP
@@ -1735,14 +1602,15 @@ HERE
 	fi
 
         cat <<HERE >>$tmpfile
-</net-udev>
-</networking>
+    </net-udev>
+  </networking>
 </profile>
 HERE
 
         merge_xml $tmpfile net-udev
 	fi
 }
+
 
 #####################################################################
 #
@@ -1765,6 +1633,7 @@ function split_list()
 	echo "$search_items"
 }
 
+
 #####################################################################
 # Name:		ret_firstval_list
 #
@@ -1779,6 +1648,7 @@ function ret_firstval_list()
 	local first_list_item=${list%% *}
         echo $first_list_item
 }
+
 
 #####################################################################
 # Name:		prepare_lists
@@ -1814,6 +1684,7 @@ function prepare_lists()
                 fi
         done
 }
+
 
 #####################################################################
 # Name:		multi_value
@@ -1870,6 +1741,7 @@ function multi_value()
 	local my_scopes=$(tr : , <<<$SLP_SCOPE_LIST)
 	replace_placeholders SLP_SCOPE_LIST "$my_scopes"
 }
+
 
 #####################################################################
 # Name:		merge_service_files
@@ -1942,20 +1814,42 @@ function make_server
 	# merge files like kdump.xml, oes-snippets, etc.
 	merge_service_files
 
-	# if my_product contains oes retrieve ask.xml
+	# Query passwords if installing OES
+	#
+	# OES:    admin_context		 is the eDir install user
+	# DSfW:   admin_context		 is the DSfW Administrator user
+	# 	  xad_tree_admin_context is the eDir install user
+	# NSS-AD: admin_name		 is the AD Administrator user
 	if [ "$my_product" == "oes" -a -z "$NO_OES_PWD" ];then
-		process_xml ask.xml ask-list ask
-		
-		create_ldap_entries "$(split_list $LDAP_SERVER_LIST)"
 
-		# query password for AD join for AD integrated OES2015 servers
+		local xml_list=$(split_list $(eval echo \$${my_service_type}))
+
+		# is this a DSfW FRD FDC?
+		grep $FRD_FDC_XML_FILE <<<"$xml_list"
+		if [ $? -eq 0 ]; then
+			process_xml ask-dsfw-frd.xml ask-list ask
+		else
+			# is this a DSfW FRD ADC?
+			grep $FRD_ADC_XML_FILE <<<"$xml_list"
+			if [ $? -eq 0 ]; then
+				process_xml ask-dsfw-frd.xml ask-list ask
+			# non-DSfW server
+			else
+				process_xml ask.xml ask-list ask
+			fi
+		fi
+		
+		# query password for AD join for AD integrated OES servers (OES2015 and later)
 		local xml_list=$(split_list $(eval echo \$${my_service_type}))
 		grep $NSS_AD_XML_FILE <<<"$xml_list"
-		if [ $? -eq 0 ];then
+		if [ $? -eq 0 ]; then
 			ask_nss_ad_uri=${AY_XML_CLASS_DIR_URL}/ask/$NSS_AD_ASK_XML_FILE
 			get_file $ask_nss_ad_uri
 			dont_merge_xml $NSS_AD_ASK_XML_FILE ask
 		fi
+
+		create_ldap_entries "$(split_list $LDAP_SERVER_LIST)"
+
 	fi
 
 	# remove 32-bit entries from software files if 32-bit system is being installed 
@@ -1963,29 +1857,21 @@ function make_server
                 remove_32
         fi
 
-        if [ "$my_release" == "15" ]; then
-
-        # create ntp server xml
-        create_ntp_sles15 "$(split_list $NTP_SERVER_LIST)"
-
-        elif [ "$my_product" == "caasp" ]; then
-
-        # replace settings for SALT_MASTER in CAASP
-        replace_placeholders NTP_SERVER_LIST_CAASP "$(split_list $NTP_SERVER_LIST)"
-
-        # replace settings for NAME_SERVER in CAASP
-        replace_placeholders NAME_SERVER_LIST_CAASP "$(split_list $NAME_SERVER_LIST)"
-
-        # replace settings for NAME_SERVER in CAASP
-        replace_placeholders SUFFIX_SEARCH_LIST_CAASP "$(split_list $SUFFIX_SEARCH_LIST)"
-
-        else
-
         # create ntp server xml
         create_ntp_sles "$(split_list $NTP_SERVER_LIST)"
 
-        fi
+        if [ "$my_product" == "caasp" ]; then
+		# caasp v3 needs adjustments in other places / scripts due to missing stage 2 in YaST
 
+        	# replace settings for NTP_SERVER in CAASP
+        	replace_placeholders NTP_SERVER_LIST_CAASP "$(split_list $NTP_SERVER_LIST)"
+
+        	# replace settings for NAME_SERVER in CAASP
+        	replace_placeholders NAME_SERVER_LIST_CAASP "$(split_list $NAME_SERVER_LIST)"
+
+        	# replace settings for SUFFIX_SEARCH_LIST in CAASP
+        	replace_placeholders SUFFIX_SEARCH_LIST_CAASP "$(split_list $SUFFIX_SEARCH_LIST)"
+        fi
 }
 
 
@@ -2108,6 +1994,7 @@ function return_service_ctx()
 
 	replace_placeholders $place_holder "$final_ctx"
 }
+
 
 #####################################################################
 # Name:		get_ay_config_base
