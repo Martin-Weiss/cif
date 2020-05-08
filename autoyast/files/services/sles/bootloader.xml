@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <bootloader>
+    <device_map config:type="list">
+      <device_map_entry>
+        <firmware>hd0</firmware>
+        <linux>%%DEVICE_NAME0%%</linux>
+      </device_map_entry>
+    </device_map>
+    <global>
+      <activate>true</activate>
+      <boot_boot>false</boot_boot>
+      <boot_extended>false</boot_extended>
+      <boot_mbr>true</boot_mbr>
+      <boot_root>false</boot_root>
+      <cpu_mitigations>auto</cpu_mitigations>
+      <gfxmode>auto</gfxmode>
+      <hiddenmenu>false</hiddenmenu>
+      <os_prober>false</os_prober>
+      <timeout config:type="integer">8</timeout>
+    </global>
+    <!-- # efi needs grub2-efi - so changing to "autodetect" by removing this entry
+    <loader_type>grub2</loader_type>
+    -->
+  </bootloader>
+</profile>

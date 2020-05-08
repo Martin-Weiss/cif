@@ -2,13 +2,14 @@
 #
 # Author: Jochen Schaefer <jochen.schaefer@microfocus.com>
 #	  Frieder Schmidt <frieder.schmidt@microfocus.com>
+#	  Martin Weiss    <martin.weiss@suse.com>
 # 
 # copyright (c) Novell Deutschland GmbH, 2001-2016. All rights reserved.
 #
 # post-inst.sh	  					 9 Jan 2013
 # last modified (disable IPv6)				21 Dec 2018
 # last modified (complete_ntp)				10 Dec 2019
-# last modified (add $PREFIX)				10 Jan 2020
+# last modified (add $PREFIX)				11 Jan 2020
 
 ###########################################################################
 ###########################################################################
@@ -161,6 +162,7 @@ function correct_things()
         /usr/bin/sed -i -r  's/(^::1.*)\s+\<localhost\>(\s+.*$)/\1\2/' $HOST_FILE
 }
 
+
 function enable_xforwarding_sshd()
 {
 	# this enables X forwarding for ssh connections
@@ -169,6 +171,7 @@ function enable_xforwarding_sshd()
 	echo "AddressFamily inet" >>$SSHD_CONFIG
 	/etc/init.d/sshd restart
 }
+
 
 function exec_vendor_scripts()
 {
@@ -205,9 +208,10 @@ function exec_vendor_scripts()
 set_vars
 
 #complete ntp.conf for SLES/OES releases pre SLE15
-if [ -n $(egrep "11|12|20"<<<$my_release) ]; then
+if [ -n "$(egrep "11|12|20"<<<$my_server_type)" ]; then
      complete_ntp
 fi
+
 correct_things
 enable_xforwarding_sshd
 exec_vendor_scripts

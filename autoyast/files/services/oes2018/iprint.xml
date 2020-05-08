@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE profile>
-<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
-  <iprint>
-    <top_context>%%IPRINT_SEARCH_BASE%%</top_context>
-    <ldap_server>%%IP_ADDRESS%%</ldap_server>
-  </iprint>
-</profile>

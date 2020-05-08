@@ -28,6 +28,8 @@
 ##				  255.255.252.0 = 22
 ##				  255.255.254.0 = 23
 ##				  255.255.255.0 = 24
+## - OR -   - MAC_ADRESS        - If AY_MACHINE_IDENTIFIER="MAC" is set in AY_MAIN.txt this field accomodates the MAC address
+##                                of the server being installed
 ## Field 03 - GATEWAY		- optional - IP address of the default gateway
 ## Field 04 - SERVER_TYPE	- mandatory - pure SLES or OES systems including version, feature pack (FP, OES11 only) and support
 ##				  pack level; "ovl" at the end of the identifier denotes that the system will be installed from the
@@ -71,35 +73,53 @@
 ## 01: HOST_NAME; 02: IP_ADDRESS/NETMASK; 03 GATEWAY; 04: SERVER_TYPE; 05: DEVICE_NAME0; 06: DEVICE_NAME1; 07: PART_FILE;
 ## 08: SOFT_FILE; 09: ZCM_KEY_LIST; 10: TREE_NAME; 11: TREE_TYPE; 12: SERVER_CONTEXT; 13: SERVER_LOCATION; 14: SERVICE_TYPE
 
+#######################################################################
+###                   AutoYaST test installations                   ###
+#######################################################################
+
+#Server1;10.10.10.101/24;;oes2018sp1-TST;/dev/sda;;part-vmware-lvm-50G.xml;soft-oes2018_branch.xml;;<Your_Tree>;new;<Your_ServerContext>;<Your_Location.txt>;OES2018SP1_Branch
+#Server2;10.10.10.102/24;;oes2018sp1-TST;/dev/sda;;part-vmware-lvm-50G.xml;soft-oes2018_branch.xml;;<Your_Tree>;existing;<Your_ServerContext>;<Your_Location.txt>;OES2018SP1_Branch
+
+#################################################################
+###     DEVELOPMENT environment eDirectory Tree <TreeName>    ###
+#################################################################
+
+#################################################################
+###        TEST environment eDirectory Tree <TreeName>        ###
+#################################################################
+
+#################################################################
+###     PRODUCTION environment eDirectory Tree <TreeName>     ###
+#################################################################
 
 #################################################################
 ###     DEVELOPMENT environment                               ###
 #################################################################
 
 # SLES 11 SP4 Example
-sles11sp4-1;10.1.1.100/24;;sles11sp4;/dev/vda;;part-ext3-50G.xml;soft-sles11.xml;;;;;;SLES11_DEFAULT
+sles11sp4-1;10.1.1.100/24;;sles11sp4;/dev/vda;;part-ext3-50G.xml;soft-sles11.xml;;;;;;SLES11_BASE
 
 # SLES 12 SP3 Example
-sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
-bond-test-sles12sp3;10.1.1.99/24;;sles12sp3;/dev/vda;/dev/vdb;part-sles12-gpt-raid1-max.xml;soft-sles12-minimal.xml;;;;;;SLES12_DEFAULT
+sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12.xml;;;;;;SLES12_BASE
+bond-test-sles12sp3;10.1.1.99/24;;sles12sp3;/dev/vda;/dev/vdb;part-sles12-gpt-raid1-max.xml;soft-sles12-minimal.xml;;;;;;SLES12_BASE
 
 # SLES 12 SP3 Example with EFI
-#sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
-sles12sp3-2;192.168.0.111/24;192.168.0.1;sles12sp3;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles12.xml;;;;;192-168-0.txt;SLES12_DEFAULT
+#sles12sp3-1;10.1.1.101/24;;sles12sp3;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles12.xml;;;;;;SLES12_BASE
+sles12sp3-2;192.168.0.111/24;192.168.0.1;sles12sp3;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles12.xml;;;;;192-168-0.txt;SLES12_BASE
 
 # SLES 12 SP4 Example
-sles12sp4-1;10.1.1.102/24;;sles12sp4;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12.xml;;;;;;SLES12_DEFAULT
+sles12sp4-1;10.1.1.102/24;;sles12sp4;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12.xml;;;;;;SLES12_BASE
 
 # SLES 15 GA Example
-sles15ga-1;10.1.1.103/24;;sles15ga;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES15_DEFAULT
+sles15ga-1;10.1.1.103/24;;sles15ga;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES15_BASE
 
 # SLES 15 SP1 Example
-sles15sp1-1;10.1.1.104/24;;sles15sp1;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES15_DEFAULT
-#sles15sp1-2;10.1.1.199/24;;sles15sp1;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES15_DEFAULT
-sles15sp1-2;192.168.0.112/24;;sles15sp1;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles15.xml;;;;;192-168-0.txt;SLES15_DEFAULT
-sles15sp1-3;192.168.0.113/24;;sles15sp1-template;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_DEFAULT
+sles15sp1-1;10.1.1.104/24;;sles15sp1;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES15_BASE
+#sles15sp1-2;10.1.1.199/24;;sles15sp1;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15.xml;;;;;;SLES15_BASE
+sles15sp1-2;192.168.0.112/24;;sles15sp1;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles15.xml;;;;;192-168-0.txt;SLES15_BASE
+sles15sp1-3;192.168.0.113/24;;sles15sp1-template;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_BASE
 
-kopano01;192.168.0.6/24;;sles15sp1;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15.xml;;;;;192-168-0.txt;SLES15_DEFAULT
+kopano01;192.168.0.6/24;;sles15sp1;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15.xml;;;;;192-168-0.txt;SLES15_BASE
 
 # CAASP 3 Example
 caasp3-admin;10.1.1.110/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-gpt-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_ADMIN
@@ -111,7 +131,7 @@ caasp3-worker02;10.1.1.115/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft
 caasp3-worker03;10.1.1.116/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_NODE
 
 # CAASP4 Example #with EFI!
-caasp4-01;10.1.1.151/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles15-btrfs-efi-50G-100G-nfs.xml;soft-sles15caasp4-infra.xml;;;;;;SLES15_DEFAULT
+caasp4-01;10.1.1.151/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles15-btrfs-efi-50G-100G-nfs.xml;soft-sles15caasp4-infra.xml;;;;;;SLES15_BASE
 caasp4-02;10.1.1.152/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles15-btrfs-efi-noswap-50G-100G-containers.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
 caasp4-03;10.1.1.153/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles15-btrfs-efi-noswap-50G-100G-containers.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
 caasp4-04;10.1.1.154/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles15-btrfs-efi-noswap-50G-100G-containers.xml;soft-sles15caasp4-node.xml;;;;;;SLES15_CAASPV4
@@ -123,9 +143,9 @@ caasp4-09;10.1.1.159/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles15-btrfs-efi
 
 # CAASP4 Example with SUSE Manager
 # shared-infrasturcture for kube
-#caasp4i-01;10.20.50.5/24;10.20.50.240;sles15sp1containers-prod;/dev/sda;/dev/sdb;part-sles15-btrfs-efi-50G-100G-docker.xml;soft-sles15containers.xml;1-sles15sp1-prod;;;;;SLES15_DEFAULT
+#caasp4i-01;10.20.50.5/24;10.20.50.240;sles15sp1containers-prod;/dev/sda;/dev/sdb;part-sles15-btrfs-efi-50G-100G-docker.xml;soft-sles15containers.xml;1-sles15sp1-prod;;;;;SLES15_BASE
 # kube-prod
-#caasp4-01;10.20.6.1/24;10.20.6.240;sles15sp1caasp4-prod;/dev/sda;/dev/sdb;part-sles15-btrfs-efi-50G-100G-nfs.xml;soft-sles15caasp4-infra.xml;1-sles15sp1caasp-prod;;;;;SLES15_DEFAULT
+#caasp4-01;10.20.6.1/24;10.20.6.240;sles15sp1caasp4-prod;/dev/sda;/dev/sdb;part-sles15-btrfs-efi-50G-100G-nfs.xml;soft-sles15caasp4-infra.xml;1-sles15sp1caasp-prod;;;;;SLES15_BASE
 #caasp4-02;10.20.6.2/24;10.20.6.240;sles15sp1caasp4-prod;/dev/sda;/dev/sdb;part-sles15-btrfs-efi-noswap-50G-100G-containers.xml;soft-sles15caasp4-node.xml;1-sles15sp1caasp-prod;;;;;SLES15_CAASPV4
 #caasp4-03;10.20.6.3/24;10.20.6.240;sles15sp1caasp4-prod;/dev/sda;/dev/sdb;part-sles15-btrfs-efi-noswap-50G-100G-containers.xml;soft-sles15caasp4-node.xml;1-sles15sp1caasp-prod;;;;;SLES15_CAASPV4
 #caasp4-04;10.20.6.4/24;10.20.6.240;sles15sp1caasp4-prod;/dev/sda;/dev/sdb;part-sles15-btrfs-efi-noswap-50G-100G-containers.xml;soft-sles15caasp4-node.xml;1-sles15sp1caasp-prod;;;;;SLES15_CAASPV4
@@ -134,27 +154,27 @@ caasp4-09;10.1.1.159/24;;sles15sp1caasp4;/dev/vda;/dev/vdb;part-sles15-btrfs-efi
 #caasp4-07;10.20.6.7/24;10.20.6.240;sles15sp1caasp4-prod;/dev/sda;/dev/sdb;part-sles15-btrfs-efi-noswap-50G-100G-containers.xml;soft-sles15caasp4-node.xml;1-sles15sp1caasp-prod;;;;;SLES15_CAASPV4
 
 # SES 5 Example
-ses5-admin;10.1.1.120/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses5-cluster1.txt;SLES12_DEFAULT
-ses5-osd01;10.1.1.121/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_DEFAULT
-ses5-osd02;10.1.1.122/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_DEFAULT
-ses5-osd03;10.1.1.123/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_DEFAULT
-ses5-osd04;10.1.1.124/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_DEFAULT
+ses5-admin;10.1.1.120/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses5-cluster1.txt;SLES12_BASE
+ses5-osd01;10.1.1.121/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_BASE
+ses5-osd02;10.1.1.122/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_BASE
+ses5-osd03;10.1.1.123/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_BASE
+ses5-osd04;10.1.1.124/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles12sp3ses5-node.xml;;;;;ses5-cluster1.txt;SLES12_BASE
 
 # SES 5 RGW test
-ses-5-rgw1;172.17.2.201/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw1.txt;SLES12_DEFAULT
-ses-5-rgw2;172.17.2.202/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw2.txt;SLES12_DEFAULT
-ses-5-rgw3;172.17.2.203/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw3.txt;SLES12_DEFAULT
+ses-5-rgw1;172.17.2.201/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw1.txt;SLES12_BASE
+ses-5-rgw2;172.17.2.202/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw2.txt;SLES12_BASE
+ses-5-rgw3;172.17.2.203/24;;sles12sp3ses5;/dev/vda;;part-sles12-btrfs-20G.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw3.txt;SLES12_BASE
 # SES 5 RGW test with gpt and mdraid
-ses-5-rgw4;172.17.2.204/24;;sles12sp3;/dev/vda;/dev/vdb;part-sles12-gpt-raid1-max.xml;soft-sles12-minimal.xml;;;;;ses-5-rgw4.txt;SLES12_DEFAULT
+ses-5-rgw4;172.17.2.204/24;;sles12sp3;/dev/vda;/dev/vdb;part-sles12-gpt-raid1-max.xml;soft-sles12-minimal.xml;;;;;ses-5-rgw4.txt;SLES12_BASE
 # SES 5 RGW test with mdraid and efi
-#ses-5-rgw4;172.17.2.204/24;;sles12sp3ses5;/dev/vda;/dev/vdb;part-sles12-gpt-efi-raid1-max.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw4.txt;SLES12_DEFAULT
+#ses-5-rgw4;172.17.2.204/24;;sles12sp3ses5;/dev/vda;/dev/vdb;part-sles12-gpt-efi-raid1-max.xml;soft-sles12sp3ses5-admin.xml;;;;;ses-5-rgw4.txt;SLES12_BASE
 
 # SES 6 Example
-ses6-admin;10.1.1.130/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-admin.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
-ses6-osd01;10.1.1.131/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
-ses6-osd02;10.1.1.132/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
-ses6-osd03;10.1.1.133/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
-ses6-osd04;10.1.1.134/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_DEFAULT
+ses6-admin;10.1.1.130/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-admin.xml;;;;;ses6-cluster1.txt;SLES15_BASE
+ses6-osd01;10.1.1.131/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_BASE
+ses6-osd02;10.1.1.132/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_BASE
+ses6-osd03;10.1.1.133/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_BASE
+ses6-osd04;10.1.1.134/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_BASE
 
 # OES 2015 SP1 Example
 oes2015sp1-1;10.1.1.201/24;;oes2015sp1;/dev/vda;;part-ext3-50G.xml;soft-oes2015_all.xml;;oes2015sp1-tree;new;ou=services,o=oes2015sp1;;OES2015_ALL
@@ -169,10 +189,10 @@ oes2018sp1-1;10.1.1.205/24;;oes2018sp1;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-
 oes2018sp1-2;10.1.1.206/24;;oes2018sp1;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes2018_all.xml;;oes2018sp1-tree;existing;ou=services,o=oes2018sp1;;OES2018_ALL
 
 # SLE-HA Example
-cl2-n01;192.168.0.61/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_DEFAULT
-cl2-n02;192.168.0.62/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_DEFAULT
-cl2-n03;192.168.0.63/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_DEFAULT
-cl2-n04;192.168.0.64/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_DEFAULT
+cl2-n01;192.168.0.61/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_BASE
+cl2-n02;192.168.0.62/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_BASE
+cl2-n03;192.168.0.63/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_BASE
+cl2-n04;192.168.0.64/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_BASE
 
 #################################################################
 ###        TEST environment                                   ###

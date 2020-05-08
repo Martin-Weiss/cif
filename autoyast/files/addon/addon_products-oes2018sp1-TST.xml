@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <!-- addon products -->
+  <add-on>
+    <add_on_products config:type="list">
+      <listentry>
+        <!-- SLES12 SP3 for OES2018 SP1 Updates -->
+        <media_url>%%YUM_SERVER%%/repo/testing/$RCE/OES2018-SP1-SLES12-SP3-Updates</media_url>
+        <product>OES2018-SP1-SLES12-SP3-UPDATES</product>
+        <product_dir>/</product_dir>
+        <name>OES2018 SP1 SLES12 SP3 Updates</name>
+        <alias>OES2018-SP1-SLES12-SP3-UPDATES</alias>
+      </listentry>
+      <listentry>
+        <!-- OES2018 SP1 Updates -->
+        <media_url>%%YUM_SERVER%%/repo/testing/$RCE/OES2018-SP1-Updates</media_url>
+        <product>OES2018-SP1-UPDATES</product>
+        <product_dir>/</product_dir>
+        <name>OES2018 SP1 Updates</name>
+        <alias>OES2018-SP1-UPDATES</alias>
+      </listentry>
+    </add_on_products>
+  </add-on>
+</profile>

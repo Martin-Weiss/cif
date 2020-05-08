@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <software>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+      <pattern>x11</pattern>
+      <pattern>SMT</pattern>
+   </patterns>
+    <packages  config:type="list">
+      <package>kernel-source</package>
+      <package>iftop</package>
+      <package>gcc</package>
+      <package>glibc</package> 
+      <package>mc</package>	
+      <package>ncurses</package>
+      <package>net-tools</package>
+      <package>findutils</package>
+      <package>kexec-tools</package>
+      <package>kdump</package>
+      <package>sysstat</package>
+      <package>dos2unix</package>
+      <package>nagios-plugins</package>
+      <package>nagios-plugins-extras</package>
+     </packages>
+  </software>
+</profile>

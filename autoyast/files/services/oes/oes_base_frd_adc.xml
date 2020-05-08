@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <oes-ldap>
+    <admin_context>%%DSFW_ROOT_DOMAIN_ADMIN%%</admin_context>
+    <admin_password>-ASK-</admin_password>
+    <proxy_context>cn=OESCommonProxy_%%HOST_NAME%%,%%SERVER_CONTEXT%%</proxy_context>
+    <proxy_password>-AUTOGENERATE-</proxy_password>
+    <tree_name>%%TREE_NAME%%</tree_name>
+    <use_common_proxy>yes</use_common_proxy>
+    <xad_tree_admin_context>%%OES_INSTALL_USER%%</xad_tree_admin_context>
+    <xad_tree_admin_password>-ASK-</xad_tree_admin_password>
+  </oes-ldap>
+  <edirectory>
+    <ocs_store>yes</ocs_store>
+    <cert_mutual>yes</cert_mutual>
+    <challenge_response>yes</challenge_response>
+    <nds>yes</nds>
+    <sasl_gssapi>yes</sasl_gssapi>
+    <simple_password>yes</simple_password>
+    <create_server_object>yes</create_server_object>
+    <dib_location>/var/opt/novell/eDirectory/data/dib</dib_location>
+    <digest_md5>yes</digest_md5>
+    <host_name>%%HOST_NAME%%</host_name>
+    <http_port config:type="integer">8028</http_port>
+    <https_port config:type="integer">8030</https_port>
+    <install_secretstore>yes</install_secretstore>
+    <!-- The following tag enforces NMAS for LDAP based authentications -->
+    <install_universalstore>yes</install_universalstore>
+    <ldap_server>%%REPLICA_SERVER%%</ldap_server>
+    <ntp_server_list config:type="list">
+		<listentry>%%NTP_SERVER_LIST%%</listentry>
+    </ntp_server_list>
+    <overwrite_cert_files>yes</overwrite_cert_files>
+    <replica_server>%%DSFW_ROOT_PDC_IP%%</replica_server>
+    <server_context>%%SERVER_CONTEXT%%</server_context>
+    <slp_da config:type="list">
+		<listentry>%%SLPDA_SERVER_LIST%%</listentry>
+    </slp_da>
+    <slp_mode>da</slp_mode>
+    <slp_scopes>%%SLP_SCOPE_LIST%%</slp_scopes>
+    <slp_backup>yes</slp_backup>
+    <slp_backup_interval>900</slp_backup_interval>
+    <slp_dasync>yes</slp_dasync>
+    <tls_for_simple_binds>yes</tls_for_simple_binds>
+    <tree_type>%%TREE_TYPE%%</tree_type>
+    <use_secure_port>yes</use_secure_port>
+
+    <!-- Information for DSfW -->
+    <domain_name>%%DOMAIN_NAME%%</domain_name>
+    <existing_dns_ip>%%DSFW_EXISTING_DNS_IP%%</existing_dns_ip>
+    <group_context>%%DNS_GROUP_CONTEXT%%</group_context>
+    <ldap_basedn>%%DNS_ROOTSERVERINFO_CONTEXT%%</ldap_basedn>
+    <locator_context>%%DNS_LOCATOR_CONTEXT%%</locator_context>
+    <runtime_admin>cn=OESCommonProxy_%%HOST_NAME%%,%%SERVER_CONTEXT%%</runtime_admin>
+    <server_object>cn=DNS_%%HOST_NAME%%,%%SERVER_CONTEXT%%</server_object>
+    <xad_admin_password>-ASK-</xad_admin_password>
+    <xad_config_dns>%%DSFW_CONFIG_DC_DNS%%</xad_config_dns>
+    <xad_domain_name>%%DOMAIN_NAME%%</xad_domain_name>
+    <!-- MUST be "controller"; "Controller causes" -601 eDir error -->
+    <xad_domain_type>controller</xad_domain_type>
+    <xad_forest_root>%%DSFW_ROOT_DOMAIN%%</xad_forest_root>
+    <xad_ldap_admin_context>%%OES_INSTALL_USER%%</xad_ldap_admin_context>
+    <xad_ldap_admin_password>-ASK-</xad_ldap_admin_password>
+    <xad_netbios>%%DSFW_DOMAIN_NETBIOS%%</xad_netbios>
+    <xad_replicate_partitions>yes</xad_replicate_partitions>
+    <xad_retain_policies>yes</xad_retain_policies>
+    <xad_service_configured>yes</xad_service_configured>
+    <xad_site_name>Default-First-Site-Name</xad_site_name>
+    <xad_wins_server>%%DSFW_CONFIG_DC_WINS%%</xad_wins_server>
+    <!-- the following two tags need to be empty for ADCs !! -->
+    <xad_convert_existing_container/>
+    <xad_existing_container/>
+  </edirectory>
+  <ncpserver>
+    <configure_now config:type="boolean">true</configure_now>
+  </ncpserver>
+  <novell-lum>
+    <admin_group>%%LUM_ADMIN_GROUP%%</admin_group>  
+    <ldap_server>%%LDAP_1%%</ldap_server>
+    <alternate_ldap_servers_list1 config:type="list">
+	<listentry>%%ALTERNATE_LDAP_SERVER%%</listentry>
+    </alternate_ldap_servers_list1>
+    <lum_enabled_services>
+    <ftp>yes</ftp>
+      <gdm>no</gdm>
+      <gnome-screensaver>no</gnome-screensaver>
+      <gnomesu-pam>no</gnomesu-pam>
+      <login>yes</login>
+      <sfcb>yes</sfcb>
+      <sshd>yes</sshd>
+      <su>yes</su>
+    </lum_enabled_services>
+    <partition_root>%%UCO_CONTEXT%%</partition_root>
+    <proxy_user></proxy_user>
+    <proxy_user_password></proxy_user_password>
+    <restrict_access>yes</restrict_access>
+    <ws_context>%%SERVER_CONTEXT%%</ws_context>
+  </novell-lum>
+  <sms>
+    <ldap_server>%%IP_ADDRESS%%</ldap_server>
+  </sms>
+</profile>

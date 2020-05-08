@@ -27,6 +27,8 @@
       <package>iftop</package>
       <package>kdump</package>
       <package>kexec-tools</package>
+      <package>logwatch</package>
+      <package>lsb-release</package>
       <package>mc</package>
       <package>net-tools</package>
       <!-- the following package is required for novell-sms -->

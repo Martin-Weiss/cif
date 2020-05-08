@@ -7,7 +7,7 @@
 # GNU Public License
 #
 # pre-fetch.sh	  					 9 Jan 2013
-# last modified: 					20 Dec 2017
+# last modified (AY_SERVER) 				13 Jan 2020
 
 ###########################################################################
 ###########################################################################
@@ -28,11 +28,12 @@
 
 function get_main_config_files()
 {
-	# derive autoyast URL from /proc/cmdline, i.e. http://<IP of AY Server>
-	AY_SERVER=$(cat /proc/cmdline | sed -r -ne 's#^.*\s*=\s*([^:]+://[^/]+)/.*#\1#p')
+	# derive  http://<[IP|DNS] of the AutoYaST Server> from /proc/cmdline
+	# asuming that autoyast= or info= do point to the AutoYaST server
+	AY_SERVER=$(cat /proc/cmdline | sed -r -ne 's#^.*(autoyast|info)\s*=\s*([^:]+://[^/]+)/.*#\2#p')
 
 	# some information cannot be derived from a configuration file!
-	# Also used in zcm-install.sh
+	# Also used in zcm-install.sh and other post-scripts
 	PREFIX="autoyast"
 
 	AY_CONFIG_DIR="configs"
@@ -113,7 +114,7 @@ function main()
 	prepare_xml
 
 	# make differences between sles/oes, and their service packs
-        make_server $my_servertype
+        make_server $my_server_type
 
         # process multi-value fields from server.txt configuration file
         multi_value

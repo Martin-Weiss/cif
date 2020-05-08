@@ -1,22 +1,32 @@
 #!/bin/bash
 #
-# Author: Jochen Schaefer <jochen.schaefer@microfocus.com>
+# Author: Jochen Schaefer <jochen.schaefer@suse.com>
 #	  Frieder Schmidt <frieder.schmidt@microfocus.com>
 #	  Martin Weiss	  <martin.weiss@suse.com>
 # 
 # copyright (c) Novell Deutschland GmbH, 2001-2016. All rights reserved.
 # GNU Public License
 #
-# CUSTOMER.txt			  			25 Jan 2013
-# last update						20 Dec 2018
+# Your_Location.txt			  		25 Jan 2013
+# last update (support for DSfW)                        24 Sep 2019
 
 
-########################################################################
-########################################################################
+###########################################################################
+###########################################################################
 ##
 ## The purpose of this file is to define the configuration information
-## that is consistent across *all* servers in *all* environments of the
-## customer.
+## that is consistent across *all* servers in a given location.
+##
+## A location in this sense can be defined by many factors such as a city,
+## a building or a network segment.
+##
+## Every customer needs to define his own set of location configuration
+## files. A concise naming standard for these files is highly recommended. 
+## 
+## Configuration settings in this file will overwrite the same configuration
+## settings in the eDirectory tree configuration file defined in field 10
+## of the server configuration file AY_SERVERTXT_FILE_URL defined in
+## AY_MAIN.txt.
 ##
 ## !! IMPORTANT !!
 ## Do NOT use any special characters, such as (but not limited to) "&",
@@ -26,74 +36,30 @@
 ## This could result in unforseable behavior including abortian of the
 ## installation routine.
 ##
-########################################################################
-
-
-## Type String
-## Description: Customer name; informational only
-CUSTOMER_NAME="SUSE"
-
-## OES services configuration information
-
-## Type Custom
-## Description: Colon separated list of xml profiles that define which
-##		components need to be configured for a server of a given
-##		service type.
-
-## SLES Base definitions with ZCM scripts
-#SLES11_BASE="sles/bootloader.xml:sles/ca_mgm.xml:sles/general.xml:sles/kdump_sles11.xml:sles/net.xml:sles/system_sles11.xml:sles/scripts-zcm.xml"
-#SLES12_BASE="sles/bootloader.xml:sles/ca_mgm.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles12.xml:sles/scripts-zcm.xml"
-#SLES15_BASE="sles/bootloader.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles15.xml:sles/scripts-zcm.xml"
-
-## SLES Base definitions with default scripts
-SLES11_BASE="sles/bootloader.xml:sles/ca_mgm.xml:sles/general.xml:sles/kdump_sles11.xml:sles/net.xml:sles/system_sles11.xml:sles/scripts-all.xml"
-SLES12_BASE="sles/bootloader.xml:sles/ca_mgm.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles12.xml:sles/scripts-all.xml"
-SLES15_BASE="sles/bootloader.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles15.xml:sles/scripts-all.xml"
-
-## CaaSP Base definitions
-SLES15_CAAPSV4="sles/bootloader.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles15.xml:sles/net-forward.xml:sles/scripts-all.xml"
-CAASP3_ADMIN="caasp3/general-admin.xml:caasp3/scripts-admin.xml:caasp3/net.xml"
-CAASP3_NODE="caasp3/general-node.xml:caasp3/scripts-node.xml:caasp3/net.xml"
-
-## OES 2015 Service types
-OES2015_EDIR="${SLES11_BASE}:oes/oes2015_base.xml:oes/imanager.xml"
-OES2015_NCS="${SLES11_BASE}:oes/oes2015_base.xml:oes/nss.xml:oes/afp.xml:oes/oes2015_cifs.xml:oes/dhcp.xml:oes/oes2015_dns.xml:oes/iprint.xml"
-OES2015_BRANCH="${SLES11_BASE}:oes/oes2015_base.xml:oes/nss.xml:oes/afp.xml:oes/oes2015_cifs.xml:oes/dhcp.xml:oes/oes2015_dns.xml:oes/iprint.xml:oes/netstorage.xml"
-OES2015_ALL="${SLES11_BASE}:oes/oes2015_base.xml:oes/imanager.xml:oes/nss.xml:oes/afp.xml:oes/oes2015_cifs.xml:oes/dhcp.xml:oes/oes2015_dns.xml:oes/iprint.xml:oes/netstorage.xml"
-
-## OES 2018 Service types
-OES2018_EDIR="${SLES12_BASE}:oes/oes_base.xml"
-OES2018_EDIR_IMAN="${SLES12_BASE}:oes/oes_base.xml:oes/imanager.xml"
-OES2018_NCS="${SLES12_BASE}:oes/oes_base.xml:oes/nss.xml:oes/afp.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml"
-OES2018_BRANCH="${SLES12_BASE}:oes/oes_base.xml:oes/nss.xml:oes/afp.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml:oes/netstorage.xml"
-OES2018_ALL="${SLES12_BASE}:oes/oes_base.xml:oes/imanager.xml:oes/nss.xml:oes/afp.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml:oes/netstorage.xml"
-
-## DSfW service types
-OES2018_DSFW_FRD_ADC="${SLES12_BASE}:oes/oes_base_frd_adc.xml:oes/dns.xml"
-OES2018_DSFW_FRD_FDC="${SLES12_BASE}:oes/oes_base_frd_fdc.xml:oes/dns.xml"
+###########################################################################
 
 
 ## infrastructure information
 
 ## Type IP
 ## Description: IP Address of Default Gateway
-GATEWAY="10.1.1.1"
+#GATEWAY=""
 
 ## Type IP
 ## Description: Colon separated list of IP addresses of DNS servers
-NAME_SERVER_LIST="10.1.1.1:192.168.0.31"
+#NAME_SERVER_LIST=""
 
 ## Type Custom
 ## Description: Colon separated list of DNS suffixes in the order in which
 ##		they will appear in resolv.conf
 ## 		The first value will be used for general domain name usage
 ##		such as in the email address in CA management
-SUFFIX_SEARCH_LIST="suse"
+#SUFFIX_SEARCH_LIST=""
 
 ## Type IP|DNS
 ## Description: Colon separated list of IP addresses or DNS names of
 ##		NTP servers
-NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
+#NTP_SERVER_LIST=""
 
 
 ## OES information
@@ -110,7 +76,7 @@ NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
 
 ## Type String
 ## Description: eDirectory context where the Unix Configuration object
-##		is located in LDAP Syntax
+##		is located in LDAP syntax
 #UCO_CONTEXT=""
 
 ## Type IP|DNS
@@ -136,7 +102,7 @@ NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
 
 ## Type String
 ## Description: eDirectory context where the DHCP Group object is located in 
-##		LDAP Syntax
+##		LDAP syntax
 #DHCP_GROUP_CONTEXT=""
 
 ## Type String
@@ -146,7 +112,7 @@ NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
 
 ## Type String
 ## Description: eDirectory context where the DHCP Locator object is located in
-##		LDAP Syntax
+##		LDAP syntax
 #DHCP_LOCATOR_CONTEXT=""
 
 ## Type String
@@ -168,17 +134,17 @@ NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
 
 ## Type String
 ## Description: eDirectory context where the Novell DNS Services Group object is
-##              located in LDAP Syntax
+##              located in LDAP syntax
 #DNS_GROUP_CONTEXT=""
 
 ## Type String
 ## Description: eDirectory context where the Novell DNS Services Locator object is
-##              located in LDAP Syntax
+##              located in LDAP syntax
 #DNS_LOCATOR_CONTEXT=""
 
 ## Type String
 ## Description: eDirectory context where the Novell DNS Services Root Server Info
-##              is located in LDAP Syntax
+##              is located in LDAP syntax
 #DNS_ROOTSERVERINFO_CONTEXT=""
 
 ## Type String
@@ -198,6 +164,7 @@ NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
 ##
 ##		     !!! Requires changes in YaST/OES code !!!
 #DNS_SERVER_CTX=""
+
 
 ## DSfW information
 
@@ -254,26 +221,26 @@ NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
 ##
 ##		This LDAP base will be used for all OES services
 ##		unless specified differently in the variables below
-#SEARCH_BASE="o=Your_O"
+#SEARCH_BASE=""
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
 ##              afp in LDAP syntax
-#AFP_SEARCH_BASE="$SEARCH_BASE"
+#AFP_SEARCH_BASE=""
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
 ##              cifs in LDAP syntax
-#CIFS_SEARCH_BASE="$SEARCH_BASE"
+#CIFS_SEARCH_BASE=""
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
-#IPRINT_SEARCH_BASE="$SEARCH_BASE"
+#IPRINT_SEARCH_BASE=""
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
 ##              netstorage in LDAP syntax
-#NETSTORAGE_SEARCH_BASE="$SEARCH_BASE"
+#NETSTORAGE_SEARCH_BASE=""
 
 
 ## NSS information
@@ -282,13 +249,13 @@ NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
 ## Description: Start value for Novell Idendity Translator (NIT)
 ##		Only required with OES2015 and newer
 ##		default: 100000
-#AD_NIT_UID_START="100000"
+#AD_NIT_UID_START=""
 
 ## Type Integer
 ## Description: End value for Novell Idendity Translator (NIT)
 ##		Only required with OES2015 and newer
 ##		default: 200000
-#AD_NIT_UID_END="200000"
+#AD_NIT_UID_END=""
 
 
 ## NSS-AD information
@@ -298,46 +265,46 @@ NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
 ##              for the OES2015 servers joined to the domain will
 ##		be placed
 ##		default: CN=Computers
-#AD_COMPUTER_CONTAINER="CN=Computers"
+#AD_COMPUTER_CONTAINER=""
 
 ## Type String
 ## Description: determines wether or not NIT IDs will be generated on
 ##              the fly
 ##		default: yes = generate mode
-#AD_CREATE_NIT_UIDS="yes"
+#AD_CREATE_NIT_UIDS=""
 
 ## Type String
 ## Description: name of the domain the OES2015 server will join
-#AD_DOMAIN_NAME="mydomain.TLD"
+#AD_DOMAIN_NAME=""
 
 ## Type String
 ## Description: name of the AD group that will receive SUPERVISOR
 ##		rights to the root of all NSS volumes
 ##		default: Domain Admins
-#AD_DOMAIN_ADMIN_GROUP="Domain Admins"
+#AD_DOMAIN_ADMIN_GROUP=""
 
 ## Type List	(no|yes)
 ## Description: determines whether or not pre-created computer objects
 ##              will be used to represent the server in AD
 ##		default: no
-#AD_USE_PRECREATED_COMPUTEROBJ="no"
+#AD_USE_PRECREATED_COMPUTEROBJ=""
 
 ## Type String
 ## Description: name of an AD user with sufficient rights to join the
 ##              domain
 ##		default: Administrator
-#AD_USER_NAME="Administrator"
+#AD_USER_NAME=""
 
 
 ## SLP information
 
-## type list	(novell,open)
+## type list(novell,open)
 ## Description: determines the type of SLP infrastructure in use
 #SLP_TYPE=""
 
 ## Type Custom
 ## Description: Colon separated list of IP addresses of SLP Directory Agent
-##              host servers
+##		host servers
 #SLPDA_SERVER_LIST=""
 
 ## Type Custom
@@ -350,33 +317,33 @@ NTP_SERVER_LIST="10.1.1.1:192.168.0.31"
 ## Type String
 ## Description: name of the YaST CA; mandatory
 ##		default: YaST_Default_CA
-CA_NAME="YaST_Default_CA"
+#CA_NAME=""
 
 ## Type String
 ## Description: CN of the YaST CA; mandatory
 ## 		default: YaST_Default_CA ($my_hostname)
-CA_CN="YaST_Default_CA (%%HOST_NAME%%)"
+#CA_CN=""
 
 ## Type String
 ## Description: country of the YaST CA; mandatory
 ##		default: DE
-CA_COUNTRY="DE"
+#CA_COUNTRY=""
 
 ## Type String
 ## Description: state where the YaST CA is located; optional
-CA_STATE=""
+#CA_STATE=""
 
 ## Type String
 ## Description: locality of the YaST CA; optional
-CA_LOCALITY=""
+#CA_LOCALITY=""
 
 ## Type String
 ## Description: organization of the YaST CA; optional
-CA_O=""
+#CA_O=""
 
 ## Type String
 ## Description: organizational unit of the YaST CA; optional
-CA_OU=""
+#CA_OU=""
 
 ## Type String
 ## Description: password of the YaST CA; mandatory
@@ -389,117 +356,33 @@ CA_OU=""
 ##
 ##		Therefor it is strongly recommend that you change the
 ##		CA password after installation
-CA_PWD="susesuse"
+#CA_PWD=""
 
 ## Type String
 ## Description: e-mail address of the YaST CA; mandatory
 ##		default: postmaster@primary_domain
 ##		The first value of SUFFIX_SEARCH_LIST is used as primary
 ##		domain. 
-CA_EMAIL="postmaster@%%DOMAIN_NAME%%"
+#CA_EMAIL=""
 
 
 ## Type List	(UTC|localtime)
 ## Description:	Hardware clock setting
-HWCLOCK="UTC"
+#HWCLOCK=""
 
 ## Type String
 ## Description:	YaST-internal identifier of the attached keyboard
-KEYMAP="german"
+#KEYMAP=""
 
 ## Type String
 ## Description:	Language
-LANGUAGE="en_US"
+#LANGUAGE=""
 
 ## Type String
 ## Description:	encrypted root password
 ##		must be enclosed in '' due to bash expansion of $
 #ROOT_PWD=''
 
-# suse1234
-ROOT_PWD='$6$MFqFb2ql$wjr0b5MwfjMWNrAi/Ala.vQnwKseKYYjQyLRAlWyADKT3fWRRGfCMFz87OeYoER4L0RhMtOBYRS44cM.UqXtx.'
-
-# novell
-#ROOT_PWD='$6$eTocV/T/0xF6$xIRCW5zo7tQJ8zxMqBPEmt59X5m97bS0YwpGj6BBh12G6JJIsF59H3jJLBsgHPSJUbU5bYIUnyqNkrCOhIO78.'
-
-# Type: String
-## Description: SSH Keys to /root/.ssh/authrized_keys
-SSH_KEYS='ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEA3P7KpLSXnkDfNfvmTkTIdlyPBRzwsHzAL60+Qw3L0U6VEuKFRLS7TTJE8s4XOdt1VxUmvWbBkEcJC8rG/g55leqJyuokZJkoNeRHdVDHT0430WpnmL21xkHl/6fGVxbxPWpwlp1XEWi8/sjvVvrc8LBeri44QMBfG8/3bkFx7zc= mweiss@nbmweiss2
-ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAv1DS2t+Kmh7spHYFg2t0592otcq8YUnZXb17WgkpaWU5cS/2eLZoNbImURkbqpVC54zVwT2dUauJZG/2bXQBul8p2OK0Rgo+Vhhrbmtnvs4GXMfgxRUo3b+zadbMPZzOAxrEWJj8nkg5PV5+5jdxLR6/3ykZtRXn2kvh2/TMHMRpxE7x5xKwyAvXiGMK9kN0dTNEun9KKfNycXX1ZbvfJ02WuzQPA7K3i8eUZZeHlnRXso/66RWsmEPCipNua23wPrBXocsNFx75hvxDFwwvj1rj4SwB9afzcQbvvnLwPheEt8pl30Xozl7qZSVaYllZaEUMcrdklXESKhj87fKDhw== root@weiss-2
-ssh-dss AAAAB3NzaC1kc3MAAAEAdT5oJ5xUOmAnVsElZPaz7yHdbFQsUrXjpAdQfIi3yojeKKSiNVzof9abCb0AhE9X5S8SSqRmuRVCjwqsp6CXDv9Dv+H67F3SDQL5LrXGLO0DR+EUJKDShtLKLiR/8apfOF764PPyRXkMtVQWmqX1uYpwgX8wQsI8ob5TxzQKBa2zkYJtqZ6MI5Ec0LasmFWs+Ur8t+eA+hsbOXY8d5KtK/UHPIRaVZmDfml76fCO4JIbBCKl3xK4xrsMRNbT/PKLet2bES99aj3qiP+4qKMusE0GEMmgva7Af/IZJfzmEUA04GdOuoZxRfiD445bHDMQ4Ys4Hwu5LaWyVIwJLTR97wAAABUAxewlGzIPxys8ouKRQpe8wOk2/fMAAAEAX1Oq3/Z8VXXpx3pMt1HStJmsTeSPyFOi/whnvZPlizR5XV+kQru0vMb0xXFVM0JtBUHnA9PR1GWVAtZMb3JqX5Yxud0EB5Zyr2p23rRa/FeRDKeVO5EdId45rYISb+r5SaQDpzv3giB1ez6dDAAv4QB+mK2tl0C7dasz/tlLSRtCdr3wj2n9JXBDCCBgO4ghLXNCo7b8taFVBi5uYt0B4UyVHae6YgmSXnXczVIelu9mKME/qZCeVQLTD2+okp9m+6Ucae2Z7HLMpwS0/kzGLD02QFNpOH1KScT9aHAG33CTHNn/C9Hp94Ez/kcd3khdNoF4i1e3JgJyqwVYbnAsjAAAAQASPq4iX3dNvN8v0eVbqN5mq/TRYXjmaZtZppzPBHBzirqkJAZ4nJa5o/fZWVgcnHWTXu14eRksQp1o/1aCnPPb9ebHe1ZYUkI2fnoeSaO3j2sbaaS10Qu9lobXPTXqVDPWHaGMMQq0jEEbYod4nJxyh1nhqDUFqOW7xqOY9jIZQmlV8aIpAhtGt/OccJT9rWtk6f8tyn2n3c1lzqSfeop7BjiJ8BOJfuyhY2d28PNngqwGmc6S+XOX4+/0KKOT5MkwRTQuOHVuBFDIOJGmAhp31I5+YLDWvxTopXzlHo5boshUVL+p/DBlVpn50KP2OG3phD65GzQk8eIJj/YCtpXw dsa-key-20060804
-'
-
 ## Type String
 ## Description:	Time Zone
-TIME_ZONE="Europe/Berlin"
-
-
-########################################################################
-##
-## The following settings provide information about the system used to
-## distribute software updates to the new systems
-##
-########################################################################
-
-## Type List	(smt, suma, zcm)
-## Description: Type of system used for software updates
-UPDATE_SYSTEM="smt"
-
-## Type URL
-## Description: Protocol (ftp|http|nfs|smb|...) and DNS name or IP address of
-##		the SMT server
-SMT_SERVER="http://smt.suse"
-
-## Type URL
-## Description: URL to the SMT client configuration script
-SMT_CLIENT_URL="$SMT_SERVER/repo/tools/clientSetup4SMT.sh"
-
-## Type URL
-## Description: Protocol (ftp|http|nfs|smb|...) and DNS name or IP address of
-##		the SLES12 SMT server
-SMT12_SERVER="$SMT_SERVER"
-
-## Type URL
-## Description: URL to the SMT client configuration script
-SMT12_CLIENT_URL="$SMT12_SERVER/repo/tools/clientSetup4SMT.sh"
-
-## Type URL
-## Description: Protocol (ftp|http|nfs|smb|...) and DNS name or IP address of
-##		the ZCM server
-#ZCM_SERVER="http://"
-
-## Type String
-## Description:	Name of the binary to install the ZCM agent
-#ZCM_AGENT_BIN="PreAgentPkg_AgentLinuxComplete.bin"
-
-## Type URL
-## Description: URL to the ZCM agent installation binary
-##              Note AY_SERVER - including the protocol - is determined
-##              by pre-fetch.sh and zcm-install.sh
-#ZCM_AGENT_URL="$ZCM_SERVER/zenworks-downloads/setup/x86_64/$ZCM_AGENT_BIN"
-
-## Type List	($AY_SERVER,$SMT_SERVER,$ZCM_SERVER)
-## Description:	Server providing ISOs via HTTP
-ISO_SERVER="$SMT_SERVER"
-
-## Type List	($AY_SERVER,$SMT_SERVER,$ZCM_SERVER)
-## Description:	Server hosting the YUM repos of the frozen patch levels
-##		that will be added during installation
-YUM_SERVER="$SMT_SERVER"
-
-## Type String
-## Description: salt master that should be used for salt minion to register to
-##
-#SALT_MASTER=""
-
-## Type String
-## Description: Suse Manager Server (Hostname or IP address)
-#SUMA_SERVER="http://10.1.1.1"
-
-## Type URL/Path
-## Description:	URL-Path to Suse Manager Bootstrap script
-#SUMA_BOOTSTRAP_FILE="/pub/bootstrap/bootstrap.sh"
-
-## Type URL
-## Description: Full URL to the Suse Manager Bootstrap script
-#SUMA_BOOTSTRAP_URL="${SUMA_SERVER}${SUMA_BOOTSTRAP_FILE}"
+#TIME_ZONE=""

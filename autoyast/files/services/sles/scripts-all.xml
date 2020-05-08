@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <scripts>
+
+    <!-- chroot-scripts (after the package installation, before the first boot) -->
+    <chroot-scripts config:type="list">
+      <script>
+      <filename>create-variables.sh</filename>
+        <interpreter>shell</interpreter>
+        <source>
+<![CDATA[
+
+# save variables in /root/install/variables.txt
+if [ -f /tmp/profile/variables.txt ]; then
+   mkdir -p /mnt/root/install
+   cat /tmp/profile/variables.txt  >> /mnt/root/install/variables.txt
+fi
+
+]]>
+        </source>
+		<notification>Please wait while variables list is stored in /root/install/variables.txt . . .</notification>
+      </script>
+    </chroot-scripts>
+
+    <!-- init-scripts (during the first boot of the installed system, all services up and running) -->
+    <init-scripts config:type="list">
+      <script>
+        <!-- Miscellaneous changes -->
+        <filename>post-inst.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/post-inst.sh</location>
+      </script>
+      <script>
+        <!-- confifgure SALT Minion -->
+        <filename>salt.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/salt.sh</location>
+      </script>
+      <script>
+        <!-- deploy SSH Keys for root -->
+        <filename>ssh-keys.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/ssh-keys.sh</location>
+      </script>
+      <script>
+        <!-- install SUSE Manager bootstrap script -->
+        <filename>suma-bootstrap.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/suma-bootstrap.sh</location>
+      </script>
+      <script>
+        <!-- install ZCM agent -->
+        <filename>zcm-install.sh</filename>
+        <interpreter>shell</interpreter>
+        <location>%%AY_SERVER%%/%%PREFIX%%/scripts/zcm-install.sh</location>
+      </script>
+    </init-scripts>
+  </scripts>
+</profile>

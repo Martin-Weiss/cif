@@ -11,7 +11,7 @@
 # last modified (DSfW support)                          19 Sep 2019
 # last modified (NTP  config)                           10 Dec 2019
 # last modified (SLE15 support)                         10 Jan 2020
-# last modified (merged with Frieder)                   10 Jan 2020
+# last update (new xml structure)                       11 Jan 2020
 
 
 #######################################################################
@@ -97,8 +97,6 @@ function set_vars()
 	VAR_FILE=$PROFILE_DIR/variables.txt
 
 	# defining OS commands
-        DHCPCMD="/sbin/dhcpcd -T"
-	DHCPCMD12="/usr/sbin/wicked test dhcp4"
         IP_CMD=/sbin/ip
 	WGETCMD="/usr/bin/wget -N"
 	XSLT_CMD=/usr/bin/xsltproc
@@ -445,7 +443,6 @@ function create_var_file()
         NTP_SERVER_LIST
         OES_INSTALL_USER
         PREFIX
-	PRODUCT
         REPLICA_SERVER
 	SALT_MASTER
         SEARCH_BASE
@@ -461,12 +458,10 @@ function create_var_file()
 	SUMA_BOOTSTRAP_FILE
 	SUMA_BOOTSTRAP_URL
 	SUMA_SERVER
-	SP
         SUFFIX_SEARCH_LIST
         TIME_ZONE
         UCO_CONTEXT
         UPDATE_SYSTEM
-	VERSION
         YUM_SERVER
         ZCM_AGENT_BIN
         ZCM_AGENT_URL
@@ -479,10 +474,8 @@ function create_var_file()
         my_location_file
         my_partfile
         my_preflen_1
-	my_product
-	my_release
         my_server_context
-        my_servertype
+        my_server_type
         my_service_type
         my_software_file
         my_tree_name
@@ -624,23 +617,17 @@ function create_error_popup()
 
 
 #####################################################################
-# Name:         getIpAddressAndPrefix
+# Name:         get_ipaddress_and_prefix
 #
 # Description:  Returns the IP address and Prefix in format
 #		xxx.xxx.xxx.xxx/yy.
-#		It's used when MAC address method is used to 
-#		identify servers on server.txt
-#               It's an improvement over previous method based on
-#		function get_dhcp_info as it requires a dhcp to 
-#		be available to calculate the prefix and netmask
 #
 # Used in:      pre-fetch.sh
 #####################################################################
 
-function getIpAddressAndPrefix()
+function get_ipaddress_and_prefix()
 {
 	local my_interface=$($IP_CMD r s| awk '/default/ {print $5}')
-
 	local my_ip_pref=$($IP_CMD a s dev $my_interface |awk '/inet / {print $2}')
 	echo $my_ip_pref
 }
@@ -675,11 +662,7 @@ function parse_line()
         my_preflen_1=$(split_ip_cidr "$(print_col 2)" cidr)
  
         if [ -z "$my_preflen_1" ];then
-		#JH 2019/08/10
-		#Avoid using get_dhcp_info as it requires a dhcp server to be available
-                #my_preflen_1=$(get_dhcp_info PREFIXLEN)
-                #my_ipaddress=$(get_ip_list)
-		my_ip_and_prefix=$(getIpAddressAndPrefix)
+		my_ip_and_prefix=$(get_ipaddress_and_prefix)
 		my_preflen_1=$(split_ip_cidr "$my_ip_and_prefix" cidr)                
 		my_ipaddress=$(split_ip_cidr "$my_ip_and_prefix" ip)		
         fi
@@ -693,7 +676,7 @@ function parse_line()
 	fi
 
         # field 04 servertype sles11sp1,oes11sp1...
-        my_servertype="$(print_col 4)"
+        my_server_type="$(print_col 4)"
 
         # field 05 first disk
         my_diskdevice_1="$(print_col 5)"
@@ -738,7 +721,7 @@ function parse_line()
 
 	# error handling for non-existing Service Type
 	if [ "$AY_CONFIG_BASE" == "csv" -a -n "$my_service_type" ]; then
-		grep "^$my_service_type" "$PROFILE_DIR/$AY_CUSTOMER_FILE"
+		grep "^${my_service_type}=" "$PROFILE_DIR/$AY_CUSTOMER_FILE"
 		RC=$?
 
 		if [ $RC -ne 0 ]; then
@@ -1241,7 +1224,7 @@ HERE
 
 	# SLES/OES releases pre SLE15
 	if [ -n "$(egrep "11|12|20"<<<$my_release)" ]; then
-        cat <<HERE >>$NTP_TMP_FILE
+        	cat <<HERE >>$NTP_TMP_FILE
   <peers config:type="list">
 HERE
 
@@ -1785,8 +1768,8 @@ function merge_service_files()
 
 function make_server
 {
-        local my_server_type=$1
-        tmp_server_type=$(tr A-Z a-z <<<$my_server_type)
+        local my_servertype=$1
+        tmp_server_type=$(tr A-Z a-z <<<$my_servertype)
 
         # derives product e.g. sles or oes
         my_product=$(sed -r -e 's/^([a-z]*).*$/\1/'<<<$tmp_server_type)

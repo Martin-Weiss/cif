@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <oes-ldap>
+    <admin_context>%%OES_INSTALL_USER%%</admin_context>
+    <admin_password>-ASK-</admin_password>
+    <proxy_context>cn=OESCommonProxy_%%HOST_NAME%%,%%SERVER_CONTEXT%%</proxy_context>
+    <proxy_password>-AUTOGENERATE-</proxy_password>
+    <tree_name>%%TREE_NAME%%</tree_name>
+    <use_common_proxy>yes</use_common_proxy>
+  </oes-ldap>
+  <edirectory>
+    <ocs_store>yes</ocs_store>
+    <cert_mutual>yes</cert_mutual>
+    <challenge_response>yes</challenge_response>
+    <nds>yes</nds>
+    <sasl_gssapi>yes</sasl_gssapi>
+    <simple_password>yes</simple_password>
+    <create_server_object>yes</create_server_object>
+    <dib_location>/var/opt/novell/eDirectory/data/dib</dib_location>
+    <digest_md5>yes</digest_md5>
+    <host_name>%%HOST_NAME%%</host_name>
+    <http_port config:type="integer">8028</http_port>
+    <https_port config:type="integer">8030</https_port>
+    <install_secretstore>yes</install_secretstore>
+    <!-- The following tag enforces NMAS for LDAP based authentications -->
+    <install_universalstore>yes</install_universalstore>
+    <ldap_server>%%REPLICA_SERVER%%</ldap_server>
+    <ntp_server_list config:type="list">
+		<listentry>%%NTP_SERVER_LIST%%</listentry>
+    </ntp_server_list>
+    <overwrite_cert_files>yes</overwrite_cert_files>
+    <replica_server>%%REPLICA_SERVER%%</replica_server>
+    <server_context>%%SERVER_CONTEXT%%</server_context>
+    <slp_da config:type="list">
+		<listentry>%%SLPDA_SERVER_LIST%%</listentry>
+    </slp_da>
+    <slp_mode>da</slp_mode>
+    <slp_scopes>%%SLP_SCOPE_LIST%%</slp_scopes>
+    <slp_backup>yes</slp_backup>
+    <slp_backup_interval>900</slp_backup_interval>
+    <slp_dasync>yes</slp_dasync>
+    <tls_for_simple_binds>yes</tls_for_simple_binds>
+    <tree_type>%%TREE_TYPE%%</tree_type>
+    <use_secure_port>yes</use_secure_port>
+  </edirectory>
+  <ncpserver>
+    <configure_now config:type="boolean">true</configure_now>
+  </ncpserver>
+  <novell-lum>
+    <admin_group>%%LUM_ADMIN_GROUP%%</admin_group>  
+    <ldap_server>%%LDAP_1%%</ldap_server>
+    <alternate_ldap_servers_list1 config:type="list">
+	<listentry>%%ALTERNATE_LDAP_SERVER%%</listentry>
+    </alternate_ldap_servers_list1>
+    <lum_enabled_services>
+    <ftp>yes</ftp>
+      <gdm>no</gdm>
+      <gnome-screensaver>no</gnome-screensaver>
+      <gnomesu-pam>no</gnomesu-pam>
+      <login>yes</login>
+      <sfcb>yes</sfcb>
+      <sshd>yes</sshd>
+      <su>yes</su>
+    </lum_enabled_services>
+    <partition_root>%%UCO_CONTEXT%%</partition_root>
+    <proxy_user></proxy_user>
+    <proxy_user_password></proxy_user_password>
+    <restrict_access>yes</restrict_access>
+    <ws_context>%%SERVER_CONTEXT%%</ws_context>
+  </novell-lum>
+  <sms>
+    <ldap_server>%%IP_ADDRESS%%</ldap_server>
+  </sms>
+</profile>

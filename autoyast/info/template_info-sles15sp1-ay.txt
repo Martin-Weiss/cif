@@ -1,0 +1,7 @@
+autoyast=http://%%AY_SERVER%%/autoyast/xml/
+install=http://%%ISO_SERVER%%/sles15sp1/
+## Installer self-updates - only enable ONE option!!!
+## from SMT
+#  self_update=http://%%YUM_SERVER%%/repo/SUSE/Updates/SLE-INSTALLER/15-SP1/x86_64/update/
+## from ZCM
+self_update=http://%%YUM_SERVER%%/zenworks-yumrepo/SLE15-SP1-Installer-Updates

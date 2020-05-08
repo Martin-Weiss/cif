@@ -8,7 +8,9 @@
 # GNU Public License
 #
 # AY_MAIN.txt  						 9 Jan 2013
+# last update (support for OES2015 SP1)                 25 May 2016
 # last update (merge OES 2018,SLES 15, CaaSP)          	20 Dec 2018
+# last update (new xml structure)                       10 Jan 2020
 
 
 ############################################################################
