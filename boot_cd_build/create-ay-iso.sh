@@ -10,7 +10,9 @@
 # create-ay-cd-v01.sh 					27 Apr 2013
 # change copy to move for backup			25 Feb 2019
 # add efi boot via grub2				13 May 2019
-# last modified (Customer Name command line parameter)	 6 May 2020
+# efi adjustments and standardization			 6 May 2020
+# adding -follow on to allow /data/boot_cd_build linked	 8 May 2020
+
 
 ARGV=$@
 debug=0
@@ -87,16 +89,16 @@ function set_vars()
 	ISO_PREF=autoyast-$(tr A-Z a-z <<<$CUSTOMER)
 	ISO_NAME=${ISO_NAME:="$ISO_PREF.iso"}
 	ISO_NAME_COPIED=$ISO_NAME.$MY_DATE
-	WORK_DIR=${WORK_DIR:="/data/boot_cd_build_efi"}
+	WORK_DIR=${WORK_DIR:="/data/boot_cd_build"}
 	TEMP_DIR="/tmp"
 }
 
 
 function prepare_efi()
 {
-	grub2-mkstandalone --format=x86_64-efi --output=$TEMP_DIR/bootx64.efi --locales="" --fonts=""\
+	grub2-mkstandalone --format=x86_64-efi --output=$TEMP_DIR/bootx64.efi --locales="" --fonts="" \
 	       		   "boot/grub/grub.cfg=$WORK_DIR/EFI/grub2.cfg" --modules="efi_gop efi_uga all_video gzio gettext gfxterm gfxmenu png"
-	dd if=/dev/zero of=$TEMP_DIR/efiboot.img bs=1M count=10 && mkfs.vfat $TEMP_DIR/efiboot.img\
+	dd if=/dev/zero of=$TEMP_DIR/efiboot.img bs=1M count=10 && mkfs.vfat $TEMP_DIR/efiboot.img \
 	       		   && mmd -i $TEMP_DIR/efiboot.img efi efi/boot && mcopy -i $TEMP_DIR/efiboot.img $TEMP_DIR/bootx64.efi ::efi/boot/
 }
 
@@ -105,7 +107,9 @@ function make_iso()
 {
 	test -f "$ISO_DIR/$ISO_NAME" && mv "$ISO_DIR/$ISO_NAME" $ISO_DIR/$ISO_NAME_COPIED
 	
-	xorriso -as mkisofs \
+	xorriso \
+	-follow on \
+	-as mkisofs \
 	-volid "$ISO_LABEL" \
 	-full-iso9660-filenames \
 	-J -joliet-long -l -R -rock \

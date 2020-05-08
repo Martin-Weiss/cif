@@ -52,11 +52,11 @@ Adjust autoyast/info-<os>.txt file to your autoyast and iso server
 
 Adjust BOOT_CD: /data/boot_cd_build/grub/*.lst and /data/boot_cd_build/EFI/*.cfg
 
-Copy initrd linux to boot cd kernel sub-directories
+Copy initrd linux from original installation ISO /boot/x86_64/loader/ to boot cd kernel sub-directories
 
-Adjust paths in create-ay-cd-v01.sh
+Adjust paths in create-ay-iso.sh
 
-Build bootcd using create-ay-cd-v01.sh
+Build bootcd using create-ay-iso.sh
 
 Install server using the boot-cd and specifying the IP for the server from server.txt in the format <ip>/<mask> i.e. 10.1.1.100/24
 
@@ -151,3 +151,4 @@ Changelog:
 - 20200508-01 add sles15sp1-template
 - 20200508-02 merge enhancements of Frieder in 2020 (also consolidated services/sles and services/oes) - changes not tested, yet!
 - 20200508-03 merge enhancements of Frieder in 2020 (boot_cd for EFI) - changes not tested, yet!
+- 20200508-04 adjust boot_cd script
