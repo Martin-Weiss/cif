@@ -50,7 +50,7 @@ Adjust IP in autoyast/xml/default
 
 Adjust autoyast/info-<os>.txt file to your autoyast and iso server
 
-Adjust BOOT_CD: /data/boot_cd_build/grub/*.lst and /data/boot_cd_build/grub2.cfg
+Adjust BOOT_CD: /data/boot_cd_build/grub/*.lst and /data/boot_cd_build/EFI/*.cfg
 
 Copy initrd linux to boot cd kernel sub-directories
 
@@ -149,4 +149,5 @@ Changelog:
 - 20200110-01 update post-inst.sh to create ntp.conf properly
 - 20200110-02 merge Frieders changes to lib and some XMLs
 - 20200508-01 add sles15sp1-template
-- 20200508-02 merge enhancements of Frieder in 2020 (also consolidated services/sles and services/oes)
+- 20200508-02 merge enhancements of Frieder in 2020 (also consolidated services/sles and services/oes) - changes not tested, yet!
+- 20200508-03 merge enhancements of Frieder in 2020 (boot_cd for EFI) - changes not tested, yet!

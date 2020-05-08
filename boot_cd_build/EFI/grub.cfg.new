@@ -1,0 +1,66 @@
+gfxmode=auto
+lang=en_US
+locale_dir=$prefix/locale
+with_gfx=1
+
+set default="0"
+set timeout="30"
+
+# correct boot device if we are booting from an ISO image
+# note: for networkboot this is [http|tftp],<ServerIP>
+if [ "$root" == "memdisk" ]; then set root="(cd0)"; fi
+
+js_prefix="($root)/boot/x86_64/grub2-efi"
+
+insmod efi_gop
+insmod efi_uga
+insmod gzio
+insmod gettext
+
+if [ "$with_gfx" = 1 ] ; then
+  insmod gfxterm
+  insmod gfxmenu
+  insmod png
+  echo "Please press 't' to show the boot menu on this console"
+  terminal_output gfxterm
+  theme=$js_prefix/themes/SLE/theme.txt
+  export theme
+  loadfont $js_prefix/unicode.pf2
+  loadfont $js_prefix/themes/SLE/DejaVuSans10.pf2
+  loadfont $js_prefix/themes/SLE/DejaVuSans12.pf2
+  loadfont $js_prefix/themes/SLE/DejaVuSans-Bold14.pf2
+fi
+
+
+menuentry "localboot" {
+	  set my_os=localboot
+	  echo "booting from local disk..."
+	  insmod part_gpt
+	  insmod part_msdos
+	  insmod btrfs
+	  if search --no-floppy --file /efi/boot/fallback.efi --set; then
+		for os in opensuse sles caasp ; do
+			if [ -f /efi/$os/grub.efi ] ; then
+			  chainloader /efi/$os/grub.efi
+			fi
+		done
+	  fi
+}
+
+
+submenu "OES2018SP2" {
+	configfile /EFI/oes2018sp2.cfg
+}
+
+submenu "SLES12SP5" {
+	configfile /EFI/sles12sp5.cfg
+}
+
+submenu "SLES15SP1" {
+	configfile /EFI/sles15sp1.cfg
+}
+
+
+menuentry 'System Setup (UEFI BIOS) aufrufen' {
+  fwsetup
+}
