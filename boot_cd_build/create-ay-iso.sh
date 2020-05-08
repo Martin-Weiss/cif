@@ -97,7 +97,7 @@ function set_vars()
 function prepare_efi()
 {
 	grub2-mkstandalone --format=x86_64-efi --output=$TEMP_DIR/bootx64.efi --locales="" --fonts="" \
-	       		   "boot/grub/grub.cfg=$WORK_DIR/EFI/grub2.cfg" --modules="efi_gop efi_uga all_video gzio gettext gfxterm gfxmenu png"
+	       		   "boot/grub/grub.cfg=$WORK_DIR/EFI/grub.cfg" --modules="efi_gop efi_uga all_video gzio gettext gfxterm gfxmenu png"
 	dd if=/dev/zero of=$TEMP_DIR/efiboot.img bs=1M count=10 && mkfs.vfat $TEMP_DIR/efiboot.img \
 	       		   && mmd -i $TEMP_DIR/efiboot.img efi efi/boot && mcopy -i $TEMP_DIR/efiboot.img $TEMP_DIR/bootx64.efi ::efi/boot/
 }
