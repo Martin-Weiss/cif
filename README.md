@@ -148,3 +148,4 @@ Changelog:
 - 20191210-01 fix services/sles15/system.xml, added sle-ha example
 - 20200110-01 update post-inst.sh to create ntp.conf properly
 - 20200110-02 merge Frieders changes to lib and some XMLs
+- 20200508-01 add sles15sp1-template
