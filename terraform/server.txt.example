@@ -1,0 +1,7 @@
+servername,ipaddress,gateway,dnsserver1,dnsserver2,domainname
+caasp-master-0,192.168.0.190/24,192.168.0.1,192.168.0.31,192.168.0.54,weiss.ddnss.de
+caasp-master-1,192.168.0.191/24,192.168.0.1,192.168.0.31,192.168.0.54,weiss.ddnss.de
+caasp-master-2,192.168.0.192/24,192.168.0.1,192.168.0.31,192.168.0.54,weiss.ddnss.de
+caasp-worker-0,192.168.0.110/24,192.168.0.1,192.168.0.31,192.168.0.54,weiss.ddnss.de
+caasp-worker-1,192.168.0.111/24,192.168.0.1,192.168.0.31,192.168.0.54,weiss.ddnss.de
+caasp-worker-2,192.168.0.112/24,192.168.0.1,192.168.0.31,192.168.0.54,weiss.ddnss.de

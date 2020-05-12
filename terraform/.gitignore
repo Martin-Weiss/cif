@@ -1,0 +1,4 @@
+export.sh
+server.txt
+terraform.tfstate
+.terraform
