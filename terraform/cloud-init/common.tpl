@@ -36,7 +36,7 @@ ${repositories}
 
 # trying workarond for error in cloud-init status -l after deployments when cloning 50G template to 50G vm
 # disable the resize by cloud-init and add it to runcmd
-# caaspadm@caasp-master-1:~> cloud-init status -l
+# suse@caasp-master-1:~> cloud-init status -l
 # status: error
 # time: Tue, 12 May 2020 08:04:13 +0000
 # detail:
@@ -71,8 +71,9 @@ runcmd:
 #  - sed -i -e '/^#PasswordAuthentication/s/^.*$/PasswordAuthentication no/' /etc/ssh/sshd_config
 #  - sshd -t || echo "ssh syntax failure"
 #  - systemctl restart sshd
-#${register_scc}
-#${register_rmt}
+${register_scc}
+${register_rmt}
+${register_suma}
 ${commands}
 
 #bootcmd:
@@ -88,7 +89,7 @@ system_info:
    distro: sles
    # Default user name + that default users groups (if added/used)
    default_user:
-     name: caaspadm
+     name: suse
      lock_passwd: True
      gecos: sles Cloud User
      groups: [cdrom, users]

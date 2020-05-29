@@ -60,8 +60,13 @@ variable "rmt_server_name" {
   description = "SUSE Repository Mirroring Server Name"
 }
 
+variable "suma_server_name" {
+  default     = ""
+  description = "SUSE Manager Server Name"
+}
+
 variable "username" {
-  default     = "caaspadm"
+  default     = "suse"
   description = "Default user for the cluster nodes created by cloud-init default configuration for all SUSE SLES systems"
 }
 
@@ -77,13 +82,18 @@ variable "server_cpus" {
 
 variable "server_memory" {
 #  default     = 8192
-  default     = 1024
+  default     = 4096
   description = "Amount of memory used on server node"
 }
 
 variable "server_disk_size" {
   default     = 50
   description = "Size of the root disk in GB on server node"
+}
+
+variable "server_data_disk_size" {
+  default     = 100
+  description = "Size of the data disk in GB on server node"
 }
 
 #### To be moved to separate vsphere.tf? ####

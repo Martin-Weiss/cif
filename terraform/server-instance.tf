@@ -34,6 +34,19 @@ data "template_file" "server_register_rmt" {
   }
 }
 
+data "template_file" "server_register_suma" {
+  template = file("cloud-init/register-suma.tpl")
+
+  for_each = { for inst in local.instances : inst.servername => inst }
+  #count    = var.suma_server_name == "" ? 0 : 1
+
+
+  vars = {
+    suma_server_name = var.suma_server_name
+    activationkey = each.value.activationkey
+  }
+}
+
 data "template_file" "server_commands" {
   template = file("cloud-init/commands.tpl")
   count    = join("", var.packages) == "" ? 0 : 1
@@ -78,6 +91,8 @@ data "template_file" "server_cloud_init_userdata" {
     repositories    = join("\n", data.template_file.server_repositories.*.rendered)
     register_scc    = join("\n", data.template_file.server_register_scc.*.rendered)
     register_rmt    = join("\n", data.template_file.server_register_rmt.*.rendered)
+    #register_suma   = join("\n", data.template_file.server_register_suma[each.key].rendered)
+    register_suma   = data.template_file.server_register_suma[each.key].rendered
     commands        = join("\n", data.template_file.server_commands.*.rendered)
     ntp_servers     = join("\n", formatlist("    - %s", var.ntp_servers))
     servername        = each.value.servername
@@ -108,7 +123,8 @@ resource "vsphere_virtual_machine" "server" {
   scsi_type        = data.vsphere_virtual_machine.template.scsi_type
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
-  wait_for_guest_net_timeout = 10
+  wait_for_guest_net_timeout = 20
+  scsi_controller_count = 2
 
   clone {
     template_uuid = data.vsphere_virtual_machine.template.id
@@ -119,6 +135,15 @@ resource "vsphere_virtual_machine" "server" {
     size  = var.server_disk_size
     eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
     thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+    unit_number = 0
+  }
+
+  disk {
+    label = "disk1"
+    size  = var.server_data_disk_size
+    eagerly_scrub    = false
+    thin_provisioned = true
+    unit_number = 15
   }
 
   extra_config = {

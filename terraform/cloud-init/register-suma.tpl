@@ -1,0 +1,3 @@
+  - wget --no-check-certificate -N https://${suma_server_name}/pub/bootstrap/bootstrap.sh
+  - sed -i s#^ACTIVATION_KEYS=.*#ACTIVATION_KEYS=${activationkey}#g bootstrap.sh
+  - /bin/bash ./bootstrap.sh

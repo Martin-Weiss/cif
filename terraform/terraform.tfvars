@@ -74,7 +74,8 @@ packages = [
 #   "ssh-rsa <key-content>"
 # ]
 authorized_keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD2rDHak8G11Qn3UvA85MNzm+nXpEFFpJV37LD2OBaohrXOBF3+zuw+Yxy7kbraFdzw6jEXtS6LjuaoxBMYRgqUcXOswo+xzSkLsJBOIDRMDIOFF8g+8sYwR4lIPs5WozM6hJpuiUwmz8MK/prJN6MR/znZFcot53pokkZp1Z4sgCbz/1ad2xr51kgB+XQqKrVf0G1H5rfe+HK6xQlZlL7i7y/BRkaIkKTLnSeXTKOqozY4n7vIp7Vy9zL0soS+bGBmMkxubvFvGx4GaP4QebRiRcME3MaZ4G5Fem4HVoq4Wdtlk/AYF74PSt0wQnTEGavbisyISXPr+J9bFJAd7b/b root@caasp4-01"
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD2rDHak8G11Qn3UvA85MNzm+nXpEFFpJV37LD2OBaohrXOBF3+zuw+Yxy7kbraFdzw6jEXtS6LjuaoxBMYRgqUcXOswo+xzSkLsJBOIDRMDIOFF8g+8sYwR4lIPs5WozM6hJpuiUwmz8MK/prJN6MR/znZFcot53pokkZp1Z4sgCbz/1ad2xr51kgB+XQqKrVf0G1H5rfe+HK6xQlZlL7i7y/BRkaIkKTLnSeXTKOqozY4n7vIp7Vy9zL0soS+bGBmMkxubvFvGx4GaP4QebRiRcME3MaZ4G5Fem4HVoq4Wdtlk/AYF74PSt0wQnTEGavbisyISXPr+J9bFJAd7b/b root@caasp4-01",
+    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAv1DS2t+Kmh7spHYFg2t0592otcq8YUnZXb17WgkpaWU5cS/2eLZoNbImURkbqpVC54zVwT2dUauJZG/2bXQBul8p2OK0Rgo+Vhhrbmtnvs4GXMfgxRUo3b+zadbMPZzOAxrEWJj8nkg5PV5+5jdxLR6/3ykZtRXn2kvh2/TMHMRpxE7x5xKwyAvXiGMK9kN0dTNEun9KKfNycXX1ZbvfJ02WuzQPA7K3i8eUZZeHlnRXso/66RWsmEPCipNua23wPrBXocsNFx75hvxDFwwvj1rj4SwB9afzcQbvvnLwPheEt8pl30Xozl7qZSVaYllZaEUMcrdklXESKhj87fKDhw== root@weiss-2"
 ]
 
 # IMPORTANT: Replace these ntp servers with ones from your infrastructure

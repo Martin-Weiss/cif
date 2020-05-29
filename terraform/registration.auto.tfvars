@@ -7,3 +7,7 @@
 
 # SUSE Repository Mirroring Server Name (FQDN)
 #rmt_server_name = "rmt.example.com"
+
+# SUSE Manager Server Name (FQDN)
+#suma_server_name = "suma.example.com"
+suma_server_name = "susemanager.weiss.ddnss.de"

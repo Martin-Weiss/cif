@@ -19,7 +19,7 @@ Next you need to define following environment variables in your current shell wi
 ```sh
 # HINT: Please enter just a hostname without specifing a protocol in VSPHERE_SERVER variable (using https by default).
 export VSPHERE_SERVER="vsphere.cluster.endpoint.fqdn"
-export VSPHERE_USER="username"
+export VSPHERE_USER="vsphere-admin-username"
 export VSPHERE_PASSWORD="password"
 export VSPHERE_ALLOW_UNVERIFIED_SSL="true"
 ```
@@ -37,7 +37,7 @@ terraform apply
 
 It is important to have your public ssh key within the `authorized_keys`, this is done by `cloud-init` through a terraform variable called `authorized_keys`.
 
-All the instances have a `sles` user, password is not set. User can login only as `sles` user over SSH by using his private ssh key. The `sles` user can perform `sudo` without specifying a password.
+All the instances have a `caaspadm` user, password is not set. User can login as `caaspadm` user over SSH by using his private ssh key. The `caaspadm` user can perform `sudo` without specifying a password.
 
 ## Variables
 
@@ -51,9 +51,17 @@ All the instances have a `sles` user, password is not set. User can login only a
 `repositories` - Additional repositories that will be added on all nodes\
 `packages` - Additional packages that will be installed on all nodes
 
-`adjust server.txt with the list of servers you want to create
+`adjust server.txt with the list of servers you want to create (see server.txt.example)
 
 ### Please use one of the following options:
 
 `caasp_registry_code` - Provide SUSE CaaSP Product Registration Code in `registration.auto.tfvars` file to register product against official SCC server\
 `rmt_server_name` - Provide SUSE Repository Mirroring Tool Server Name in `registration.auto.tfvars` file to use repositories stored on RMT server
+`suma_server_name` - Provide SUSE Manager Server Name in `registration.auto.tfvars` file to use repositories stored on SUSE Manager server
+
+### Open ToDo:
+
+ terraform destroy -> need to delete servers from rmt/scc/suse manager
+ add suma registration only in case a suma server is specified (not "")
+ register only in case an activation key is specified for a system
+ find out how to re-register a system with the same name but different machine-id to suse manager
