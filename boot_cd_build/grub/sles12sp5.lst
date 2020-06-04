@@ -1,0 +1,21 @@
+color white/blue black/light-gray
+default 0
+timeout 30
+root (cd)
+gfxmenu /grub/message
+
+title back
+        configfile /grub/instserver.lst
+
+title SLES12SP5 AutoYaST
+	kernel /kernel/sles12sp5/linux info=http://10.1.1.1/autoyast/info-sles12sp5.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/sles12sp5/initrd
+
+title SLES12SP5 manual installation
+	kernel /kernel/sles12sp5/linux info=http://10.1.1.1/autoyast/info-sles12sp5-manual.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/sles12sp5/initrd
+
+title SLES12SP5 rescue mode
+	kernel /kernel/sles12sp5/linux info=http://10.1.1.1/autoyast/info-sles12sp5-rescue.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/sles12sp5/initrd
+

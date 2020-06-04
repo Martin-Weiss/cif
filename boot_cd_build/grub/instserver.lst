@@ -16,11 +16,17 @@ title SLES12SP3
 title SLES12SP4
 	configfile /grub/sles12sp4.lst
 
+title SLES12SP5
+	configfile /grub/sles12sp5.lst
+
 title SLES15GA
 	configfile /grub/sles15ga.lst
 
 title SLES15SP1
 	configfile /grub/sles15sp1.lst
+
+title SLES15SP2
+	configfile /grub/sles15sp2.lst
 
 title CAASP3
 	configfile /grub/caasp3.lst
@@ -33,4 +39,7 @@ title OES2018GA
 
 title OES2018SP1
 	configfile /grub/oes2018sp1.lst
+
+title OES2018SP2
+	configfile /grub/oes2018sp2.lst
 

@@ -1,0 +1,3 @@
+install=http://10.1.1.1/sles15sp2/
+self_update=http://10.1.1.1/repo/SUSE/Updates/SLE-INSTALLER/15-SP2/x86_64/update/
+rescue=1
