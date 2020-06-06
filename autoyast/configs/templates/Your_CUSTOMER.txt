@@ -9,7 +9,7 @@
 #
 # CUSTOMER.txt			  			25 Jan 2013
 # last update (support for DSfW)                        24 Sep 2019
-# last update (new xml structure)                       18 Jan 2020
+# last update (new xml structure)                       12 Feb 2020
 
 
 ########################################################################
@@ -246,26 +246,26 @@ OES2018_DSFW_FRD_FDC="${SLES12_BASE}:oes/oes_base_frd_fdc.xml:oes/dns.xml"
 ##
 ##		This LDAP base will be used for all OES services
 ##		unless specified differently in the variables below
-SEARCH_BASE="o=Your_O"
+#SEARCH_BASE=""
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
 ##              afp in LDAP syntax
-AFP_SEARCH_BASE="$SEARCH_BASE"
+#AFP_SEARCH_BASE="$SEARCH_BASE"
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
 ##              cifs in LDAP syntax
-CIFS_SEARCH_BASE="$SEARCH_BASE"
+#CIFS_SEARCH_BASE="$SEARCH_BASE"
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
-IPRINT_SEARCH_BASE="$SEARCH_BASE"
+#IPRINT_SEARCH_BASE="$SEARCH_BASE"
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
 ##              netstorage in LDAP syntax
-NETSTORAGE_SEARCH_BASE="$SEARCH_BASE"
+#NETSTORAGE_SEARCH_BASE="$SEARCH_BASE"
 
 
 ## NSS information
@@ -451,13 +451,8 @@ TIME_ZONE="Europe/Berlin"
 #SMT12_CLIENT_URL="$SMT12_SERVER/repo/tools/clientSetup4SMT.sh"
 
 ## Type String
-## Description: salt master that should be used for salt minion to register to
-##
-#SALT_MASTER=""
-
-## Type String
 ## Description: Suse Manager Server (Hostname or IP address)
-#SUMA_SERVER="http://10.1.1.1"
+#SUMA_SERVER="http://"
 
 ## Type URL/Path
 ## Description:	URL-Path to Suse Manager Bootstrap script

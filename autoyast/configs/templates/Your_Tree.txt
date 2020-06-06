@@ -219,26 +219,26 @@
 ##
 ##		This LDAP base will be used for all OES services
 ##		unless specified differently in the variables below
-#SEARCH_BASE=""
+SEARCH_BASE="Your_O"
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
 ##              afp in LDAP syntax
-#AFP_SEARCH_BASE=""
+AFP_SEARCH_BASE="$SEARCH_BASE"
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
 ##              cifs in LDAP syntax
-#CIFS_SEARCH_BASE=""
+CIFS_SEARCH_BASE="$SEARCH_BASE"
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
-#IPRINT_SEARCH_BASE=""
+IPRINT_SEARCH_BASE="$SEARCH_BASE"
 
 ## Type String
 ## Description: fully distinguished name of the eDir search base for
 ##              netstorage in LDAP syntax
-#NETSTORAGE_SEARCH_BASE=""
+NETSTORAGE_SEARCH_BASE="$SEARCH_BASE"
 
 
 ## NSS information
