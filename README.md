@@ -155,3 +155,4 @@ Changelog:
 - 20200604-01 added sles15sp2, oes2018sp2, sles12sp5 - changes not tested, yet!
 - 20200605-01 adjusted boot-cd script to add efi only if EFI dir exists
 - 20200606-01 corrected template files
+- 20200612-01 added vmware folder to terraform / try to use FQDN based machine-id / enable uuid

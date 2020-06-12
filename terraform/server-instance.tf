@@ -111,7 +111,14 @@ data "template_file" "server_cloud_init_userdata" {
 #  }
 #}
 
+resource "vsphere_folder" "folder" {
+  path          = var.stack_name
+  type          = "vm"
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
 resource "vsphere_virtual_machine" "server" {
+  depends_on = [vsphere_folder.folder]
 
   for_each = { for inst in local.instances : inst.servername => inst }
 
@@ -123,6 +130,7 @@ resource "vsphere_virtual_machine" "server" {
   scsi_type        = data.vsphere_virtual_machine.template.scsi_type
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
+  folder           = var.stack_name
   wait_for_guest_net_timeout = 20
   scsi_controller_count = 2
 
@@ -152,6 +160,8 @@ resource "vsphere_virtual_machine" "server" {
     "guestinfo.userdata"          = base64gzip(data.template_file.server_cloud_init_userdata[each.key].rendered)
     "guestinfo.userdata.encoding" = "gzip+base64"
   }
+
+  enable_disk_uuid = true
 
   network_interface {
     network_id = data.vsphere_network.network.id

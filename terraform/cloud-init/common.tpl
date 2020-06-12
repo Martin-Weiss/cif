@@ -60,7 +60,10 @@ runcmd:
   # start another service by either `enable --now` or `start` will create a
   # deadlock. Instead, we have to use the `--no-block-` flag.
   # The template machine should have been cleaned up, so no machine-id exists
+  - uuidgen --sha1 --namespace @dns --name ${servername}.${domainname} |sed 's/-//g' >/var/lib/dbus/machine-id
   - dbus-uuidgen --ensure
+  # try to ensure the machine-id is persistent and based on FQDN
+  - uuidgen --sha1 --namespace @dns --name ${servername}.${domainname} |sed 's/-//g' >/etc/machine-id
   - systemd-machine-id-setup
   # With a new machine-id generated the journald daemon will work and can be restarted
   # Without a new machine-id it should be in a failed state
