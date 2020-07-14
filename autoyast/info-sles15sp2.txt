@@ -1,3 +1,15 @@
 autoyast=http://10.1.1.1/autoyast/xml/
-install=http://10.1.1.1/sles15sp2/
+# full media
+#install=http://10.1.1.1/sles15sp2/
+# not available, yet
 self_update=http://10.1.1.1/repo/SUSE/Updates/SLE-INSTALLER/15-SP2/x86_64/update/
+# online only
+instsys=http://10.1.1.1/sles15sp2/boot/x86_64/root
+install=http://10.1.1.1/repo/SUSE/Products/SLE-Product-SLES/15-SP2/x86_64/product/
+# as the dud files are not signed we need to use insecure
+insecure=1
+# hosts file fix
+dud=http://10.1.1.1/dud/sles15sp2-bug1173213.dud
+# online media fix
+dud=http://10.1.1.1/dud/online-install-bug1173336.dud
+

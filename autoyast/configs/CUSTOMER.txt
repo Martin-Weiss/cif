@@ -51,7 +51,7 @@ SLES12_BASE="sles/bootloader.xml:sles/ca_mgm.xml:sles/general.xml:sles/kdump.xml
 SLES15_BASE="sles/bootloader.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles15.xml:sles/scripts-all.xml"
 
 ## CaaSP Base definitions
-SLES15_CAAPSV4="sles/bootloader.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles15.xml:sles/net-forward.xml:sles/scripts-all.xml"
+SLES15_CAASPV4="sles/bootloader.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles15.xml:sles/net-forward.xml:sles/scripts-all.xml"
 CAASP3_ADMIN="caasp3/general-admin.xml:caasp3/scripts-admin.xml:caasp3/net.xml"
 CAASP3_NODE="caasp3/general-node.xml:caasp3/scripts-node.xml:caasp3/net.xml"
 

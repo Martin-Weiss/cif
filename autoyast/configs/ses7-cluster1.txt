@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# Author: Jochen Schaefer <jochen.schaefer@microfocus.com>
+#	  Frieder Schmidt <frieder.schmidt@microfocus.com>
+#	  Martin Weiss	  <martin.weiss@suse.com>
+# 
+# copyright (c) Novell Deutschland GmbH, 2001-2016. All rights reserved.
+# GNU Public License
+#
+# CUSTOMER.txt			  			25 Jan 2013
+# last update						20 Dec 2018
+
+
+########################################################################
+########################################################################
+##
+## The purpose of this file is to define the configuration information
+## that is consistent across *all* servers in *all* environments of the
+## customer.
+##
+## !! IMPORTANT !!
+## Do NOT use any special characters, such as (but not limited to) "&",
+## "<", or ">" in any variable value since these characters could have
+## special meanings in the programming languages used and/or in the
+## resulting xml files.
+## This could result in unforseable behavior including abortian of the
+## installation routine.
+##
+########################################################################
+
+
+## infrastructure information
+
+
+## Type String
+## Description: salt master that should be used for salt minion to register to
+##
+SALT_MASTER="ses7-admin.suse"
