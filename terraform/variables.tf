@@ -1,19 +1,36 @@
 variable "template_name" {
+  type        = string
+  description = "VM template that should be used for the VMs"
 }
 
 variable "stack_name" {
+  type        = string
+  description = "Prefix to be added to VM names in vSphere"
 }
 
 variable "vsphere_datastore" {
+  type        = string
+  description = "vSphere datastore to use"
 }
 
 variable "vsphere_datacenter" {
+  type        = string
+  description = "vSphere datacenter to use"
 }
 
 variable "vsphere_network" {
+  type        = string
+  description = "vSphere network to be attached to the VMs"
 }
 
 variable "vsphere_resource_pool" {
+  type        = string
+  description = "vSphere resource pool VMs should be assigned to"
+}
+
+variable "vsphere_vm_folder" {
+  type        = string
+  description = "VM folder the VMs should be placed in"
 }
 
 variable "authorized_keys" {
@@ -49,6 +66,12 @@ variable "packages" {
   description = "List of additional packages to install"
 }
 
+variable "admin-packages" {
+  type        = list(string)
+  default     = []
+  description = "List of additional packages to install"
+}
+
 variable "repositories" {
   type        = map(string)
   default     = {}
@@ -66,7 +89,7 @@ variable "suma_server_name" {
 }
 
 variable "username" {
-  default     = "suse"
+  default     = "caaspadm"
   description = "Default user for the cluster nodes created by cloud-init default configuration for all SUSE SLES systems"
 }
 
@@ -94,34 +117,5 @@ variable "server_disk_size" {
 variable "server_data_disk_size" {
   default     = 100
   description = "Size of the data disk in GB on server node"
-}
-
-#### To be moved to separate vsphere.tf? ####
-
-provider "vsphere" {
-}
-
-data "vsphere_resource_pool" "pool" {
-  name          = var.vsphere_resource_pool
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
-data "vsphere_datastore" "datastore" {
-  name          = var.vsphere_datastore
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
-data "vsphere_datacenter" "dc" {
-  name = var.vsphere_datacenter
-}
-
-data "vsphere_network" "network" {
-  name          = var.vsphere_network
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
-
-data "vsphere_virtual_machine" "template" {
-  name          = var.template_name
-  datacenter_id = data.vsphere_datacenter.dc.id
 }
 

@@ -1,5 +1,5 @@
 data "local_file" "server-txt" {
-        filename = "${path.module}/server.txt"
+  filename = "${path.module}/server.txt"
 }
 
 locals {
@@ -47,6 +47,15 @@ data "template_file" "server_register_suma" {
   }
 }
 
+data "template_file" "admin_server_commands" {
+  template = file("cloud-init/admin-commands.tpl")
+  count    = join("", var.admin-packages) == "" ? 0 : 1
+
+  vars = {
+    admin-packages = join(", ", var.admin-packages)
+  }
+}
+
 data "template_file" "server_commands" {
   template = file("cloud-init/commands.tpl")
   count    = join("", var.packages) == "" ? 0 : 1
@@ -62,8 +71,8 @@ data "template_file" "server_network_cloud_init" {
   for_each = { for inst in local.instances : inst.servername => inst }
 
   vars = {
-    ipaddress = each.value.ipaddress
-    gateway = each.value.gateway
+    ipaddress  = each.value.ipaddress
+    gateway    = each.value.gateway
     dnsserver1 = each.value.dnsserver1
     dnsserver2 = each.value.dnsserver2
     domainname = each.value.domainname
@@ -77,7 +86,7 @@ data "template_file" "server_cloud_init_metadata" {
 
   vars = {
     network_config = base64gzip(data.template_file.server_network_cloud_init[each.key].rendered)
-    instance_id    = each.value.servername
+    instance_id    = "${var.stack_name}-${each.value.servername}"
   }
 }
 
@@ -93,14 +102,15 @@ data "template_file" "server_cloud_init_userdata" {
     register_rmt    = join("\n", data.template_file.server_register_rmt.*.rendered)
     #register_suma   = join("\n", data.template_file.server_register_suma[each.key].rendered)
     register_suma   = data.template_file.server_register_suma[each.key].rendered
+    admin-commands  = each.value.is_admin_server == "1" ? join("\n", data.template_file.admin_server_commands.*.rendered) : ""
     commands        = join("\n", data.template_file.server_commands.*.rendered)
     ntp_servers     = join("\n", formatlist("    - %s", var.ntp_servers))
-    servername        = each.value.servername
-    ipaddress = each.value.ipaddress
-    gateway = each.value.gateway
-    dnsserver1 = each.value.dnsserver1
-    dnsserver2 = each.value.dnsserver2
-    domainname = each.value.domainname
+    servername      = each.value.servername
+    ipaddress       = each.value.ipaddress
+    gateway         = each.value.gateway
+    dnsserver1      = each.value.dnsserver1
+    dnsserver2      = each.value.dnsserver2
+    domainname      = each.value.domainname
   }
 }
 
@@ -111,48 +121,51 @@ data "template_file" "server_cloud_init_userdata" {
 #  }
 #}
 
-resource "vsphere_folder" "folder" {
-  path          = var.stack_name
-  type          = "vm"
-  datacenter_id = data.vsphere_datacenter.dc.id
-}
+#resource "vsphere_folder" "folder" {
+#  path          = var.stack_name
+#  type          = "vm"
+#  datacenter_id = data.vsphere_datacenter.dc.id
+#}
 
 resource "vsphere_virtual_machine" "server" {
-  depends_on = [vsphere_folder.folder]
+#  depends_on = [vsphere_folder.folder]
 
   for_each = { for inst in local.instances : inst.servername => inst }
 
-  name             = each.value.servername
-  num_cpus         = var.server_cpus
-  memory           = var.server_memory
+  name             = "${var.stack_name}-${each.value.servername}"
+  folder           = var.vsphere_vm_folder
+  num_cpus         = each.value.cpus
+  memory           = each.value.memory
   guest_id         = var.guest_id
   firmware         = var.firmware
   scsi_type        = data.vsphere_virtual_machine.template.scsi_type
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
-  folder           = var.stack_name
-  wait_for_guest_net_timeout = 20
-  scsi_controller_count = 2
+
+  scsi_controller_count = 1
+  #scsi_controller_count = 2
+
+  wait_for_guest_net_timeout = 10
 
   clone {
     template_uuid = data.vsphere_virtual_machine.template.id
   }
 
   disk {
-    label = "disk0"
-    size  = var.server_disk_size
+    label            = "disk0"
+    size             = each.value.root_disk_size
     eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
     thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
     unit_number = 0
   }
 
-  disk {
-    label = "disk1"
-    size  = var.server_data_disk_size
-    eagerly_scrub    = false
-    thin_provisioned = true
-    unit_number = 15
-  }
+  #disk {
+  #  label = "disk1"
+  #  size  = var.server_data_disk_size
+  #  eagerly_scrub    = false
+  #  thin_provisioned = true
+  #  unit_number = 15
+  #}
 
   extra_config = {
     "guestinfo.metadata"          = base64gzip(data.template_file.server_cloud_init_metadata[each.key].rendered)
@@ -170,14 +183,14 @@ resource "vsphere_virtual_machine" "server" {
 
 resource "null_resource" "server_wait_cloudinit" {
   depends_on = [vsphere_virtual_machine.server]
-#  count = var.servers
+  #  count = var.servers
 
   for_each = { for inst in local.instances : inst.servername => inst }
 
   connection {
     host = vsphere_virtual_machine.server[each.key].guest_ip_addresses.0
-#      count.index,
-#       each.key,
+    #      count.index,
+    #       each.key,
     user  = var.username
     type  = "ssh"
     agent = true

@@ -4,7 +4,8 @@
 locale: en_US.UTF-8
 
 # set timezone
-timezone: Europe/Berlin
+#timezone: Europe/Berlin
+timezone: Europe/Paris
 
 ssh_authorized_keys:
 ${authorized_keys}
@@ -36,7 +37,7 @@ ${repositories}
 
 # trying workarond for error in cloud-init status -l after deployments when cloning 50G template to 50G vm
 # disable the resize by cloud-init and add it to runcmd
-# suse@caasp-master-1:~> cloud-init status -l
+# caaspadm@caasp-master-1:~> cloud-init status -l
 # status: error
 # time: Tue, 12 May 2020 08:04:13 +0000
 # detail:
@@ -60,10 +61,7 @@ runcmd:
   # start another service by either `enable --now` or `start` will create a
   # deadlock. Instead, we have to use the `--no-block-` flag.
   # The template machine should have been cleaned up, so no machine-id exists
-  - uuidgen --sha1 --namespace @dns --name ${servername}.${domainname} |sed 's/-//g' >/var/lib/dbus/machine-id
   - dbus-uuidgen --ensure
-  # try to ensure the machine-id is persistent and based on FQDN
-  - uuidgen --sha1 --namespace @dns --name ${servername}.${domainname} |sed 's/-//g' >/etc/machine-id
   - systemd-machine-id-setup
   # With a new machine-id generated the journald daemon will work and can be restarted
   # Without a new machine-id it should be in a failed state
@@ -74,10 +72,11 @@ runcmd:
 #  - sed -i -e '/^#PasswordAuthentication/s/^.*$/PasswordAuthentication no/' /etc/ssh/sshd_config
 #  - sshd -t || echo "ssh syntax failure"
 #  - systemctl restart sshd
-${register_scc}
-${register_rmt}
-${register_suma}
+#${register_scc}
+#${register_rmt}
+${admin-commands}
 ${commands}
+#  - zypper -n in -t pattern SUSE-CaaSP-Management
 
 #bootcmd:
 #  # Hostnames from DHCP - otherwise `localhost` will be used
@@ -92,7 +91,7 @@ system_info:
    distro: sles
    # Default user name + that default users groups (if added/used)
    default_user:
-     name: suse
+     name: caaspadm
      lock_passwd: True
      gecos: sles Cloud User
      groups: [cdrom, users]
