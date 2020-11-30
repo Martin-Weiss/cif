@@ -59,21 +59,20 @@
         <name>SLE-Module-Containers15-SP2-Updates</name>
         <alias>SLE-Module-Containers15-SP2-Updates</alias>
       </listentry>
- <!--     <listentry>
-        <media_url>%%SMT12_SERVER%%/repo/SUSE/Products/SUSE-CAASP/4.0/x86_64/product/</media_url>
-        <product>SUSE-CAASP-4.0-Pool</product>
+     <listentry>
+        <media_url>%%SMT12_SERVER%%/repo/SUSE/Products/SUSE-CAASP/4.5/x86_64/product/</media_url>
+        <product>SUSE-CAASP-4.5-Pool</product>
         <product_dir>/</product_dir>
-        <name>SUSE-CAASP-4.0-Pool</name>
-        <alias>SUSE-CAASP-4.0-Pool</alias>
+        <name>SUSE-CAASP-4.5-Pool</name>
+        <alias>SUSE-CAASP-4.5-Pool</alias>
       </listentry>
      <listentry>
-        <media_url>%%SMT12_SERVER%%/repo/SUSE/Updates/SUSE-CAASP/4.0/x86_64/update/</media_url>
-        <product>SUSE-CAASP-4.0-Updates</product>
+        <media_url>%%SMT12_SERVER%%/repo/SUSE/Updates/SUSE-CAASP/4.5/x86_64/update/</media_url>
+        <product>SUSE-CAASP-4.5-Updates</product>
         <product_dir>/</product_dir>
-        <name>SUSE-CAASP-4.0-Updates</name>
-        <alias>SUSE-CAASP-4.0-Updates</alias>
+        <name>SUSE-CAASP-4.5-Updates</name>
+        <alias>SUSE-CAASP-4.5-Updates</alias>
       </listentry>
--->
      <listentry>
         <media_url>%%SMT12_SERVER%%/repo/SUSE/Products/SLE-Module-Public-Cloud/15-SP2/x86_64/product/</media_url>
         <product>SLE-Module-Public-Cloud15-SP2-Pool</product>

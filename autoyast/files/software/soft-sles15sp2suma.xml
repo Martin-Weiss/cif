@@ -9,10 +9,8 @@
       <package>sles-release</package>
       <package>sle-module-server-applications-release</package>
       <package>sle-module-basesystem-release</package>
-      <package>open-vm-tools</package>
-      <package>cloud-init</package>
-      <package>cloud-init-vmware-guestinfo</package>
-      <package>chrony-pool-empty</package>
+      <package>sle-module-suse-manager-server-release</package>
+      <package>spacewalk-utils</package>
     </packages>
     <patterns config:type="list">
       <pattern>apparmor</pattern>
@@ -20,10 +18,19 @@
       <pattern>enhanced_base</pattern>
       <pattern>minimal_base</pattern>
       <pattern>sw_management</pattern>
+      <pattern>x11</pattern>
+      <pattern>x11_yast</pattern>
       <pattern>yast2_basis</pattern>
+      <pattern>suma_server</pattern>
     </patterns>
     <products config:type="list">
       <product>SLES</product>
+      <product>SUSE-Manager-Server</product>
     </products>
+    <!--
+    <remove-packages config:type="list">
+      <package>sles-release</package>
+    </remove-packages>
+    -->
   </software>
 </profile>
