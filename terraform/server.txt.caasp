@@ -1,0 +1,10 @@
+servername,ipaddress,gateway,dnsserver1,dnsserver2,domainname,activationkey
+caasp-admin,192.168.0.21/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,1-caasp-admin
+caasp-lb,192.168.0.22/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,1-caasp-lb
+caasp-master-01,192.168.0.23/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,1-caasp-master
+caasp-master-02,192.168.0.24/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,1-caasp-master
+caasp-master-03,192.168.0.25/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,1-caasp-master
+caasp-worker-01,192.168.0.26/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,1-caasp-worker
+caasp-worker-02,192.168.0.27/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,1-caasp-worker
+caasp-worker-03,192.168.0.28/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,1-caasp-worker
+caasp-worker-04,192.168.0.29/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,1-caasp-worker

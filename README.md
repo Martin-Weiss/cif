@@ -156,3 +156,4 @@ Changelog:
 - 20200605-01 adjusted boot-cd script to add efi only if EFI dir exists
 - 20200606-01 corrected template files
 - 20200612-01 added vmware folder to terraform / try to use FQDN based machine-id / enable uuid
+- 20201209-01 added upgrade bond active-backup with single interface

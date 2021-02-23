@@ -20,7 +20,7 @@
 >   # get MAC address of the interface
 >   MAC=$(ip -br -h -f link a show $INTERFACE|awk '{print $3}')
 >   # get bonding module opts
->   BONDING_MODULE_OPTS=$(grep BONDING_MODULE_OPTS /etc/sysconfig/network/ifcfg-$INTERFACE |sed 's/BONDING_MODULE_OPTS=//g')
+>   BONDING_MODULE_OPTS=$(grep BONDING_MODULE_OPTS /etc/sysconfig/network/ifcfg-$INTERFACE |sed 's/BONDING_MODULE_OPTS=//g');if [ "$BONDING_MODULE_OPTS" = "" ]; then BONDING_MODULE_OPTS="active-backup"; fi
 >   # get VLANID
 >   # todo
 > 

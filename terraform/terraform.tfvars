@@ -21,7 +21,8 @@ vsphere_resource_pool = "Cluster1/Resources"
 # template name the machines will be copied from
 # EXAMPLE:
 # template_name = "SLES15-SP1-cloud-init"
-template_name = "sles15sp1-3-template"
+# template_name = "sles15sp1-template-v0.1"
+template_name = "sles15sp2-template-v0.1"
 
 # IMPORTANT: Replace by "efi" string in case your template was created by using EFI firmware
 firmware = "bios"
@@ -29,7 +30,7 @@ firmware = "bios"
 # prefix that all of the booted machines will use
 # IMPORTANT: please enter unique identifier below as value of
 # stack_name variable to not interfere with other deployments
-stack_name = "caasp"
+stack_name = "rancher"
 
 # Number of servers
 servers = 1
@@ -43,25 +44,29 @@ server_disk_size = 55
 #   repository1 = "http://repo.example.com/repository1/"
 #   repository2 = "http://repo.example.com/repository2/"
 # }
+#repositories = {
+#    SES6-POOL = "http://smt.suse/repo/SUSE/Products/Storage/6/x86_64/product/"
+#    SES6-UPDATES = "http://smt.suse/repo/SUSE/Updates/Storage/6/x86_64/update/"
+#    SLE-Module-Basesystem15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Module-Basesystem/15-SP1/x86_64/product/"
+#    SLE-Module-Basesystem15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Module-Basesystem/15-SP1/x86_64/update/"
+#    SLE-Module-CAP-Tools15-SP1-Pool = "http://smt.suse/SUSE/Products/SLE-Module-CAP-Tools/15-SP1/x86_64/product/"
+#    SLE-Module-CAP-Tools15-SP1-Updates = "http://smt.suse/SUSE/Updates/SLE-Module-CAP-Tools/15-SP1/x86_64/update/"
+#    SLE-Module-Containers15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Module-Containers/15-SP1/x86_64/product/"
+#    SLE-Module-Containers15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Module-Containers/15-SP1/x86_64/update/"
+#    SLE-Module-Server-Applications15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Module-Server-Applications/15-SP1/x86_64/product/"
+#    SLE-Module-Server-Applications15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Module-Server-Applications/15-SP1/x86_64/update/"
+#    SLE-Product-HA15-SP1-Pool = "http://smt.suse/SUSE/Products/SLE-Product-HA/15-SP1/x86_64/product/"
+#    SLE-Product-HA15-SP1-Updates = "http://smt.suse/SUSE/Updates/SLE-Product-HA/15-SP1/x86_64/update"
+#    SLE-Product-SLES15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Product-SLES/15-SP1/x86_64/product/"
+#    SLE-Product-SLES15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Product-SLES/15-SP1/x86_64/update/"
+#    "SLES15-SP1-15.1-0" =  "http://smt.suse/sles15sp1/"
+#    "SUSE-CAASP-4.0-Pool" = "http://smt.suse/repo/SUSE/Products/SUSE-CAASP/4.0/x86_64/product/"
+#    "SUSE-CAASP-4.0-Updates" = "http://smt.suse/repo/SUSE/Updates/SUSE-CAASP/4.0/x86_64/update/"
+#}
+
 repositories = {
-    SES6-POOL = "http://smt.suse/repo/SUSE/Products/Storage/6/x86_64/product/"
-    SES6-UPDATES = "http://smt.suse/repo/SUSE/Updates/Storage/6/x86_64/update/"
-    SLE-Module-Basesystem15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Module-Basesystem/15-SP1/x86_64/product/"
-    SLE-Module-Basesystem15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Module-Basesystem/15-SP1/x86_64/update/"
-    SLE-Module-CAP-Tools15-SP1-Pool = "http://smt.suse/SUSE/Products/SLE-Module-CAP-Tools/15-SP1/x86_64/product/"
-    SLE-Module-CAP-Tools15-SP1-Updates = "http://smt.suse/SUSE/Updates/SLE-Module-CAP-Tools/15-SP1/x86_64/update/"
-    SLE-Module-Containers15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Module-Containers/15-SP1/x86_64/product/"
-    SLE-Module-Containers15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Module-Containers/15-SP1/x86_64/update/"
-    SLE-Module-Server-Applications15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Module-Server-Applications/15-SP1/x86_64/product/"
-    SLE-Module-Server-Applications15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Module-Server-Applications/15-SP1/x86_64/update/"
-    SLE-Product-HA15-SP1-Pool = "http://smt.suse/SUSE/Products/SLE-Product-HA/15-SP1/x86_64/product/"
-    SLE-Product-HA15-SP1-Updates = "http://smt.suse/SUSE/Updates/SLE-Product-HA/15-SP1/x86_64/update"
-    SLE-Product-SLES15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Product-SLES/15-SP1/x86_64/product/"
-    SLE-Product-SLES15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Product-SLES/15-SP1/x86_64/update/"
-    "SLES15-SP1-15.1-0" =  "http://smt.suse/sles15sp1/"
-    "SUSE-CAASP-4.0-Pool" = "http://smt.suse/repo/SUSE/Products/SUSE-CAASP/4.0/x86_64/product/"
-    "SUSE-CAASP-4.0-Updates" = "http://smt.suse/repo/SUSE/Updates/SUSE-CAASP/4.0/x86_64/update/"
 }
+
 
 # Minimum required packages. Do not remove them.
 # Feel free to add more packages

@@ -96,6 +96,12 @@ variable "server_data_disk_size" {
   description = "Size of the data disk in GB on server node"
 }
 
+variable "server_longhorn_disk_size" {
+  default     = 100
+  description = "Size of the data disk in GB on server node"
+}
+
+
 #### To be moved to separate vsphere.tf? ####
 
 provider "vsphere" {

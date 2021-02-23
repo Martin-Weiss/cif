@@ -123,8 +123,8 @@ resource "vsphere_virtual_machine" "server" {
   for_each = { for inst in local.instances : inst.servername => inst }
 
   name             = each.value.servername
-  num_cpus         = var.server_cpus
-  memory           = var.server_memory
+  num_cpus         = each.value.cpus
+  memory           = each.value.memory
   guest_id         = var.guest_id
   firmware         = var.firmware
   scsi_type        = data.vsphere_virtual_machine.template.scsi_type
@@ -132,7 +132,7 @@ resource "vsphere_virtual_machine" "server" {
   datastore_id     = data.vsphere_datastore.datastore.id
   folder           = var.stack_name
   wait_for_guest_net_timeout = 20
-  scsi_controller_count = 2
+  scsi_controller_count = 1
 
   clone {
     template_uuid = data.vsphere_virtual_machine.template.id
@@ -146,12 +146,26 @@ resource "vsphere_virtual_machine" "server" {
     unit_number = 0
   }
 
-  disk {
-    label = "disk1"
-    size  = var.server_data_disk_size
-    eagerly_scrub    = false
-    thin_provisioned = true
-    unit_number = 15
+  dynamic "disk" {
+        for_each        = each.value.data_disk_size > 0 ? [1] : []
+        content {
+            label = "disk1"
+            size  = each.value.data_disk_size
+            eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
+            thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+            unit_number = 1
+        }
+  }
+
+  dynamic "disk" {
+        for_each        = each.value.longhorn_disk_size > 0 ? [1] : []
+        content {
+            label = "disk2"
+            size  = each.value.longhorn_disk_size
+            eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
+            thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+            unit_number = 2
+            }
   }
 
   extra_config = {
