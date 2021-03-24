@@ -49,7 +49,7 @@ runcmd:
   - echo "default ${gateway} - -" > /etc/sysconfig/network/routes
   - /usr/sbin/ip route add default via ${gateway}
   # /etc/hosts
-  - echo ${ipaddress} ${servername}.${domainname} ${servername} >> /etc/hosts
+  - echo $(echo ${ipaddress}|cut -f1 -d "/") ${servername}.${domainname} ${servername} >> /etc/hosts
   # /etc/resolv.conf
   - sed -i 's/^NETCONFIG_DNS_STATIC_SERVERS=.*/NETCONFIG_DNS_STATIC_SERVERS="${dnsserver1} ${dnsserver2}"/g' /etc/sysconfig/network/config
   - sed -i 's/^NETCONFIG_DNS_STATIC_SEARCHLIST=.*/NETCONFIG_DNS_STATIC_SEARCHLIST="${domainname}"/g' /etc/sysconfig/network/config
