@@ -1,0 +1,29 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: de
+    variant: de
+  network:
+    network:
+      version: 2
+      ethernets:
+        ens192:
+          dhcp4: true
+  storage:
+    layout:
+      name: lvm
+  identity:
+    hostname: ubuntu-20-04-02-template
+    username: packer
+    password: $6$W4cYOZp9GPUIY2T$FndVoDxH.4y4GvpEFTaw3PoaphP4gQhWVEl4XwSF0nfWTvZqji8gicZouoMeYeNmG7Za5tpJOkQAUkq3lZvog0
+  ssh:
+    install-server: yes
+    allow-pw: true
+    authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD1RPbAISjVatORw9QZjLPS4h++Noq/6haXnaZjtsmQNiqVaq3v4zUTaEolrow8/fTKIwIDxLbtUyy8Y/AbDoCp3dT2fx1YCw2BCpg1fn4QxBzc7NAxA+XrUty53PZ3V2AhpJgoN5Iybjkvo0xguiPjo/W62ZRTtNssodRr/nMnwos4/Xb1VvLe5sIQIkHuLQvp9TdBJtUhf3H/zw4tiwGrI6FN6B02Q1DVAntX8BMcq0pjgF2Gd6QV1L1CTz+H+IIeevALWzJG+AeQmXE7psRPpqgMYBof2bNTTYUjpau+8/plVBoHJZCxABPALUYDGwu/m6iPdjhMFH7jxXPBaseDgTDLWthAV/4j7il2o2xVjjsJ0IfShiOvx10BIBfkAR20NLQ9ptQkHki5/TdTEDO7H9R2Sd9ktWtOaylTXXoES1cqLN/cl1VJ8oXxc+ehFFyFdCumTQKRNEPoTdXYsfMVCPkX/aklttvzv2J+/GGrruN2x1cBsR01KPVafVGuH10= root@susemanager
+  user-data:
+    disable_root: false
+  late-commands:
+    - echo 'packer ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/packer

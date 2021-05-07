@@ -1,0 +1,51 @@
+{
+    "builders": [
+    {
+      "type": "vsphere-iso",
+      "vcenter_server": "{{user `vsphere-server`}}",      
+      "username": "{{user `vsphere-user`}}",      
+      "password": "{{user `vsphere-password`}}",
+      "insecure_connection": "true",
+    
+      "datacenter": "{{user `vsphere-datacenter`}}",
+      "cluster": "{{user `vsphere-cluster`}}",      
+          
+
+      "datastore": "{{user `vsphere-datastore`}}",  
+      "guest_os_type": "ubuntu64Guest",
+      "CPUs": "{{user `vm-cpu-num`}}",
+      "RAM": "{{user `vm-mem-size`}}",
+      "RAM_reserve_all": false,
+      "disk_controller_type": "pvscsi",
+      "storage": {
+        "disk_size": "{{user `vm-disk-size`}}",
+        "disk_thin_provisioned":true
+      },
+      "network_adapters": {
+        "network": "{{user `vsphere-network`}}", 
+        "network_card": "vmxnet3"
+      },
+
+      "vm_name": "{{user `vm-name`}}",      
+      "notes": "Build via Packer",            
+      "convert_to_template": true,
+
+      "ssh_username": "packer",      
+      "ssh_password": "packer",
+      "ssh_timeout": "20m",
+      "ssh_handshake_attempts": "100",
+
+      "iso_paths": ["{{user `iso_url`}}"], 
+
+      "cd_files": ["./http/user-data", "./http/meta-data"],
+      "cd_label": "cidata",
+      "boot_wait": "10s",
+      "boot_command": [
+        "<enter><wait2><enter><wait><f6><esc><wait>",
+        " autoinstall<wait2> ds=nocloud;",
+        "<wait><enter>"
+      ],
+      "shutdown_command": "echo 'packer'|sudo -S shutdown -P now" 
+    }
+  ]
+}
