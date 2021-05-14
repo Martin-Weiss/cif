@@ -9,6 +9,9 @@
       "datacenter": "{{user `vsphere-datacenter`}}",
       "cluster": "{{user `vsphere-cluster`}}",      
       "datastore": "{{user `vsphere-datastore`}}",  
+      "folder": "{{user `vm-folder`}}", 
+      "vm_name": "{{user `vm-name`}}",     
+      "notes": "Build via Packer",            
       "guest_os_type": "ubuntu64Guest",
       "CPUs": "{{user `vm-cpu-num`}}",
       "RAM": "{{user `vm-mem-size`}}",
@@ -23,9 +26,6 @@
         "network_card": "vmxnet3"
       },
 
-      "vm_name": "{{user `vm-name`}}",     
-      "folder": "{{user `vm-folder`}}", 
-      "notes": "Build via Packer",            
       "convert_to_template": true,
 
       "ssh_username": "packer",      
