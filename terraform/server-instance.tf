@@ -200,7 +200,6 @@ resource "vsphere_virtual_machine" "server" {
             unit_number = 5
             }
   }
-#  scsi0:5.virtualSSD = 1
 
   dynamic "disk" {
         for_each        = each.value.ceph_disk_4_size > 0 ? [1] : []
@@ -212,14 +211,14 @@ resource "vsphere_virtual_machine" "server" {
             unit_number = 6
             }
   }
-#  scsi0:6.virtualSSD = 1
-
 
   extra_config = {
     "guestinfo.metadata"          = base64gzip(data.template_file.server_cloud_init_metadata[each.key].rendered)
     "guestinfo.metadata.encoding" = "gzip+base64"
     "guestinfo.userdata"          = base64gzip(data.template_file.server_cloud_init_userdata[each.key].rendered)
     "guestinfo.userdata.encoding" = "gzip+base64"
+    "scsi0:5.virtualSSD" = "1"
+    "scsi0:6.virtualSSD" = "1"
   }
 
   enable_disk_uuid = true
