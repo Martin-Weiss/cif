@@ -168,6 +168,53 @@ resource "vsphere_virtual_machine" "server" {
             }
   }
 
+  dynamic "disk" {
+        for_each        = each.value.ceph_disk_1_size > 0 ? [1] : []
+        content {
+            label = "disk3"
+            size  = each.value.ceph_disk_1_size
+            eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
+            thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+            unit_number = 3
+            }
+  }
+
+  dynamic "disk" {
+        for_each        = each.value.ceph_disk_2_size > 0 ? [1] : []
+        content {
+            label = "disk4"
+            size  = each.value.ceph_disk_2_size
+            eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
+            thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+            unit_number = 4
+            }
+  }
+
+  dynamic "disk" {
+        for_each        = each.value.ceph_disk_3_size > 0 ? [1] : []
+        content {
+            label = "disk5"
+            size  = each.value.ceph_disk_3_size
+            eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
+            thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+            unit_number = 5
+            }
+  }
+#  scsi0:5.virtualSSD = 1
+
+  dynamic "disk" {
+        for_each        = each.value.ceph_disk_4_size > 0 ? [1] : []
+        content {
+            label = "disk6"
+            size  = each.value.ceph_disk_4_size
+            eagerly_scrub    = data.vsphere_virtual_machine.template.disks.0.eagerly_scrub
+            thin_provisioned = data.vsphere_virtual_machine.template.disks.0.thin_provisioned
+            unit_number = 6
+            }
+  }
+#  scsi0:6.virtualSSD = 1
+
+
   extra_config = {
     "guestinfo.metadata"          = base64gzip(data.template_file.server_cloud_init_metadata[each.key].rendered)
     "guestinfo.metadata.encoding" = "gzip+base64"

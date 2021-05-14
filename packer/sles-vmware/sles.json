@@ -1,0 +1,62 @@
+{
+  "builders": [
+    {
+      "type": "vsphere-iso",
+      "vcenter_server": "{{user `vsphere-server`}}",
+      "username": "{{user `vsphere-user`}}",
+      "password": "{{user `vsphere-password`}}",
+      "insecure_connection": "true",
+      "datacenter": "{{user `vsphere-datacenter`}}",
+      "cluster": "{{user `vsphere-cluster`}}",
+      "datastore": "{{user `vsphere-datastore`}}",
+      "folder": "{{user `vm-folder`}}",
+      "vm_name": "{{user `vm-name`}}",
+      "notes": "Build via Packer",
+      "guest_os_type": "sles15_64Guest",
+      "CPUs": 2,
+      "RAM": 2048,
+      "RAM_reserve_all": true,
+      "disk_controller_type": "pvscsi",
+      "storage": {
+        "disk_size": "{{user `vm-disk-size`}}",
+        "disk_thin_provisioned": true
+      },
+      "network_adapters": {
+        "network": "{{user `vsphere-network`}}",
+        "network_card": "vmxnet3"
+      },
+      "convert_to_template": "true",
+      "ip_wait_timeout": "60m",
+      "ssh_username": "root",
+      "ssh_password": "suse1234",
+      "ssh_port": 22,
+      "ssh_timeout": "10000s",
+      "ssh_handshake_attempts": "1000",
+      "iso_paths": ["{{user `iso_url`}}"],
+      "boot_wait": "20s",
+      "boot_command": [
+	"<esc><enter><wait>",
+	"linux ",
+        "lang=en_US ",
+        "textmode=1 ",
+        "info=http://192.168.0.20/pub/autoyast/info-sles15sp2.txt ",
+        "netsetup=0 ",
+	"hostip=192.168.0.115/24 ",
+        "gateway=192.168.0.1 ",
+        "nameserver=192.168.0.31 ",
+        "netwait=10 ",
+        "<enter><wait>"
+      ],
+      "shutdown_command": "echo 'packer'|sudo -S shutdown -P now"
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "echo '{{user `ssh_password`}}' | sudo -S -E bash '{{.Path}}'",
+      "scripts": [
+	      "install.sh"
+      ],
+      "type": "shell"
+    }
+  ]
+}
