@@ -221,6 +221,13 @@ resource "vsphere_virtual_machine" "server" {
     "scsi0:6.virtualSSD" = "1"
   }
 
+  lifecycle {
+	ignore_changes = [
+		# ignore changes to extra_config scsi..virtualSSD in case the host does not have the device
+		extra_config,
+	]
+  }
+
   enable_disk_uuid = true
 
   network_interface {
