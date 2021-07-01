@@ -157,3 +157,4 @@ Changelog:
 - 20200606-01 corrected template files
 - 20200612-01 added vmware folder to terraform / try to use FQDN based machine-id / enable uuid
 - 20201209-01 added upgrade bond active-backup with single interface
+- 20210107-01 added SLES 15 SP3 adjustments
