@@ -8,9 +8,11 @@
       <enable config:type="list">
         <service>sshd</service>
       </enable>
+      <!--      
       <on_demand config:type="list">
-        <listentry>iscsid</listentry>
+	<listentry>iscsid</listentry>
       </on_demand>
+      -->
     </services>
   </services-manager>
   <users config:type="list">
