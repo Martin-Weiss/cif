@@ -1,0 +1,15 @@
+#!/bin/bash
+ export VSPHERE_SERVER="vsphere.suse"
+ export VSPHERE_USER="terraform-kubernetes@vsphere.local"
+ export VSPHERE_PASSWORD="suse1234"
+ export VSPHERE_ALLOW_UNVERIFIED_SSL=true # In case you are using custom certificate for accessing vsphere API
+ export GOVC_URL="https://$VSPHERE_USER:$VSPHERE_PASSWORD@$VSPHERE_SERVER/sdk"
+ export GOVC_INSECURE="1"
+ export GOVC_DATACENTER=""
+ export GOVC_DATASTORE=""
+ export GOVC_NETWORK=""
+ export GOVC_RESOURCE_POOL=""
+ export GOVC_HOST=""
+ export GOVC_GUEST_LOGIN=""
+ export GOVC_VIM_NAMESPACE=""
+ export GOVC_VIM_VERSION=""
