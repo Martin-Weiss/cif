@@ -135,6 +135,7 @@ sles15sp2-1;192.168.0.114/24;;sles15sp2;/dev/sda;;part-sles12-btrfs-efi-50G.xml;
 #sles15sp2-2;192.168.0.115/24;;sles15sp2-template;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_BASE
 #sles15sp2-2;192.168.0.115/24;;sles15sp2-template;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_BASE
 sles15sp3-1;192.168.0.115/24;;sles15sp3-template;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_BASE
+sles15sp3-2;192.168.0.116/24;;sles15sp3-template;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_BASE
 
 # CAASP 3 Example
 caasp3-admin;10.1.1.110/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-gpt-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_ADMIN
