@@ -1,0 +1,16 @@
+{
+  "DiskProvisioning": "thin",
+  "IPAllocationPolicy": "dhcpPolicy",
+  "IPProtocol": "IPv4",
+  "MarkAsTemplate": true,
+  "PowerOn": false,
+  "InjectOvfEnv": false,
+  "WaitForIP": false,
+  "Name": "slemicro52-kiwi-template-v0.1",
+  "NetworkMapping": [
+  {
+  "Name": "192-168-0",
+  "Network": "192-168-0"
+  }]
+}
+
