@@ -23,7 +23,7 @@ mkdir -p $TARGET_DIR/image
 
 # build the image
 kiwi-ng --profile vmware system build --target-dir $TARGET_DIR/image --description $TARGET_DIR \
---add-repo http://smt.suse/sles15sp3/,repo-md,sles15sp3,1,true,false \
+--add-repo http://weiss-2.weiss.ddnss.de/sles15sp3/,repo-md,sles15sp3,1,true,false \
 --add-repo http://smt.suse/repo/SUSE/Products/SLE-Product-SLES/15-SP3/x86_64/product/,repo-md,SLE-Product-SLES15-SP3-Pool \
 --add-repo http://smt.suse/repo/SUSE/Updates/SLE-Product-SLES/15-SP3/x86_64/update/,repo-md,SLE-Product-SLES15-SP3-Updates \
 --add-repo http://smt.suse/repo/SUSE/Products/SLE-Module-Basesystem/15-SP3/x86_64/product/,repo-md,SLE-Module-Basesystem15-SP3-Pool \
