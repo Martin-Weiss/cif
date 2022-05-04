@@ -304,8 +304,9 @@
         <package name="kernel-default"/>
 	<!-- For WiFi: -->
 	<!-- can not find the package jeos-firstboot-rpiwifi in sles 15 sp3 channels at the moment so commenting this out
-	<package name="jeos-firstboot-rpiwifi"/> 
+	     update 04.05.2022 - got a PTF on bug 1198940 - so re-adding
         -->
+	<package name="jeos-firstboot-rpiwifi"/> 
         <package name="bcm43xx-firmware"/>
     </packages>
 

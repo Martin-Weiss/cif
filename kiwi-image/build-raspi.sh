@@ -32,6 +32,8 @@ kiwi-ng --profile RaspberryPi system build --target-dir $TARGET_DIR/image --desc
 --add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sle-module-devtools15-sp3-updates-aarch64/sles15sp3a64/,repo-md,SLE-Module-DevTools15-SP3-Updates \
 --add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sle-module-server-applications15-sp3-pool-aarch64/sles15sp3a64/,repo-md,SLE-Module-Server-Applications15-SP3-Pool \
 --add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sle-module-server-applications15-sp3-updates-aarch64/sles15sp3a64/,repo-md,SLE-Module-Server-Applications15-SP3-Updates \
+--add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sle-module-desktop-applications15-sp3-pool-aarch64/sles15sp3a64/,repo-md,SLE-Module-Desktop-Applications15-SP3-Pool \
+--add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sle-module-desktop-applications15-sp3-updates-aarch64/sles15sp3a64/,repo-md,SLE-Module-Desktop-Applications15-SP3-Updates \
 --add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sle-module-containers15-sp3-pool-aarch64/sles15sp3a64/,repo-md,SLE-Module-Containers15-SP3-Pool \
 --add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sle-module-containers15-sp3-updates-aarch64/sles15sp3a64/,repo-md,SLE-Module-Containers15-SP3-Updates \
 --add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sle-module-packagehub-subpackages15-sp3-pool-aarch64/sles15sp3a64/,repo-md,SLE-Module-Packagehub-Subpackages15-SP3-Pool \
@@ -40,6 +42,7 @@ kiwi-ng --profile RaspberryPi system build --target-dir $TARGET_DIR/image --desc
 --add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sle-module-public-cloud15-sp3-updates-aarch64/sles15sp3a64/,repo-md,SLE-Module-Public-Cloud15-SP3-Updates \
 --add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-suse-packagehub-15-sp3-backports-pool-aarch64/sles15sp3a64/,repo-md,SUSE-PackageHub-15-SP3-Backports-Pool \
 --add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-suse-packagehub-15-sp3-pool-aarch64/sles15sp3a64/,repo-md,SUSE-PackageHub-15-SP3-Pool \
+--add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp3a64-test-sles15sp3a64-ptfs/sles15sp3a64/,repo-md,sles15sp3a64-ptfs \
 
 # create bundle
 rm -rf $TARGET_DIR/image-bundle
