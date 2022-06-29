@@ -46,3 +46,12 @@ title OES2018SP1
 title OES2018SP2
 	configfile /grub/oes2018sp2.lst
 
+title HARVESTER100
+	configfile /grub/harvester100.lst
+
+title HARVESTER101
+	configfile /grub/harvester101.lst
+
+title HARVESTER102
+	configfile /grub/harvester102.lst
+
