@@ -11,6 +11,7 @@
     </description>
     <profiles>
         <profile name="arm" description="JeOS for ARM" arch="aarch64"/>
+        <profile name="harvester" description="JeOS for harvester" arch="x86_64"/>
         <profile name="vmware" description="JeOS for vmware" arch="x86_64"/>
         <profile name="RaspberryPi" description="JeOS for the Raspberry Pi" arch="aarch64"/>
         <profile name="RaspberryPi-xfs" description="JeOS for the Raspberry Pi with XFS filesystem" arch="aarch64"/>
@@ -56,6 +57,45 @@
             </systemdisk>
             <size unit="G">50</size>
         </type>
+    </preferences>
+
+    <preferences profiles="harvester">
+        <version>1.0.0</version>
+        <packagemanager>zypper</packagemanager>
+        <bootsplash-theme>SLE</bootsplash-theme>
+        <bootloader-theme>SLE</bootloader-theme>
+        <locale>en_US</locale>
+        <keytable>de.map.gz</keytable>
+        <timezone>Europe/Berlin</timezone>
+        <hwclock>utc</hwclock>
+        <rpm-excludedocs>false</rpm-excludedocs>
+        <type
+            image="vmx"
+            filesystem="btrfs"
+            format="qcow2"
+            bootloader="grub2"
+            firmware="uefi"
+            efipartsize="33"
+            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty0 quiet"
+            bootpartition="false"
+            bootkernel="custom"
+            devicepersistency="by-uuid"
+            btrfs_quota_groups="true"
+            btrfs_root_is_snapshot="true"
+        >
+            <systemdisk>
+                <volume name="home"/>
+                <volume name="root"/>
+                <volume name="tmp"/>
+                <volume name="opt"/>
+                <volume name="srv"/>
+                <volume name="boot/grub2/i386-pc"/>
+                <volume name="boot/grub2/x86_64-efi" mountpoint="boot/grub2/x86_64-efi"/>
+                <volume name="usr/local"/>
+                <volume name="var" copy_on_write="false"/>
+            </systemdisk>
+            <size unit="G">50</size>
+            </type>
     </preferences>
 
     <preferences profiles="vmware">
@@ -118,7 +158,8 @@
         <keytable>de.map.gz</keytable>
         <timezone>Europe/Berlin</timezone>
         <hwclock>utc</hwclock>
-        <rpm-excludedocs>true</rpm-excludedocs>
+	<rpm-excludedocs>true</rpm-excludedocs>
+	<!-- blacklist vc4 as the DSI connected display gets black with this module in SLES 15 SP3 on 19th of May 2022 -->
         <type
             image="oem"
             initrd_system="dracut"
@@ -126,7 +167,7 @@
             fsmountoptions="noatime,compress=lzo"
             bootloader="grub2"
             firmware="efi"
-            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty quiet"
+            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty quiet modprobe.blacklist=vc4"
             bootpartition="false"
             devicepersistency="by-uuid"
             btrfs_quota_groups="true"
@@ -162,13 +203,14 @@
         <timezone>Europe/Berlin</timezone>
         <hwclock>utc</hwclock>
         <rpm-excludedocs>true</rpm-excludedocs>
+	<!-- blacklist vc4 as the DSI connected display gets black with this module in SLES 15 SP3 on 19th of May 2022 -->
         <type
             image="oem"
             initrd_system="dracut"
             filesystem="xfs"
             bootloader="grub2"
             firmware="efi"
-            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty quiet"
+            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty quiet modprobe.blacklist=vc4"
             bootpartition="false"
             devicepersistency="by-uuid"
             efipartsize="64"
@@ -291,6 +333,26 @@
 	<package name="cloud-init" />
         <package name="cloud-init-config-suse" />
 	<!-- <package name="cloud-init-vmware-guestinfo" /> -->
+
+    </packages>
+
+    <packages type="image" profiles="harvester">
+        <!-- for rke2 with longhorn we need the kernel-default as the iscsi_tcp is not part of kernel-default-base -->
+        <package name="kernel-default"/>
+        <package name="qemu-guest-agent" arch="x86_64"/>
+
+        <!-- Only for btrfs -->
+        <package name="btrfsprogs"/>
+        <package name="btrfsmaintenance"/>
+        <package name="grub2-snapper-plugin"/>  <!-- snapper - grub2 - integration, "small" -->
+        <package name="snapper-zypp-plugin"/>   <!-- this is key snapper/zypp integration, as requested in the PRD -->
+        <package name="rollback-helper"/>
+        <package name="snapper"/>
+
+        <!--  cloud-init also in vmware -->
+        <package name="cloud-init" />
+        <package name="cloud-init-config-suse" />
+        <!-- <package name="cloud-init-vmware-guestinfo" /> -->
 
     </packages>
 
