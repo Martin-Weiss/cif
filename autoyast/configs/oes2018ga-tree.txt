@@ -63,7 +63,7 @@ LDAP_SERVER_LIST="oes2018ga-1.suse:oes2018ga-2.suse"
 ## Type IP
 ## Description: IP Address of an existing eDirectory server holding a writable
 ##		replica of the context where the new server will be installed
-REPLICA_SERVER="10.1.1.203"
+REPLICA_SERVER="10.1.1.211"
 
 
 ## DHCP information
@@ -226,7 +226,7 @@ SLP_TYPE="open"
 ## Type Custom
 ## Description: Colon separated list of IP addresses of SLP Directory Agent
 ##              host servers
-SLPDA_SERVER_LIST="10.1.1.203:10.1.1.204"
+SLPDA_SERVER_LIST="10.1.1.211:10.1.1.212"
 
 ## Type Custom
 ## Description: Colon separated list of SLP Scope names
