@@ -1,0 +1,21 @@
+color white/blue black/light-gray
+default 0
+timeout 30
+root (cd)
+gfxmenu /grub/message
+
+title back
+        configfile /grub/instserver.lst
+
+title OES2018SP3 AutoYaST
+	kernel /kernel/oes2018sp3/linux info=http://10.1.1.1/autoyast/info-oes2018sp3.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes2018sp3/initrd
+
+title OES2018SP3 manual installation
+	kernel /kernel/oes2018sp3/linux info=http://10.1.1.1/autoyast/info-oes2018sp3-manual.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes2018sp3/initrd
+
+title OES2018SP3 rescue mode
+	kernel /kernel/oes2018sp3/linux info=http://10.1.1.1/autoyast/info-oes2018sp3-rescue.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes2018sp3/initrd
+

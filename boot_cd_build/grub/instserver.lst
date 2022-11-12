@@ -31,6 +31,9 @@ title SLES15SP2
 title SLES15SP3
 	configfile /grub/sles15sp3.lst
 
+title SLES15SP4
+	configfile /grub/sles15sp4.lst
+
 title CAASP3
 	configfile /grub/caasp3.lst
 
@@ -45,6 +48,12 @@ title OES2018SP1
 
 title OES2018SP2
 	configfile /grub/oes2018sp2.lst
+
+title OES2018SP3
+	configfile /grub/oes2018sp3.lst
+
+title OES2023GA
+	configfile /grub/oes2023ga.lst
 
 title HARVESTER100
 	configfile /grub/harvester100.lst

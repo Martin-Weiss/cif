@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <software>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+      <pattern>novell-base</pattern>
+      <pattern>novell-domain-services</pattern>
+      <pattern>novell-dns</pattern>
+      <pattern>novell-edirectory</pattern>
+      <pattern>novell-lum</pattern>
+      <pattern>novell-ncp</pattern>
+      <pattern>novell-nrm</pattern>
+      <pattern>novell-sms</pattern>
+      <pattern>novell-web-services</pattern>
+      <pattern>novell-welcome</pattern>
+      <pattern>novell-xtier</pattern>
+      <pattern>novell-yast2</pattern>
+      <pattern>x11</pattern>
+    </patterns>
+    <packages  config:type="list">
+      <package>Open_Enterprise_Server-release</package>
+      <package>dos2unix</package>
+      <package>gcc</package>
+      <package>glibc</package>
+      <package>iftop</package>
+      <package>kdump</package>
+      <package>kexec-tools</package>
+      <package>logwatch</package>
+      <package>lsb-release</package>
+      <package>net-tools</package>
+      <!-- the following package is required for novell-sms -->
+      <package>openslp-32bit</package>
+      <package>sysstat</package>
+     </packages>
+  </software>
+</profile>

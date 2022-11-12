@@ -1,0 +1,21 @@
+color white/blue black/light-gray
+default 0
+timeout 30
+root (cd)
+gfxmenu /grub/message
+
+title back
+        configfile /grub/instserver.lst
+
+title OES2023GA AutoYaST
+	kernel /kernel/oes2023ga/linux info=http://10.1.1.1/autoyast/info-oes2023ga.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes2023ga/initrd
+
+title OES2023GA manual installation
+	kernel /kernel/oes2023ga/linux info=http://10.1.1.1/autoyast/info-oes2023ga-manual.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes2023ga/initrd
+
+title OES2023GA rescue mode
+	kernel /kernel/oes2023ga/linux info=http://10.1.1.1/autoyast/info-oes2023ga-rescue.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes2023ga/initrd
+

@@ -1223,7 +1223,7 @@ xmlns:config="http://www.suse.com/1.0/configns">
 HERE
 
 	# SLES/OES releases pre SLE15
-	if [ -n "$(egrep "11|12|20"<<<$my_release)" ]; then
+	if [ -n "$(egrep "11|12|2015|2018"<<<$my_release)" ]; then
         	cat <<HERE >>$NTP_TMP_FILE
   <peers config:type="list">
 HERE

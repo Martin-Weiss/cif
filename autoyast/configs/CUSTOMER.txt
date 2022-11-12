@@ -68,6 +68,13 @@ OES2018_NCS="${SLES12_BASE}:oes/oes_base.xml:oes/nss.xml:oes/afp.xml:oes/cifs.xm
 OES2018_BRANCH="${SLES12_BASE}:oes/oes_base.xml:oes/nss.xml:oes/afp.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml:oes/netstorage.xml"
 OES2018_ALL="${SLES12_BASE}:oes/oes_base.xml:oes/imanager.xml:oes/nss.xml:oes/afp.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml:oes/netstorage.xml"
 
+## OES 2023 Service types
+OES2023_EDIR="${SLES15_BASE}:oes/oes_base.xml"
+OES2023_EDIR_IMAN="${SLES15_BASE}:oes/oes_base.xml:oes/imanager.xml"
+OES2023_NCS="${SLES15_BASE}:oes/oes_base.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml"
+OES2023_BRANCH="${SLES15_BASE}:oes/oes_base.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml"
+OES2023_ALL="${SLES15_BASE}:oes/oes_base.xml:oes/imanager.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml"
+
 ## DSfW service types
 OES2018_DSFW_FRD_ADC="${SLES12_BASE}:oes/oes_base_frd_adc.xml:oes/dns.xml"
 OES2018_DSFW_FRD_FDC="${SLES12_BASE}:oes/oes_base_frd_fdc.xml:oes/dns.xml"
