@@ -5,6 +5,8 @@
     <admin_context>%%OES_INSTALL_USER%%</admin_context>
     <admin_password>-ASK-</admin_password>
     <proxy_context>cn=OESCommonProxy_%%HOST_NAME%%,%%SERVER_CONTEXT%%</proxy_context>
+    <!-- oes2023 new -->
+    <common_proxy_context>cn=OESCommonProxy_%%HOST_NAME%%,%%SERVER_CONTEXT%%</common_proxy_context>
     <proxy_password>-AUTOGENERATE-</proxy_password>
     <tree_name>%%TREE_NAME%%</tree_name>
     <use_common_proxy>yes</use_common_proxy>
