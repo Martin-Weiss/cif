@@ -57,12 +57,14 @@ UCO_CONTEXT="ou=lum,ou=global,o=oes2023ga"
 ## 		theses services.
 ##		The remaining servers are configured as alternate LDAP servers
 ##		for LUM
-LDAP_SERVER_LIST="oes2023ga-1.suse:oes2023ga-2.suse"
+#LDAP_SERVER_LIST="oes2023ga-1.suse:oes2023ga-2.suse"
+# cifs proxy create failure due to dns instead of ip?
+LDAP_SERVER_LIST="10.1.1.211:10.1.1.212"
 
 ## Type IP
 ## Description: IP Address of an existing eDirectory server holding a writable
 ##		replica of the context where the new server will be installed
-REPLICA_SERVER="10.1.1.205"
+REPLICA_SERVER="10.1.1.211"
 
 
 ## DHCP information
