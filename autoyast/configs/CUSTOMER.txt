@@ -70,10 +70,10 @@ OES2018_ALL="${SLES12_BASE}:oes/oes_base.xml:oes/imanager.xml:oes/nss.xml:oes/af
 
 ## OES 2023 Service types
 OES2023_EDIR="${SLES15_BASE}:oes/oes_base.xml"
-OES2023_EDIR_IMAN="${SLES15_BASE}:oes/oes_base.xml:oes/imanager.xml"
+OES2023_EDIR_IMAN="${SLES15_BASE}:oes/oes_base.xml:oes/imanager.xml,oes/umc.xml"
 OES2023_NCS="${SLES15_BASE}:oes/oes_base.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml"
 OES2023_BRANCH="${SLES15_BASE}:oes/oes_base.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml"
-OES2023_ALL="${SLES15_BASE}:oes/oes_base.xml:oes/imanager.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml"
+OES2023_ALL="${SLES15_BASE}:oes/oes_base.xml:oes/imanager.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml:oes/umc.xml"
 
 ## DSfW service types
 OES2018_DSFW_FRD_ADC="${SLES12_BASE}:oes/oes_base_frd_adc.xml:oes/dns.xml"

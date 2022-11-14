@@ -16,6 +16,7 @@
       <pattern>novell-welcome</pattern>
       <pattern>novell-xtier</pattern>
       <pattern>novell-yast2</pattern>
+      <pattern>microfocus-umc</pattern>
       <pattern>x11</pattern>
     </patterns>
     <packages  config:type="list">
@@ -33,6 +34,8 @@
       <!-- the following package is required for novell-sms -->
       <package>openslp-32bit</package>
       <package>sysstat</package>
+      <!-- the following package is required for ucs -->
+      <package>python3-requests</package>
      </packages>
   </software>
 </profile>

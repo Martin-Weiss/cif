@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+<umc>
+    <umc_db_hostname>%%HOST_NAME%%.%%DOMAIN_NAME%%</umc_db_hostname>
+    <umc_db_password>SAM23#$</umc_db_password>
+    <umc_db_port>5432</umc_db_port>
+    <umc_db_username>umcdb</umc_db_username>
+    <umc_open_db_port>yes</umc_open_db_port>
+</umc>
+</profile>
