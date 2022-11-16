@@ -208,7 +208,7 @@ function exec_vendor_scripts()
 set_vars
 
 #complete ntp.conf for SLES/OES releases pre SLE15
-if [ -n "$(egrep "11|12|20"<<<$my_server_type)" ]; then
+if [ -n "$(egrep "11|12|2015|2018"<<<$my_server_type)" ]; then
      complete_ntp
 fi
 
