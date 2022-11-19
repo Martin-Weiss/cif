@@ -41,8 +41,6 @@
       <package>logwatch</package>
       <package>lsb-release</package>
       <package>net-tools</package>
-      <!-- the following package is required for novell-sms -->
-      <package>openslp-32bit</package>
       <package>sysstat</package>
      </packages>
   </software>
