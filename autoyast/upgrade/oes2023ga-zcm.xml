@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <report>
+    <messages>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </messages>
+    <warnings>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </warnings>
+  </report>
+  <general>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+    </mode>
+    <signature-handling>
+      <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key config:type="boolean">true</accept_unknown_gpg_key>
+      <accept_unsigned_file config:type="boolean">true</accept_unsigned_file>
+      <accept_verification_failed config:type="boolean">false</accept_verification_failed>
+      <import_gpg_key config:type="boolean">true</import_gpg_key>
+    </signature-handling>
+  </general>
+  <keyboard>
+    <keymap>german</keymap>
+  </keyboard>
+  <language>
+    <language>en_US</language>
+    <languages>en_US</languages>
+  </language>
+  <backup>
+    <modified config:type="boolean">true</modified>
+    <sysconfig config:type="boolean">true</sysconfig>
+    <remove_old config:type="boolean">false</remove_old>
+  </backup>
+  <upgrade>
+    <stop_on_solver_conflict config:type="boolean">true</stop_on_solver_conflict>
+    <only_installed_packages config:type="boolean">false</only_installed_packages>
+  </upgrade>
+  <add-on>
+    <add_on_products config:type="list">
+      <listentry>
+        <media_url>http://10.1.1.1/oes2023ga</media_url>
+        <product>OES2023-GA-DVD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-GA-DVD</name>
+        <alias>OES2023-GA-DVD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-Pool-bundle-PROD</media_url>
+        <product>OES2023-Pool-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-Pool-bundle-PROD</name>
+        <alias>OES2023-Pool-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-Updates-bundle-PROD</media_url>
+        <product>OES2023-Updates-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-Updates-bundle-PROD</name>
+        <alias>OES2023-Updates-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Product-SLES15-SP4-Pool-bundle-PROD</media_url>
+        <product>OES2023-SLE-Product-SLES15-SP4-Pool-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Product-SLES15-SP4-Pool-bundle-PROD</name>
+        <alias>OES2023-SLE-Product-SLES15-SP4-Pool-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Product-SLES15-SP4-Updates-bundle-PROD</media_url>
+        <product>OES2023-SLE-Product-SLES15-SP4-Updates-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Product-SLES15-SP4-Updates-bundle-PROD</name>
+        <alias>OES2023-SLE-Product-SLES15-SP4-Updates-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Basesystem15-SP4-Pool-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Basesystem15-SP4-Pool-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Basesystem15-SP4-Pool-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Basesystem15-SP4-Pool-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Basesystem15-SP4-Updates-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Basesystem15-SP4-Updates-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Basesystem15-SP4-Updates-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Basesystem15-SP4-Updates-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Containers15-SP4-Pool-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Containers15-SP4-Pool-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Containers15-SP4-Pool-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Containers15-SP4-Pool-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Containers15-SP4-Updates-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Containers15-SP4-Updates-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Containers15-SP4-Updates-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Containers15-SP4-Updates-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-DevTools15-SP4-Pool-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-DevTools15-SP4-Pool-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-DevTools15-SP4-Pool-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-DevTools15-SP4-Pool-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-DevTools15-SP4-Updates-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-DevTools15-SP4-Updates-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-DevTools15-SP4-Updates-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-DevTools15-SP4-Updates-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Legacy15-SP4-Pool-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Legacy15-SP4-Pool-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Legacy15-SP4-Pool-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Legacy15-SP4-Pool-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Legacy15-SP4-Updates-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Legacy15-SP4-Updates-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Legacy15-SP4-Updates-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Legacy15-SP4-Updates-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Python3-15-SP4-Pool-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Python3-15-SP4-Pool-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Python3-15-SP4-Pool-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Python3-15-SP4-Pool-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Python3-15-SP4-Updates-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Python3-15-SP4-Updates-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Python3-15-SP4-Updates-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Python3-15-SP4-Updates-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Server-Applications15-SP4-Pool-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Server-Applications15-SP4-Pool-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Server-Applications15-SP4-Pool-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Server-Applications15-SP4-Pool-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Server-Applications15-SP4-Updates-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Server-Applications15-SP4-Updates-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Server-Applications15-SP4-Updates-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Server-Applications15-SP4-Updates-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Web-Scripting15-SP4-Pool-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Web-Scripting15-SP4-Pool-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Web-Scripting15-SP4-Pool-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Web-Scripting15-SP4-Pool-bundle-PROD</alias>
+      </listentry>
+      <listentry>
+        <media_url>http://10.1.1.1/zenworks-yumrepo/OES2023-SLE-Module-Web-Scripting15-SP4-Updates-bundle-PROD</media_url>
+        <product>OES2023-SLE-Module-Web-Scripting15-SP4-Updates-bundle-PROD</product>
+        <product_dir>/</product_dir>
+        <name>OES2023-SLE-Module-Web-Scripting15-SP4-Updates-bundle-PROD</name>
+        <alias>OES2023-SLE-Module-Web-Scripting15-SP4-Updates-bundle-PROD</alias>
+      </listentry>
+    </add_on_products>
+  </add-on>
+  <software>
+  <do_online_update config:type="boolean">true</do_online_update>
+    <packages config:type="list">
+    </packages>
+    <patterns config:type="list">
+    </patterns>
+    <remove-packages config:type="list">
+        <package>kernel-kdump</package>
+        <package>quagga</package>
+    </remove-packages>
+    <remove_patterns config:type="list">
+    </remove_patterns>
+  </software>
+</profile>
+
