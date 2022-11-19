@@ -5,6 +5,7 @@
     <install_recommended config:type="boolean">true</install_recommended>
     <patterns config:type="list">
       <pattern>base</pattern>
+      <pattern>enhanced_base</pattern>
       <pattern>novell-base</pattern>
       <pattern>novell-cifs</pattern>
       <pattern>novell-dhcp</pattern>
@@ -25,6 +26,10 @@
       <pattern>novell-ncs</pattern>
       <pattern>microfocus-umc</pattern>
       <pattern>x11</pattern>
+      <pattern>x11_yast</pattern>
+      <pattern>yast2_basis</pattern>
+      <pattern>yast2_desktop</pattern>
+      <pattern>yast2_server</pattern>
    </patterns>
     <packages  config:type="list">
       <package>Open_Enterprise_Server-release</package>

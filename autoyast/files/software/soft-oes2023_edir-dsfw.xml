@@ -5,6 +5,7 @@
     <install_recommended config:type="boolean">true</install_recommended>
     <patterns config:type="list">
       <pattern>base</pattern>
+      <pattern>enhanced_base</pattern>
       <pattern>novell-base</pattern>
       <pattern>novell-domain-services</pattern>
       <pattern>novell-dns</pattern>
@@ -18,6 +19,10 @@
       <pattern>novell-xtier</pattern>
       <pattern>novell-yast2</pattern>
       <pattern>x11</pattern>
+      <pattern>x11_yast</pattern>
+      <pattern>yast2_basis</pattern>
+      <pattern>yast2_desktop</pattern>
+      <pattern>yast2_server</pattern>
     </patterns>
     <packages  config:type="list">
       <package>Open_Enterprise_Server-release</package>
