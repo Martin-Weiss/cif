@@ -21,7 +21,7 @@ fi
 #govc tree
 
 # delete current vm
-govc vm.destroy sles15sp3-kiwi-template-v0.1
+govc vm.destroy sles15sp4-kiwi-template-v0.1
 
 # import ova
-govc import.ova -options=deploy.json -folder=Kubernetes image-bundle/SLES15SP3.x86_64-1.0.0-0.ova
+govc import.ova -options=deploy.json -folder=Kubernetes image-bundle/SLES15SP4.x86_64-1.0.0-0.ova

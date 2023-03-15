@@ -3,16 +3,17 @@
 <!-- OBS-Profiles: @BUILD_FLAVOR@ -->
 <!-- OBS-Milestone: %current_milestone -->
 
-<image schemaversion="6.1" name="SLES15SP3" displayname="SLES 15 SP3">
+<image schemaversion="6.1" name="SLES15SP4" displayname="SLES 15 SP4">
     <description type="system">
         <author>Martin Weiss</author>
         <contact>martin.weiss@suse.com</contact>
-        <specification>SUSE Linux Enterprise 15 SP3</specification>
+        <specification>SUSE Linux Enterprise 15 SP4</specification>
     </description>
     <profiles>
         <profile name="arm" description="JeOS for ARM" arch="aarch64"/>
         <profile name="harvester" description="JeOS for harvester" arch="x86_64"/>
         <profile name="vmware" description="JeOS for vmware" arch="x86_64"/>
+        <profile name="vmware-iso" description="JeOS for vmware iso" arch="x86_64"/>
         <profile name="RaspberryPi" description="JeOS for the Raspberry Pi" arch="aarch64"/>
         <profile name="RaspberryPi-xfs" description="JeOS for the Raspberry Pi with XFS filesystem" arch="aarch64"/>
     </profiles>
@@ -149,6 +150,22 @@
 	    </type>
     </preferences>
 
+    <preferences profiles="vmware-iso">
+        <version>1.0.0</version>
+        <packagemanager>zypper</packagemanager>
+        <bootsplash-theme>SLE</bootsplash-theme>
+        <bootloader-theme>SLE</bootloader-theme>
+        <locale>en_US</locale>
+        <keytable>de.map.gz</keytable>
+        <timezone>Europe/Berlin</timezone>
+        <hwclock>utc</hwclock>
+        <rpm-excludedocs>false</rpm-excludedocs>
+        <type
+            image="iso"
+        >
+            </type>
+    </preferences>
+
     <preferences profiles="RaspberryPi">
         <version>1.0.0</version>
         <packagemanager>zypper</packagemanager>
@@ -159,7 +176,7 @@
         <timezone>Europe/Berlin</timezone>
         <hwclock>utc</hwclock>
 	<rpm-excludedocs>true</rpm-excludedocs>
-	<!-- blacklist vc4 as the DSI connected display gets black with this module in SLES 15 SP3 on 19th of May 2022 -->
+	<!-- blacklist vc4 as the DSI connected display gets black with this module in SLES 15 SP4 on 19th of May 2022 -->
         <type
             image="oem"
             initrd_system="dracut"
@@ -203,7 +220,7 @@
         <timezone>Europe/Berlin</timezone>
         <hwclock>utc</hwclock>
         <rpm-excludedocs>true</rpm-excludedocs>
-	<!-- blacklist vc4 as the DSI connected display gets black with this module in SLES 15 SP3 on 19th of May 2022 -->
+	<!-- blacklist vc4 as the DSI connected display gets black with this module in SLES 15 SP4 on 19th of May 2022 -->
         <type
             image="oem"
             initrd_system="dracut"
@@ -295,7 +312,7 @@
     </packages>
 
     <!-- Shim for secure boot everywhere except for RPi -->
-    <packages type="image" profiles="arm,vmware">
+    <packages type="image" profiles="arm,vmware,vmware-iso">
         <package name="shim" arch="aarch64,x86_64"/>
     </packages>
 
@@ -316,7 +333,7 @@
         <package name="snapper"/>
     </packages>
 
-    <packages type="image" profiles="vmware">
+    <packages type="image" profiles="vmware,vmware-iso">
     	<!-- for rke2 with longhorn we need the kernel-default as the iscsi_tcp is not part of kernel-default-base -->
 	<package name="kernel-default"/>
         <package name="open-vm-tools" arch="x86_64"/>
@@ -365,7 +382,7 @@
         <package name="dracut-kiwi-oem-repart"/>
         <package name="kernel-default"/>
 	<!-- For WiFi: -->
-	<!-- can not find the package jeos-firstboot-rpiwifi in sles 15 sp3 channels at the moment so commenting this out
+	<!-- can not find the package jeos-firstboot-rpiwifi in sles 15 sp4 channels at the moment so commenting this out
 	     update 04.05.2022 - got a PTF on bug 1198940 - so re-adding
         -->
 	<package name="jeos-firstboot-rpiwifi"/> 
@@ -375,6 +392,11 @@
     <!-- Install xfsprogs when using xfs -->
     <packages type="image" profiles="RaspberryPi-xfs">
         <package name="xfsprogs" arch="aarch64"/>
+    </packages>
+
+    <packages type="image" profiles="vmware-iso">
+        <package name="dracut-kiwi-live" arch="x86_64"/>
+        <package name="syslinux" arch="x86_64"/>
     </packages>
 
     <packages type="bootstrap">
