@@ -194,12 +194,14 @@ ses6-osd03;10.1.1.133/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft
 ses6-osd04;10.1.1.134/24;;sles15sp1ses6;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp1ses6-node.xml;;;;;ses6-cluster1.txt;SLES15_BASE
 
 # SES 7 Example
-ses7-admin;192.168.0.40/24;192.168.0.1;sles15sp2ses7;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp2ses7-admin.xml;;;;;ses7-cluster1.txt;SLES15_BASE
-ses7-01;192.168.0.41/24;192.168.0.1;sles15sp2ses7;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp2ses7-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
-ses7-02;192.168.0.42/24;192.168.0.1;sles15sp2ses7;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp2ses7-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
-ses7-03;192.168.0.43/24;192.168.0.1;sles15sp2ses7;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp2ses7-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
-ses7-04;192.168.0.44/24;192.168.0.1;sles15sp2ses7;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp2ses7-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
-ses7-05;192.168.0.45/24;192.168.0.1;sles15sp2ses7;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp2ses7-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
+ses7-admin;192.168.0.40/24;192.168.0.1;sles15sp3ses71;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp3ses71-admin.xml;;;;;ses7-cluster1.txt;SLES15_BASE
+ses7-01;192.168.0.41/24;192.168.0.1;sles15sp3ses71;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp3ses71-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
+ses7-02;192.168.0.42/24;192.168.0.1;sles15sp3ses71;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp3ses71-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
+ses7-03;192.168.0.43/24;192.168.0.1;sles15sp3ses71;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp3ses71-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
+ses7-04;192.168.0.44/24;192.168.0.1;sles15sp3ses71;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp3ses71-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
+ses7-05;192.168.0.45/24;192.168.0.1;sles15sp3ses71;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp3ses71-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
+ses7-06;192.168.0.56/24;192.168.0.1;sles15sp3ses71;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp3ses71-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
+ses7-07;192.168.0.57/24;192.168.0.1;sles15sp3ses71;/dev/vda;;part-sles12-btrfs-50G.xml;soft-sles15sp3ses71-node.xml;;;;;ses7-cluster1.txt;SLES15_BASE
 
 
 # OES 2015 SP1 Example
