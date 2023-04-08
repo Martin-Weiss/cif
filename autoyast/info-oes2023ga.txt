@@ -1,3 +1,4 @@
 autoyast=http://10.1.1.1/autoyast/xml/
 install=http://10.1.1.1/oes2023ga/
 YAST_SKIP_XML_VALIDATION=1
+ssl.certs=0

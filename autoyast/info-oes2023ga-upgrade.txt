@@ -2,4 +2,4 @@ autoyast=http://10.1.1.1/autoyast/upgrade/oes2023ga.xml
 install=http://10.1.1.1/oes2023ga/
 YAST_SKIP_XML_VALIDATION=1
 autoupgrade=1
-
+ssl.certs=0
