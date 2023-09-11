@@ -1,0 +1,20 @@
+color white/blue black/light-gray
+default 0
+timeout 30
+root (cd)
+gfxmenu /grub/message
+
+title back
+        configfile /grub/instserver.lst
+
+title harvester1
+	kernel /kernel/harvester112/linux ip=192.168.0.35 netmask=255.255.255.0 gateway=192.168.0.1 nameserver=192.168.0.31 net.ifnames=1 rd.cos.disable console=tty1 root=live:http://192.168.0.31/h112/r.s harvester.install.automatic=true harvester.install.config_url=http://192.168.0.31/h112/h1.yaml
+	initrd=/kernel/harvester112/initrd
+
+title harvester2
+	kernel /kernel/harvester112/linux ip=192.168.0.36 netmask=255.255.255.0 gateway=192.168.0.1 nameserver=192.168.0.31 net.ifnames=1 rd.cos.disable console=tty1 root=live:http://192.168.0.31/h112/r.s harvester.install.automatic=true harvester.install.config_url=http://192.168.0.31/h112/h2.yaml
+	initrd=/kernel/harvester112/initrd
+
+title harvester3
+	kernel /kernel/harvester112/linux ip=192.168.0.37 netmask=255.255.255.0 gateway=192.168.0.1 nameserver=192.168.0.31 net.ifnames=1 rd.cos.disable console=tty1 root=live:http://192.168.0.31/h112/r.s harvester.install.automatic=true harvester.install.config_url=http://192.168.0.31/h112/h3.yaml
+	initrd=/kernel/harvester112/initrd
