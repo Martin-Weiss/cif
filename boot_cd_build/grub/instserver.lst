@@ -34,6 +34,9 @@ title SLES15SP3
 title SLES15SP4
 	configfile /grub/sles15sp4.lst
 
+title SLES15SP5
+	configfile /grub/sles15sp5.lst
+
 title CAASP3
 	configfile /grub/caasp3.lst
 
