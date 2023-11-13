@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <software>
+    <image/>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <instsource/>
+    <packages config:type="list">
+      <!--      <package>sles-release</package> -->
+      <package>sle-module-server-applications-release</package>
+      <package>sle-module-basesystem-release</package>
+      <package>sle-module-hpc-release</package>
+    </packages>
+    <patterns config:type="list">
+      <pattern>apparmor</pattern>
+      <!--      <pattern>base</pattern>
+      <pattern>enhanced_base</pattern>-->
+      <pattern>minimal_base</pattern>
+      <pattern>sw_management</pattern>
+      <pattern>yast2_basis</pattern>
+      <pattern>hpc_workload_server</pattern>
+    </patterns>
+    <!--    <products config:type="list">
+    <product>SLE_HPC</product>
+    </products> -->
+    <remove-packages config:type="list">
+      <package>sles-release</package>
+    </remove-packages>
+  </software>
+</profile>

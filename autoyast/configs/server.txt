@@ -137,7 +137,14 @@ sles15sp2-1;192.168.0.114/24;;sles15sp2;/dev/sda;;part-sles12-btrfs-efi-50G.xml;
 sles15sp3-1;192.168.0.115/24;;sles15sp3-template;/dev/sda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_BASE
 sles15sp3-2;192.168.0.116/24;;sles15sp3-template;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_BASE
 sles15sp4-1;192.168.0.117/24;;sles15sp4;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_BASE
-sles15sp5-1;192.168.0.118/24;;sles15sp5;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15-template.xml;;;;;192-168-0.txt;SLES15_BASE
+sles15sp5-1;192.168.0.118/24;;sles15sp5;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15.xml;;;;;192-168-0.txt;SLES15_BASE
+
+# HPC Example
+hpc-mgmt-01;192.168.0.85/24;;sles15sp5hpc;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15hpc-mgmt.xml;;;;;192-168-0.txt;SLES15_BASE
+hpc-mgmt-02;192.168.0.86/24;;sles15sp5hpc;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15hpc-mgmt.xml;;;;;192-168-0.txt;SLES15_BASE
+hpc-node-01;192.168.0.87/24;;sles15sp5hpc;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15hpc-node.xml;;;;;192-168-0.txt;SLES15_BASE
+hpc-node-02;192.168.0.88/24;;sles15sp5hpc;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15hpc-node.xml;;;;;192-168-0.txt;SLES15_BASE
+hpc-node-03;192.168.0.89/24;;sles15sp5hpc;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15hpc-node.xml;;;;;192-168-0.txt;SLES15_BASE
 
 # CAASP 3 Example
 caasp3-admin;10.1.1.110/24;10.1.1.1;caasp3;/dev/vda;;part-caasp3-gpt-50G.xml;soft-caasp3-vmware.xml;;;;;caasp3-cluster1.txt;CAASP3_ADMIN
