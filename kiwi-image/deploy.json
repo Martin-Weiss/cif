@@ -6,7 +6,7 @@
   "PowerOn": false,
   "InjectOvfEnv": false,
   "WaitForIP": false,
-  "Name": "sles15sp4-kiwi-template-v0.1",
+  "Name": "sles15sp5-kiwi-template-v0.1",
   "NetworkMapping": [
   {
   "Name": "192-168-0",

@@ -3,19 +3,24 @@
 <!-- OBS-Profiles: @BUILD_FLAVOR@ -->
 <!-- OBS-Milestone: %current_milestone -->
 
-<image schemaversion="6.1" name="SLES15SP4" displayname="SLES 15 SP4">
+<image schemaversion="6.1" name="SLES15-SP5-Minimal" displayname="SLES 15 SP5">
     <description type="system">
         <author>Martin Weiss</author>
         <contact>martin.weiss@suse.com</contact>
-        <specification>SUSE Linux Enterprise 15 SP4</specification>
+        <specification>SUSE Linux Enterprise 15 SP5 Minimal</specification>
     </description>
     <profiles>
-        <profile name="arm" description="JeOS for ARM" arch="aarch64"/>
-        <profile name="harvester" description="JeOS for harvester" arch="x86_64"/>
-        <profile name="vmware" description="JeOS for vmware" arch="x86_64"/>
-        <profile name="vmware-iso" description="JeOS for vmware iso" arch="x86_64"/>
-        <profile name="RaspberryPi" description="JeOS for the Raspberry Pi" arch="aarch64"/>
-        <profile name="RaspberryPi-xfs" description="JeOS for the Raspberry Pi with XFS filesystem" arch="aarch64"/>
+        <profile name="arm" description="Minimal for ARM" arch="aarch64"/>
+        <profile name="harvester" description="Minimal for harvester" arch="x86_64"/>
+	<profile name="vmware" description="Minimal for vmware" arch="x86_64"/>
+	<profile name="vmware-iso" description="Minimal for vmware iso" arch="x86_64"/>
+        <profile name="kvm-and-xen" description="Minimal for KVM and Xen" arch="x86_64"/>
+        <profile name="kvm" description="Minimal for KVM" arch="aarch64"/>
+        <profile name="VMware" description="Minimal for VMware" arch="x86_64"/>
+        <profile name="MS-HyperV" description="Minimal for Hyper-V" arch="x86_64"/>
+        <profile name="Cloud" description="Minimal for Cloud" arch="x86_64"/>
+        <profile name="RaspberryPi" description="Minimal for the Raspberry Pi" arch="aarch64"/>
+        <profile name="RaspberryPi-xfs" description="Minimal for the Raspberry Pi with XFS" arch="aarch64"/>
     </profiles>
 
     <users>
@@ -23,7 +28,7 @@
     </users>
 
     <preferences profiles="arm">
-        <version>1.0.0</version>
+        <version>15.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -61,7 +66,7 @@
     </preferences>
 
     <preferences profiles="harvester">
-        <version>1.0.0</version>
+        <version>15.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -100,7 +105,7 @@
     </preferences>
 
     <preferences profiles="vmware">
-        <version>1.0.0</version>
+        <version>15.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -134,24 +139,24 @@
                 <volume name="usr/local"/>
                 <volume name="var" copy_on_write="false"/>
             </systemdisk>
-	    <size unit="G">50</size>
-	    <!-- HW Version https://kb.vmware.com/s/article/1003746 -->
-	    <machine ncpus="2" memory="4096" HWversion="15" guestOS="sles15-64" ovftype="vmware">
-		    <vmnic driver="vmxnet3" interface="0" mode="none"/>
-		    <vmconfig-entry>ethernet0.networkName = "192-168-0"</vmconfig-entry>
-		    <vmdisk id="0" controller="pvscsi" diskmode="monolithicSparse"/>
-		    <vmconfig-entry>firmware = "efi"</vmconfig-entry>
-	    </machine>
+            <size unit="G">50</size>
+            <!-- HW Version https://kb.vmware.com/s/article/1003746 -->
+            <machine ncpus="2" memory="4096" HWversion="15" guestOS="sles15-64" ovftype="vmware">
+                    <vmnic driver="vmxnet3" interface="0" mode="none"/>
+                    <vmconfig-entry>ethernet0.networkName = "192-168-0"</vmconfig-entry>
+                    <vmdisk id="0" controller="pvscsi" diskmode="monolithicSparse"/>
+                    <vmconfig-entry>firmware = "efi"</vmconfig-entry>
+            </machine>
             <oemconfig>
               <oem-swap>true</oem-swap>
               <oem-swapsize>4096</oem-swapsize>
               <oem-skip-verify>true</oem-skip-verify>
             </oemconfig>
-	    </type>
+            </type>
     </preferences>
 
     <preferences profiles="vmware-iso">
-        <version>1.0.0</version>
+        <version>15.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -163,11 +168,11 @@
         <type
             image="iso"
         >
-            </type>
+        </type>
     </preferences>
 
-    <preferences profiles="RaspberryPi">
-        <version>1.0.0</version>
+    <preferences profiles="kvm-and-xen">
+        <version>15.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -175,8 +180,195 @@
         <keytable>de.map.gz</keytable>
         <timezone>Europe/Berlin</timezone>
         <hwclock>utc</hwclock>
-	<rpm-excludedocs>true</rpm-excludedocs>
-	<!-- blacklist vc4 as the DSI connected display gets black with this module in SLES 15 SP4 on 19th of May 2022 -->
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <type
+            image="vmx"
+            filesystem="btrfs"
+            format="qcow2"
+            bootloader="grub2"
+            firmware="uefi"
+            efipartsize="33"
+            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty0 quiet"
+            bootpartition="false"
+            bootkernel="custom"
+            devicepersistency="by-uuid"
+            btrfs_quota_groups="true"
+            btrfs_root_is_snapshot="true"
+            bundle_format="%N-VM.%A-%I"
+        >
+            <systemdisk>
+                <volume name="home"/>
+                <volume name="root"/>
+                <volume name="tmp"/>
+                <volume name="opt"/>
+                <volume name="srv"/>
+                <volume name="boot/grub2/i386-pc"/>
+                <volume name="boot/grub2/x86_64-efi" mountpoint="boot/grub2/x86_64-efi"/>
+                <volume name="usr/local"/>
+                <volume name="var" copy_on_write="false"/>
+            </systemdisk>
+            <size unit="G">24</size>
+        </type>
+    </preferences>
+
+    <preferences profiles="kvm">
+        <version>15.5.0</version>
+	<packagemanager>zypper</packagemanager>
+        <bootsplash-theme>SLE</bootsplash-theme>
+        <bootloader-theme>SLE</bootloader-theme>
+        <locale>en_US</locale>
+        <keytable>de.map.gz</keytable>
+        <timezone>Europe/Berlin</timezone>
+        <hwclock>utc</hwclock>
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <type
+            image="vmx"
+            filesystem="btrfs"
+            format="qcow2"
+            bootloader="grub2"
+            firmware="uefi"
+            efipartsize="33"
+            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty0 quiet"
+            bootpartition="false"
+            bootkernel="custom"
+            devicepersistency="by-uuid"
+            btrfs_quota_groups="true"
+            btrfs_root_is_snapshot="true"
+            bundle_format="%N-VM.%A-%I"
+        >
+            <systemdisk>
+                <volume name="home"/>
+                <volume name="root"/>
+                <volume name="tmp"/>
+                <volume name="opt"/>
+                <volume name="srv"/>
+                <volume name="boot/grub2/arm64-efi" mountpoint="boot/grub2/arm64-efi"/>
+                <volume name="usr/local"/>
+                <volume name="var" copy_on_write="false"/>
+            </systemdisk>
+            <size unit="G">24</size>
+        </type>
+    </preferences>
+
+    <preferences profiles="VMware">
+        <version>15.5.0</version>
+        <packagemanager>zypper</packagemanager>
+        <bootsplash-theme>SLE</bootsplash-theme>
+        <bootloader-theme>SLE</bootloader-theme>
+        <locale>en_US</locale>
+        <keytable>de.map.gz</keytable>
+        <timezone>Europe/Berlin</timezone>
+        <hwclock>utc</hwclock>
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <type
+            image="vmx"
+            filesystem="btrfs"
+            format="vmdk"
+            bootloader="grub2"
+            firmware="uefi"
+            efipartsize="33"
+            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty0 quiet"
+            bootpartition="false"
+            bootkernel="custom"
+            devicepersistency="by-uuid"
+            btrfs_quota_groups="true"
+            btrfs_root_is_snapshot="true"
+            bundle_format="%N-VM.%A-%I"
+        >
+            <systemdisk>
+                <volume name="home"/>
+                <volume name="root"/>
+                <volume name="tmp"/>
+                <volume name="opt"/>
+                <volume name="srv"/>
+                <volume name="boot/grub2/i386-pc"/>
+                <volume name="boot/grub2/x86_64-efi" mountpoint="boot/grub2/x86_64-efi"/>
+                <volume name="usr/local"/>
+                <volume name="var" copy_on_write="false"/>
+            </systemdisk>
+            <size unit="G">24</size>
+            <machine memory="1024" HWversion="10" guestOS="sles-64"/>
+        </type>
+    </preferences>
+
+    <preferences profiles="Cloud">
+        <version>15.5.0</version>
+        <packagemanager>zypper</packagemanager>
+        <bootsplash-theme>SLE</bootsplash-theme>
+        <bootloader-theme>SLE</bootloader-theme>
+        <locale>en_US</locale>
+        <keytable>de.map.gz</keytable>
+        <timezone>Europe/Berlin</timezone>
+        <hwclock>utc</hwclock>
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <type
+            image="vmx"
+            filesystem="xfs"
+            format="qcow2"
+            vga="normal"
+            boottimeout="1"
+            bootloader="grub2"
+            firmware="uefi"
+            efipartsize="33"
+            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty0 net.ifnames=0 quiet"
+            bootpartition="false"
+            bootkernel="custom"
+            devicepersistency="by-uuid"
+            bundle_format="%N-VM.%A-%I"
+        />
+    </preferences>
+
+    <preferences profiles="MS-HyperV">
+        <version>15.5.0</version>
+        <packagemanager>zypper</packagemanager>
+        <bootsplash-theme>SLE</bootsplash-theme>
+        <bootloader-theme>SLE</bootloader-theme>
+        <locale>en_US</locale>
+        <keytable>de.map.gz</keytable>
+        <timezone>Europe/Berlin</timezone>
+        <hwclock>utc</hwclock>
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <type
+            image="vmx"
+            filesystem="btrfs"
+            format="vhdx"
+            boottimeout="10"
+            bootloader="grub2"
+            firmware="uefi"
+            efipartsize="33"
+            kernelcmdline="rw systemd.show_status=1 rootdelay=300 console=ttyS0,115200 console=tty0 earlyprintk=ttyS0,115200 quiet"
+            bootpartition="false"
+            bootkernel="custom"
+            devicepersistency="by-uuid"
+            btrfs_quota_groups="true"
+            btrfs_root_is_snapshot="true"
+            bundle_format="%N-VM.%A-%I"
+        >
+            <systemdisk>
+                <volume name="home"/>
+                <volume name="root"/>
+                <volume name="tmp"/>
+                <volume name="opt"/>
+                <volume name="srv"/>
+                <volume name="boot/grub2/i386-pc"/>
+                <volume name="boot/grub2/x86_64-efi" mountpoint="boot/grub2/x86_64-efi"/>
+                <volume name="usr/local"/>
+                <volume name="var" copy_on_write="false"/>
+            </systemdisk>
+            <size unit="G">24</size>
+        </type>
+    </preferences>
+
+    <preferences profiles="RaspberryPi">
+        <version>15.5.0</version>
+        <packagemanager>zypper</packagemanager>
+        <bootsplash-theme>SLE</bootsplash-theme>
+        <bootloader-theme>SLE</bootloader-theme>
+        <locale>en_US</locale>
+        <keytable>de.map.gz</keytable>
+        <timezone>Europe/Berlin</timezone>
+        <hwclock>utc</hwclock>
+        <rpm-excludedocs>true</rpm-excludedocs>
         <type
             image="oem"
             initrd_system="dracut"
@@ -184,13 +376,14 @@
             fsmountoptions="noatime,compress=lzo"
             bootloader="grub2"
             firmware="efi"
-            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty quiet modprobe.blacklist=vc4"
+            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty quiet"
             bootpartition="false"
             devicepersistency="by-uuid"
             btrfs_quota_groups="true"
             btrfs_root_is_snapshot="true"
             efipartsize="64"
             editbootinstall="editbootinstall_rpi.sh"
+            bundle_format="%N-Image.%A-%I"
         >
             <systemdisk>
                 <volume name="home"/>
@@ -210,39 +403,11 @@
         </type>
     </preferences>
 
-    <preferences profiles="RaspberryPi-xfs">
-        <version>1.0.0</version>
-        <packagemanager>zypper</packagemanager>
-        <bootsplash-theme>SLE</bootsplash-theme>
-        <bootloader-theme>SLE</bootloader-theme>
-        <locale>en_US</locale>
-        <keytable>de.map.gz</keytable>
-        <timezone>Europe/Berlin</timezone>
-        <hwclock>utc</hwclock>
-        <rpm-excludedocs>true</rpm-excludedocs>
-	<!-- blacklist vc4 as the DSI connected display gets black with this module in SLES 15 SP4 on 19th of May 2022 -->
-        <type
-            image="oem"
-            initrd_system="dracut"
-            filesystem="xfs"
-            bootloader="grub2"
-            firmware="efi"
-            kernelcmdline="rw systemd.show_status=1 console=ttyS0,115200 console=tty quiet modprobe.blacklist=vc4"
-            bootpartition="false"
-            devicepersistency="by-uuid"
-            efipartsize="64"
-	    editbootinstall="editbootinstall_rpi.sh"
-        >
-            <oemconfig>
-              <oem-swap>true</oem-swap>
-              <oem-swapsize>1000</oem-swapsize>
-              <oem-skip-verify>true</oem-skip-verify>
-            </oemconfig>
-        </type>
-    </preferences>
-
+    <!--    <repository type="rpm-md" >
+        <source path='obsrepositories:/'/>
+    </repository> -->
     <packages type="image">
-        <package name="patterns-base-minimal_base"/>
+        <package name="patterns-base-base"/>
         <package name="patterns-base-apparmor"/> <!-- Installs tools and profiles -->
         <package name="audit"/> <!-- On SLE it's only recommended by the apparmor pattern -->
         <package name="aaa_base-extras"/> <!-- wouldn't be SUSE without that ;-) -->
@@ -257,7 +422,7 @@
         <package name="iputils"/>
         <package name="issue-generator"/> <!-- bsc#1084879 -->
         <package name="zypper-lifecycle-plugin"/> <!-- bsc#1030278 fate#320597 -->
-        <package name="vim"/>
+        <package name="vim-small"/>
         <package name="grub2"/>
         <package name="grub2-x86_64-efi" arch="x86_64"/>
         <package name="grub2-arm64-efi" arch="aarch64"/>
@@ -284,8 +449,8 @@
         <package name="zypper-needs-restarting"/> <!-- Some deployment script use this (bsc#1173548) -->
     </packages>
 
-    <!-- Not needed in OpenStack as it uses XFS and cloud-init -->
-    <packages type="image" profiles="RaspberryPi">
+    <!-- Not needed in Cloud  as it uses XFS and cloud-init -->
+    <packages type="image" profiles="kvm-and-xen,kvm,VMware,MS-HyperV,RaspberryPi">
         <!-- Only for btrfs -->
         <package name="btrfsprogs"/>
         <package name="btrfsmaintenance"/>
@@ -294,51 +459,24 @@
         <package name="rollback-helper"/>
         <package name="snapper"/>
 
-        <!-- Only if not cloud-init -->
         <package name="jeos-firstboot"/>
         <package name="fbiterm"/> <!-- Optionally used by jeos-firstboot for non-latin fonts -->
 
-        <!-- Not useful with OpenStack --> 
-        <package name="firewalld"/>
-    </packages>
-
-    <packages type="image" profiles="RaspberryPi-xfs">
-        <!-- Only if not cloud-init -->
-        <package name="jeos-firstboot"/>
-        <package name="fbiterm"/> <!-- Optionally used by jeos-firstboot for non-latin fonts -->
-
-        <!-- Not useful with OpenStack -->
+        <!-- Not useful for Cloud --> 
         <package name="firewalld"/>
     </packages>
 
     <!-- Shim for secure boot everywhere except for RPi -->
-    <packages type="image" profiles="arm,vmware,vmware-iso">
+    <packages type="image" profiles="kvm-and-xen,kvm,VMware,MS-HyperV,Cloud,arm,vmware,vmware-iso,harvester">
         <package name="shim" arch="aarch64,x86_64"/>
     </packages>
 
-    <packages type="image" profiles="arm">
-        <package name="kernel-default-base"/>
-        <package name="qemu-guest-agent"/>
-
-	<!-- Only if not cloud-init -->
-        <package name="jeos-firstboot"/>
-        <package name="fbiterm"/> <!-- Optionally used by jeos-firstboot for non-latin fonts -->
-
-        <!-- Only for btrfs -->
-        <package name="btrfsprogs"/>
-        <package name="btrfsmaintenance"/>
-        <package name="grub2-snapper-plugin"/>  <!-- snapper - grub2 - integration, "small" -->
-        <package name="snapper-zypp-plugin"/>   <!-- this is key snapper/zypp integration, as requested in the PRD -->
-        <package name="rollback-helper"/>
-        <package name="snapper"/>
-    </packages>
-
     <packages type="image" profiles="vmware,vmware-iso">
-    	<!-- for rke2 with longhorn we need the kernel-default as the iscsi_tcp is not part of kernel-default-base -->
-	<package name="kernel-default"/>
+        <!-- for rke2 with longhorn we need the kernel-default as the iscsi_tcp is not part of kernel-default-base -->
+        <package name="kernel-default"/>
         <package name="open-vm-tools" arch="x86_64"/>
 
-	<!-- Only for btrfs -->
+        <!-- Only for btrfs -->
         <package name="btrfsprogs"/>
         <package name="btrfsmaintenance"/>
         <package name="grub2-snapper-plugin"/>  <!-- snapper - grub2 - integration, "small" -->
@@ -347,11 +485,10 @@
         <package name="snapper"/>
 
         <!--  cloud-init also in vmware -->
-	<package name="cloud-init" />
+        <package name="cloud-init" />
         <package name="cloud-init-config-suse" />
-	<!-- <package name="cloud-init-vmware-guestinfo" /> -->
-
-    </packages>
+        <!-- <package name="cloud-init-vmware-guestinfo" /> -->
+    </packages>    
 
     <packages type="image" profiles="harvester">
         <!-- for rke2 with longhorn we need the kernel-default as the iscsi_tcp is not part of kernel-default-base -->
@@ -370,22 +507,49 @@
         <package name="cloud-init" />
         <package name="cloud-init-config-suse" />
         <!-- <package name="cloud-init-vmware-guestinfo" /> -->
-
     </packages>
 
+    <packages type="image" profiles="kvm-and-xen">
+        <!-- XEN specific packages -->
+        <package name="xen-tools-domU" arch="x86_64"/>
+        <package name="xen-libs" arch="x86_64"/>
+    </packages>
+    <packages type="image" profiles="kvm-and-xen,kvm">
+        <package name="kernel-default-base"/>
+    </packages>
+    <packages type="image" profiles="kvm-and-xen,kvm,Cloud">
+        <package name="qemu-guest-agent"/>
+    </packages>
+    <packages type="image" profiles="VMware">
+        <package name="cloud-init" />
+        <package name="cloud-init-config-suse" />
+        <package name="open-vm-tools" arch="x86_64"/>
+        <package name="kernel-default-base"/>
+    </packages>
+    <packages type="image" profiles="Cloud">
+        <package name="cloud-init" />
+        <package name="cloud-init-config-suse" />
+        <package name="jeos-firstboot"/>
+        <package name="fbiterm"/> <!-- Optionally used by jeos-firstboot for non-latin fonts -->
+        <package name="xfsprogs" />
+        <package name="kernel-default-base"/>
+    </packages>
+    <packages type="image" profiles="MS-HyperV">
+        <package name="hyper-v" arch="x86_64"/>
+        <package name="kernel-default-base"/>
+        <!--<package name="python-azure-agent"/> disabled until bsc#1061584 is fixed -->
+    </packages>
     <packages type="image" profiles="RaspberryPi,RaspberryPi-xfs">
         <package name="raspberrypi-eeprom" arch="aarch64"/>
         <package name="raspberrypi-firmware" arch="aarch64"/>
         <package name="raspberrypi-firmware-config" arch="aarch64"/>
         <package name="raspberrypi-firmware-dt" arch="aarch64"/>
+        <package name="arm-trusted-firmware-rpi4" arch="aarch64"/>
         <package name="u-boot-rpiarm64" arch="aarch64"/>
         <package name="dracut-kiwi-oem-repart"/>
         <package name="kernel-default"/>
-	<!-- For WiFi: -->
-	<!-- can not find the package jeos-firstboot-rpiwifi in sles 15 sp4 channels at the moment so commenting this out
-	     update 04.05.2022 - got a PTF on bug 1198940 - so re-adding
-        -->
-	<package name="jeos-firstboot-rpiwifi"/> 
+        <!-- For WiFi: -->
+        <package name="jeos-firstboot-rpiwifi"/>
         <package name="bcm43xx-firmware"/>
     </packages>
 

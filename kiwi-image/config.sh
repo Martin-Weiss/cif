@@ -47,12 +47,6 @@ rm -f /etc/machine-id \
       /var/lib/zypp/AnonymousUniqueId \
       /var/lib/systemd/random-seed
 
-#======================================
-# SuSEconfig
-#--------------------------------------
-echo "** Running suseConfig..."
-suseConfig
-
 echo "** Running ldconfig..."
 /sbin/ldconfig
 
@@ -80,22 +74,23 @@ if [ -e /etc/cloud/cloud.cfg ]; then
         # not useful for cloud
         systemctl mask systemd-firstboot.service
 
-        suseInsertService cloud-init-local
-        suseInsertService cloud-init
-        suseInsertService cloud-config
-        suseInsertService cloud-final
+	systemctl enable cloud-init-local
+	systemctl enable cloud-init
+	systemctl enable cloud-config
+	systemctl enable cloud-final
 else
-        # Enable jeos-firstboot
-        mkdir -p /var/lib/YaST2
-        touch /var/lib/YaST2/reconfig_system
+	# Enable jeos-firstboot
+	mkdir -p /var/lib/YaST2
+	touch /var/lib/YaST2/reconfig_system
 
-        systemctl mask systemd-firstboot.service
-        systemctl enable jeos-firstboot.service
+	systemctl mask systemd-firstboot.service
+	systemctl enable jeos-firstboot.service
 fi
 
-# Enable firewalld if installed
-if [ -x /usr/sbin/firewalld ]; then
-        chkconfig firewalld on
+# Enable firewalld if installed except on VMware
+if [ -x /usr/sbin/firewalld ] && [ "$kiwi_profiles" != "VMware" ]; then
+    echo 'Enabling firewall...'
+    chkconfig firewalld on
 fi
 
 # Set GRUB2 to boot graphically (bsc#1097428)
