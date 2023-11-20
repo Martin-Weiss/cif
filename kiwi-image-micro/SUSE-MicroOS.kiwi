@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- OBS-Profiles: @BUILD_FLAVOR@ -->
 <!-- OBS-Milestone: %current_milestone -->
-<image schemaversion="6.7" name="SUSE-MicroOS" displayname="SLE Micro">
+<image schemaversion="6.7" name="SLE-Micro" displayname="SLE Micro">
     <description type="system">
-        <author>Martin Weiss</author>
+	<author>Martin Weiss</author>
         <contact>martin.weiss@suse.com</contact>
         <specification>SLE Micro</specification>
     </description>
@@ -52,6 +52,9 @@
 	<profile name="x86-qcow" description="qcow2 for x86_64 - uEFI" arch="x86_64">
 	  <requires profile="bootloader"/>
 	</profile>
+	<profile name="aarch64-qcow" description="qcow2 for aarch64 - uEFI" arch="aarch64">
+	  <requires profile="bootloader"/>
+	</profile>
 	<profile name="s390-kvm" description="Raw disk for s390 - DASD" arch="s390x">
 	  <requires profile="bootloader"/>
 	</profile>
@@ -62,13 +65,13 @@
 	  <requires profile="bootloader"/>
 	</profile>
 	<!-- Images (flavor + platform) -->
-	<profile name="Default" description="SLE Micro with Podman as raw image with uEFI boot" arch="x86_64">
-	    <requires profile="full"/>
-	    <requires profile="x86"/>
-        </profile>
 	<profile name="Default-vmware" description="SLE Micro with Podman as raw image with uEFI boot" arch="x86_64">
 	    <requires profile="full"/>
 	    <requires profile="vmware"/>
+        </profile>
+	<profile name="Default" description="SLE Micro with Podman as raw image with uEFI boot" arch="x86_64">
+	    <requires profile="full"/>
+	    <requires profile="x86"/>
         </profile>
 	<profile name="Default-SelfInstall" description="SLE Micro with Podman as raw image with uEFI boot - SelfInstall" arch="x86_64">
 	    <requires profile="full"/>
@@ -123,66 +126,15 @@
 	    <requires profile="full"/>
 	    <requires profile="x86-qcow"/>
         </profile>
+	<profile name="Default-qcow" description="SLE Micro with Podman as raw image with uEFI boot" arch="aarch64">
+	    <requires profile="full"/>
+	    <requires profile="aarch64-qcow"/>
+        </profile>
     </profiles>
 
-    <preferences profiles="vmware">
-        <version>5.2.0</version>
-        <packagemanager>zypper</packagemanager>
-        <bootsplash-theme>SLE</bootsplash-theme>
-        <bootloader-theme>SLE</bootloader-theme>
-        <locale>en_US</locale>
-	
-	<keytable>de.map.gz</keytable>
-        <timezone>Europe/Berlin</timezone>
-        <hwclock>utc</hwclock>
-        <rpm-excludedocs>false</rpm-excludedocs>
-	
-	<type
-            image="vmx"
-            format="ova"
-            initrd_system="dracut"
-            filesystem="btrfs"
-            bootloader="grub2"
-            bootloader_console="gfxterm"
-            firmware="uefi"
-            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=metal"
-            bootpartition="false"
-            bootkernel="custom"
-            devicepersistency="by-uuid"
-            btrfs_root_is_snapshot="true"
-            btrfs_root_is_readonly_snapshot="true"
-            btrfs_quota_groups="true"
-        >
-            <systemdisk>
-                <volume name="home"/>
-                <volume name="root"/>
-                <!-- on tmpfs jsc#SMO-2                <volume name="tmp"/> -->
-                <volume name="opt"/>
-                <volume name="srv"/>
-                <volume name="boot/grub2/i386-pc"/>
-                <volume name="boot/grub2/x86_64-efi" mountpoint="boot/grub2/x86_64-efi"/>
-                <volume name="boot/writable"/>
-                <volume name="usr/local"/>
-                <volume name="var" copy_on_write="false"/>
-            </systemdisk>
-            <size unit="G">50</size>
-            <!-- HW Version https://kb.vmware.com/s/article/1003746 -->
-            <machine ncpus="2" memory="4096" HWversion="15" guestOS="sles15-64" ovftype="vmware">
-                    <vmnic driver="vmxnet3" interface="0" mode="none"/>
-                    <vmconfig-entry>ethernet0.networkName = "192-168-0"</vmconfig-entry>
-                    <vmdisk id="0" controller="pvscsi" diskmode="monolithicSparse"/>
-                    <vmconfig-entry>firmware = "efi"</vmconfig-entry>
-            </machine>
-            <oemconfig>
-              <oem-swap>true</oem-swap>
-              <oem-swapsize>4096</oem-swapsize>
-              <oem-skip-verify>true</oem-skip-verify>
-            </oemconfig>
-        </type>
-    </preferences>
 
     <preferences profiles="x86,x86-rt">
-        <version>5.2.0</version>
+        <version>5.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -194,8 +146,9 @@
             filesystem="btrfs"
             bootloader="grub2"
             bootloader_console="gfxterm"
+	    boottimeout="3"
             firmware="uefi"
-            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=metal"
+            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=metal"
             bootpartition="false"
             bootkernel="custom"
             devicepersistency="by-uuid"
@@ -218,8 +171,65 @@
         </type>
     </preferences>
 
+    <preferences profiles="vmware">
+        <version>5.5.0</version>
+        <packagemanager>zypper</packagemanager>
+        <bootsplash-theme>SLE</bootsplash-theme>
+        <bootloader-theme>SLE</bootloader-theme>
+	<locale>en_US</locale>
+
+	<keytable>de.map.gz</keytable>
+        <timezone>Europe/Berlin</timezone>
+        <hwclock>utc</hwclock>
+        <rpm-excludedocs>false</rpm-excludedocs>
+
+        <type
+            image="vmx"
+	    format="ova"
+            initrd_system="dracut"
+            filesystem="btrfs"
+            bootloader="grub2"
+            bootloader_console="gfxterm"
+            boottimeout="3"
+            firmware="uefi"
+            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=metal"
+            bootpartition="false"
+            bootkernel="custom"
+            devicepersistency="by-uuid"
+            btrfs_root_is_snapshot="true"
+            btrfs_root_is_readonly_snapshot="true"
+            btrfs_quota_groups="true"
+        >
+            <systemdisk>
+                <volume name="home"/>
+                <volume name="root"/>
+                <!-- on tmpfs jsc#SMO-2                <volume name="tmp"/> -->
+                <volume name="opt"/>
+                <volume name="srv"/>
+                <volume name="boot/grub2/i386-pc"/>
+                <volume name="boot/grub2/x86_64-efi" mountpoint="boot/grub2/x86_64-efi"/>
+                <volume name="boot/writable"/>
+                <volume name="usr/local"/>
+                <volume name="var" copy_on_write="false"/>
+	    </systemdisk>
+	    <size unit="G">50</size>
+            <!-- HW Version https://kb.vmware.com/s/article/1003746 -->
+            <machine ncpus="2" memory="4096" HWversion="15" guestOS="sles15-64" ovftype="vmware">
+                    <vmnic driver="vmxnet3" interface="0" mode="none"/>
+                    <vmconfig-entry>ethernet0.networkName = "192-168-0"</vmconfig-entry>
+                    <vmdisk id="0" controller="pvscsi" diskmode="monolithicSparse"/>
+                    <vmconfig-entry>firmware = "efi"</vmconfig-entry>
+            </machine>
+            <oemconfig>
+              <oem-swap>true</oem-swap>
+              <oem-swapsize>4096</oem-swapsize>
+              <oem-skip-verify>true</oem-skip-verify>
+            </oemconfig>
+        </type>
+    </preferences>
+
     <preferences profiles="x86-self_install,x86-rt-self_install">
-        <version>5.2.0</version>
+        <version>5.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -231,9 +241,12 @@
 	    installiso="true"
             filesystem="btrfs"
             bootloader="grub2"
-            bootloader_console="gfxterm"
+	    bootloader_console="gfxterm"
+	    boottimeout="3"
+	    installboot="install"
+	    install_continue_on_timeout="false"
             firmware="uefi"
-            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=metal"
+            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=metal"
             bootpartition="false"
             bootkernel="custom"
             devicepersistency="by-uuid"
@@ -257,7 +270,7 @@
     </preferences>
 
     <preferences profiles="rpi">
-        <version>5.2.0</version>
+        <version>5.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -270,15 +283,17 @@
             fsmountoptions="noatime"
             bootloader="grub2"
             bootloader_console="gfxterm"
+	    boottimeout="3"
             firmware="efi"
-            kernelcmdline="console=ttyS0,115200n8 console=tty0 security=selinux quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=metal"
+            kernelcmdline="console=ttyS0,115200n8 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=metal"
             bootpartition="false"
             devicepersistency="by-uuid"
             btrfs_root_is_snapshot="true"
             efipartsize="16"
             editbootinstall="editbootinstall_rpi.sh"
             btrfs_root_is_readonly_snapshot="true"
-            btrfs_quota_groups="false"
+	    btrfs_quota_groups="false"
+	    disk_start_sector="4096"
         >
             <systemdisk>
                 <volume name="home"/>
@@ -295,7 +310,7 @@
     </preferences>
 
     <preferences profiles="s390-kvm">
-        <version>5.2.0</version>
+        <version>5.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -310,9 +325,9 @@
             bootfilesystem="ext2"
 	    initrd_system="dracut"
 	    format="qcow2"
-            boottimeout="0"
             bootloader="grub2_s390x_emu"
-            kernelcmdline="hvc_iucv=8 TERM=dumb security=selinux quiet \$ignition_firstboot"
+	    boottimeout="3"
+            kernelcmdline="hvc_iucv=8 TERM=dumb security=selinux selinux=1 quiet \$ignition_firstboot"
 	    devicepersistency="by-uuid"
             btrfs_root_is_snapshot="true"
             btrfs_root_is_readonly_snapshot="true"
@@ -334,7 +349,7 @@
 
 
     <preferences profiles="s390-dasd">
-        <version>5.2.0</version>
+        <version>5.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -349,7 +364,8 @@
           initrd_system="dracut"
           bootloader="grub2_s390x_emu"
           bootloader_console="serial"
-          kernelcmdline="dasd_mod.dasd=ipldev hvc_iucv=8 TERM=dumb security=selinux quiet \$ignition_firstboot"
+	  boottimeout="3"
+          kernelcmdline="dasd_mod.dasd=ipldev hvc_iucv=8 TERM=dumb security=selinux selinux=1 quiet \$ignition_firstboot"
           zipl_targettype="CDL"
           devicepersistency="by-uuid"
           target_blocksize="4096"
@@ -374,7 +390,7 @@
 
 
     <preferences profiles="s390-fba">
-        <version>5.2.0</version>
+        <version>5.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -389,7 +405,8 @@
           initrd_system="dracut"
           bootloader="grub2_s390x_emu"
           bootloader_console="serial"
-          kernelcmdline="dasd_mod.dasd=ipldev hvc_iucv=8 TERM=dumb security=selinux quiet \$ignition_firstboot"
+	  boottimeout="3"
+          kernelcmdline="dasd_mod.dasd=ipldev hvc_iucv=8 TERM=dumb security=selinux selinux=1 quiet \$ignition_firstboot"
           zipl_targettype="FBA"
           devicepersistency="by-uuid"
           btrfs_root_is_snapshot="true"
@@ -413,7 +430,7 @@
 
 
     <preferences profiles="x86-vdi">
-        <version>5.2.0</version>
+        <version>5.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -425,8 +442,9 @@
             format="vdi"
             bootloader="grub2"
             bootloader_console="gfxterm"
+	    boottimeout="3"
             firmware="uefi"
-            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=virtualbox"
+            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=virtualbox"
             bootpartition="false"
             bootkernel="custom"
             devicepersistency="by-uuid"
@@ -452,7 +470,7 @@
     </preferences>
 
     <preferences profiles="x86-vdi-legacy">
-        <version>5.2.0</version>
+        <version>5.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -464,8 +482,9 @@
             format="vdi"
             bootloader="grub2"
             bootloader_console="gfxterm"
+	    boottimeout="3"
             firmware="bios"
-            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=virtualbox"
+            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=virtualbox"
             bootpartition="false"
             bootkernel="custom"
             devicepersistency="by-uuid"
@@ -490,7 +509,7 @@
         </type>
     </preferences>
     <preferences profiles="x86-qcow">
-        <version>5.2.0</version>
+        <version>5.5.0</version>
         <packagemanager>zypper</packagemanager>
         <bootsplash-theme>SLE</bootsplash-theme>
         <bootloader-theme>SLE</bootloader-theme>
@@ -502,8 +521,9 @@
             filesystem="btrfs"
             bootloader="grub2"
             bootloader_console="gfxterm"
+	    boottimeout="3"
             firmware="uefi"
-            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=qemu"
+            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=qemu"
             bootpartition="false"
             bootkernel="custom"
             devicepersistency="by-uuid"
@@ -523,14 +543,51 @@
                 <volume name="boot/writable"/>
 		<volume name="usr/local"/>
             </systemdisk>
+            <size unit="G">20</size>
         </type>
     </preferences>
 
-<!-- 
-    <repository type="rpm-md" >
+    <preferences profiles="aarch64-qcow">
+        <version>5.5.0</version>
+        <packagemanager>zypper</packagemanager>
+        <bootsplash-theme>SLE</bootsplash-theme>
+        <bootloader-theme>SLE</bootloader-theme>
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <locale>en_US</locale>
+        <type
+            image="vmx"
+            format="qcow2"
+            filesystem="btrfs"
+            bootloader="grub2"
+            bootloader_console="gfxterm"
+	    boottimeout="3"
+            firmware="uefi"
+            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=qemu"
+            bootpartition="false"
+            bootkernel="custom"
+            devicepersistency="by-uuid"
+            btrfs_root_is_snapshot="true"
+            btrfs_root_is_readonly_snapshot="true"
+            btrfs_quota_groups="true"
+            spare_part="5G" spare_part_mountpoint="/var" spare_part_fs="btrfs" spare_part_is_last="true" spare_part_fs_attributes="no-copy-on-write"
+        >
+            <systemdisk>
+                <volume name="home"/>
+                <volume name="root"/>
+		<!-- on tmpfs jsc#SMO-2                <volume name="tmp"/> -->
+ 		<volume name="opt"/>
+                <volume name="srv"/>
+                <volume name="boot/grub2/arm64-efi" mountpoint="boot/grub2/arm64-efi"/>
+                <volume name="boot/writable"/>
+		<volume name="usr/local"/>
+            </systemdisk>
+            <size unit="G">20</size>
+        </type>
+    </preferences>
+
+    <!--   <repository type="rpm-md" >
         <source path='obsrepositories:/'/>
-    </repository>
--->
+    </repository> -->
 
     <packages type="image" profiles="full">
         <namedCollection name="microos-salt_minion"/>
@@ -547,18 +604,25 @@
 	<package name="patterns-microos-selinux"/>
 	<package name="podman"/>
 	<package name="suseconnect-ng"/>
-	<package name="SUSE-MicroOS-release"/>
+	<package name="SLE-Micro-release"/>
 	<package name="grub2-branding-SLE" arch="x86_64,aarch64"/>
 	<package name="systemd-presets-branding-SMO"/>
 	<package name="systemd-default-settings-branding-SLE-Micro"/>
 	<package name="firewalld"/>
+	<package name="wpa_supplicant" arch="x86_64,aarch64"/>
 
         <!-- include directly to avoid cockpit-machines (bsc#1196971)  -->
 	<package name="cockpit-system"/>
+	<package name="libpwquality-tools"/> <!-- dependency of cockpit-system not handled by kiwi properly -->
 	<package name="cockpit-ws"/>
 	<package name="cockpit"/>
-	<package name="cockpit-wicked"/>
+	<package name="cockpit-networkmanager"/>
 	<package name="cockpit-podman"/>
+	<package name="cockpit-tukit"/>
+	<package name="cockpit-storaged"/>
+	<package name="libudisks2-0_lvm2"/>
+	<package name="libudisks2-0_btrfs"/>
+	<package name="cockpit-selinux"/>
     </packages>
 
     <packages type="image" profiles="container-host">
@@ -574,7 +638,7 @@
 	<package name="patterns-microos-selinux"/>
 	<package name="podman"/>
 	<package name="suseconnect-ng"/>
-	<package name="SUSE-MicroOS-release"/>
+	<package name="SLE-Micro-release"/>
 	<package name="grub2-branding-SLE" arch="x86_64,aarch64"/>
 	<package name="systemd-presets-branding-SMO"/>
 	<package name="systemd-default-settings-branding-SLE-Micro"/>
@@ -582,10 +646,16 @@
 
         <!-- include directly to avoid cockpit-machines (bsc#1196971)  -->
 	<package name="cockpit-system"/>
+	<package name="libpwquality-tools"/> <!-- dependency of cockpit-system not handled by kiwi properly -->
 	<package name="cockpit-ws"/>
 	<package name="cockpit"/>
-	<package name="cockpit-wicked"/>
+	<package name="cockpit-networkmanager"/>
 	<package name="cockpit-podman"/>
+	<package name="cockpit-tukit"/>
+	<package name="cockpit-storaged"/>
+	<package name="libudisks2-0_lvm2"/>
+	<package name="libudisks2-0_btrfs"/>
+	<package name="cockpit-selinux"/>
     </packages>
 
     <packages type="image" profiles="ecs_anywhere">
@@ -600,16 +670,19 @@
         <package name="patterns-microos-basesystem"/>
         <namedCollection name="microos-hardware"/>
         <package name="patterns-microos-hardware"/>
+        <namedCollection name="microos-fips"/>
+        <package name="patterns-microos-fips"/>
         <package name="grub2"/>
         <package name="glibc-locale-base"/>
         <package name="ca-certificates"/>
-	<package name="SUSE-MicroOS-release"/>
+	<package name="SLE-Micro-release"/>
 	<package name="systemd-presets-branding-SMO"/>
 	<package name="systemd-default-settings-branding-SLE-Micro"/>
 	<package name="firewalld"/>
         <package name="ignition"/>
         <package name="ignition-dracut-grub2"/>
 	<package name="combustion"/>
+	<package name="jeos-firstboot"/>
 	<package name="growpart-generator"/>
 	<package name="suse-build-key"/>
 	<!-- for debugging -->
@@ -618,6 +691,9 @@
 
         <namedCollection name="microos-defaults"/>
         <package name="patterns-microos-defaults"/>
+	<package name="NetworkManager"/>
+	<package name="NetworkManager-branding-SLE"/>
+	<package name="ModemManager"/>
     </packages>
 
     <packages type="image" profiles="bootloader">
@@ -631,13 +707,20 @@
       <package name="mokutil" arch="x86_64,aarch64"/>
     </packages>
     <!-- rpi kernel-default-base does not provide all necessary drivers -->
-    <packages type="image" profiles="vmware,x86,x86-legacy,x86-self_install,x86-vdi,x86-vdi-legacy,x86-qcow,s390-kvm,s390-dasd,s390-fba">
+    <packages type="image" profiles="vmware,x86,x86-legacy,x86-self_install,x86-vdi,x86-vdi-legacy,x86-qcow,aarch64-qcow,s390-kvm,s390-dasd,s390-fba">
       <package name="kernel-default"/>
       <package name="kernel-firmware-all"/>
     </packages>
     <packages type="image" profiles="x86-rt,x86-rt-self_install">
       <package name="kernel-rt"/>
       <package name="kernel-firmware-all"/>
+      <package name="cpuset"/>
+      <package name="tuned"/>
+      <package name="rt-tests"/>
+    </packages>
+    <packages type="image" profiles="x86,x86-legacy,x86-self_install,x86-rt,x86-rt-selfinstall">
+      <package name="ucode-intel"/>
+      <package name="ucode-amd"/>
     </packages>
     <packages type="image" profiles="s390-kvm,s390-dasd,s390-fba">
         <package name="dracut-kiwi-oem-repart"/>
@@ -656,6 +739,7 @@
         <package name="bcm43xx-firmware"/>
         <package name="kernel-firmware-all"/><!-- Fix choice between kernel-firmware and kernel-firmware-all -->
         <package name="wireless-tools"/>
+        <package name="wireless-regdb"/>
 	<package name="wpa_supplicant"/>
         <package name="grub2-arm64-efi"/>
 	<!-- kernel-default-base does not have all required drivers -->
@@ -665,5 +749,4 @@
         <package name="filesystem"/>
     </packages>
 </image>
-
 

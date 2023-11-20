@@ -1,4 +1,177 @@
 -------------------------------------------------------------------
+Thu Sep 21 17:52:03 UTC 2023 - jsrain@suse.com
+
+- include wireless-regdb in RaspberryPi image (bsc#1215153)
+
+-------------------------------------------------------------------
+Tue Sep 19 07:13:49 UTC 2023 - jsrain@suse.com
+
+- remove the workaround for bsc#1215351
+
+-------------------------------------------------------------------
+Fri Sep 15 12:24:35 UTC 2023 - jsrain@suse.com
+
+- add workaround for system groups not being created (bsc#1215351)
+
+-------------------------------------------------------------------
+Fri Aug 11 11:12:47 UTC 2023 - jsrain@suse.com
+
+- build qcow2 image also for aarch64 (jsc#SMO-244)
+- include ucode in x86 raw disk images
+
+-------------------------------------------------------------------
+Thu Jul 27 19:02:10 UTC 2023 - jsrain@suse.com
+
+- build qcow2 image for x86_64 (jsc#SMO-244)
+
+-------------------------------------------------------------------
+Tue Jul  4 06:23:05 UTC 2023 - jsrain@suse.com
+
+- bump to 5.5
+
+-------------------------------------------------------------------
+Fri Mar 31 11:42:41 UTC 2023 - jsrain@suse.com
+
+- explicilty specify NetworkManagr branding package
+
+-------------------------------------------------------------------
+Mon Mar 13 13:40:36 UTC 2023 - jsrain@suse.com
+
+- include FIPS pattern in the images (jsc#SMO-211)
+
+-------------------------------------------------------------------
+Tue Feb 14 08:56:36 UTC 2023 - jsrain@suse.com
+
+- adjust the disk start sector for RPi image (jsc#PED-3457)
+
+-------------------------------------------------------------------
+Mon Feb 13 10:17:09 UTC 2023 - jsrain@suse.com
+
+- added tuned (jsc#SMO-189) and rt-tests (jsc#SMO-206) to the
+  real-time images
+
+-------------------------------------------------------------------
+Fri Feb  3 09:25:01 UTC 2023 - jsrain@suse.com
+
+- explicitly add libpwquality-tools
+
+-------------------------------------------------------------------
+Mon Nov 28 07:08:30 UTC 2022 - jsrain@suse.com
+
+- switch SELinux to enforcing by default (jsc#SMO-191)
+
+-------------------------------------------------------------------
+Wed Nov 16 08:16:32 UTC 2022 - jsrain@suse.com
+
+- bump image version to 5.4.0
+
+-------------------------------------------------------------------
+Tue Sep 20 05:46:52 UTC 2022 - jsrain@suse.com
+
+- removed cockpit-kdump which is not yet ready
+
+-------------------------------------------------------------------
+Fri Sep  9 11:28:47 UTC 2022 - jsrain@suse.com
+
+- added cockpit-selinux (jsc#CSD-77)
+
+-------------------------------------------------------------------
+Mon Sep  5 10:42:55 UTC 2022 - jsrain@suse.com
+
+- added cockpit-kdump (jsc#SMO-166)
+- added missing cockpit plug-ins to container-host profile
+
+--------------------------------------------------------------------
+Tue Aug 30 12:07:43 UTC 2022 - jsrain@suse.com
+
+- explicitly put selinux=1 to cmdline (bsc#1202449)
+
+-------------------------------------------------------------------
+Fri Aug 26 11:12:35 UTC 2022 - jsrain@suse.com
+
+- added cpuset to the RT image (jsc#SMO-174)
+
+-------------------------------------------------------------------
+Thu Aug 25 13:58:04 UTC 2022 - jsrain@suse.com
+
+- added libudisks2-0_btrfs libudisks2-0_lvm2 (jsc#SMO-154)
+
+-------------------------------------------------------------------
+Fri Aug 19 13:10:09 UTC 2022 - jsrain@suse.com
+
+- move .autorelabel to proper location (bsc#1202437)
+
+-------------------------------------------------------------------
+Mon Aug 15 13:14:32 UTC 2022 - jsrain@suse.com
+
+- added cockpit-tukit (jsc#SMO-22)
+- added cockpit-storaged (jsc#SMO-116)
+
+-------------------------------------------------------------------
+Tue Aug  2 09:26:38 UTC 2022 - jsrain@suse.com
+
+- reverted last change as wrong fix
+
+-------------------------------------------------------------------
+Mon Aug  1 11:52:23 UTC 2022 - jsrain@suse.com
+
+- always enable network in initrd for Combustion (bsc#1201957)
+
+-------------------------------------------------------------------
+Thu Jul 28 07:47:27 UTC 2022 - jsrain@suse.com
+
+- disable boot time-out for SelfIstall media, set default to
+  install
+
+-------------------------------------------------------------------
+Thu Jul 21 06:31:27 UTC 2022 - jsrain@suse.com
+
+- set GRUB time-out via kiwi instead of config.sh
+
+-------------------------------------------------------------------
+Wed Jul 20 22:07:42 UTC 2022 - jsrain@suse.com
+
+- set default GRUB time-out to 3s (jsc#SMO-95)
+
+-------------------------------------------------------------------
+Fri Jul 15 06:24:33 UTC 2022 - jsrain@suse.com
+
+- call iscsi-gen-initiatorname only if present (bsc#1200492)
+
+-------------------------------------------------------------------
+Wed Jun 22 17:13:58 UTC 2022 - jsrain@suse.com
+
+- include NetworkManager / ModemManager (jsc#SMO-84)
+
+-------------------------------------------------------------------
+Mon Jun 13 11:11:04 UTC 2022 - jsrain@suse.com
+
+- fixed typo in /sbin/iscsi-gen-initiatorname (bsc#1200492)
+
+-------------------------------------------------------------------
+Mon Jun 13 06:05:51 UTC 2022 - jsrain@suse.com
+
+- include and enable jeos-firstboot in the image (jsc#SMO-88)
+
+-------------------------------------------------------------------
+Wed Jun  8 16:58:15 UTC 2022 - jsrain@suse.com
+
+- add wpa_supplicant to x86_64 images (bsc#1199084)
+
+-------------------------------------------------------------------
+Sun May 29 11:27:44 UTC 2022 - jsrain@suse.com
+
+- add delay for the iscsi-gen-initiatorname (boo#1198457)
+- update self-install specific section (boo#1199115)
+  taking the latest self-install section from kubic
+
+-------------------------------------------------------------------
+Tue May 24 11:15:03 UTC 2022 - jsrain@suse.com
+
+- rename to SLE-Micro
+- bump to 5.3
+
+-------------------------------------------------------------------
 Tue Mar 29 18:18:24 UTC 2022 - jsrain@suse.com
 
 - disable build of ECS Anywhere images (bsc#1197657)
@@ -246,6 +419,5 @@ Fri Aug 14 07:54:06 UTC 2020 - jsrain@suse.com
 Thu Aug 13 08:34:07 UTC 2020 - jsrain@suse.com
 
 - initial version
-
 
 

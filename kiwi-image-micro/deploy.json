@@ -6,7 +6,7 @@
   "PowerOn": false,
   "InjectOvfEnv": false,
   "WaitForIP": false,
-  "Name": "slemicro52-kiwi-template-v0.1",
+  "Name": "slemicro55-kiwi-template-v0.1",
   "NetworkMapping": [
   {
   "Name": "192-168-0",

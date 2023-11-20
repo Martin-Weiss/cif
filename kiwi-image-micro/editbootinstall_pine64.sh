@@ -38,4 +38,3 @@ if ! dd if=boot/u-boot-sunxi-with-spl.bin of=$diskname bs=1024 seek=8 conv=notru
 	exit 1
 fi
 
-

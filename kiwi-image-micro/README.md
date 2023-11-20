@@ -15,3 +15,6 @@ Prepare
 Process (manual)
 1. build.sh (create the image based on config.xml and config.sh with ova format for vmware)
 2. deploy.sh (upload image to vsphere)
+
+HINT:
+- KIWI Sources from https://build.opensuse.org/package/show/SUSE:SLE-15-SP5:Update:Products:Micro55/SLE-Micro

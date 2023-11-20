@@ -43,4 +43,3 @@ dd of=$loopdev if=mbrid.bin bs=1 seek=440 count=4
 rm -f mbrid.bin
 rm -f gdisk.tmp
 
-

@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # need ovf tool for ova build!
-# From https://developer.vmware.com/web/tool/4.4.0/ovf
+# From https://developer.vmware.com/web/tool/ovf-tool/
 if [ ! -d ovftool ]; then
-	wget -N https://vdc-download.vmware.com/vmwb-repository/dcr-public/2ee5a010-babf-450b-ab53-fb2fa4de79af/2a136212-2f83-4f5d-a419-232f34dc08cf/VMware-ovftool-4.4.3-18663434-lin.x86_64.zip
-	unzip -q -o VMware-ovftool-4.4.3-18663434-lin.x86_64.zip
-	echo VMware-ovftool-4.4.3-18663434-lin.x86_64.zip >.gitignore
+	wget -N https://vdc-download.vmware.com/vmwb-repository/dcr-public/8a93ce23-4f88-4ae8-b067-ae174291e98f/c609234d-59f2-4758-a113-0ec5bbe4b120/VMware-ovftool-4.6.2-22220919-lin.x86_64.zip -O VMware-ovftool.zip
+	unzip -q -o VMware-ovftool.zip
+	echo VMware-ovftool.zip >.gitignore
 	echo "ovftool" >>.gitignore
 	echo "image" >>.gitignore
 	echo "image-bundle" >>.gitignore
@@ -23,8 +23,8 @@ mkdir -p $TARGET_DIR/image
 
 # build the image
 kiwi-ng --profile vmware system build --target-dir $TARGET_DIR/image --description $TARGET_DIR \
---add-repo http://smt.suse/repo/SUSE/Products/SUSE-MicroOS/5.2/x86_64/product/,repo-md,SUSE-MicroOS-5.2-Pool \
---add-repo http://smt.suse/repo/SUSE/Updates/SUSE-MicroOS/5.2/x86_64/update/,repo-md,SUSE-MicroOS-5.2-Updates
+--add-repo http://smt.suse/SUSE/Products/SLE-Micro/5.5/x86_64/product/,repo-md,SLE-Micro-5.5-Pool \
+--add-repo http://smt.suse/SUSE/Updates/SLE-Micro/5.5/x86_64/update/,repo-md,SLE-Micro-5.5-Updates
 
 # create bundle
 rm -rf $TARGET_DIR/image-bundle

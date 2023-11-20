@@ -44,8 +44,7 @@ CONSOLE_FONT="eurlatgr.psfu"
 # prepare for setting root pw, timezone
 #--------------------------------------
 echo ** "reset machine settings"
-# kiwi is setting the root password in my case
-#sed -i 's/^root:[^:]*:/root:*:/' /etc/shadow
+sed -i 's/^root:[^:]*:/root:*:/' /etc/shadow
 rm /etc/machine-id
 rm /var/lib/zypp/AnonymousUniqueId
 rm /var/lib/systemd/random-seed
@@ -66,16 +65,37 @@ baseSetRunlevel 3
 suseImportBuildKey
 
 #======================================
-# Enable DHCP on eth0
+# If SELinux is installed, configure it like transactional-update setup-selinux
 #--------------------------------------
-cat >/etc/sysconfig/network/ifcfg-eth0 <<EOF
-BOOTPROTO='dhcp'
-MTU=''
-REMOTE_IPADDR=''
-STARTMODE='auto'
-ETHTOOL_OPTIONS=''
-USERCONTROL='no'
-EOF
+if [[ -e /etc/selinux/config ]]; then
+	# Check if we don't have selinux already enabled.
+	grep ^GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub | grep -q security=selinux || \
+	    sed -i -e 's|\(^GRUB_CMDLINE_LINUX_DEFAULT=.*\)"|\1 security=selinux selinux=1"|g' "/etc/default/grub"
+
+	# Adjust selinux config
+	sed -i -e 's|^SELINUX=.*|SELINUX=enforcing|g' \
+	    -e 's|^SELINUXTYPE=.*|SELINUXTYPE=targeted|g' \
+	    "/etc/selinux/config"
+
+	# Move an /.autorelabel file from initial installation to writeable location
+	test -f /.autorelabel && mv /.autorelabel /etc/selinux/.autorelabel
+fi
+
+##======================================
+## Enable DHCP on eth0
+##--------------------------------------
+#cat >/etc/sysconfig/network/ifcfg-eth0 <<EOF
+#BOOTPROTO='dhcp'
+#MTU=''
+#REMOTE_IPADDR=''
+#STARTMODE='auto'
+#ETHTOOL_OPTIONS=''
+#USERCONTROL='no'
+#EOF
+
+systemctl disable wicked
+systemctl enable NetworkManager
+systemctl enable ModemManager
 
 #======================================
 # Enable cloud-init
@@ -147,6 +167,13 @@ if [ "${kiwi_btrfs_root_is_snapshot-false}" = 'true' ]; then
 	sed -i'' 's/^NUMBER_LIMIT_IMPORTANT=.*$/NUMBER_LIMIT_IMPORTANT="4-10"/g' /etc/snapper/configs/root
 fi
 
+# Enable jeos-firstboot if installed, disabled by combustion/ignition
+if rpm -q --whatprovides jeos-firstboot >/dev/null; then
+        mkdir -p /var/lib/YaST2
+        touch /var/lib/YaST2/reconfig_system
+        systemctl enable jeos-firstboot.service
+fi
+
 # The %post script can't edit /etc/fstab sys due to https://github.com/OSInside/kiwi/issues/945
 # so use the kiwi custom hack
 cat >/etc/fstab.script <<"EOF"
@@ -170,27 +197,48 @@ EOF
 #======================================
 # Configure SelfInstall specifics
 #--------------------------------------
-echo "SelfInstall-Specific\n"
-echo "$kiwi_profiles\n"
-if [[ "$kiwi_profiles" == *"self_install"* ]]; then
-	echo "Is Self-Installing\n"
-	cat > /etc/systemd/system/firstbootreboot.service <<-EOF
+if [[ "$kiwi_profiles" == *"SelfInstall"* ]]; then
+	cat > /etc/systemd/system/selfinstallreboot.service <<-EOF
 	[Unit]
-	Description=First Boot Reboot
-	After=first-boot-complete.target multi-user.target
+	Description=SelfInstall Image Reboot after Firstboot (to ensure ignition and such runs)
+	After=systemd-machine-id-commit.service
+	Before=jeos-firstboot.service
 	
 	[Service]
 	Type=oneshot
-	ExecStart=rm /etc/systemd/system/firstbootreboot.service
-	ExecStart=rm /etc/systemd/system/default.target.wants/firstbootreboot.service
-	ExecStart=systemctl reboot
-	
+	ExecStart=rm /etc/systemd/system/selfinstallreboot.service
+	ExecStart=rm /etc/systemd/system/default.target.wants/selfinstallreboot.service
+	ExecStart=systemctl --no-block reboot
+
 	[Install]
 	WantedBy=default.target
 	EOF
-	ln -s /etc/systemd/system/firstbootreboot.service /etc/systemd/system/default.target.wants/firstbootreboot.service
-	echo "Set hard reboot\n"
+	ln -s /etc/systemd/system/selfinstallreboot.service /etc/systemd/system/default.target.wants/selfinstallreboot.service
 fi
+
+#======================================
+# Boot TimeOut Configuration for iSCSI
+#--------------------------------------
+cat > /etc/systemd/system/iscsi-init-delay.service <<-EOF
+[Unit]
+# Workaround for boo#1198457 delay gen-initiatorname after local-fs
+Description=One time delay for the iscsid.service
+ConditionPathExists=!/etc/iscsi/initiatorname.iscsi
+ConditionPathExists=/sbin/iscsi-gen-initiatorname
+DefaultDependencies=no
+RequiresMountsFor=/etc/iscsi
+After=local-fs.target
+Before=iscsi-init.service
+
+[Install]
+WantedBy=default.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStart=/sbin/iscsi-gen-initiatorname
+EOF
+ln -s /etc/systemd/system/iscsi-init-delay.service /etc/systemd/system/default.target.wants/iscsi-init-delay.service
 
 #======================================
 # Configure Pine64 specifics
@@ -243,5 +291,4 @@ fi
 baseCleanMount || true
 
 exit 0
-
 
