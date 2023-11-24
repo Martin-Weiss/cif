@@ -1,0 +1,10 @@
+[connection]
+id=eth0
+type=ethernet
+interface-name=eth0
+[ipv4]
+address1=${ipaddress},${gateway}
+dns=${dnsserver1};${dnsserver2}
+dns-search=${domainname}
+may-fail=false
+method=manual

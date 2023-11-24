@@ -1,0 +1,2 @@
+This is just a work in progress example to create a sle micro instance configured with guestinfo data using igniton and combustion. The cloud-init metadata/userdata is added as well but not used at the moment.
+Target has been to use sle micro 5.5 with ignition and combustion for personalization and with using vmware guestinfo instead of additional disk with labels and to use static network config instead of dhcp.

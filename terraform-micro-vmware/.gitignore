@@ -1,0 +1,7 @@
+.terraform
+registration.auto.tfvars
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfvars
+server.txt
+export.sh

@@ -1,0 +1,2 @@
+servername,ipaddress,gateway,dnsserver1,dnsserver2,domainname,cpus,memory,activationkey,data_disk_size,longhorn_disk_size,ceph_disk_1_size,ceph_disk_2_size,ceph_disk_3_size,ceph_disk_4_size
+micro1,192.168.0.69/24,192.168.0.1,192.168.0.31,192.168.0.54,suse,2,2048,1-micro,0,0,0,0,0,0

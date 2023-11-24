@@ -1,0 +1,88 @@
+# datastore to use in vSphere
+# EXAMPLE:
+# vsphere_datastore = "STORAGE-0"
+vsphere_datastore = "datastore1"
+
+# datacenter to use in vSphere
+# EXAMPLE:
+# vsphere_datacenter = "DATACENTER"
+vsphere_datacenter = "Datacenter1"
+
+# network to use in vSphere
+# EXAMPLE:
+# vsphere_network = "VM Network"
+vsphere_network = "192-168-0"
+
+# resource pool the machines will be running in
+# EXAMPLE:
+# vsphere_resource_pool = "CaaSP_RP"
+vsphere_resource_pool = "Cluster1/Resources"
+
+# template name the machines will be copied from
+# EXAMPLE:
+# template_name = "SLES15-SP1-cloud-init"
+# template_name = "sles15sp1-template-v0.1"
+# template_name = "Kubernetes/sles15sp2-template-v0.1"
+template_name = "slemicro55-kiwi-template-v0.1"
+
+# IMPORTANT: Replace by "efi" string in case your template was created by using EFI firmware
+firmware = "efi"
+
+# prefix that all of the booted machines will use
+# IMPORTANT: please enter unique identifier below as value of
+# stack_name variable to not interfere with other deployments
+stack_name = "micro"
+
+# Number of servers
+servers = 1
+
+# Optional: Size of the root disk in GB on server
+server_disk_size = 50
+
+# Optional: Define the repositories to use
+# EXAMPLE:
+# repositories = {
+#   repository1 = "http://repo.example.com/repository1/"
+#   repository2 = "http://repo.example.com/repository2/"
+# }
+#repositories = {
+#    SES6-POOL = "http://smt.suse/repo/SUSE/Products/Storage/6/x86_64/product/"
+#    SES6-UPDATES = "http://smt.suse/repo/SUSE/Updates/Storage/6/x86_64/update/"
+#    SLE-Module-Basesystem15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Module-Basesystem/15-SP1/x86_64/product/"
+#    SLE-Module-Basesystem15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Module-Basesystem/15-SP1/x86_64/update/"
+#    SLE-Module-CAP-Tools15-SP1-Pool = "http://smt.suse/SUSE/Products/SLE-Module-CAP-Tools/15-SP1/x86_64/product/"
+#    SLE-Module-CAP-Tools15-SP1-Updates = "http://smt.suse/SUSE/Updates/SLE-Module-CAP-Tools/15-SP1/x86_64/update/"
+#    SLE-Module-Containers15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Module-Containers/15-SP1/x86_64/product/"
+#    SLE-Module-Containers15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Module-Containers/15-SP1/x86_64/update/"
+#    SLE-Module-Server-Applications15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Module-Server-Applications/15-SP1/x86_64/product/"
+#    SLE-Module-Server-Applications15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Module-Server-Applications/15-SP1/x86_64/update/"
+#    SLE-Product-HA15-SP1-Pool = "http://smt.suse/SUSE/Products/SLE-Product-HA/15-SP1/x86_64/product/"
+#    SLE-Product-HA15-SP1-Updates = "http://smt.suse/SUSE/Updates/SLE-Product-HA/15-SP1/x86_64/update"
+#    SLE-Product-SLES15-SP1-Pool = "http://smt.suse/repo/SUSE/Products/SLE-Product-SLES/15-SP1/x86_64/product/"
+#    SLE-Product-SLES15-SP1-Updates = "http://smt.suse/repo/SUSE/Updates/SLE-Product-SLES/15-SP1/x86_64/update/"
+#    "SLES15-SP1-15.1-0" =  "http://smt.suse/sles15sp1/"
+#    "SUSE-CAASP-4.0-Pool" = "http://smt.suse/repo/SUSE/Products/SUSE-CAASP/4.0/x86_64/product/"
+#    "SUSE-CAASP-4.0-Updates" = "http://smt.suse/repo/SUSE/Updates/SUSE-CAASP/4.0/x86_64/update/"
+#}
+
+repositories = {
+}
+
+
+# Minimum required packages. Do not remove them.
+# Feel free to add more packages
+packages = [
+]
+
+# ssh keys to inject into all the nodes
+# EXAMPLE:
+# authorized_keys = [
+#   "ssh-rsa <key-content>"
+# ]
+authorized_keys = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD1RPbAISjVatORw9QZjLPS4h++Noq/6haXnaZjtsmQNiqVaq3v4zUTaEolrow8/fTKIwIDxLbtUyy8Y/AbDoCp3dT2fx1YCw2BCpg1fn4QxBzc7NAxA+XrUty53PZ3V2AhpJgoN5Iybjkvo0xguiPjo/W62ZRTtNssodRr/nMnwos4/Xb1VvLe5sIQIkHuLQvp9TdBJtUhf3H/zw4tiwGrI6FN6B02Q1DVAntX8BMcq0pjgF2Gd6QV1L1CTz+H+IIeevALWzJG+AeQmXE7psRPpqgMYBof2bNTTYUjpau+8/plVBoHJZCxABPALUYDGwu/m6iPdjhMFH7jxXPBaseDgTDLWthAV/4j7il2o2xVjjsJ0IfShiOvx10BIBfkAR20NLQ9ptQkHki5/TdTEDO7H9R2Sd9ktWtOaylTXXoES1cqLN/cl1VJ8oXxc+ehFFyFdCumTQKRNEPoTdXYsfMVCPkX/aklttvzv2J+/GGrruN2x1cBsR01KPVafVGuH10= root@susemanager",
+    "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAv1DS2t+Kmh7spHYFg2t0592otcq8YUnZXb17WgkpaWU5cS/2eLZoNbImURkbqpVC54zVwT2dUauJZG/2bXQBul8p2OK0Rgo+Vhhrbmtnvs4GXMfgxRUo3b+zadbMPZzOAxrEWJj8nkg5PV5+5jdxLR6/3ykZtRXn2kvh2/TMHMRpxE7x5xKwyAvXiGMK9kN0dTNEun9KKfNycXX1ZbvfJ02WuzQPA7K3i8eUZZeHlnRXso/66RWsmEPCipNua23wPrBXocsNFx75hvxDFwwvj1rj4SwB9afzcQbvvnLwPheEt8pl30Xozl7qZSVaYllZaEUMcrdklXESKhj87fKDhw== root@weiss-2"
+]
+
+# IMPORTANT: Replace these ntp servers with ones from your infrastructure
+ntp_servers = ["192.168.0.31"]
