@@ -192,7 +192,7 @@
             bootloader_console="gfxterm"
             boottimeout="3"
             firmware="uefi"
-            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=metal"
+            kernelcmdline="console=ttyS0,115200 console=tty0 security=selinux selinux=1 quiet net.ifnames=0 \$ignition_firstboot ignition.platform.id=vmware"
             bootpartition="false"
             bootkernel="custom"
             devicepersistency="by-uuid"
@@ -679,8 +679,9 @@
 	<package name="systemd-presets-branding-SMO"/>
 	<package name="systemd-default-settings-branding-SLE-Micro"/>
 	<package name="firewalld"/>
-        <package name="ignition"/>
-        <package name="ignition-dracut-grub2"/>
+	<package name="ignition"/>
+	<!-- ignition-dracut-grub2 obsolete in ptf -->
+        <!-- <package name="ignition-dracut-grub2"/> -->
 	<package name="combustion"/>
 	<package name="jeos-firstboot"/>
 	<package name="growpart-generator"/>
@@ -710,6 +711,10 @@
     <packages type="image" profiles="vmware,x86,x86-legacy,x86-self_install,x86-vdi,x86-vdi-legacy,x86-qcow,aarch64-qcow,s390-kvm,s390-dasd,s390-fba">
       <package name="kernel-default"/>
       <package name="kernel-firmware-all"/>
+    </packages>
+    <!-- vmware needs open-vm-tools -->
+    <packages type="image" profiles="vmware">
+    <package name="open-vm-tools" arch="x86_64"/>
     </packages>
     <packages type="image" profiles="x86-rt,x86-rt-self_install">
       <package name="kernel-rt"/>

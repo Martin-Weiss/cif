@@ -21,7 +21,8 @@ fi
 #govc tree
 
 # delete current vm
-govc vm.destroy slemicro55-kiwi-template-v0.1
+govc vm.destroy slemicro55-kiwi-template-v0.1 
 
 # import ova
-govc import.ova -options=deploy.json -folder=Kubernetes image-bundle/SLE-Micro.x86_64-5.5.0-0.ova
+#govc import.ova -options=deploy.json -folder=Kubernetes image-bundle/SLE-Micro.x86_64-5.5.0-0.ova
+govc import.ova -options=deploy.json  image-bundle/SLE-Micro.x86_64-5.5.0-0.ova

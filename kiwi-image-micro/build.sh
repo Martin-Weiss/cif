@@ -24,7 +24,10 @@ mkdir -p $TARGET_DIR/image
 # build the image
 kiwi-ng --profile vmware system build --target-dir $TARGET_DIR/image --description $TARGET_DIR \
 --add-repo http://smt.suse/SUSE/Products/SLE-Micro/5.5/x86_64/product/,repo-md,SLE-Micro-5.5-Pool \
---add-repo http://smt.suse/SUSE/Updates/SLE-Micro/5.5/x86_64/update/,repo-md,SLE-Micro-5.5-Updates
+--add-repo http://smt.suse/SUSE/Updates/SLE-Micro/5.5/x86_64/update/,repo-md,SLE-Micro-5.5-Updates \
+--add-repo http://susemanager.suse/pub/sles15sp5-ptfs,repo-md,sles15sp5-ptfs
+
+#--add-repo http://susemanager.suse/ks/dist/child/staging-sles15sp5-prod-sles15sp5-ptfs/sles15sp5/,repo-md,sles15sp5-ptfs
 
 # create bundle
 rm -rf $TARGET_DIR/image-bundle
