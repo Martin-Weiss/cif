@@ -80,7 +80,7 @@ rm /etc/grub.d/99_upgrade
     <do_registration config:type="boolean">true</do_registration>
     <install_updates config:type="boolean">true</install_updates>
     <slp_discovery config:type="boolean">false</slp_discovery>
-      <reg_server>http://sles-smt.bader-leather.intern</reg_server>
+      <reg_server>http://smt.suse</reg_server>
   </suse_register>
 -->
   <add-on>
