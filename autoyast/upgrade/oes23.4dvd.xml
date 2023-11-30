@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <scripts>
+      <chroot-scripts config:type="list">
+         <script>
+            <chrooted config:type="boolean">true</chrooted>
+            <filename>remove-upgrade.sh</filename>
+            <interpreter>shell</interpreter>
+            <source>
+<![CDATA[#!/bin/sh
+rm /etc/grub.d/99_upgrade; exit 0
+]]>
+            </source>
+         </script>
+      </chroot-scripts>
+  </scripts>
+  <report>
+    <messages>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </messages>
+    <warnings>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </warnings>
+  </report>
+  <general>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+    </mode>
+    <signature-handling>
+      <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key config:type="boolean">true</accept_unknown_gpg_key>
+      <accept_unsigned_file config:type="boolean">true</accept_unsigned_file>
+      <accept_verification_failed config:type="boolean">false</accept_verification_failed>
+      <import_gpg_key config:type="boolean">true</import_gpg_key>
+    </signature-handling>
+  </general>
+  <keyboard>
+    <keymap>german</keymap>
+  </keyboard>
+  <language>
+    <language>en_US</language>
+    <languages>en_US</languages>
+  </language>
+  <backup>
+    <modified config:type="boolean">true</modified>
+    <sysconfig config:type="boolean">true</sysconfig>
+    <remove_old config:type="boolean">false</remove_old>
+  </backup>
+  <upgrade>
+    <stop_on_solver_conflict config:type="boolean">true</stop_on_solver_conflict>
+    <only_installed_packages config:type="boolean">false</only_installed_packages>
+  </upgrade>
+  <add-on>
+    <add_on_products config:type="list">
+      <listentry>
+        <media_url>cd:///OES-23.4-23.4-0</media_url>
+        <product>OES23.4-DVD</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-DVD</name>
+        <alias>OES23.4-DVD</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Product-SLES15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Product-SLES15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Product-SLES15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Product-SLES15-SP4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-Pool</name>
+        <alias>OES23.4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-Updates</name>
+        <alias>OES23.4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Manager-Tools15-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Manager-Tools15-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Manager-Tools15-Pool</name>
+        <alias>OES23.4-SLE-Manager-Tools15-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Manager-Tools15-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Manager-Tools15-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Manager-Tools15-Updates</name>
+        <alias>OES23.4-SLE-Manager-Tools15-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Basesystem15-SP4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Basesystem15-SP4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Basesystem15-SP4-Pool</name>
+        <alias>OES23.4-SLE-Module-Basesystem15-SP4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Basesystem15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Basesystem15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Basesystem15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Module-Basesystem15-SP4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Containers15-SP4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Containers15-SP4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Containers15-SP4-Pool</name>
+        <alias>OES23.4-SLE-Module-Containers15-SP4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Containers15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Containers15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Containers15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Module-Containers15-SP4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Desktop-Applications15-SP4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Desktop-Applications15-SP4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Desktop-Applications15-SP4-Pool</name>
+        <alias>OES23.4-SLE-Module-Desktop-Applications15-SP4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Desktop-Applications15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Desktop-Applications15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Desktop-Applications15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Module-Desktop-Applications15-SP4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-DevTools15-SP4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-DevTools15-SP4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-DevTools15-SP4-Pool</name>
+        <alias>OES23.4-SLE-Module-DevTools15-SP4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-DevTools15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-DevTools15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-DevTools15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Module-DevTools15-SP4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Legacy15-SP4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Legacy15-SP4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Legacy15-SP4-Pool</name>
+        <alias>OES23.4-SLE-Module-Legacy15-SP4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Legacy15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Legacy15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Legacy15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Module-Legacy15-SP4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Public-Cloud15-SP4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Public-Cloud15-SP4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Public-Cloud15-SP4-Pool</name>
+        <alias>OES23.4-SLE-Module-Public-Cloud15-SP4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Public-Cloud15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Public-Cloud15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Public-Cloud15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Module-Public-Cloud15-SP4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Python3-15-SP4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Python3-15-SP4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Python3-15-SP4-Pool</name>
+        <alias>OES23.4-SLE-Module-Python3-15-SP4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Python3-15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Python3-15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Python3-15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Module-Python3-15-SP4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Server-Applications15-SP4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Server-Applications15-SP4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Server-Applications15-SP4-Pool</name>
+        <alias>OES23.4-SLE-Module-Server-Applications15-SP4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Server-Applications15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Server-Applications15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Server-Applications15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Module-Server-Applications15-SP4-Updates</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Web-Scripting15-SP4-Pool/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Web-Scripting15-SP4-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Web-Scripting15-SP4-Pool</name>
+        <alias>OES23.4-SLE-Module-Web-Scripting15-SP4-Pool</alias>
+      </listentry>
+      <listentry>
+        <media_url>cd:///OES23.4-SLE-Module-Web-Scripting15-SP4-Updates/sle-15-x86_64</media_url>
+        <product>OES23.4-SLE-Module-Web-Scripting15-SP4-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES23.4-SLE-Module-Web-Scripting15-SP4-Updates</name>
+        <alias>OES23.4-SLE-Module-Web-Scripting15-SP4-Updates</alias>
+      </listentry>
+    </add_on_products>
+  </add-on>
+  <software>
+    <!--    
+    <products config:type="list">
+      <product>Open_Enterprise_Server</product>
+    </products>
+     -->
+    <do_online_update config:type="boolean">true</do_online_update>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <packages config:type="list">
+    </packages>
+    <patterns config:type="list">
+      <pattern>novell-base</pattern>
+    </patterns>
+    <remove-packages config:type="list">
+        <package>kernel-kdump</package>
+        <package>quagga</package>
+        <package>php5</package>
+        <package>php5-gd</package>
+        <package>apache2-mod_php5</package>
+        <package>novell-libstdc++6</package>
+        <package>novell-libstdc++6-32bit</package>
+    </remove-packages>
+    <remove_patterns config:type="list">
+    </remove_patterns>
+  </software>
+</profile>
+

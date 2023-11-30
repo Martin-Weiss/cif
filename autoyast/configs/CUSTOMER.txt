@@ -77,9 +77,23 @@ OES2023_BRANCH="${SLES15_BASE}:oes/oes_base.xml:oes/nss.xml:oes/cifs.xml:oes/dhc
 OES2023_FILE="${SLES15_BASE}:oes/oes_base.xml:oes/nss.xml:oes/cifs.xml"
 OES2023_ALL="${SLES15_BASE}:oes/oes_base.xml:oes/imanager.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml:oes/umc.xml"
 
+## OES 23.4 Service types
+OES23_4_EDIR="${SLES15_BASE}:oes/oes_base.xml"
+OES23_4_EDIR_IMAN="${SLES15_BASE}:oes/oes_base.xml:oes/imanager.xml,oes/umc.xml"
+OES23_4_NCS="${SLES15_BASE}:oes/oes_base.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml"
+OES23_4_BRANCH="${SLES15_BASE}:oes/oes_base.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml"
+OES23_4_FILE="${SLES15_BASE}:oes/oes_base.xml:oes/nss.xml:oes/cifs.xml"
+OES23_4_ALL="${SLES15_BASE}:oes/oes_base.xml:oes/imanager.xml:oes/nss.xml:oes/cifs.xml:oes/dhcp.xml:oes/dns.xml:oes/iprint.xml:oes/umc.xml"
+
 ## DSfW service types
 OES2018_DSFW_FRD_ADC="${SLES12_BASE}:oes/oes_base_frd_adc.xml:oes/dns.xml"
 OES2018_DSFW_FRD_FDC="${SLES12_BASE}:oes/oes_base_frd_fdc.xml:oes/dns.xml"
+
+OES2023_DSFW_FRD_ADC="${SLES12_BASE}:oes/oes_base_frd_adc.xml:oes/dns.xml"
+OES2023_DSFW_FRD_FDC="${SLES12_BASE}:oes/oes_base_frd_fdc.xml:oes/dns.xml"
+
+OES23_4_DSFW_FRD_ADC="${SLES12_BASE}:oes/oes_base_frd_adc.xml:oes/dns.xml"
+OES22_4_DSFW_FRD_FDC="${SLES12_BASE}:oes/oes_base_frd_fdc.xml:oes/dns.xml"
 
 
 ## infrastructure information

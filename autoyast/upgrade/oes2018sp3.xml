@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <report>
+    <messages>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </messages>
+    <warnings>
+      <show config:type="boolean">true</show>
+      <timeout config:type="integer">10</timeout>
+      <log config:type="boolean">true</log>
+    </warnings>
+  </report>
+  <general>
+    <mode>
+      <confirm config:type="boolean">false</confirm>
+    </mode>
+    <signature-handling>
+      <accept_file_without_checksum config:type="boolean">true</accept_file_without_checksum>
+      <accept_non_trusted_gpg_key config:type="boolean">true</accept_non_trusted_gpg_key>
+      <accept_unknown_gpg_key config:type="boolean">true</accept_unknown_gpg_key>
+      <accept_unsigned_file config:type="boolean">true</accept_unsigned_file>
+      <accept_verification_failed config:type="boolean">false</accept_verification_failed>
+      <import_gpg_key config:type="boolean">true</import_gpg_key>
+    </signature-handling>
+  </general>
+  <keyboard>
+    <keymap>german</keymap>
+  </keyboard>
+  <language>
+    <language>en_US</language>
+    <languages>en_US</languages>
+  </language>
+  <backup>
+    <modified config:type="boolean">true</modified>
+    <sysconfig config:type="boolean">true</sysconfig>
+    <remove_old config:type="boolean">false</remove_old>
+  </backup>
+  <upgrade>
+    <stop_on_solver_conflict config:type="boolean">true</stop_on_solver_conflict>
+    <only_installed_packages config:type="boolean">false</only_installed_packages>
+  </upgrade>
+
+  <software>
+  <do_online_update config:type="boolean">true</do_online_update>
+    <packages config:type="list">
+    </packages>
+    <patterns config:type="list">
+    </patterns>
+    <remove-packages config:type="list">
+	<package>kernel-kdump</package>
+    </remove-packages>
+    <remove_patterns config:type="list">
+    </remove_patterns>
+  </software>
+<!--
+  <suse_register>
+    <do_registration config:type="boolean">true</do_registration>
+    <install_updates config:type="boolean">true</install_updates>
+    <slp_discovery config:type="boolean">false</slp_discovery>
+      <reg_server>http://10.1.1.1</reg_server>
+  </suse_register>
+-->
+  <add-on>
+    <add_on_products config:type="list">
+     <listentry>
+        <media_url>http://10.1.1.1/repo/$RCE/OES2018-SP3-Pool/sle-12-x86_64/</media_url>
+        <product>OES2018-SP3-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES2018-SP3-Pool</name>
+        <alias>OES2018-SP3-Pool</alias>
+      </listentry>
+     <listentry>
+        <media_url>http://10.1.1.1/repo/$RCE/OES2018-SP3-Updates/sle-12-x86_64/</media_url>
+        <product>OES2018-SP3-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES2018-SP3-Updates</name>
+        <alias>OES2018-SP3-Updates</alias>
+      </listentry>
+     <listentry>
+        <media_url>http://10.1.1.1/repo/$RCE/OES2018-SP3-SLES12-SP5-Pool/sle-12-x86_64/</media_url>
+        <product>OES2018-SLES12-SP5-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES2018-SLES12-SP5-Pool</name>
+        <alias>OES2018-SLES12-SP5-Pool</alias>
+      </listentry>
+     <listentry>
+        <media_url>http://10.1.1.1/repo/$RCE/OES2018-SP3-SLES12-SP5-Updates/sle-12-x86_64/</media_url>
+        <product>OES2018-SLES12-SP5-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES2018-SLES12-SP5-Updates</name>
+        <alias>OES2018-SLES12-SP5-Updates</alias>
+      </listentry>
+     <listentry>
+        <media_url>http://10.1.1.1/repo/$RCE/OES2018-SP3-SLE-Module-Containers12-Pool/sle-12-x86_64/</media_url>
+        <product>OES2018-SP3-SLE-Module-Containers12-Pool</product>
+        <product_dir>/</product_dir>
+        <name>OES2018-SP3-SLE-Module-Containers12-Pool</name>
+        <alias>OES2018-SP3-SLE-Module-Containers12-Pool</alias>
+      </listentry>
+     <listentry>
+        <media_url>http://10.1.1.1/repo/$RCE/OES2018-SP3-SLE-Module-Containers12-Updates/sle-12-x86_64/</media_url>
+        <product>OES2018-SP3-SLE-Module-Containers12-Updates</product>
+        <product_dir>/</product_dir>
+        <name>OES2018-SP3-SLE-Module-Containers12-Updates</name>
+        <alias>OES2018-SP3-SLE-Module-Containers12-Update</alias>
+      </listentry>
+    </add_on_products>
+  </add-on>
+</profile>

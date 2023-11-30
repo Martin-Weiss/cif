@@ -19,3 +19,6 @@ title OES2018SP3 rescue mode
 	kernel /kernel/oes2018sp3/linux info=http://10.1.1.1/autoyast/info-oes2018sp3-rescue.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
 	initrd=/kernel/oes2018sp3/initrd
 
+title OES2018SP3 upgrade
+        kernel /kernel/oes2018sp3/linux info=http://10.1.1.1/autoyast/info-oes2018sp3-upgrade.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+        initrd=/kernel/oes2018sp3/initrd

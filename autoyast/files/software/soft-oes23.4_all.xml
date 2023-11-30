@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <software>
+    <install_recommended config:type="boolean">true</install_recommended>
+    <patterns config:type="list">
+      <pattern>base</pattern>
+      <pattern>enhanced_base</pattern>
+      <pattern>novell-base</pattern>
+      <pattern>novell-cifs</pattern>
+      <pattern>novell-dhcp</pattern>
+      <pattern>novell-dns</pattern>
+      <pattern>novell-edirectory</pattern>
+      <pattern>novell-ftp</pattern>
+      <pattern>novell-imanager</pattern>
+      <pattern>novell-iprint</pattern>
+      <pattern>novell-lum</pattern>
+      <pattern>novell-ncp</pattern>
+      <pattern>novell-nrm</pattern>
+      <pattern>novell-nss</pattern>
+      <pattern>novell-sms</pattern>
+      <pattern>novell-web-services</pattern>
+      <pattern>novell-welcome</pattern>
+      <pattern>novell-xtier</pattern>
+      <pattern>novell-yast2</pattern>
+      <pattern>novell-ncs</pattern>
+      <pattern>microfocus-umc</pattern>
+      <pattern>x11</pattern>
+      <pattern>x11_yast</pattern>
+      <pattern>yast2_basis</pattern>
+      <pattern>yast2_desktop</pattern>
+      <pattern>yast2_server</pattern>
+   </patterns>
+    <packages  config:type="list">
+      <package>Open_Enterprise_Server-release</package>
+      <package>dos2unix</package>
+      <package>findutils</package>
+      <package>gcc</package>
+      <package>glibc</package> 
+      <package>iftop</package>
+      <package>kdump</package>
+      <package>kexec-tools</package>
+      <package>lftp</package>	
+      <package>net-tools</package>
+      <package>sysstat</package>
+      <!-- the following package is required for ucs -->
+      <package>python3-requests</package>
+     </packages>
+  </software>
+</profile>

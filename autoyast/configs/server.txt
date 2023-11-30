@@ -236,6 +236,10 @@ oes2018sp3-2;10.1.1.210/24;;oes2018sp3;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-
 oes2023ga-1;10.1.1.211/24;;oes2023ga;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes2023_all.xml;;oes2023ga-tree;new;ou=services,o=oes2023ga;;OES2023_ALL
 oes2023ga-2;10.1.1.212/24;;oes2023ga;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes2023_all.xml;;oes2023ga-tree;existing;ou=services,o=oes2023ga;;OES2023_ALL
 
+# OES 23_4 Example
+oes23-4-1;10.1.1.213/24;;oes23.4;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes23-4_all.xml;;oes23-4-tree;new;ou=services,o=oes2023ga;;OES23_4_ALL
+oes23-4-2;10.1.1.214/24;;oes23.4;/dev/vda;;part-vmware-GPT-btrfs-lvm-edir-50G.xml;soft-oes23-4_all.xml;;oes23-4-tree;existing;ou=services,o=oes2023ga;;OES23_4_ALL
+
 # SLE-HA Example
 cl2-n01;192.168.0.61/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_BASE
 cl2-n02;192.168.0.62/24;;sles15sp1ha;/dev/vda;;part-sles15-btrfs-efi-50G.xml;soft-sles15ha.xml;;;;;192-168-0.txt;SLES15_BASE

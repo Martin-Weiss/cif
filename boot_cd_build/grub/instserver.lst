@@ -58,6 +58,9 @@ title OES2018SP3
 title OES2023GA
 	configfile /grub/oes2023ga.lst
 
+title OES23.4
+	configfile /grub/oes23.4.lst
+
 title HARVESTER100
 	configfile /grub/harvester100.lst
 
