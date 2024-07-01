@@ -37,6 +37,9 @@ title SLES15SP4
 title SLES15SP5
 	configfile /grub/sles15sp5.lst
 
+title SLES15SP6
+	configfile /grub/sles15sp6.lst
+
 title CAASP3
 	configfile /grub/caasp3.lst
 
@@ -87,4 +90,13 @@ title HARVESTER120
 
 title HARVESTER121
 	configfile /grub/harvester121.lst
+
+title HARVESTER122
+	configfile /grub/harvester122.lst
+
+title HARVESTER130
+	configfile /grub/harvester130.lst
+
+title HARVESTER131
+	configfile /grub/harvester131.lst
 
