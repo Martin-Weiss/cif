@@ -100,3 +100,6 @@ title HARVESTER130
 title HARVESTER131
 	configfile /grub/harvester131.lst
 
+title HARVESTER132
+	configfile /grub/harvester132.lst
+
