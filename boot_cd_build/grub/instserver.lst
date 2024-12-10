@@ -64,6 +64,9 @@ title OES2023GA
 title OES23.4
 	configfile /grub/oes23.4.lst
 
+title OES24.4
+	configfile /grub/oes24.4.lst
+
 title HARVESTER100
 	configfile /grub/harvester100.lst
 
@@ -102,4 +105,7 @@ title HARVESTER131
 
 title HARVESTER132
 	configfile /grub/harvester132.lst
+
+title HARVESTER140
+	configfile /grub/harvester140.lst
 

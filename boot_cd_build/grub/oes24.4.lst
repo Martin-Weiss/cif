@@ -1,0 +1,25 @@
+color white/blue black/light-gray
+default 0
+timeout 30
+root (cd)
+gfxmenu /grub/message
+
+title back
+        configfile /grub/instserver.lst
+
+title OES24.4 AutoYaST
+	kernel /kernel/oes24.4/linux info=http://10.1.1.1/autoyast/info-oes24.4.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes24.4/initrd
+
+title OES24.4 manual installation
+	kernel /kernel/oes24.4/linux info=http://10.1.1.1/autoyast/info-oes24.4-manual.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes24.4/initrd
+
+title OES24.4 rescue mode
+	kernel /kernel/oes24.4/linux info=http://10.1.1.1/autoyast/info-oes24.4-rescue.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/oes24.4/initrd
+
+title OES24.4 upgrade
+        kernel /kernel/oes24.4/linux info=http://10.1.1.1/autoyast/info-oes24.4-upgrade.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10
+        initrd=/kernel/oes24.4/initrd
+
