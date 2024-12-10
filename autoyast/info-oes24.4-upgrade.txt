@@ -1,0 +1,5 @@
+autoyast=http://10.1.1.1/autoyast/upgrade/oes24.4.xml
+install=http://10.1.1.1/oes24.4/
+YAST_SKIP_XML_VALIDATION=1
+autoupgrade=1
+ssl.certs=0
