@@ -140,6 +140,8 @@ sles15sp4-1;192.168.0.117/24;;sles15sp4;/dev/vda;;part-sles12-btrfs-efi-50G.xml;
 sles15sp5-1;192.168.0.118/24;;sles15sp5;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15.xml;;;;;192-168-0.txt;SLES15_BASE
 sles15sp6-1;192.168.0.119/24;;sles15sp6;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15.xml;;;;;192-168-0.txt;SLES15_BASE
 
+win-rke2-linux01;192.168.0.120/24;;sles15sp6;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15.xml;;;;;192-168-0.txt;SLES15_BASE
+
 # HPC Example
 hpc-mgmt-01;192.168.0.85/24;;sles15sp5hpc;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15hpc-mgmt.xml;;;;;192-168-0.txt;SLES15_BASE
 hpc-mgmt-02;192.168.0.86/24;;sles15sp5hpc;/dev/vda;;part-sles12-btrfs-efi-50G.xml;soft-sles15hpc-mgmt.xml;;;;;192-168-0.txt;SLES15_BASE

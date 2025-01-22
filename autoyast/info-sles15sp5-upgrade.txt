@@ -1,4 +1,5 @@
 autoupgrade=1
 install=http://10.1.1.1/sles15sp5/
 autoyast=http://10.1.1.1/autoyast/upgrade/sles15sp5.xml
-self_update=http://10.1.1.1/repo/SUSE/Updates/SLE-INSTALLER/15-SP5/x86_64/update/
+#self_update=http://10.1.1.1/repo/SUSE/Updates/SLE-INSTALLER/15-SP5/x86_64/update/
+self_update=http://10.1.1.1/repo/RPMMD/SLE15-SP5-Installer-Updates
