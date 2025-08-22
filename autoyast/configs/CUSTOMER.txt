@@ -528,7 +528,7 @@ YUM_SERVER="$SMT_SERVER"
 
 ## Type String
 ## Description: Suse Manager Server (Hostname or IP address)
-#SUMA_SERVER="http://10.1.1.1"
+SUMA_SERVER="http://susemanager.suse"
 
 ## Type URL/Path
 ## Description:	URL-Path to Suse Manager Bootstrap script
