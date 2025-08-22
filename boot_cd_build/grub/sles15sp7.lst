@@ -1,0 +1,21 @@
+color white/blue black/light-gray
+default 0
+timeout 30
+root (cd)
+gfxmenu /grub/message
+
+title back
+        configfile /grub/instserver.lst
+
+title SLES15SP7 AutoYaST
+	kernel /kernel/sles15sp7/linux info=http://10.1.1.1/autoyast/info-sles15sp7.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 YAST_SKIP_XML_VALIDATION=1 
+	initrd=/kernel/sles15sp7/initrd
+
+title SLES15SP7 manual installation
+	kernel /kernel/sles15sp7/linux info=http://10.1.1.1/autoyast/info-sles15sp7-manual.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/sles15sp7/initrd
+
+title SLES15SP7 rescue mode
+	kernel /kernel/sles15sp7/linux info=http://10.1.1.1/autoyast/info-sles15sp7-rescue.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+	initrd=/kernel/sles15sp7/initrd
+
