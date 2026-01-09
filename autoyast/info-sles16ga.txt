@@ -1,0 +1,3 @@
+inst.auto=http://10.1.1.1/autoyast/agama/autoinst.jsonnet
+inst.install_url=http://10.1.1.1/sles16ga/install/
+systemd.unit=multi-user.target

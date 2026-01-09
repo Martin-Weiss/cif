@@ -43,6 +43,9 @@ title SLES15SP6
 title SLES15SP7
 	configfile /grub/sles15sp7.lst
 
+title SLES16GA
+	configfile /grub/sles16ga.lst
+
 title CAASP3
 	configfile /grub/caasp3.lst
 
