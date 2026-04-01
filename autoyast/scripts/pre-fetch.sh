@@ -23,7 +23,7 @@
 #########################################################
 # Name:		get_main_config_files
 #
-# Description:	retrieves first argument via wget
+# Description:	retrieves first argument via curl
 #########################################################
 
 function get_main_config_files()
@@ -44,14 +44,15 @@ function get_main_config_files()
 
 	# change to the profile directory on the installation system
         PROFILE_DIR=/tmp/profile
+	mkdir -p $PROFILE_DIR
 	cd "$PROFILE_DIR"
 
 	# fetch and source the main configuration file (default: AY_MAIN.txt)	
-	/usr/bin/wget -N $AY_CONFIG_DIR_URL/$MAIN_CONFIG_FILE
+	/usr/bin/curl $AY_CONFIG_DIR_URL/$MAIN_CONFIG_FILE -o $MAIN_CONFIG_FILE
 	source ./$MAIN_CONFIG_FILE
 
 	# fetch and source the main library (default: ay_lib.sh)
-	/usr/bin/wget -N $AY_MAIN_LIB_FILE_URL
+	/usr/bin/curl $AY_MAIN_LIB_FILE_URL -o $AY_MAIN_LIB_FILE
 	source ./$AY_MAIN_LIB_FILE
 }
 

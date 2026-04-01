@@ -98,7 +98,7 @@ function set_vars()
 
 	# defining OS commands
         IP_CMD=/sbin/ip
-	WGETCMD="/usr/bin/wget -N"
+	CURLCMD="/usr/bin/curl"
 	XSLT_CMD=/usr/bin/xsltproc
 
 	# defining ZENworks Configuration Management agent command
@@ -109,16 +109,16 @@ function set_vars()
 #####################################################################
 # Name:		get_file
 #
-# Description:	retrieves first argument via wget
+# Description:	retrieves first argument via curl
 #
-# Used in:	any funtion that needs to retrieve a file via wget
+# Used in:	any funtion that needs to retrieve a file via curl
 #####################################################################
 
 function get_file()
 {
 	local FILE=$1
 
-        $WGETCMD $FILE
+	$CURLCMD "$FILE" -o $(basename "$FILE")
 	if [ $? -ne 0 ];then
 		echo -ne "URL $FILE not found\n" >>$ERROR_FILE
                 false
@@ -169,9 +169,12 @@ function get_mac_list()
 
 function prepare_xml()
 {
-	print_func $FUNCNAME	
+        print_func $FUNCNAME
 
-        cp $AUTOYAST_FILE $AUTOYAST_CHANGE_FILE
+        if ! [[ "$my_server_type" == *16* ]]; then
+                cp $AUTOYAST_FILE $AUTOYAST_CHANGE_FILE
+        fi
+
 }
 
 
@@ -597,7 +600,9 @@ function create_error_popup()
 					dont_merge_xml $file_a ask
 				else
 				# merge check_errors.xml only for sles
-					merge_xml $file_a dummy
+			        	if ! [[ "$my_server_type" == *16* ]]; then
+						merge_xml $file_a dummy
+				        fi
 				fi
 			# no modified.xml
 			else
@@ -756,6 +761,11 @@ function replace_placeholders()
 
 	local place_holder=$1
 	local replace_string=$2
+
+        if [[ "$my_server_type" == *16* ]]; then
+                AUTOYAST_CHANGE_FILE=agama.jsonnet
+        fi
+
 	if [ -n "$replace_string" ];then
 		sed -i -re "s#%%$place_holder%%#$replace_string#g" $AUTOYAST_CHANGE_FILE
 	else
@@ -939,7 +949,20 @@ function do_replace()
         replace_placeholders SALT_MASTER "$SALT_MASTER"
 
         # replace settings for SSH_KEYS in CAASP
-        replace_placeholders SSH_KEYS "$SSH_KEYS"
+	#
+        if [[ "$my_server_type" == *16* ]]; then
+
+		echo "$SSH_KEYS" | jq -Rs 'split("\n") | map(select(length > 0)) | {
+		  root: {
+		    sshPublicKey: .
+		  }
+		}' > ssh-keys.jsonnet
+
+		merge_xml ssh-keys.jsonnet ssh-keys
+
+	else
+        	replace_placeholders SSH_KEYS "$SSH_KEYS"
+        fi
 
 }
 
@@ -1094,7 +1117,7 @@ function uncomment_multiple_tags()
 
 function merge_xml()
 {
-	print_func $FUNCNAME	
+        print_func $FUNCNAME
 
         local start_dir=$PROFILE_DIR
         local with_file=$start_dir/$1
@@ -1103,12 +1126,22 @@ function merge_xml()
         local change_type=merge
         local outer_xml_tag=$2
 
-	$XSLT_CMD --novalid --stringparam with $with_file --stringparam replace false --stringparam $change_type $outer_xml_tag --output $out_file $XSLT_TEMPL $change_file
+set -x
 
-        mv $out_file $AUTOYAST_CHANGE_FILE
-        rm $with_file
+        if [ -f $XSLT_CMD ]; then
+                        $XSLT_CMD --novalid --stringparam with $with_file --stringparam replace false --stringparam $change_type $outer_xml_tag --output $out_file $XSLT_TEMPL $change_file
+                        mv $out_file $AUTOYAST_CHANGE_FILE
+                        rm $with_file
+                else
+                        local out_file=merged.jsonnet
+                        local change_file=agama.jsonnet
+                        if ! [ -f agama.jsonnet ]; then echo "{}" > agama.jsonnet; fi
+                        jsonnet -J $start_dir -e "(import '${change_file}') + (import '${with_file}')" > $out_file
+                        mv $out_file $change_file
+                        #rm $with_file
+        fi
+
 }
-
 
 #####################################################################
 # Name:		dont_merge_xml
@@ -1285,6 +1318,11 @@ HERE
   </ntp-client>
 </profile>
 HERE
+
+        if [[ "$my_server_type" == *16* ]]; then
+		echo '{}' > ntp.jsonnet
+		local NTP_TMP_FILE=ntp.jsonnet
+        fi
 
 	merge_xml $NTP_TMP_FILE ntp-client
 }
@@ -1792,7 +1830,12 @@ function make_server
 	# argument 2  = tag, argument 3 = subdir below $AY_FILE_DIR (autoyast/files)
 	process_xml $my_partfile partitioning partitioning extra
 	process_xml $my_software_file software software extra
-        process_xml addon_products-${my_server_type}.xml add-on addon extra
+        if ! [[ "$my_server_type" == *16* ]]; then
+        	process_xml addon_products-${my_server_type}.xml add-on addon extra
+	else
+        	process_xml addon_products-${my_server_type}.jsonnet add-on addon extra
+
+        fi
 
 	# merge files like kdump.xml, oes-snippets, etc.
 	merge_service_files

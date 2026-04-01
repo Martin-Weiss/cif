@@ -49,6 +49,7 @@ CUSTOMER_NAME="SUSE"
 SLES11_BASE="sles/bootloader.xml:sles/ca_mgm.xml:sles/general.xml:sles/kdump_sles11.xml:sles/net.xml:sles/system_sles11.xml:sles/scripts-all.xml"
 SLES12_BASE="sles/bootloader.xml:sles/ca_mgm.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles12.xml:sles/scripts-all.xml"
 SLES15_BASE="sles/bootloader.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles15.xml:sles/scripts-all.xml"
+SLES16_BASE="sles/general.jsonnet"
 
 ## CaaSP Base definitions
 SLES15_CAASPV4="sles/bootloader.xml:sles/general.xml:sles/kdump.xml:sles/net.xml:sles/system_sles15.xml:sles/net-forward.xml:sles/scripts-all.xml"

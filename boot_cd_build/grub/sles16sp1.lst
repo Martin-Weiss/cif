@@ -1,0 +1,25 @@
+color white/blue black/light-gray
+default 0
+timeout 30
+root (cd)
+gfxmenu /grub/message
+
+title back
+        configfile /grub/instserver.lst
+
+title SLES16SP1 Agama
+	kernel /kernel/sles16sp1/linux inst.info=http://10.1.1.1/autoyast/info-sles16sp1.txt root=live:http://10.1.1.1/sles16sp1/LiveOS/squashfs.img live.net_config_tui=1
+	initrd=/kernel/sles16sp1/initrd
+
+#title SLES16SP1 AutoYaST
+#	kernel /kernel/sles16sp1/linux info=http://10.1.1.1/autoyast/info-sles16sp1.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 YAST_SKIP_XML_VALIDATION=1 
+#	initrd=/kernel/sles16sp1/initrd
+
+#title SLES16SP1 manual installation
+#	kernel /kernel/sles16sp1/linux info=http://10.1.1.1/autoyast/info-sles16sp1-manual.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+#	initrd=/kernel/sles16sp1/initrd
+
+#title SLES16SP1 rescue mode
+#	kernel /kernel/sles16sp1/linux info=http://10.1.1.1/autoyast/info-sles16sp1-rescue.txt netsetup=hostip,gateway,nameserver netmask=255.255.255.0 gateway=10.1.1.1 nameserver=10.1.1.1 netwait=10 
+#	initrd=/kernel/sles16sp1/initrd
+
