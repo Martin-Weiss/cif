@@ -918,9 +918,19 @@ function do_replace()
 	replace_placeholders TIME_ZONE "$TIME_ZONE"
 
 	# Language
+        if [[ "$my_server_type" == *16* ]]; then
+		if [ "$LANGUAGE" == "en_US" ]; then
+			LANGUAGE="en_US.UTF-8"
+		fi
+	fi
 	replace_placeholders LANGUAGE "$LANGUAGE"
 
 	# KEYMAP
+        if [[ "$my_server_type" == *16* ]]; then
+		if [ "$KEYMAP" == "german" ]; then
+			KEYMAP="de"
+		fi
+	fi
 	replace_placeholders KEYMAP "$KEYMAP"
 
 	# HWCLOCK
@@ -1221,6 +1231,46 @@ function process_xml()
         fi
 }
 
+#####################################################################
+# Name:         create_net_sles
+#
+# Description:  creates the net.jsonnet
+#
+#               merge_xml is used to merge the snippet with the main
+#               autoyast driver file
+#
+# Used in:      make_server
+#####################################################################
+
+function create_net_sles()
+{
+        local NET_TMP_FILE=netconfig.jsonnet
+        local ip_address="$1"
+        local gateway="$2"
+        local name_server_list="$3"
+        local suffix_search_list="$4"
+
+	FORMATTED_NS=$(echo "$NAME_SERVER_LIST" | sed "s/:/', '/g; s/^/'/; s/$/'/")
+
+cat <<EOF > $NET_TMP_FILE
+{
+  network: {
+    connections: [
+      {
+        id: 'Wired Connection',
+        method4: 'manual',
+        method6: 'disabled',
+        autoconnect: true,
+        addresses: ['$ip_address'],
+        gateway4: '$gateway',
+        nameservers: [$FORMATTED_NS],
+      }
+    ]
+  },
+}
+EOF
+        merge_xml $NET_TMP_FILE network
+}
 
 #####################################################################
 # Name:		create_ntp_sles
@@ -1898,6 +1948,11 @@ function make_server
         	# replace settings for SUFFIX_SEARCH_LIST in CAASP
         	replace_placeholders SUFFIX_SEARCH_LIST_CAASP "$(split_list $SUFFIX_SEARCH_LIST)"
         fi
+
+	if [[ "$my_server_type" == *16* ]]; then
+		create_net_sles "$my_ipaddress"/"$my_preflen_1" "$GATEWAY" "$NAME_SERVER_LIST" "$SUFFIX_SEARCH_LIST"
+	fi
+
 }
 
 

@@ -37,7 +37,7 @@ GATEWAY="192.168.0.1"
 
 ## Type IP
 ## Description: Colon separated list of IP addresses of DNS servers
-NAME_SERVER_LIST="192.168.0.31"
+NAME_SERVER_LIST="192.168.0.31:192.168.0.54"
 
 ## Type Custom
 ## Description: Colon separated list of DNS suffixes in the order in which
