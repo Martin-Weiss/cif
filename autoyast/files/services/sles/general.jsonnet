@@ -11,16 +11,11 @@
     static: '%%HOST_NAME%%.%%DOMAIN_NAME%%',
     transient: '%%HOST_NAME%%.%%DOMAIN_NAME%%',
   },
-  root: {
-    hashedPassword: false,
-    password: 'suse1234',
-    sshPublicKey: '%%SSH_KEYS%%' ,
-  },
   user: {
-    hashedPassword: false,
+    hashedPassword: true,
     fullName: 'Martin Weiss',
     userName: 'mweiss',
-    password: 'suse1234'
+    password: '%%ROOT_PWD%%'
   },
   localization: {
     language: '%%LANGUAGE%%',

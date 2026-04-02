@@ -910,10 +910,6 @@ function do_replace()
 	replace_placeholders SUMA_BOOTSTRAP_FILE "$SUMA_BOOTSTRAP_FILE"
 	replace_placeholders SUMA_BOOTSTRAP_URL "$SUMA_BOOTSTRAP_URL"
 
-	# replace root password 
-	# must be encrypted as created by the yast autoinstallationt module
-	replace_placeholders ROOT_PWD "$ROOT_PWD"
-
 	# Time Zone
 	replace_placeholders TIME_ZONE "$TIME_ZONE"
 
@@ -964,7 +960,9 @@ function do_replace()
 
 		echo "$SSH_KEYS" | jq -Rs 'split("\n") | map(select(length > 0)) | {
 		  root: {
-		    sshPublicKey: .
+		    sshPublicKey: .,
+                    hashedPassword: true,
+                    password: "%%ROOT_PWD%%"
 		  }
 		}' > ssh-keys.jsonnet
 
@@ -973,6 +971,10 @@ function do_replace()
 	else
         	replace_placeholders SSH_KEYS "$SSH_KEYS"
         fi
+
+	# replace root password 
+	# must be encrypted as created by the yast autoinstallationt module
+	replace_placeholders ROOT_PWD "$ROOT_PWD"
 
 }
 
