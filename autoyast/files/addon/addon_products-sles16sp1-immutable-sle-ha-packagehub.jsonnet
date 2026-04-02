@@ -1,7 +1,7 @@
 {
   product: {
     id: 'SLES',
-    mode: "standard",
+    mode: "immutable",
     registrationUrl: 'https://weiss-2.weiss.ddnss.de:444',
     addons: [
       {
