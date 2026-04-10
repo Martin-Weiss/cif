@@ -12,7 +12,7 @@
 	<script>
 	<interpreter>shell</interpreter>
 	<filename>pre-fetch.sh</filename>
-        <location>http://10.1.1.1/autoyast/scripts/pre-fetch.sh</location>
+        <location>http://autoyast.suse/autoyast/scripts/pre-fetch.sh</location>
 	<notification>Please wait while pre-fetch.sh is running...</notification>
 	<feedback config:type="boolean">false</feedback>
 	<debug config:type="boolean">false</debug>

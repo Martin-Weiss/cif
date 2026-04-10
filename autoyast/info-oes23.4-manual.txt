@@ -1,2 +1,2 @@
-install=http://10.1.1.1/oes23.4/
+install=http://autoyast.suse/oes23.4/
 ssl.certs=0

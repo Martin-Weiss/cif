@@ -1,2 +1,2 @@
-autoyast=http://10.1.1.1/autoyast/xml/
-install=http://10.1.1.1/oes2018sp2/
+autoyast=http://autoyast.suse/autoyast/xml/
+install=http://autoyast.suse/oes2018sp2/

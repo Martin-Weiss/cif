@@ -1,8 +1,8 @@
 inst.script_insecure=1
-inst.script=http://10.1.1.1/autoyast/scripts/pre-fetch.sh
-#inst.auto=http://10.1.1.1/autoyast/agama/autoinst-16.1.jsonnet
+inst.script=http://autoyast.suse/autoyast/scripts/pre-fetch.sh
+#inst.auto=http://autoyast.suse/autoyast/agama/autoinst-16.1.jsonnet
 inst.auto=file:///tmp/profile/agama.jsonnet
-inst.install_url=http://10.1.1.1/sles16sp1/install/
+inst.install_url=http://autoyast.suse/sles16sp1/install/
 systemd.unit=multi-user.target
 inst.self_update=1
 inst.register_url=https://weiss-2.weiss.ddnss.de:444
